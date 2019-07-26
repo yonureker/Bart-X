@@ -12,9 +12,10 @@ export default class App extends React.Component {
     };
   }
 
+
   componentDidMount() {
     this.fetchBartStations();
-    this.fetchSpaceStation();
+    this.interval = setInterval(() => this.fetchSpaceStation(), 1000)
   }
 
   fetchSpaceStation() {
@@ -46,34 +47,35 @@ export default class App extends React.Component {
 
 
   renderSpaceStation(){
-    const stationLogo = require("./assets/space_station.png");
+    const spaceStationLogo = require("./assets/space_station.png");
     const spaceStationLatitude = this.state.spaceStation.latitude;
     const spaceStationLongitude = this.state.spaceStation.longitude;
 
     return(
-      
       <MapView.Marker
           key={1}
           coordinate={{ latitude: spaceStationLatitude, longitude: spaceStationLongitude }}
-          image={stationLogo}
+          image={spaceStationLogo}
         />
     )
   }
 
   renderBartStations(){
     const stationLogo = require("./assets/station.png");
-    this.state.bartStations.map((station, index) => 
-      (
-        <MapView.Marker
-            key={index}
-            coordinate={{ latitude: station.gtfs_latitude, longitude: station.gtfs_longitude }}
-            image={stationLogo}
-          />
-      )
+    return(
+    this.state.bartStations.map((el, index) => 
+          <MapView.Marker
+              key={index}
+              coordinate={{ latitude: el.gtfs_latitude, longitude: el.gtfs_longitude }}
+              image={stationLogo}
+            />
+        )
     )
   }
 
   render() {
+
+    if (this.state.bartStations.length !== 0 ){
     
     return (
       <MapView
@@ -88,9 +90,17 @@ export default class App extends React.Component {
         }}
         provider={"google"}
       >
-        {this.renderSpaceStation()}
         {this.renderBartStations()}
+        {this.renderSpaceStation()}
+        
       </MapView>
-    );
+    )
+      } else {
+        return(
+          <View>
+            <Text>loading...</Text>
+          </View>
+        )
+      }
   }
 }
