@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import MapView from "react-native-maps";
 
 export default class App extends React.Component {
@@ -8,14 +8,19 @@ export default class App extends React.Component {
 
     this.state = {
       spaceStation: {},
-      bartStations: []
+      bartStations: [],
+      stationRealTime: {}
     };
   }
 
-
   componentDidMount() {
     this.fetchBartStations();
-    this.interval = setInterval(() => this.fetchSpaceStation(), 1000)
+    this.fetchTrain();
+    this.interval = setInterval(() => this.fetchTrain(), 10000)
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval);
   }
 
   fetchSpaceStation() {
@@ -31,6 +36,8 @@ export default class App extends React.Component {
       });
   }
 
+
+
   fetchBartStations() {
     fetch("https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y")
       .then(response => response.json())
@@ -44,7 +51,18 @@ export default class App extends React.Component {
       });
   }
 
-
+  fetchTrain(){
+    fetch('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=DBRK&key=MW9S-E7SL-26DU-VV8V&json=y')
+      .then(response => response.json())
+      .then((responseJson) => {
+        this.setState({
+          stationRealTime: responseJson.root.station[0]
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   renderSpaceStation(){
     const spaceStationLogo = require("./assets/space_station.png");
@@ -66,16 +84,52 @@ export default class App extends React.Component {
     this.state.bartStations.map((el, index) => 
           <MapView.Marker
               key={index}
-              coordinate={{ latitude: el.gtfs_latitude, longitude: el.gtfs_longitude }}
+              coordinate={{ latitude: parseFloat(el.gtfs_latitude), longitude: parseFloat(el.gtfs_longitude) }}
               image={stationLogo}
+              zIndex={5}
             />
         )
     )
   }
 
-  render() {
+  renderTrain(){
+    // checking all stations:
+    // data.root.station -> Array of stations
+    // data.root.station.etd -> Array of routes of a station
+    // data.root.station.etd.abbreviation -> Abbreviation of the station
+    // data.root.station.etd.estimate -> Array of trains of a route
+    // data.root.station.etd.estimate.direction -> Direction of train
+    // data.root.station.etd.estimate.minutes -> Minutes until departure
 
-    if (this.state.bartStations.length !== 0 ){
+    const stationDetails = require('./stationDetails.js');
+    const trainLogo = require('./assets/train.png');
+    const route = this.state.stationRealTime.etd;
+
+    return(
+      route.map((el) => 
+        el.estimate.map((train, index) => {
+            const direction = train.direction;
+            const minutes = train.minutes;
+            if (stationDetails["DBRK"]["waypoints"][direction][minutes] !== undefined){
+              return (
+                <MapView.Marker
+                key={index}
+                coordinate={stationDetails["DBRK"]["waypoints"][direction][minutes]}
+                image={trainLogo}
+                zIndex={10}
+              />
+              )
+            }
+          }
+        )
+      )
+    )
+  }
+
+  render() {
+    
+
+    if (this.state.bartStations.length !== 0 && this.state.stationRealTime.length !== 0 ){
     
     return (
       <MapView
@@ -83,22 +137,21 @@ export default class App extends React.Component {
           flex: 1
         }}
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: 37.870104,
+          longitude: -122.268136,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
         provider={"google"}
       >
         {this.renderBartStations()}
-        {this.renderSpaceStation()}
-        
+        {this.renderTrain()}
       </MapView>
     )
       } else {
         return(
           <View>
-            <Text>loading...</Text>
+            <Text>loadinggg.......</Text>
           </View>
         )
       }
