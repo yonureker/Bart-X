@@ -123,7 +123,49 @@ module.exports = {
   EMBR: {
     name: "Embarcadero",
     gtfs_latitude: "37.792874",
-    gtfs_longitude: "-122.397020"
+    gtfs_longitude: "-122.397020",
+    waypoints: {
+      South: {
+        "Leaving": {
+          latitude : "37.792874",
+          longitude : "-122.397020"
+        },
+        "1": {
+          latitude: "37.800446",
+          longitude: "-122.387801"
+        },
+        "2": {
+          latitude: "37.803091",
+          longitude: "-122.376042"
+        },
+        "3": {
+          latitude: "37.805397",
+          longitude: "-122.362395"
+        },
+        "4": {
+          latitude: "37.807771",
+          longitude: "-122.348061"
+        },
+        "5": {
+          latitude: "37.809737",
+          longitude: "-122.335530"
+        },
+        "6": {
+          latitude: "37.807998",
+          longitude: "-122.309952"
+        },
+      },
+      North: {
+        "Leaving": {
+          latitude : "37.792874",
+          longitude : "-122.397020"
+        },
+        "1": {
+          latitude : "37.791391",
+          longitude : "-122.4009797"
+        }
+      }
+    }
   },
   FRMT: {
     name: "Fremont",
@@ -168,12 +210,64 @@ module.exports = {
   MONT: {
     name: "Montgomery St.",
     gtfs_latitude: "37.789405",
-    gtfs_longitude: "-122.401066"
+    gtfs_longitude: "-122.401066",
+    waypoints: {
+      South: {
+        "Leaving": {
+          latitude : "37.789405",
+          longitude : "-122.401066"
+        },
+        "1": {
+          latitude: "37.800446",
+          longitude: "-122.387801"
+        },
+      },
+      North: {
+        "Leaving": {
+          latitude : "37.792874",
+          longitude : "-122.397020"
+        },
+        "1": {
+          latitude : "37.791391",
+          longitude : "-122.4009797"
+        }
+      }
+    }
   },
   NBRK: {
     name: "North Berkeley",
     gtfs_latitude: "37.873967",
-    gtfs_longitude: "-122.283440"
+    gtfs_longitude: "-122.283440",
+    waypoints: {
+      South: {
+        "Leaving": {
+          latitude : "37.873967",
+          longitude : "37.873967"
+        },
+        "1": {
+          latitude: "37.881403",
+          longitude: "-122.289938"
+        },
+        "2": {
+          latitude: "37.892444",
+          longitude: "-122.2894015"
+        }
+      },
+      North: {
+        "Leaving": {
+          latitude : "37.873967",
+          longitude : "37.873967"
+        },
+        "1": {
+          latitude: "37.8997968",
+          longitude: "-122.2742413"
+        },
+        "2": {
+          latitude: "37.873968",
+          longitude: "-122.283440"
+        }
+      }
+    }
   },
   NCON: {
     name: "North Concord/Martinez",

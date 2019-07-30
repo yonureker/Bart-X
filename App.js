@@ -52,7 +52,7 @@ export default class App extends React.Component {
   }
 
   fetchTrain(){
-    fetch('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=DBRK&key=MW9S-E7SL-26DU-VV8V&json=y')
+    fetch('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=EMBR&key=MW9S-E7SL-26DU-VV8V&json=y')
       .then(response => response.json())
       .then((responseJson) => {
         this.setState({
@@ -104,17 +104,18 @@ export default class App extends React.Component {
     const stationDetails = require('./stationDetails.js');
     const trainLogo = require('./assets/train.png');
     const route = this.state.stationRealTime.etd;
+    // const abbr = this.state.stationRealTime.abbr
 
     return(
       route.map((el) => 
         el.estimate.map((train, index) => {
             const direction = train.direction;
             const minutes = train.minutes;
-            if (stationDetails["DBRK"]["waypoints"][direction][minutes] !== undefined){
+            if (stationDetails["EMBR"]["waypoints"][direction][minutes] !== undefined){
               return (
                 <MapView.Marker
                 key={index}
-                coordinate={stationDetails["DBRK"]["waypoints"][direction][minutes]}
+                coordinate={stationDetails["EMBR"]["waypoints"][direction][minutes]}
                 image={trainLogo}
                 zIndex={10}
               />
