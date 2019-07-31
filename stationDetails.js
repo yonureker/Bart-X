@@ -223,6 +223,14 @@ module.exports = {
         Leaving: {
           latitude: "37.684638",
           longitude: "-122.466233"
+        },
+        "2": {
+          latitude: "37.672441",
+          longitude: "-122.452561"
+        },
+        "1": {
+          latitude: "37.678827",
+          longitude: "-122.459685"
         }
       }
     }
