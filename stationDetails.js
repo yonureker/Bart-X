@@ -853,13 +853,13 @@ module.exports = {
           longitude: "122.412414"
         }
       },
-        North: {
-          Leaving: {
-            latitude: "37.615966",
-            longitude: "-122.392409"
-          }
+      North: {
+        Leaving: {
+          latitude: "37.615966",
+          longitude: "-122.392409"
         }
       }
+    }
   },
   SANL: {
     name: "San Leandro",
