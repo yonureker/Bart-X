@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, AppRegistry, Platform } from "react-native";
 import MapView from "react-native-maps";
 
 export default class App extends React.Component {
@@ -9,14 +9,14 @@ export default class App extends React.Component {
     this.state = {
       spaceStation: {},
       bartStations: [],
-      stationRealTime: {}
+      stationList: []
     };
   }
 
   componentDidMount() {
     this.fetchBartStations();
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 10000)
+    this.interval = setInterval(() => this.fetchTrain(), 5000)
   }
 
   componentWillUnmount(){
@@ -52,11 +52,11 @@ export default class App extends React.Component {
   }
 
   fetchTrain(){
-    fetch('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=EMBR&key=MW9S-E7SL-26DU-VV8V&json=y')
+    fetch('http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y')
       .then(response => response.json())
       .then((responseJson) => {
         this.setState({
-          stationRealTime: responseJson.root.station[0]
+          stationList: responseJson.root.station
         })
       })
       .catch(error => {
@@ -93,36 +93,35 @@ export default class App extends React.Component {
   }
 
   renderTrain(){
-    // checking all stations:
-    // data.root.station -> Array of stations
-    // data.root.station.etd -> Array of routes of a station
-    // data.root.station.etd.abbreviation -> Abbreviation of the station
-    // data.root.station.etd.estimate -> Array of trains of a route
-    // data.root.station.etd.estimate.direction -> Direction of train
-    // data.root.station.etd.estimate.minutes -> Minutes until departure
-
     const stationDetails = require('./stationDetails.js');
     const trainLogo = require('./assets/train.png');
-    const route = this.state.stationRealTime.etd;
-    // const abbr = this.state.stationRealTime.abbr
-
+    const stations = this.state.stationList;
+  
     return(
-      route.map((el) => 
-        el.estimate.map((train, index) => {
-            const direction = train.direction;
-            const minutes = train.minutes;
-            if (stationDetails["EMBR"]["waypoints"][direction][minutes] !== undefined){
-              return (
-                <MapView.Marker
-                key={index}
-                coordinate={stationDetails["EMBR"]["waypoints"][direction][minutes]}
-                image={trainLogo}
-                zIndex={10}
-              />
-              )
-            }
-          }
+      stations.map((station) => {
+        var stationAbr = station.abbr;
+
+        return(
+          station.etd.map(route => 
+            route.estimate.map((train, index) => {
+              let direction = train.direction;
+              let minutes = train.minutes;
+
+              if (stationDetails[stationAbr]["waypoints"][direction][minutes] !== undefined){
+                return(
+                  <MapView.Marker
+                    key={index}
+                    coordinate={stationDetails[stationAbr]["waypoints"][direction][minutes]}
+                    image={trainLogo}
+                    zIndex={10}
+                  />
+                )
+              }
+            })
+            )
         )
+    
+      }
       )
     )
   }
@@ -130,7 +129,7 @@ export default class App extends React.Component {
   render() {
     
 
-    if (this.state.bartStations.length !== 0 && this.state.stationRealTime.length !== 0 ){
+    if (this.state.bartStations.length !== 0 && this.state.stationList.length !== 0 ){
     
     return (
       <MapView
