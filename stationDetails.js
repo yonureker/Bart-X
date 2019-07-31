@@ -27,12 +27,20 @@ module.exports = {
         Leaving: {
           latitude: "37.765062",
           longitude: "-122.419694"
+        },
+        "1": {
+          latitude: "37.773675",
+          longitude: "-122.420737"
         }
       },
       North: {
         Leaving: {
           latitude: "37.765062",
           longitude: "-122.419694"
+        },
+        "1": {
+          latitude: "37.759427",
+          longitude: "-122.419750"
         }
       }
     }
@@ -65,12 +73,24 @@ module.exports = {
         Leaving: {
           latitude: "37.752470",
           longitude: "-122.418143"
+        },
+        "1": {
+          latitude: "37.759427",
+          longitude: "-122.419750"
         }
       },
       North: {
         Leaving: {
           latitude: "37.752470",
           longitude: "-122.418143"
+        },
+        "2": {
+          latitude: "37.737947",
+          longitude: "-122.427260"
+        },
+        "1": {
+          latitude: "37.745956",
+          longitude: "-122.420265"
         }
       }
     }
@@ -122,12 +142,32 @@ module.exports = {
         Leaving: {
           latitude: "37.721585",
           longitude: "-122.447506"
+        },
+        "1": {
+          latitude: "37.727272",
+          longitude: "-122.444984"
+        },
+        "2": {
+          latitude: "37.730497",
+          longitude: "-122.438482"
         }
       },
       North: {
         Leaving: {
           latitude: "37.721585",
           longitude: "-122.447506"
+        },
+        "3": {
+          latitude: "37.710333",
+          longitude: "-122.462923"
+        },
+        "2": {
+          latitude: "37.712098",
+          longitude: "-122.453438"
+        },
+        "1": {
+          latitude: "37.716919",
+          longitude: "-122.448675"
         }
       }
     }
@@ -185,6 +225,10 @@ module.exports = {
         Leaving: {
           latitude: "37.779732",
           longitude: "-122.414123"
+        },
+        "1": {
+          latitude: "37.773675",
+          longitude: "-122.420737"
         }
       }
     }
@@ -217,6 +261,18 @@ module.exports = {
         Leaving: {
           latitude: "37.684638",
           longitude: "-122.466233"
+        },
+        "1": {
+          latitude: "37.690944",
+          longitude: " -122.470304"
+        },
+        "2": {
+          latitude: "37.696446",
+          longitude: "-122.470819"
+        },
+        "3": {
+          latitude: "37.701200",
+          longitude: "-122.471334"
         }
       },
       North: {
@@ -263,12 +319,36 @@ module.exports = {
         Leaving: {
           latitude: "37.706121",
           longitude: "-122.469081"
+        },
+        "1": {
+          latitude: "37.710333",
+          longitude: "-122.462923"
+        },
+        "2": {
+          latitude: "37.712098",
+          longitude: "-122.453438"
+        },
+        "3": {
+          latitude: "37.716919",
+          longitude: "-122.448675"
         }
       },
       North: {
         Leaving: {
           latitude: "37.706121",
           longitude: "-122.469081"
+        },
+        "3": {
+          latitude: "37.690944",
+          longitude: " -122.470304"
+        },
+        "2": {
+          latitude: "37.696446",
+          longitude: "-122.470819"
+        },
+        "1": {
+          latitude: "37.701200",
+          longitude: "-122.471334"
         }
       }
     }
@@ -402,8 +482,8 @@ module.exports = {
           longitude: "-122.397020"
         },
         "1": {
-          latitude: "37.791391",
-          longitude: "-122.4009797"
+          latitude: "37.791578",
+          longitude: "-122.398809"
         }
       }
     }
@@ -455,12 +535,28 @@ module.exports = {
         Leaving: {
           latitude: "37.733064",
           longitude: "-122.433817"
+        },
+        "1": {
+          latitude: "37.737947",
+          longitude: "-122.427260"
+        },
+        "2": {
+          latitude: "37.745956",
+          longitude: "-122.420265"
         }
       },
       North: {
         Leaving: {
           latitude: "37.733064",
           longitude: "-122.433817"
+        },
+        "2": {
+          latitude: "37.727272",
+          longitude: "-122.444984"
+        },
+        "1": {
+          latitude: "37.730497",
+          longitude: "-122.438482"
         }
       }
     }
@@ -571,8 +667,8 @@ module.exports = {
           longitude: "-122.401066"
         },
         "1": {
-          latitude: "37.800446",
-          longitude: "-122.387801"
+          latitude: "37.791578",
+          longitude: "-122.398809"
         }
       },
       North: {
@@ -581,8 +677,8 @@ module.exports = {
           longitude: "-122.401066"
         },
         "1": {
-          latitude: "37.791391",
-          longitude: "-122.4009797"
+          latitude: "37.786903",
+          longitude: "-122.405030"
         }
       }
     }
@@ -745,6 +841,10 @@ module.exports = {
         Leaving: {
           latitude: "37.784471",
           longitude: "-122.407974"
+        },
+        "1": {
+          latitude: "37.786903",
+          longitude: "-122.405030"
         }
       },
       North: {
