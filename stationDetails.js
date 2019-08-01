@@ -8,12 +8,28 @@ module.exports = {
         Leaving: {
           latitude: "37.803768",
           longitude: "-122.271450"
+        },
+        "1":{
+          latitude: "37.806312",
+          longitude: "-122.269998"
         }
       },
       North: {
         Leaving: {
           latitude: "37.803768",
           longitude: "-122.271450"
+        },
+        "3": {
+          latitude: "37.803091",
+          longitude: "-122.289439"
+        },
+        "2": {
+          latitude: "37.801531",
+          longitude: "-122.283603"
+        },
+        "1": {
+          latitude: "37.798886",
+          longitude: "-122.276479"
         }
       }
     }
@@ -60,6 +76,10 @@ module.exports = {
         Leaving: {
           latitude: "37.808350",
           longitude: "-122.268602"
+        },
+        "1":{
+          latitude: "37.806312",
+          longitude: "-122.269998"
         }
       }
     }
@@ -1127,12 +1147,48 @@ module.exports = {
         Leaving: {
           latitude: "37.804872",
           longitude: "-122.295140"
+        },
+        "1": {
+          latitude: "37.803091",
+          longitude: "-122.289439"
+        },
+        "2": {
+          latitude: "37.801531",
+          longitude: "-122.283603"
+        },
+        "3": {
+          latitude: "37.798886",
+          longitude: "-122.276479"
         }
       },
       North: {
         Leaving: {
           latitude: "37.804872",
           longitude: "-122.295140"
+        },
+        "1": {
+          latitude: "37.800446",
+          longitude: "-122.387801"
+        },
+        "2": {
+          latitude: "37.803091",
+          longitude: "-122.376042"
+        },
+        "3": {
+          latitude: "37.805397",
+          longitude: "-122.362395"
+        },
+        "4": {
+          latitude: "37.807771",
+          longitude: "-122.348061"
+        },
+        "5": {
+          latitude: "37.809737",
+          longitude: "-122.335530"
+        },
+        "6": {
+          latitude: "37.807998",
+          longitude: "-122.309952"
         }
       }
     }

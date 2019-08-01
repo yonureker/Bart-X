@@ -94,7 +94,11 @@ export default class App extends React.Component {
 
   renderTrain(){
     const stationDetails = require('./stationDetails.js');
-    const trainLogo = require('./assets/train.png');
+    const redTrain = require('./assets/train-red.png');
+    const yellowTrain = require('./assets/train-yellow.png');
+    const blueTrain = require('./assets/train-blue.png');
+    const greenTrain = require('./assets/train-green.png');
+    const orangeTrain = require('./assets/train-orange.png');
     const stations = this.state.stationList;
   
     return(
@@ -108,11 +112,29 @@ export default class App extends React.Component {
               let minutes = train.minutes;
 
               if (stationDetails[stationAbr]["waypoints"][direction][minutes] !== undefined){
+
+                const markerColor = function(){
+                  switch (train.color) {
+                    case "GREEN":
+                      return greenTrain;
+                    case "YELLOW":
+                      return yellowTrain;
+                    case "BLUE":
+                      return blueTrain;
+                    case "RED":
+                      return redTrain;
+                    case "ORANGE":
+                      return orangeTrain;
+                    default:
+                      break;
+                  }
+                }
+
                 return(
                   <MapView.Marker
                     key={index}
                     coordinate={stationDetails[stationAbr]["waypoints"][direction][minutes]}
-                    image={trainLogo}
+                    image={markerColor()}
                     zIndex={10}
                   />
                 )
