@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, AppRegistry, Platform } from "react-native";
 import MapView from "react-native-maps";
+// import MapView from 'react-native-map-clustering';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.fetchBartStations();
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 5000)
+    this.interval = setInterval(() => this.fetchTrain(), 10000)
   }
 
   componentWillUnmount(){
@@ -86,7 +87,7 @@ export default class App extends React.Component {
               key={index}
               coordinate={{ latitude: parseFloat(el.gtfs_latitude), longitude: parseFloat(el.gtfs_longitude) }}
               image={stationLogo}
-              zIndex={5}
+              zIndex={-1}
             />
         )
     )
@@ -99,6 +100,7 @@ export default class App extends React.Component {
     const blueTrain = require('./assets/train-blue.png');
     const greenTrain = require('./assets/train-green.png');
     const orangeTrain = require('./assets/train-orange.png');
+    const purpleTrain = require('./assets/train-purple.png');
     const stations = this.state.stationList;
   
     return(
@@ -125,6 +127,8 @@ export default class App extends React.Component {
                       return redTrain;
                     case "ORANGE":
                       return orangeTrain;
+                    case "PURPLE":
+                      return purpleTrain;
                     default:
                       break;
                   }
@@ -135,7 +139,7 @@ export default class App extends React.Component {
                     key={index}
                     coordinate={stationDetails[stationAbr]["waypoints"][direction][minutes]}
                     image={markerColor()}
-                    zIndex={10}
+                    zIndex={index}
                   />
                 )
               }
