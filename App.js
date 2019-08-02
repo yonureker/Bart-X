@@ -16,7 +16,6 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      spaceStation: {},
       bartStations: [],
       stationList: []
     };
@@ -25,7 +24,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.fetchBartStations();
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 15000);
+    this.interval = setInterval(() => this.fetchTrain(), 5000);
   }
 
   componentWillUnmount() {
@@ -75,24 +74,8 @@ export default class App extends React.Component {
       });
   }
 
-  renderSpaceStation() {
-    const spaceStationLogo = require("./assets/space_station.png");
-    const spaceStationLatitude = this.state.spaceStation.latitude;
-    const spaceStationLongitude = this.state.spaceStation.longitude;
-
-    return (
-      <MapView.Marker
-        key={1}
-        coordinate={{
-          latitude: spaceStationLatitude,
-          longitude: spaceStationLongitude
-        }}
-        image={spaceStationLogo}
-      />
-    );
-  }
-
   renderBartStations() {
+    // moved to top
     // const stationLogo = require("./assets/station.png");
     return this.state.bartStations.map((el, index) => (
       <MapView.Marker
@@ -122,6 +105,7 @@ export default class App extends React.Component {
             stationDetails[stationAbr]["waypoints"][direction][minutes] !==
             undefined
           ) {
+            //sets train color 
             const markerColor = function() {
               switch (train.color) {
                 case "GREEN":
