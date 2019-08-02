@@ -9,7 +9,7 @@ module.exports = {
           latitude: "37.803768",
           longitude: "-122.271450"
         },
-        "1":{
+        "1": {
           latitude: "37.806312",
           longitude: "-122.269998"
         }
@@ -77,7 +77,7 @@ module.exports = {
           latitude: "37.808350",
           longitude: "-122.268602"
         },
-        "1":{
+        "1": {
           latitude: "37.806312",
           longitude: "-122.269998"
         }
@@ -158,7 +158,7 @@ module.exports = {
       }
     }
   },
-  ASHB: { 
+  ASHB: {
     name: "Ashby",
     gtfs_latitude: "37.852803",
     gtfs_longitude: "-122.270062",
@@ -482,7 +482,7 @@ module.exports = {
         },
         "2": {
           latitude: "37.701669",
-          longitude: ", -121.919297"
+          longitude: "-121.919297"
         }
       }
     }
@@ -1635,7 +1635,7 @@ module.exports = {
         },
         "1": {
           latitude: "37.701669",
-          longitude: ", -121.919297"
+          longitude: "-121.919297"
         }
       },
       North: {

@@ -85,6 +85,7 @@ export default class App extends React.Component {
           longitude: parseFloat(el.gtfs_longitude)
         }}
         image={stationLogo}
+        title={el.name}
         zIndex={-1}
       />
     ));
@@ -125,24 +126,25 @@ export default class App extends React.Component {
               }
             };
 
-            // const preventFlicker = function(){
-            //   switch (direction) {
-            //     case "North":
-            //       return stationDetails[stationAbr]["waypoints"][direction][minutes];
-            //     case "South":
-            //       return ({
-            //         latitude: stationDetails[stationAbr]["waypoints"][direction][minutes]['latitude'] + 1.000015,
-            //         longitude: stationDetails[stationAbr]["waypoints"][direction][minutes]['longitude'] + 1.000015
-            //       })
-            //     default:
-            //       break;
-            //   }
-            // }
+            //moving South direction trains a bit so they don't overlap with North trains.
+            const preventFlicker = function(){
+              switch (direction) {
+                case "North":
+                  return stationDetails[stationAbr]["waypoints"][direction][minutes];
+                case "South":
+                  return ({
+                    latitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['latitude']) + 0.000085,
+                    longitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['longitude']) + 0.000085
+                  })
+                default:
+                  break;
+              }
+            }
 
             return (
               <MapView.Marker
                 key={index}
-                coordinate={stationDetails[stationAbr]["waypoints"][direction][minutes]}
+                coordinate={preventFlicker()}
                 image={markerColor()}
                 title={`${route.destination} Train`}
                 description={`Next Station: ${station.name}`}
