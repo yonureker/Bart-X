@@ -158,7 +158,7 @@ module.exports = {
       }
     }
   },
-  ASHB: {
+  ASHB: { 
     name: "Ashby",
     gtfs_latitude: "37.852803",
     gtfs_longitude: "-122.270062",
@@ -167,6 +167,10 @@ module.exports = {
         Leaving: {
           latitude: "37.852803",
           longitude: "-122.270062"
+        },
+        "1": {
+          latitude: "37.862437",
+          longitude: "  "
         }
       },
       North: {
@@ -451,7 +455,7 @@ module.exports = {
         },
         "1": {
           latitude: "37.862437",
-          longitude: "-122.2676602"
+          longitude: "  "
         }
       }
     }
@@ -471,6 +475,14 @@ module.exports = {
         Leaving: {
           latitude: "37.701687",
           longitude: "-121.899179"
+        },
+        "1": {
+          latitude: "37.701822",
+          longitude: "-121.908998"
+        },
+        "2": {
+          latitude: "37.701669",
+          longitude: ", -121.919297"
         }
       }
     }
@@ -1616,12 +1628,56 @@ module.exports = {
         Leaving: {
           latitude: "37.699756",
           longitude: "-121.928240"
+        },
+        "2": {
+          latitude: "37.701822",
+          longitude: "-121.908998"
+        },
+        "1": {
+          latitude: "37.701669",
+          longitude: ", -121.919297"
         }
       },
       North: {
         Leaving: {
           latitude: "37.699756",
           longitude: "-121.928240"
+        },
+        "1": {
+          latitude: "37.698783",
+          longitude: "-121.945841"
+        },
+        "2": {
+          latitude: "37.697560",
+          longitude: "-121.964895"
+        },
+        "3": {
+          latitude: "37.699190",
+          longitude: "-121.982233"
+        },
+        "4": {
+          latitude: "37.7035367",
+          longitude: "-122.00231"
+        },
+        "5": {
+          latitude: "37.703129",
+          longitude: "-122.014848"
+        },
+        "6": {
+          latitude: "37.702042",
+          longitude: "-122.031328"
+        },
+        "7": {
+          latitude: "37.698375",
+          longitude: "-122.041799"
+        },
+        "8": {
+          latitude: "37.693553",
+          longitude: "-122.055189"
+        },
+        "9": {
+          latitude: "37.691855",
+          longitude: "-122.065317"
         }
       }
     }
