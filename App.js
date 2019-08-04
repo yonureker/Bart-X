@@ -121,6 +121,8 @@ export default class App extends React.Component {
                   return orangeTrain;
                 case "PURPLE":
                   return purpleTrain;
+                case "WHITE":
+                  return yellowTrain;
                 default:
                   break;
               }
@@ -133,8 +135,8 @@ export default class App extends React.Component {
                   return stationDetails[stationAbr]["waypoints"][direction][minutes];
                 case "South":
                   return ({
-                    latitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['latitude']) + 0.000085,
-                    longitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['longitude']) + 0.000085
+                    latitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['latitude']) + 0.000100,
+                    longitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['longitude']) + 0.000100
                   })
                 default:
                   break;
