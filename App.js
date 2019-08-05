@@ -9,7 +9,6 @@ import blueTrain from "./assets/train-blue.png";
 import greenTrain from "./assets/train-green.png";
 import orangeTrain from "./assets/train-orange.png";
 import purpleTrain from "./assets/train-purple.png";
-// import MapView from 'react-native-map-clustering';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -75,8 +74,6 @@ export default class App extends React.Component {
   }
 
   renderBartStations() {
-    // moved to top
-    // const stationLogo = require("./assets/station.png");
     return this.state.bartStations.map((el, index) => (
       <MapView.Marker
         key={index}
