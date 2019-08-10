@@ -8,7 +8,7 @@ View on [Snack](https://snack.expo.io/@onureker/587be4).
 # Functionality
 
 - Trains are colored by their routes.
-- Trains and stations display snippets on press.
+- Trains and stations display snippets on p ress.
 - The location of trains are updated by fetching data from Bart API.
 
 
