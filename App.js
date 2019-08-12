@@ -37,7 +37,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.fetchBartStations();
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 50000);
+    this.interval = setInterval(() => this.fetchTrain(), 5000);
   }
 
   componentWillUnmount() {
@@ -56,19 +56,6 @@ export default class App extends React.Component {
     this.setState({ location });
     console.log(this.state.location)
   };
-
-  fetchSpaceStation() {
-    fetch("http://api.open-notify.org/iss-now.json")
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          spaceStation: responseJson.iss_position
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
 
   fetchBartStations() {
     fetch(
