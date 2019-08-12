@@ -10,6 +10,7 @@ View on [Snack](https://snack.expo.io/@onureker/587be4).
 - Trains are colored by their routes.
 - Trains and stations display snippets on p ress.
 - The location of trains are updated by fetching data from Bart API.
+- Asks for permission to track user locations and zooms the map to their coordinates.
 
 
 # Technologies and Technical Challenges
