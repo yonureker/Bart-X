@@ -1,6 +1,8 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 import MapView from "react-native-maps";
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import redTrain from "./assets/train-red.png";
@@ -16,19 +18,44 @@ export default class App extends React.Component {
 
     this.state = {
       bartStations: [],
-      stationList: []
+      stationList: [],
+      location: null,
+      errorMessage: null
     };
+  }
+
+  componentWillMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this._getLocationAsync();
+    }
   }
 
   componentDidMount() {
     this.fetchBartStations();
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 5000);
+    this.interval = setInterval(() => this.fetchTrain(), 50000);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+    console.log(this.state.location)
+  };
 
   fetchSpaceStation() {
     fetch("http://api.open-notify.org/iss-now.json")
@@ -167,8 +194,10 @@ export default class App extends React.Component {
             flex: 1
           }}
           initialRegion={{
-            latitude: 37.870104,
-            longitude: -122.268136,
+            // latitude: 37.870104,
+            // longitude: -122.268136,
+            latitude: this.state.location.coords.latitude,
+            longitude: this.state.location.coords.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
