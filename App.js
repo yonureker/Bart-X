@@ -54,7 +54,6 @@ export default class App extends React.Component {
 
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
-    console.log(this.state.location)
   };
 
   fetchBartStations() {
@@ -173,7 +172,7 @@ export default class App extends React.Component {
   render() {
     if (
       this.state.bartStations.length !== 0 &&
-      this.state.stationList.length !== 0
+      this.state.stationList.length !== 0 && this.state.location.coords !== undefined
     ) {
       return (
         <MapView
@@ -181,8 +180,8 @@ export default class App extends React.Component {
             flex: 1
           }}
           initialRegion={{
-            // latitude: 37.870104,
-            // longitude: -122.268136,
+            // latitude: ,
+            // longitude: ,
             latitude: this.state.location.coords.latitude,
             longitude: this.state.location.coords.longitude,
             latitudeDelta: 0.0922,
@@ -196,8 +195,13 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View>
-          <Text>loadinggg.......</Text>
+        <View style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <Text>BartLiveMobile</Text>
+          <Text>Loading...</Text>
         </View>
       );
     }
