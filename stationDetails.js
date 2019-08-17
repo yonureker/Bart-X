@@ -170,7 +170,7 @@ module.exports = {
         },
         "1": {
           latitude: "37.862437",
-          longitude: "  "
+          longitude: "-122.267283"
         }
       },
       North: {
@@ -455,7 +455,7 @@ module.exports = {
         },
         "1": {
           latitude: "37.862437",
-          longitude: "  "
+          longitude: "-122.267283"
         }
       }
     }

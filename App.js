@@ -1,8 +1,8 @@
 import React from "react";
 import { Platform, Text, View } from "react-native";
 import MapView from "react-native-maps";
-import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
+import * as Location from "expo-location";
+import * as Permissions from "expo-permissions";
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import redTrain from "./assets/train-red.png";
@@ -25,9 +25,10 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    if (Platform.OS === 'android' && !Constants.isDevice) {
+    if (Platform.OS === "android" && !Constants.isDevice) {
       this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+        errorMessage:
+          "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
       });
     } else {
       this._getLocationAsync();
@@ -37,7 +38,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.fetchBartStations();
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 5000);
+    this.interval = setInterval(() => this.fetchTrain(), 500000);
   }
 
   componentWillUnmount() {
@@ -46,9 +47,9 @@ export default class App extends React.Component {
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
+    if (status !== "granted") {
       this.setState({
-        errorMessage: 'Permission to access location was denied',
+        errorMessage: "Permission to access location was denied"
       });
     }
 
@@ -96,7 +97,8 @@ export default class App extends React.Component {
         }}
         image={stationLogo}
         title={el.name}
-        zIndex={-1}
+        description={this.state.stationList[0].name}
+        zIndex={-2}
       />
     ));
   }
@@ -116,7 +118,7 @@ export default class App extends React.Component {
             stationDetails[stationAbr]["waypoints"][direction][minutes] !==
             undefined
           ) {
-            //sets train color 
+            //sets train color
             const markerColor = function() {
               switch (train.color) {
                 case "GREEN":
@@ -139,19 +141,31 @@ export default class App extends React.Component {
             };
 
             //moving South direction trains a bit so they don't overlap with North trains.
-            const preventFlicker = function(){
+            const preventFlicker = function() {
               switch (direction) {
                 case "North":
-                  return stationDetails[stationAbr]["waypoints"][direction][minutes];
+                  return stationDetails[stationAbr]["waypoints"][direction][
+                    minutes
+                  ];
                 case "South":
-                  return ({
-                    latitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['latitude']) + 0.000100,
-                    longitude: parseFloat(stationDetails[stationAbr]["waypoints"][direction][minutes]['longitude']) + 0.000100
-                  })
+                  return {
+                    latitude:
+                      parseFloat(
+                        stationDetails[stationAbr]["waypoints"][direction][
+                          minutes
+                        ]["latitude"]
+                      ) + 0.0001,
+                    longitude:
+                      parseFloat(
+                        stationDetails[stationAbr]["waypoints"][direction][
+                          minutes
+                        ]["longitude"]
+                      ) + 0.0001
+                  };
                 default:
                   break;
               }
-            }
+            };
 
             return (
               <MapView.Marker
@@ -172,7 +186,8 @@ export default class App extends React.Component {
   render() {
     if (
       this.state.bartStations.length !== 0 &&
-      this.state.stationList.length !== 0 && this.state.location.coords !== undefined
+      this.state.stationList.length !== 0 &&
+      this.state.location.coords !== undefined
     ) {
       return (
         <MapView
@@ -182,8 +197,8 @@ export default class App extends React.Component {
           initialRegion={{
             // latitude: ,
             // longitude: ,
-            latitude: this.state.location.coords.latitude,
-            longitude: this.state.location.coords.longitude,
+            latitude: parseFloat(this.state.location.coords.latitude),
+            longitude: parseFloat(this.state.location.coords.longitude),
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
@@ -195,11 +210,13 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           <Text>BartLiveMobile</Text>
           <Text>Loading...</Text>
         </View>
