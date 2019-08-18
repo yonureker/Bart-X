@@ -218,7 +218,7 @@ export default class App extends React.Component {
           }}
         >
           <Text>BartLiveMobile</Text>
-          <Text>Loading...</Text>
+          <Text>Loading....</Text>
         </View>
       );
     }
