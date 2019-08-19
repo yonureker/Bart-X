@@ -19,7 +19,7 @@ export default class App extends React.Component {
     this.state = {
       bartStations: [],
       stationList: [],
-      location: null,
+      location: {coords: null},
       errorMessage: null
     };
   }
@@ -97,7 +97,6 @@ export default class App extends React.Component {
         }}
         image={stationLogo}
         title={el.name}
-        description={this.state.stationList[0].name}
         zIndex={-2}
       />
     ));
@@ -144,9 +143,20 @@ export default class App extends React.Component {
             const preventFlicker = function() {
               switch (direction) {
                 case "North":
-                  return stationDetails[stationAbr]["waypoints"][direction][
-                    minutes
-                  ];
+                  return {
+                    latitude:
+                      parseFloat(
+                        stationDetails[stationAbr]["waypoints"][direction][
+                          minutes
+                        ]["latitude"]
+                      ) - 0.0004,
+                    longitude:
+                      parseFloat(
+                        stationDetails[stationAbr]["waypoints"][direction][
+                          minutes
+                        ]["longitude"]
+                      ) - 0.0004
+                  };
                 case "South":
                   return {
                     latitude:
@@ -154,13 +164,13 @@ export default class App extends React.Component {
                         stationDetails[stationAbr]["waypoints"][direction][
                           minutes
                         ]["latitude"]
-                      ) + 0.0001,
+                      ) + 0.0004,
                     longitude:
                       parseFloat(
                         stationDetails[stationAbr]["waypoints"][direction][
                           minutes
                         ]["longitude"]
-                      ) + 0.0001
+                      ) + 0.0004
                   };
                 default:
                   break;
