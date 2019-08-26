@@ -979,7 +979,7 @@ module.exports = {
       North: {
         Leaving: {
           latitude: "37.713238",
-          longitude: "-122.212191"
+          longitude: "-122.212190"
         }
       }
     }
