@@ -4,32 +4,90 @@ module.exports = {
     gtfs_latitude: "37.803768",
     gtfs_longitude: "-122.271450",
     waypoints: {
-      South: {
-        Leaving: {
-          latitude: "37.803768",
-          longitude: "-122.271450"
+      RED: {
+        South: {
+          Leaving: {
+            latitude: "37.803768",
+            longitude: "-122.271450"
+          },
+          "1": {
+            latitude: "37.806312",
+            longitude: "-122.269998"
+          }
         },
-        "1": {
-          latitude: "37.806312",
-          longitude: "-122.269998"
+        North: {
+          Leaving: {
+            latitude: "37.803768",
+            longitude: "-122.271450"
+          },
+          "3": {
+            latitude: "37.803091",
+            longitude: "-122.289439"
+          },
+          "2": {
+            latitude: "37.801531",
+            longitude: "-122.283603"
+          },
+          "1": {
+            latitude: "37.798886",
+            longitude: "-122.276479"
+          }
         }
       },
-      North: {
-        Leaving: {
-          latitude: "37.803768",
-          longitude: "-122.271450"
+      YELLOW: {
+        South: {
+          Leaving: {
+            latitude: "37.803768",
+            longitude: "-122.271450"
+          },
+          "1": {
+            latitude: "37.806312",
+            longitude: "-122.269998"
+          }
         },
-        "3": {
-          latitude: "37.803091",
-          longitude: "-122.289439"
+        North: {
+          Leaving: {
+            latitude: "37.803768",
+            longitude: "-122.271450"
+          },
+          "3": {
+            latitude: "37.803091",
+            longitude: "-122.289439"
+          },
+          "2": {
+            latitude: "37.801531",
+            longitude: "-122.283603"
+          },
+          "1": {
+            latitude: "37.798886",
+            longitude: "-122.276479"
+          }
+        }
+      },
+      ORANGE: {
+        South: {
+          Leaving: {
+            latitude: "37.803768",
+            longitude: "-122.271450"
+          },
+          "1": {
+            latitude: "37.806312",
+            longitude: "-122.269998"
+          }
         },
-        "2": {
-          latitude: "37.801531",
-          longitude: "-122.283603"
-        },
-        "1": {
-          latitude: "37.798886",
-          longitude: "-122.276479"
+        North: {
+          Leaving: {
+            latitude: "37.803768",
+            longitude: "-122.271450"
+          },
+          "2": {
+            latitude: "37.799155",
+            longitude: "-122.268605"
+          },
+          "1": {
+            latitude: "37.800647",
+            longitude: "-122.272167"
+          }
         }
       }
     }
@@ -225,16 +283,106 @@ module.exports = {
     gtfs_latitude: "37.696924",
     gtfs_longitude: "-122.126514",
     waypoints: {
-      South: {
-        Leaving: {
-          latitude: "37.696924",
-          longitude: "-122.126514"
+      BLUE: {
+        South: {
+          Leaving: {
+            latitude: "37.696924",
+            longitude: "-122.126514"
+          },
+          "1": {
+            latitude: "37.706335",
+            longitude: "-122.140631"
+          },
+          "2": {
+            latitude: "37.713125",
+            longitude: "-122.150416"
+          }
+        },
+        North: {
+          Leaving: {
+            latitude: "37.696924",
+            longitude: "-122.126514"
+          },
+          "1": {
+            latitude: "37.689221",
+            longitude: "-122.115140"
+          },
+          "2": {
+            latitude: "37.689493",
+            longitude: "-122.101492"
+          },
+          "3": {
+            latitude: "37.690715",
+            longitude: "-122.088103"
+          }
         }
       },
-      North: {
-        Leaving: {
-          latitude: "37.696924",
-          longitude: "-122.126514"
+      ORANGE: {
+        South: {
+          Leaving: {
+            latitude: "37.696924",
+            longitude: "-122.126514"
+          },
+          "1": {
+            latitude: "37.706335",
+            longitude: "-122.140631"
+          },
+          "2": {
+            latitude: "37.713125",
+            longitude: "-122.150416"
+          }
+        },
+        North: {
+          Leaving: {
+            latitude: "37.696924",
+            longitude: "-122.126514"
+          },
+          "1": {
+            latitude: "37.689221",
+            longitude: "-122.115912"
+          },
+          "2": {
+            latitude: "37.682225",
+            longitude: "-122.106213"
+          },
+          "3": {
+            latitude: "37.676247",
+            longitude: "-122.097029"
+          }
+        }
+      },
+      GREEN: {
+        South: {
+          Leaving: {
+            latitude: "37.696924",
+            longitude: "-122.126514"
+          },
+          "1": {
+            latitude: "37.706335",
+            longitude: "-122.140631"
+          },
+          "2": {
+            latitude: "37.713125",
+            longitude: "-122.150416"
+          }
+        },
+        North: {
+          Leaving: {
+            latitude: "37.696924",
+            longitude: "-122.126514"
+          },
+          "1": {
+            latitude: "37.689221",
+            longitude: "-122.115912"
+          },
+          "2": {
+            latitude: "37.682225",
+            longitude: "-122.106213"
+          },
+          "3": {
+            latitude: "37.676247",
+            longitude: "-122.097029"
+          }
         }
       }
     }
@@ -248,6 +396,18 @@ module.exports = {
         Leaving: {
           latitude: "37.690746",
           longitude: "-122.075602"
+        },
+        "3": {
+          latitude: "37.689221",
+          longitude: "-122.115140"
+        },
+        "2": {
+          latitude: "37.689493",
+          longitude: "-122.101492"
+        },
+        "1": {
+          latitude: "37.690715",
+          longitude: "-122.088103"
         }
       },
       North: {

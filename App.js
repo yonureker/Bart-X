@@ -104,6 +104,7 @@ export default class App extends React.Component {
 
   renderTrain() {
     const stations = this.state.stationList;
+    // const transferStations = ['MacArthur', |'12th St'|, 'West Oakland', 'Lake Merritt', 'Bay Fair']
 
     return stations.map(station => {
       var stationAbr = station.abbr;
