@@ -104,7 +104,7 @@ export default class App extends React.Component {
 
   renderTrain() {
     const stations = this.state.stationList;
-    // const transferStations = ['MacArthur', |'12th St'|, 'West Oakland', 'Lake Merritt', 'Bay Fair']
+    const transferStations = ['MCAR', '12TH', 'WOAK', 'LAKE', 'BAYF']
 
     return stations.map(station => {
       var stationAbr = station.abbr;
@@ -114,8 +114,14 @@ export default class App extends React.Component {
           let direction = train.direction;
           let minutes = train.minutes;
 
+          if (transferStations.includes(stationAbr)) {
+            let minutesLeft = stationDetails[stationAbr]["waypoints"][train.color][direction][minutes]
+          } else {
+            let minutesLeft = stationDetails[stationAbr]["waypoints"][direction][minutes]
+          }
+
           if (
-            stationDetails[stationAbr]["waypoints"][direction][minutes] !==
+            minutesLeft !==
             undefined
           ) {
             //sets train color
@@ -147,30 +153,22 @@ export default class App extends React.Component {
                   return {
                     latitude:
                       parseFloat(
-                        stationDetails[stationAbr]["waypoints"][direction][
-                          minutes
-                        ]["latitude"]
+                        minutesLeft["latitude"]
                       ) - 0.0001,
                     longitude:
                       parseFloat(
-                        stationDetails[stationAbr]["waypoints"][direction][
-                          minutes
-                        ]["longitude"]
+                        minutesLeft["longitude"]
                       ) - 0.0001
                   };
                 case "South":
                   return {
                     latitude:
                       parseFloat(
-                        stationDetails[stationAbr]["waypoints"][direction][
-                          minutes
-                        ]["latitude"]
+                        minutesLeft["latitude"]
                       ) + 0.0001,
                     longitude:
                       parseFloat(
-                        stationDetails[stationAbr]["waypoints"][direction][
-                          minutes
-                        ]["longitude"]
+                        minutesLeft["longitude"]
                       ) + 0.0001
                   };
                 default:
