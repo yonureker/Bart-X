@@ -88,18 +88,32 @@ export default class App extends React.Component {
   }
 
   renderBartStations() {
-    return this.state.bartStations.map((el, index) => (
+    // return this.state.bartStations.map((el, index) => (
+    //   <MapView.Marker
+    //     key={index}
+    //     coordinate={{
+    //       latitude: parseFloat(el.gtfs_latitude),
+    //       longitude: parseFloat(el.gtfs_longitude)
+    //     }}
+    //     image={stationLogo}
+    //     title={el.name}
+    //     zIndex={-2}
+    //   />
+    // ));
+
+    return this.state.stationList.map((station, index) => (
       <MapView.Marker
         key={index}
         coordinate={{
-          latitude: parseFloat(el.gtfs_latitude),
-          longitude: parseFloat(el.gtfs_longitude)
+          latitude: parseFloat(stationDetails[station.abbr].gtfs_latitude),
+          longitude: parseFloat(stationDetails[station.abbr].gtfs_longitude)
         }}
         image={stationLogo}
-        title={el.name}
+        title={station.name}
+        description={station.etd.map()}
         zIndex={-2}
       />
-    ));
+    ))
   }
 
   renderTrain() {
@@ -115,9 +129,9 @@ export default class App extends React.Component {
           let minutes = train.minutes;
 
           if (transferStations.includes(stationAbr)) {
-            let minutesLeft = stationDetails[stationAbr]["waypoints"][train.color][direction][minutes]
+            minutesLeft = stationDetails[stationAbr]["waypoints"][train.color][direction][minutes]
           } else {
-            let minutesLeft = stationDetails[stationAbr]["waypoints"][direction][minutes]
+            minutesLeft = stationDetails[stationAbr]["waypoints"][direction][minutes]
           }
 
           if (
@@ -146,7 +160,7 @@ export default class App extends React.Component {
               }
             };
 
-            //moving South direction trains a bit so they don't overlap with North trains.
+            //moving South direction trains a bit so they don't overlap with North trains on the same location and flicker.
             const preventFlicker = function() {
               switch (direction) {
                 case "North":
