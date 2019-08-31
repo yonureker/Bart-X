@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, Text, View } from "react-native";
+import { Modal, Platform, Text, View } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -20,7 +20,8 @@ export default class App extends React.Component {
       bartStations: [],
       stationList: [],
       location: {coords: {latitude: null, longitude: null}},
-      errorMessage: null
+      errorMessage: null,
+      modalVisible: false
     };
   }
 
@@ -101,7 +102,24 @@ export default class App extends React.Component {
     //   />
     // ));
 
-    return this.state.stationList.map((station, index) => (
+    return this.state.stationList.map((station, index) => {
+
+      const approachingTrains = function(){
+        let trainText = ''
+
+        station.etd.map(route => {
+          trainText += `${route.destination} in`
+          route.estimate.map(train => {
+            trainText += ` ${train.minutes}`
+          })
+          trainText += ' mins \n'
+        }
+        )
+
+        return trainText;
+      }
+
+      return(
       <MapView.Marker
         key={index}
         coordinate={{
@@ -110,10 +128,10 @@ export default class App extends React.Component {
         }}
         image={stationLogo}
         title={station.name}
-        description={station.etd.map()}
-        zIndex={-2}
-      />
-    ))
+        description={approachingTrains()}
+        zIndex={100}
+      />)
+      })
   }
 
   renderTrain() {
@@ -224,21 +242,26 @@ export default class App extends React.Component {
       this.state.location.coords !== undefined
     ) {
       return (
-        <MapView
+        <View>
+          <MapView
           style={{
-            flex: 1
-          }}
-          initialRegion={{
-            latitude: parseFloat(this.state.location.coords.latitude) || 37.792874,
-            longitude: parseFloat(this.state.location.coords.longitude) || -122.397020,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }}
-          provider={"google"}
-        >
-          {this.renderBartStations()}
-          {this.renderTrain()}
-        </MapView>
+            flex: 1}}
+            initialRegion={{
+              latitude: parseFloat(this.state.location.coords.latitude) || 37.792874,
+              longitude: parseFloat(this.state.location.coords.longitude) || -122.397020,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
+            }}
+            provider={"google"}
+          >
+            {this.renderBartStations()}
+            {this.renderTrain()}
+          </MapView>
+          <View style={{
+            flex: 1}}>
+            <Text>Hello</Text>
+          </View>
+          </View>
       );
     } else {
       return (
