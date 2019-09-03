@@ -19,7 +19,7 @@ export default class App extends React.Component {
     this.state = {
       bartStations: [],
       stationList: [],
-      location: {coords: {latitude: null, longitude: null}},
+      location: { coords: { latitude: null, longitude: null } },
       errorMessage: null,
       modalVisible: false
     };
@@ -89,54 +89,40 @@ export default class App extends React.Component {
   }
 
   renderBartStations() {
-    // return this.state.bartStations.map((el, index) => (
-    //   <MapView.Marker
-    //     key={index}
-    //     coordinate={{
-    //       latitude: parseFloat(el.gtfs_latitude),
-    //       longitude: parseFloat(el.gtfs_longitude)
-    //     }}
-    //     image={stationLogo}
-    //     title={el.name}
-    //     zIndex={-2}
-    //   />
-    // ));
-
     return this.state.stationList.map((station, index) => {
-
-      const approachingTrains = function(){
-        let trainText = ''
+      const approachingTrains = function() {
+        let trainText = "";
 
         station.etd.map(route => {
-          trainText += `${route.destination} in`
+          trainText += `${route.destination} in`;
           route.estimate.map(train => {
-            trainText += ` ${train.minutes}`
-          })
-          trainText += ' mins \n'
-        }
-        )
+            trainText += ` ${train.minutes}`;
+          });
+          trainText += " mins \n";
+        });
 
         return trainText;
-      }
+      };
 
-      return(
-      <MapView.Marker
-        key={index}
-        coordinate={{
-          latitude: parseFloat(stationDetails[station.abbr].gtfs_latitude),
-          longitude: parseFloat(stationDetails[station.abbr].gtfs_longitude)
-        }}
-        image={stationLogo}
-        title={station.name}
-        description={approachingTrains()}
-        zIndex={100}
-      />)
-      })
+      return (
+        <MapView.Marker
+          key={index}
+          coordinate={{
+            latitude: parseFloat(stationDetails[station.abbr].gtfs_latitude),
+            longitude: parseFloat(stationDetails[station.abbr].gtfs_longitude)
+          }}
+          image={stationLogo}
+          title={station.name}
+          description={approachingTrains()}
+          zIndex={100}
+        />
+      );
+    });
   }
 
   renderTrain() {
     const stations = this.state.stationList;
-    const transferStations = ['MCAR', '12TH', 'WOAK', 'LAKE', 'BAYF']
+    const transferStations = ["MCAR", "12TH", "WOAK", "LAKE", "BAYF"];
 
     return stations.map(station => {
       var stationAbr = station.abbr;
@@ -147,15 +133,16 @@ export default class App extends React.Component {
           let minutes = train.minutes;
 
           if (transferStations.includes(stationAbr)) {
-            minutesLeft = stationDetails[stationAbr]["waypoints"][train.color][direction][minutes]
+            minutesLeft =
+              stationDetails[stationAbr]["waypoints"][train.color][direction][
+                minutes
+              ];
           } else {
-            minutesLeft = stationDetails[stationAbr]["waypoints"][direction][minutes]
+            minutesLeft =
+              stationDetails[stationAbr]["waypoints"][direction][minutes];
           }
 
-          if (
-            minutesLeft !==
-            undefined
-          ) {
+          if (minutesLeft !== undefined) {
             //sets train color
             const markerColor = function() {
               switch (train.color) {
@@ -183,41 +170,29 @@ export default class App extends React.Component {
               switch (direction) {
                 case "North":
                   return {
-                    latitude:
-                      parseFloat(
-                        minutesLeft["latitude"]
-                      ) - 0.0001,
-                    longitude:
-                      parseFloat(
-                        minutesLeft["longitude"]
-                      ) - 0.0001
+                    latitude: parseFloat(minutesLeft["latitude"]) - 0.0001,
+                    longitude: parseFloat(minutesLeft["longitude"]) - 0.0001
                   };
                 case "South":
                   return {
-                    latitude:
-                      parseFloat(
-                        minutesLeft["latitude"]
-                      ) + 0.0001,
-                    longitude:
-                      parseFloat(
-                        minutesLeft["longitude"]
-                      ) + 0.0001
+                    latitude: parseFloat(minutesLeft["latitude"]) + 0.0001,
+                    longitude: parseFloat(minutesLeft["longitude"]) + 0.0001
                   };
                 default:
                   break;
               }
             };
 
-            const nextStation = function(){
-              switch(minutes) {
-                case 'Leaving':
+            const nextStation = function() {
+              switch (minutes) {
+                case "Leaving":
                   return `Leaving ${station.name}`;
-                case '1':
+                case "1":
                   return `Next Station: ${station.name} in ${minutes} min`;
                 default:
                   return `Next Station: ${station.name} in ${minutes} mins`;
               }
-            }
+            };
 
             return (
               <MapView.Marker
@@ -242,13 +217,20 @@ export default class App extends React.Component {
       this.state.location.coords !== undefined
     ) {
       return (
-        <View>
-          <MapView
+        <View
           style={{
-            flex: 1}}
+            flex: 1
+          }}
+        >
+          <MapView
+            style={{
+              flex: 1
+            }}
             initialRegion={{
-              latitude: parseFloat(this.state.location.coords.latitude) || 37.792874,
-              longitude: parseFloat(this.state.location.coords.longitude) || -122.397020,
+              latitude:
+                parseFloat(this.state.location.coords.latitude) || 37.792874,
+              longitude:
+                parseFloat(this.state.location.coords.longitude) || -122.39702,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421
             }}
@@ -257,11 +239,14 @@ export default class App extends React.Component {
             {this.renderBartStations()}
             {this.renderTrain()}
           </MapView>
-          <View style={{
-            flex: 1}}>
+          <View
+            style={{
+              flex: 1
+            }}
+          >
             <Text>Hello</Text>
           </View>
-          </View>
+        </View>
       );
     } else {
       return (
