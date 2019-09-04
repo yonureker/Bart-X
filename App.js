@@ -96,7 +96,11 @@ export default class App extends React.Component {
         station.etd.map(route => {
           trainText += `${route.destination} in`;
           route.estimate.map(train => {
-            trainText += ` ${train.minutes}`;
+            if (train.minutes === 'Leaving'){
+              trainText += ` 0`
+            } else {
+              trainText += ` ${train.minutes}`;
+            }
           });
           trainText += " mins \n";
         });
@@ -239,13 +243,6 @@ export default class App extends React.Component {
             {this.renderBartStations()}
             {this.renderTrain()}
           </MapView>
-          <View
-            style={{
-              flex: 1
-            }}
-          >
-            <Text>Hello</Text>
-          </View>
         </View>
       );
     } else {
