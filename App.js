@@ -17,7 +17,6 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      bartStations: [],
       stationList: [],
       location: { coords: { latitude: null, longitude: null } },
       errorMessage: null,
@@ -37,7 +36,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchBartStations();
     this.fetchTrain();
     this.interval = setInterval(() => this.fetchTrain(), 5000);
   }
@@ -58,20 +56,20 @@ export default class App extends React.Component {
     this.setState({ location });
   };
 
-  fetchBartStations() {
-    fetch(
-      "https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          bartStations: responseJson.root.stations.station
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  // fetchBartStations() {
+  //   fetch(
+  //     "https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
+  //   )
+  //     .then(response => response.json())
+  //     .then(responseJson => {
+  //       this.setState({
+  //         bartStations: responseJson.root.stations.station
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
   fetchTrain() {
     fetch(
@@ -96,8 +94,8 @@ export default class App extends React.Component {
         station.etd.map(route => {
           trainText += `${route.destination} in`;
           route.estimate.map(train => {
-            if (train.minutes === 'Leaving'){
-              trainText += ` 0`
+            if (train.minutes === "Leaving") {
+              trainText += ` 0`;
             } else {
               trainText += ` ${train.minutes}`;
             }
@@ -116,10 +114,14 @@ export default class App extends React.Component {
             longitude: parseFloat(stationDetails[station.abbr].gtfs_longitude)
           }}
           image={stationLogo}
-          title={station.name}
-          description={approachingTrains()}
-          zIndex={100}
-        />
+          zIndex={100}>
+                    <MapView.Callout tooltip={true}>
+                <View style={{backgroundColor: '#fff', justifyContent: "center"}}>
+                  <Text style={{fontWeight: 'bold'}}>{station.name}</Text>
+                  <Text>{approachingTrains()}</Text>
+                </View>
+              </MapView.Callout>
+          </MapView.Marker>
       );
     });
   }
@@ -216,7 +218,6 @@ export default class App extends React.Component {
 
   render() {
     if (
-      this.state.bartStations.length !== 0 &&
       this.state.stationList.length !== 0 &&
       this.state.location.coords !== undefined
     ) {
