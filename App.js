@@ -1,5 +1,6 @@
 import React from "react";
-import { Modal, Platform, Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -20,7 +21,6 @@ export default class App extends React.Component {
       stationList: [],
       location: { coords: { latitude: null, longitude: null } },
       errorMessage: null,
-      modalVisible: false
     };
   }
 
@@ -55,21 +55,6 @@ export default class App extends React.Component {
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
   };
-
-  // fetchBartStations() {
-  //   fetch(
-  //     "https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
-  //   )
-  //     .then(response => response.json())
-  //     .then(responseJson => {
-  //       this.setState({
-  //         bartStations: responseJson.root.stations.station
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
 
   fetchTrain() {
     fetch(
@@ -114,14 +99,15 @@ export default class App extends React.Component {
             longitude: parseFloat(stationDetails[station.abbr].gtfs_longitude)
           }}
           image={stationLogo}
-          zIndex={100}>
-                    <MapView.Callout tooltip={true}>
-                <View style={{backgroundColor: '#fff', justifyContent: "center"}}>
-                  <Text style={{fontWeight: 'bold'}}>{station.name}</Text>
-                  <Text>{approachingTrains()}</Text>
-                </View>
-              </MapView.Callout>
-          </MapView.Marker>
+          zIndex={100}
+        >
+          <MapView.Callout tooltip={true} style={{alignSelf: 'flex-start'}}>
+            <View style={{ backgroundColor: "#fff", border: '1px solid #000000', alignSelf: 'flex-start' }}>
+              <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
+              <Text>{approachingTrains()}</Text>
+            </View>
+          </MapView.Callout>
+        </MapView.Marker>
       );
     });
   }
