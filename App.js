@@ -1,6 +1,7 @@
 import React from "react";
-import { Platform, Text, View } from "react-native";
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { Platform, Text, Image, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -12,15 +13,16 @@ import blueTrain from "./assets/train-blue.png";
 import greenTrain from "./assets/train-green.png";
 import orangeTrain from "./assets/train-orange.png";
 import purpleTrain from "./assets/train-purple.png";
+import systemMap from "./assets/system-map-weekday.png";
 
-export default class App extends React.Component {
+class LiveMap extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       stationList: [],
       location: { coords: { latitude: null, longitude: null } },
-      errorMessage: null,
+      errorMessage: null
     };
   }
 
@@ -38,6 +40,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.fetchTrain();
     this.interval = setInterval(() => this.fetchTrain(), 5000);
+    this.interval = setInterval(() => this.renderBartStations(), 5000);
   }
 
   componentWillUnmount() {
@@ -78,11 +81,19 @@ export default class App extends React.Component {
 
         station.etd.map(route => {
           trainText += `${route.destination} in`;
-          route.estimate.map(train => {
-            if (train.minutes === "Leaving") {
-              trainText += ` 0`;
+          route.estimate.map((train, index) => {
+            if (index === 0) {
+              if (train.minutes === "Leaving") {
+                trainText += ` 0`;
+              } else {
+                trainText += ` ${train.minutes}`;
+              }
             } else {
-              trainText += ` ${train.minutes}`;
+              if (train.minutes === "Leaving") {
+                trainText += `, 0`;
+              } else {
+                trainText += `, ${train.minutes}`;
+              }
             }
           });
           trainText += " mins \n";
@@ -101,9 +112,21 @@ export default class App extends React.Component {
           image={stationLogo}
           zIndex={100}
         >
-          <MapView.Callout tooltip={true} style={{alignSelf: 'flex-start'}}>
-            <View style={{ backgroundColor: "#fff", border: '1px solid #000000', alignSelf: 'flex-start' }}>
+          <MapView.Callout
+            tooltip={true}
+            style={{ backgroundColor: "#ffffff" }}
+          >
+            <View
+              style={{
+                marginHorizontal: 5,
+                marginTop: 2,
+                borderBottomWidth: "1px",
+                borderBottomColor: "#c4c1b9"
+              }}
+            >
               <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
+            </View>
+            <View style={{ marginTop: 5, marginLeft: 5, marginRight: 5 }}>
               <Text>{approachingTrains()}</Text>
             </View>
           </MapView.Callout>
@@ -228,7 +251,7 @@ export default class App extends React.Component {
             provider={"google"}
           >
             {this.renderBartStations()}
-            {this.renderTrain()}
+            {/* {this.renderTrain()} */}
           </MapView>
         </View>
       );
@@ -248,3 +271,20 @@ export default class App extends React.Component {
     }
   }
 }
+
+class SystemMap extends React.Component {
+  render() {
+    return (
+      <View>
+        <Image source={systemMap} style={{ resizeMode: "contain" }} />
+      </View>
+    );
+  }
+}
+
+const TabNavigator = createBottomTabNavigator({
+  LiveMap: { screen: LiveMap },
+  SystemMap: { screen: SystemMap }
+});
+
+export default createAppContainer(TabNavigator);
