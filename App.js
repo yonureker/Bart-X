@@ -40,7 +40,6 @@ class LiveMap extends React.Component {
   componentDidMount() {
     this.fetchTrain();
     this.interval = setInterval(() => this.fetchTrain(), 5000);
-    this.interval = setInterval(() => this.renderBartStations(), 5000);
   }
 
   componentWillUnmount() {
@@ -113,6 +112,7 @@ class LiveMap extends React.Component {
           zIndex={100}
         >
           <MapView.Callout
+            key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
           >
@@ -244,8 +244,8 @@ class LiveMap extends React.Component {
               latitude:
                 parseFloat(this.state.location.coords.latitude) || 37.792874,
               longitude:
-                parseFloat(this.state.location.coords.longitude) || -122.39702,
-              latitudeDelta: 0.0922,
+                parseFloat(this.state.location.coords.longitude) || -122.39703,
+              latitudeDelta: 0.0422,
               longitudeDelta: 0.0421
             }}
             provider={"google"}
@@ -275,8 +275,8 @@ class LiveMap extends React.Component {
 class SystemMap extends React.Component {
   render() {
     return (
-      <View>
-        <Image source={systemMap} style={{ resizeMode: "contain" }} />
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Image width={500} height={400} source={systemMap} style={{ resizeMode: "center"}} />
       </View>
     );
   }
