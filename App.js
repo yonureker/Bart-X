@@ -1,7 +1,7 @@
 import React from "react";
 import { Platform, Text, Image, View } from "react-native";
-import { createAppContainer } from "react-navigation";
-import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
+// import { createAppContainer } from "react-navigation";
+// import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -13,9 +13,8 @@ import blueTrain from "./assets/train-blue.png";
 import greenTrain from "./assets/train-green.png";
 import orangeTrain from "./assets/train-orange.png";
 import purpleTrain from "./assets/train-purple.png";
-import systemMap from "./assets/system-map-weekday.png";
 
-class LiveMap extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,7 +38,8 @@ class LiveMap extends React.Component {
 
   componentDidMount() {
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 5000);
+    this.interval = setInterval(() => this.fetchTrain(), 10000);
+    // this.interval2 = setInterval(() => this.renderBartStations(), 1000);
   }
 
   componentWillUnmount() {
@@ -110,6 +110,7 @@ class LiveMap extends React.Component {
           }}
           image={stationLogo}
           zIndex={100}
+          tracksInfoWindowChanges={true}
         >
           <MapView.Callout
             key={index}
@@ -272,19 +273,19 @@ class LiveMap extends React.Component {
   }
 }
 
-class SystemMap extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Image width={500} height={400} source={systemMap} style={{ resizeMode: "center"}} />
-      </View>
-    );
-  }
-}
+// class SystemMap extends React.Component {
+//   render() {
+//     return (
+//       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+//         <Image width={500} height={400} source={systemMap} style={{ resizeMode: "center"}} />
+//       </View>
+//     );
+//   }
+// }
 
-const TabNavigator = createBottomTabNavigator({
-  LiveMap: { screen: LiveMap },
-  SystemMap: { screen: SystemMap }
-});
+// const TabNavigator = createBottomTabNavigator({
+//   LiveMap: { screen: LiveMap },
+//   SystemMap: { screen: SystemMap }
+// });
 
-export default createAppContainer(TabNavigator);
+// export default createAppContainer(TabNavigator);
