@@ -1,18 +1,19 @@
 import React from "react";
 import { Platform, Text, Image, View } from "react-native";
-// import { createAppContainer } from "react-navigation";
-// import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
-import redTrain from "./assets/train-red.png";
-import yellowTrain from "./assets/train-yellow.png";
-import blueTrain from "./assets/train-blue.png";
-import greenTrain from "./assets/train-green.png";
-import orangeTrain from "./assets/train-orange.png";
-import purpleTrain from "./assets/train-purple.png";
+import StationCallout from "./stationCallout";
+// import { createAppContainer } from "react-navigation";
+// import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
+// import redTrain from "./assets/train-red.png";
+// import yellowTrain from "./assets/train-yellow.png";
+// import blueTrain from "./assets/train-blue.png";
+// import greenTrain from "./assets/train-green.png";
+// import orangeTrain from "./assets/train-orange.png";
+// import purpleTrain from "./assets/train-purple.png";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 10000);
+    this.interval = setInterval(() => this.fetchTrain(), 5000);
     // this.interval2 = setInterval(() => this.renderBartStations(), 1000);
   }
 
@@ -75,32 +76,6 @@ export default class App extends React.Component {
 
   renderBartStations() {
     return this.state.stationList.map((station, index) => {
-      const approachingTrains = function() {
-        let trainText = "";
-
-        station.etd.map(route => {
-          trainText += `${route.destination} in`;
-          route.estimate.map((train, index) => {
-            if (index === 0) {
-              if (train.minutes === "Leaving") {
-                trainText += ` 0`;
-              } else {
-                trainText += ` ${train.minutes}`;
-              }
-            } else {
-              if (train.minutes === "Leaving") {
-                trainText += `, 0`;
-              } else {
-                trainText += `, ${train.minutes}`;
-              }
-            }
-          });
-          trainText += " mins \n";
-        });
-
-        return trainText;
-      };
-
       return (
         <MapView.Marker
           key={index}
@@ -127,8 +102,18 @@ export default class App extends React.Component {
             >
               <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
             </View>
-            <View style={{ marginTop: 5, marginLeft: 5, marginRight: 5 }}>
-              <Text>{approachingTrains()}</Text>
+            <View
+              style={{
+                marginTop: 5,
+                marginLeft: 5,
+                marginRight: 5,
+                marginBottom: 8
+              }}
+            >
+              <StationCallout
+                key={index}
+                station={this.state.stationList[index]}
+              />
             </View>
           </MapView.Callout>
         </MapView.Marker>
