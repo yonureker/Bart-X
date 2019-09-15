@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, Text, Image, View } from "react-native";
+import { Platform, Text, ImageBackground, View } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -243,15 +243,8 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <Text>BartLiveMobile</Text>
-          <Text>Loading....</Text>
+        <View style={{ flex: 1 }}>
+          <ImageBackground style={{width: '100%', height: '100%'}} source={require('./assets/loading.png')}/>
         </View>
       );
     }

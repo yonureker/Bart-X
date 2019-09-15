@@ -8,7 +8,6 @@ export default class StationCallout extends React.Component {
 
   render() {
     return this.props.station.etd.map((route, index) => {
-
       const approachingTrains = function() {
         trainText = `${route.destination} in`;
 
@@ -25,28 +24,15 @@ export default class StationCallout extends React.Component {
             } else {
               trainText += `, ${train.minutes}`;
             }
-        }});
+          }
+        });
 
         trainText += " mins";
 
-        return (
-          <Text>
-            {trainText}
-          </Text>
-        )
+        return <Text>{trainText}</Text>;
       };
 
-      return (
-          <View key={index}>
-            {approachingTrains()}
-          </View>
-      );
+      return <View key={index}>{approachingTrains()}</View>;
     });
-
-    // return (
-    //   <View>
-    //     <Text>{this.props.stationList.length}</Text>
-    //   </View>
-    // );
   }
 }
