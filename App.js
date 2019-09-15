@@ -244,7 +244,10 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <ImageBackground style={{width: '100%', height: '100%'}} source={require('./assets/loading.png')}/>
+          <ImageBackground
+            style={{ width: "100%", height: "100%" }}
+            source={require("./assets/loading.png")}
+          />
         </View>
       );
     }
