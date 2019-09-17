@@ -6,6 +6,7 @@ import * as Permissions from "expo-permissions";
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
+import DetailsScreen from "./detailsScreen";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 // import { createAppContainer } from "react-navigation";
@@ -258,20 +259,6 @@ class App extends React.Component {
         </View>
       );
     }
-  }
-}
-
-class DetailsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Details',
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>This is the details screen</Text>
-      </View>
-    );
   }
 }
 
