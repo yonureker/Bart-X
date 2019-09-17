@@ -6,6 +6,8 @@ import * as Permissions from "expo-permissions";
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 // import { createAppContainer } from "react-navigation";
 // import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
 // import redTrain from "./assets/train-red.png";
@@ -15,7 +17,7 @@ import StationCallout from "./stationCallout";
 // import orangeTrain from "./assets/train-orange.png";
 // import purpleTrain from "./assets/train-purple.png";
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,6 +27,10 @@ export default class App extends React.Component {
       errorMessage: null
     };
   }
+
+  static navigationOptions = {
+    title: 'Live Map',
+  };
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -91,6 +97,7 @@ export default class App extends React.Component {
             key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
+            onPress={() => this.props.navigation.navigate('Details')}
           >
             <View
               style={{
@@ -254,19 +261,23 @@ export default class App extends React.Component {
   }
 }
 
-// class SystemMap extends React.Component {
-//   render() {
-//     return (
-//       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-//         <Image width={500} height={400} source={systemMap} style={{ resizeMode: "center"}} />
-//       </View>
-//     );
-//   }
-// }
+class DetailsScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Details',
+  };
 
-// const TabNavigator = createBottomTabNavigator({
-//   LiveMap: { screen: LiveMap },
-//   SystemMap: { screen: SystemMap }
-// });
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>This is the details screen</Text>
+      </View>
+    );
+  }
+}
 
-// export default createAppContainer(TabNavigator);
+const AppNavigator = createStackNavigator({
+  Home: App,
+  Details: DetailsScreen
+});
+
+export default createAppContainer(AppNavigator);
