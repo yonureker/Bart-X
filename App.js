@@ -33,6 +33,7 @@ class App extends React.Component {
     title: 'Live Map',
   };
 
+
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
       this.setState({
@@ -40,13 +41,14 @@ class App extends React.Component {
           "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
       });
     } else {
+      // asking user Location before component mounts.
       this._getLocationAsync();
     }
   }
 
   componentDidMount() {
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 5000);
+    this.interval = setInterval(() => this.fetchTrain(), 3000);
     // this.interval2 = setInterval(() => this.renderBartStations(), 1000);
   }
 
@@ -98,7 +100,8 @@ class App extends React.Component {
             key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
-            onPress={() => this.props.navigation.navigate('Details')}
+            onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
+            // onPress={() => this.props.navigation.navigate('Details')}
           >
             <View
               style={{
@@ -239,8 +242,8 @@ class App extends React.Component {
                 parseFloat(this.state.location.coords.latitude) || 37.792874,
               longitude:
                 parseFloat(this.state.location.coords.longitude) || -122.39703,
-              latitudeDelta: 0.0422,
-              longitudeDelta: 0.0421
+              latitudeDelta: 0.1,
+              longitudeDelta: 0.1
             }}
             provider={"google"}
           >
