@@ -1,5 +1,10 @@
 import React from "react";
-import { Platform, Text, ImageBackground, View } from "react-native";
+import {
+  Platform,
+  Text,
+  ImageBackground,
+  View
+} from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -24,15 +29,15 @@ export default class App extends React.Component {
 
     this.state = {
       stationList: [],
+      lastUpdate: "",
       location: { coords: { latitude: null, longitude: null } },
       errorMessage: null
     };
   }
 
   static navigationOptions = {
-    title: 'Live Map',
+    title: "Live Map"
   };
-
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -48,7 +53,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 3000);
+    this.interval = setInterval(() => this.fetchTrain(), 5000);
     // this.interval2 = setInterval(() => this.renderBartStations(), 1000);
   }
 
@@ -75,7 +80,8 @@ export default class App extends React.Component {
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
-          stationList: responseJson.root.station
+          stationList: responseJson.root.station,
+          lastUpdate: responseJson.root.time
         });
       })
       .catch(error => {
@@ -249,6 +255,9 @@ export default class App extends React.Component {
             {this.renderBartStations()}
             {/* {this.renderTrain()} */}
           </MapView>
+          <View style={{backgroundColor: '#0099CC' }}>
+          <Text style={{fontSize: 12, color: 'white', marginLeft: 5}}>Last update at {this.state.lastUpdate}</Text>
+          </View>
         </View>
       );
     } else {

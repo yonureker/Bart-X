@@ -32,7 +32,9 @@ export default class StationCallout extends React.Component {
         return <Text>{trainText}</Text>;
       };
 
-      return <View key={index}>{approachingTrains()}</View>;
+      return <View key={index}>
+      {approachingTrains()}
+      </View>;
     });
   }
 }
