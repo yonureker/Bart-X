@@ -7,8 +7,8 @@ import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
 import DetailsScreen from "./detailsScreen";
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 // import { createAppContainer } from "react-navigation";
 // import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
 // import redTrain from "./assets/train-red.png";
@@ -30,9 +30,8 @@ class App extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Live Map',
+    title: "Live Map"
   };
-
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -100,7 +99,11 @@ class App extends React.Component {
             key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
-            onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
+            onPress={() =>
+              this.props.navigation.navigate("Details", {
+                station: this.state.stationList[index]
+              })
+            }
             // onPress={() => this.props.navigation.navigate('Details')}
           >
             <View
@@ -132,95 +135,95 @@ class App extends React.Component {
     });
   }
 
-  renderTrain() {
-    const stations = this.state.stationList;
-    const transferStations = ["MCAR", "12TH", "WOAK", "LAKE", "BAYF"];
+  // renderTrain() {
+  //   const stations = this.state.stationList;
+  //   const transferStations = ["MCAR", "12TH", "WOAK", "LAKE", "BAYF"];
 
-    return stations.map(station => {
-      var stationAbr = station.abbr;
+  //   return stations.map(station => {
+  //     var stationAbr = station.abbr;
 
-      return station.etd.map(route =>
-        route.estimate.map((train, index) => {
-          let direction = train.direction;
-          let minutes = train.minutes;
+  //     return station.etd.map(route =>
+  //       route.estimate.map((train, index) => {
+  //         let direction = train.direction;
+  //         let minutes = train.minutes;
 
-          if (transferStations.includes(stationAbr)) {
-            minutesLeft =
-              stationDetails[stationAbr]["waypoints"][train.color][direction][
-                minutes
-              ];
-          } else {
-            minutesLeft =
-              stationDetails[stationAbr]["waypoints"][direction][minutes];
-          }
+  //         if (transferStations.includes(stationAbr)) {
+  //           minutesLeft =
+  //             stationDetails[stationAbr]["waypoints"][train.color][direction][
+  //               minutes
+  //             ];
+  //         } else {
+  //           minutesLeft =
+  //             stationDetails[stationAbr]["waypoints"][direction][minutes];
+  //         }
 
-          if (minutesLeft !== undefined) {
-            //sets train color
-            const markerColor = function() {
-              switch (train.color) {
-                case "GREEN":
-                  return greenTrain;
-                case "YELLOW":
-                  return yellowTrain;
-                case "BLUE":
-                  return blueTrain;
-                case "RED":
-                  return redTrain;
-                case "ORANGE":
-                  return orangeTrain;
-                case "PURPLE":
-                  return purpleTrain;
-                case "WHITE":
-                  return yellowTrain;
-                default:
-                  break;
-              }
-            };
+  //         if (minutesLeft !== undefined) {
+  //           //sets train color
+  //           const markerColor = function() {
+  //             switch (train.color) {
+  //               case "GREEN":
+  //                 return greenTrain;
+  //               case "YELLOW":
+  //                 return yellowTrain;
+  //               case "BLUE":
+  //                 return blueTrain;
+  //               case "RED":
+  //                 return redTrain;
+  //               case "ORANGE":
+  //                 return orangeTrain;
+  //               case "PURPLE":
+  //                 return purpleTrain;
+  //               case "WHITE":
+  //                 return yellowTrain;
+  //               default:
+  //                 break;
+  //             }
+  //           };
 
-            //moving South direction trains a bit so they don't overlap with North trains on the same location and flicker.
-            const preventFlicker = function() {
-              switch (direction) {
-                case "North":
-                  return {
-                    latitude: parseFloat(minutesLeft["latitude"]) - 0.0001,
-                    longitude: parseFloat(minutesLeft["longitude"]) - 0.0001
-                  };
-                case "South":
-                  return {
-                    latitude: parseFloat(minutesLeft["latitude"]) + 0.0001,
-                    longitude: parseFloat(minutesLeft["longitude"]) + 0.0001
-                  };
-                default:
-                  break;
-              }
-            };
+  //           //moving South direction trains a bit so they don't overlap with North trains on the same location and flicker.
+  //           const preventFlicker = function() {
+  //             switch (direction) {
+  //               case "North":
+  //                 return {
+  //                   latitude: parseFloat(minutesLeft["latitude"]) - 0.0001,
+  //                   longitude: parseFloat(minutesLeft["longitude"]) - 0.0001
+  //                 };
+  //               case "South":
+  //                 return {
+  //                   latitude: parseFloat(minutesLeft["latitude"]) + 0.0001,
+  //                   longitude: parseFloat(minutesLeft["longitude"]) + 0.0001
+  //                 };
+  //               default:
+  //                 break;
+  //             }
+  //           };
 
-            const nextStation = function() {
-              switch (minutes) {
-                case "Leaving":
-                  return `Leaving ${station.name}`;
-                case "1":
-                  return `Next Station: ${station.name} in ${minutes} min`;
-                default:
-                  return `Next Station: ${station.name} in ${minutes} mins`;
-              }
-            };
+  //           const nextStation = function() {
+  //             switch (minutes) {
+  //               case "Leaving":
+  //                 return `Leaving ${station.name}`;
+  //               case "1":
+  //                 return `Next Station: ${station.name} in ${minutes} min`;
+  //               default:
+  //                 return `Next Station: ${station.name} in ${minutes} mins`;
+  //             }
+  //           };
 
-            return (
-              <MapView.Marker
-                key={index}
-                coordinate={preventFlicker()}
-                image={markerColor()}
-                title={`${route.destination} Train`}
-                description={nextStation()}
-                zIndex={index}
-              />
-            );
-          }
-        })
-      );
-    });
-  }
+  //           return (
+  //             <MapView.Marker
+  //               key={index}
+  //               coordinate={preventFlicker()}
+  //               image={markerColor()}
+  //               title={`${route.destination} Train`}
+  //               description={nextStation()}
+  //               zIndex={index}
+  //             />
+  //           );
+  //         }
+  //       })
+  //     );
+  //   });
+  // }
 
   render() {
     if (

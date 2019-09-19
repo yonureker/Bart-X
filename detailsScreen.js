@@ -13,7 +13,7 @@ export default class DetailsScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Hello'
+    title: "Hello"
   };
 
   render() {
@@ -59,7 +59,7 @@ export default class DetailsScreen extends React.Component {
                 style={{
                   flexDirection: "row",
                   borderBottomWidth: 1,
-                  borderBottomColor: "#f0ebe9"
+                  borderBottomColor: "#f0ebe8"
                 }}
               >
                 <View
@@ -71,7 +71,12 @@ export default class DetailsScreen extends React.Component {
                 >
                   <Image
                     source={trainColor()}
-                    style={{ width: 30, height: 30, marginBottom: 10, marginLeft: 5 }}
+                    style={{
+                      width: 30,
+                      height: 30,
+                      marginBottom: 10,
+                      marginLeft: 5
+                    }}
                   />
                 </View>
                 <View style={{ flex: 4, justifyContent: "center" }}>
