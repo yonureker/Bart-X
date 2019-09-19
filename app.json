@@ -1,13 +1,11 @@
 {
   "expo": {
-    "name": "Bart Live Mobile",
-    "slug": "BartLiveMobile",
+    "name": "BartLiveMobile",
+    "slug": "bart-live-mobile",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "ios"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +22,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "onureker.bartlivemobile"
     },
     "description": "",
     "githubUrl": "https://github.com/yonureker/BartLiveMobile"

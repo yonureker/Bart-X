@@ -10,14 +10,18 @@ import purpleTrain from "./assets/train-purple.png";
 export default class DetailsScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      station: this.props.navigation.state.params.station
+    }
   }
 
   static navigationOptions = {
-    title: "Hello"
+    title: 'Details'
   };
 
   render() {
-    const station = this.props.navigation.state.params.station;
+    const station = this.state.station;
 
     const trainList = function() {
       return station.etd.map((route, index) => {

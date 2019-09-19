@@ -7,8 +7,8 @@ import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
 import DetailsScreen from "./detailsScreen";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+// import { createAppContainer } from 'react-navigation';
+// import { createStackNavigator } from 'react-navigation-stack';
 // import { createAppContainer } from "react-navigation";
 // import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
 // import redTrain from "./assets/train-red.png";
@@ -18,7 +18,7 @@ import { createStackNavigator } from "react-navigation-stack";
 // import orangeTrain from "./assets/train-orange.png";
 // import purpleTrain from "./assets/train-purple.png";
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,8 +30,9 @@ class App extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Live Map"
+    title: 'Live Map',
   };
+
 
   componentWillMount() {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -99,12 +100,7 @@ class App extends React.Component {
             key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
-            onPress={() =>
-              this.props.navigation.navigate("Details", {
-                station: this.state.stationList[index]
-              })
-            }
-            // onPress={() => this.props.navigation.navigate('Details')}
+            // onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
           >
             <View
               style={{
@@ -268,9 +264,11 @@ class App extends React.Component {
   }
 }
 
-const AppNavigator = createStackNavigator({
-  Home: App,
-  Details: DetailsScreen
-});
+// disabling tabs for now
+//
+// const AppNavigator = createStackNavigator({
+//   Home: App,
+//   Details: DetailsScreen
+// });
 
-export default createAppContainer(AppNavigator);
+// export default createAppContainer(AppNavigator);
