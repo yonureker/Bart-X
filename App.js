@@ -8,6 +8,7 @@ import {
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
+import { AppLoading } from "expo";
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
@@ -31,7 +32,7 @@ export default class App extends React.Component {
       stationList: [],
       lastUpdate: "",
       location: { coords: { latitude: null, longitude: null } },
-      errorMessage: null
+      errorMessage: null,
     };
   }
 
@@ -228,10 +229,10 @@ export default class App extends React.Component {
   // }
 
   render() {
-    if (
-      this.state.stationList.length !== 0 &&
-      this.state.location.coords !== undefined
-    ) {
+    // if (
+    //   this.state.stationList.length !== 0 &&
+    //   this.state.location.coords !== undefined
+    // ) {
       return (
         <View
           style={{
@@ -260,16 +261,16 @@ export default class App extends React.Component {
           </View>
         </View>
       );
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <ImageBackground
-            style={{ width: "100%", height: "100%" }}
-            source={require("./assets/loading.png")}
-          />
-        </View>
-      );
-    }
+    // } else {
+    //   return (
+    //     <View style={{ flex: 1 }}>
+    //       <ImageBackground
+    //         style={{ width: "100%", height: "100%" }}
+    //         source={require("./assets/loading.png")}
+    //       />
+    //     </View>
+    //   );
+    // }
   }
 }
 
