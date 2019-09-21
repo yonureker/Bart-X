@@ -8,11 +8,12 @@ import {
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import { AppLoading } from "expo";
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
 import DetailsScreen from "./detailsScreen";
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
 // import { createAppContainer } from 'react-navigation';
 // import { createStackNavigator } from 'react-navigation-stack';
 // import { createAppContainer } from "react-navigation";
@@ -31,8 +32,9 @@ export default class App extends React.Component {
     this.state = {
       stationList: [],
       lastUpdate: "",
-      location: { coords: { latitude: null, longitude: null } },
+      location: { coords: { latitude: 37.792874, longitude: -122.39703 } },
       errorMessage: null,
+      isReady: false
     };
   }
 
@@ -220,11 +222,26 @@ export default class App extends React.Component {
   //   });
   // }
 
+  async _cacheResourcesAsync() {
+    const images = [require('./assets/splash.png')];
+
+    const cacheImages = images.map(image => {
+      return Asset.fromModule(image).downloadAsync();
+    }); 
+    return Promise.all(cacheImages);
+  }
+
   render() {
-    // if (
-    //   this.state.stationList.length !== 0 &&
-    //   this.state.location.coords !== undefined
-    // ) {
+    if (!this.state.isReady) {
+      return (
+        <AppLoading
+          startAsync={this._cacheResourcesAsync}
+          onFinish={() => this.setState({ isReady: true })}
+          onError={console.warn}
+        />
+      ); }
+
+
       return (
         <View
           style={{
