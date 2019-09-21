@@ -41,15 +41,7 @@ export default class App extends React.Component {
   };
 
   componentWillMount() {
-    if (Platform.OS === "android" && !Constants.isDevice) {
-      this.setState({
-        errorMessage:
-          "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
-      });
-    } else {
-      // asking user Location before component mounts.
-      this._getLocationAsync();
-    }
+    this._getLocationAsync();
   }
 
   componentDidMount() {
