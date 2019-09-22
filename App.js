@@ -223,7 +223,7 @@ export default class App extends React.Component {
   // }
 
   async _cacheResourcesAsync() {
-    const images = [require('./assets/splash.png')];
+    const images = [require('./assets/splash.png'), require('./assets/station.png')];
 
     const cacheImages = images.map(image => {
       return Asset.fromModule(image).downloadAsync();
