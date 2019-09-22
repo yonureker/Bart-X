@@ -38,10 +38,6 @@ export default class App extends React.Component {
     };
   }
 
-  static navigationOptions = {
-    title: "Live Map"
-  };
-
   componentWillMount() {
     this._getLocationAsync();
   }
