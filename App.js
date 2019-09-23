@@ -32,7 +32,7 @@ export default class App extends React.Component {
     this.state = {
       stationList: [],
       lastUpdate: "",
-      location: { coords: { latitude: 37.792874, longitude: -122.39703 } },
+      location: { coords: { latitude: null, longitude: null } },
       errorMessage: null,
       isReady: false
     };
@@ -246,7 +246,7 @@ export default class App extends React.Component {
         >
           <MapView
             style={{
-              flex: 1
+              flex: 15
             }}
             initialRegion={{
               latitude:
@@ -261,8 +261,8 @@ export default class App extends React.Component {
             {this.renderBartStations()}
             {/* {this.renderTrain()} */}
           </MapView>
-          <View style={{backgroundColor: '#0099CC' }}>
-          <Text style={{fontSize: 12, color: 'white', marginLeft: 5}}>Last update at {this.state.lastUpdate}</Text>
+          <View style={{flex: 1, backgroundColor: '#0099CC', justifyContent: 'center', alignContent: 'center' }}>
+          <Text style={{fontSize: 15, color: 'white', marginLeft: 5, alignSelf: 'center'}}>Last update at {this.state.lastUpdate}</Text>
           </View>
         </View>
       );
