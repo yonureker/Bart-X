@@ -11,7 +11,7 @@ import * as Permissions from "expo-permissions";
 import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
-import DetailsScreen from "./detailsScreen";
+// import DetailsScreen from "./detailsScreen";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 // import { createAppContainer } from 'react-navigation';
@@ -37,6 +37,10 @@ export default class App extends React.Component {
       isReady: false
     };
   }
+
+  // static navigationOptions = {
+  //   title: 'Live Map'
+  // };
 
   componentWillMount() {
     this._getLocationAsync();
@@ -246,7 +250,7 @@ export default class App extends React.Component {
         >
           <MapView
             style={{
-              flex: 15
+              flex: 19
             }}
             initialRegion={{
               latitude:
@@ -262,7 +266,7 @@ export default class App extends React.Component {
             {/* {this.renderTrain()} */}
           </MapView>
           <View style={{flex: 1, backgroundColor: '#0099CC', justifyContent: 'center', alignContent: 'center' }}>
-          <Text style={{fontSize: 15, color: 'white', marginLeft: 5, alignSelf: 'center'}}>Last update at {this.state.lastUpdate}</Text>
+          <Text style={{fontSize: 15, color: 'white', alignSelf: 'center'}}>Last update at {this.state.lastUpdate}</Text>
           </View>
         </View>
       );

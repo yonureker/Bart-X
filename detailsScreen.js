@@ -21,7 +21,7 @@ export default class DetailsScreen extends React.Component {
   };
 
   render() {
-    const station = this.state.station;
+    const station = this.props.navigation.state.params.station;
 
     const trainList = function() {
       return station.etd.map((route, index) => {
@@ -56,7 +56,7 @@ export default class DetailsScreen extends React.Component {
                 alignContent: "center",
                 marginTop: 5,
                 marginLeft: 5,
-                marginBottom: 5
+                marginBottom: 1,
               }}
             >
               <View
@@ -76,18 +76,19 @@ export default class DetailsScreen extends React.Component {
                   <Image
                     source={trainColor()}
                     style={{
-                      width: 30,
-                      height: 30,
-                      marginBottom: 10,
-                      marginLeft: 5
+                      width: 20,
+                      height: 20,
+                      // marginBottom: 5,
+                      // marginLeft: 10,
+                      alignSelf: 'center'
                     }}
                   />
                 </View>
-                <View style={{ flex: 4, justifyContent: "center" }}>
+                <View style={{ flex: 4, justifyContent: "center", marginLeft: 10 }}>
                   <Text
-                    style={{ fontSize: 20, marginBottom: 5 }}
+                    style={{ fontSize: 18, marginBottom: 5}}
                   >{`${route.destination}`}</Text>
-                  <Text style={{ marginBottom: 10 }}>
+                  <Text style={{ marginBottom: 5}}>
                     {train.length} cars | Platform: {train.platform}
                   </Text>
                 </View>
@@ -99,7 +100,7 @@ export default class DetailsScreen extends React.Component {
                   }}
                 >
                   <Text
-                    style={{ fontSize: 20 }}
+                    style={{ fontSize: 15 }}
                   >{`${train.minutes} mins`}</Text>
                 </View>
               </View>
