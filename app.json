@@ -23,9 +23,17 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "onureker.bartlivemobile"
+      "bundleIdentifier": "onureker.bartlivemobile",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDemgMjmGFBL8XWbf6L8tjwRFAVSlGwe2Q"
+      }
     },
     "description": "",
     "githubUrl": "https://github.com/yonureker/BartLiveMobile"
+  },
+  "ios": {
+    "googleMaps": {
+      "apiKey": "AIzaSyDemgMjmGFBL8XWbf6L8tjwRFAVSlGwe2Q"
+    }
   }
 }
