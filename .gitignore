@@ -9,4 +9,5 @@ npm-debug.*
 web-build/
 web-report/
 *.json
-
+app.json*
+*json*

@@ -39,7 +39,7 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    // this._getLocationAsync();
+    this._getLocationAsync();
   }
 
   componentDidMount() {
@@ -52,17 +52,17 @@ export default class App extends React.Component {
     clearInterval(this.interval);
   }
 
-  // _getLocationAsync = async () => {
-  //   let { status } = await Permissions.askAsync(Permissions.LOCATION);
-  //   if (status !== "granted") {
-  //     this.setState({
-  //       errorMessage: "Permission to access location was denied"
-  //     });
-  //   }
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access location was denied"
+      });
+    }
 
-  //   let location = await Location.getCurrentPositionAsync({});
-  //   this.setState({ location });
-  // };
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  };
 
   fetchTrain() {
     fetch(
