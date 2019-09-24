@@ -1,8 +1,6 @@
 import React from "react";
 import {
-  Platform,
   Text,
-  ImageBackground,
   View
 } from "react-native";
 import MapView from "react-native-maps";
