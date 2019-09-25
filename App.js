@@ -60,6 +60,7 @@ export default class App extends React.Component {
     if (status !== 'granted') {
       this.setState({
         errorMessage: 'Permission to access location was denied',
+        location: {coords: { latitude: 37.792874, longitude: -122.39703}}
       });
     }
 
