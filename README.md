@@ -1,6 +1,8 @@
 # BartLive!
 
-BartLiveMobile is a mobile application which you track Bart trains on a map in real time. 
+BartLiveMobile is a mobile app that displays real-time estimated departures using the data fetched from [BART API](http://api.bart.gov/docs/overview/index.aspx).
+
+![](https://i.ibb.co/b2ZKBYK/Slice-1.png)
 
 View on [Snack](https://snack.expo.io/@onureker/587be4). 
 
