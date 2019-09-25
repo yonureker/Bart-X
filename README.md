@@ -11,7 +11,8 @@ View on [Snack](https://snack.expo.io/@onureker/587be4).
 
 - Asks for permission to track user locations and zooms the map to their coordinates. expo-location package is used with the function below:
 
-```_getLocationAsync = async () => {
+```
+_getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       this.setState({
@@ -26,7 +27,8 @@ View on [Snack](https://snack.expo.io/@onureker/587be4).
 
 - User's location is requested before component loads:
 
-```componentWillMount() {
+```
+componentWillMount() {
     this._getLocationAsync();
   }
 ```

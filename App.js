@@ -101,7 +101,7 @@ export default class App extends React.Component {
             key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
-            // onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
+          // onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
           >
             <View
               style={{
@@ -223,11 +223,15 @@ export default class App extends React.Component {
   // }
 
   async _cacheResourcesAsync() {
-    const images = [require('./assets/splash.png'), require('./assets/station.png')];
+    const images = [
+      require('./assets/splash.png'),
+      require('./assets/station.png'),
+      require('./assets/loading.png')
+    ];
 
     const cacheImages = images.map(image => {
       return Asset.fromModule(image).downloadAsync();
-    }); 
+    });
     return Promise.all(cacheImages);
   }
 
@@ -239,9 +243,10 @@ export default class App extends React.Component {
           onFinish={() => this.setState({ isReady: true })}
           onError={console.warn}
         />
-      ); }
+      );
+    }
 
-      if (this.state.location.coords.latitude !== null){
+    if (this.state.location.coords.latitude !== null) {
       return (
         <View
           style={{
@@ -265,8 +270,8 @@ export default class App extends React.Component {
             {this.renderBartStations()}
             {/* {this.renderTrain()} */}
           </MapView>
-          <View style={{flex: 1, backgroundColor: '#0099CC', justifyContent: 'center', alignContent: 'center' }}>
-          <Text style={{fontSize: 15, color: 'white', alignSelf: 'center'}}>Last update at {this.state.lastUpdate}</Text>
+          <View style={{ flex: 1, backgroundColor: '#0099CC', justifyContent: 'center', alignContent: 'center' }}>
+            <Text style={{ fontSize: 15, color: 'white', alignSelf: 'center' }}>Last update at {this.state.lastUpdate}</Text>
           </View>
         </View>
       );
