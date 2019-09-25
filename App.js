@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  ImageBackground,
   Text,
   View
 } from "react-native";
@@ -56,9 +57,9 @@ export default class App extends React.Component {
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
+    if (status !== 'granted') {
       this.setState({
-        errorMessage: "Permission to access location was denied"
+        errorMessage: 'Permission to access location was denied',
       });
     }
 
@@ -80,6 +81,7 @@ export default class App extends React.Component {
       .catch(error => {
         console.log(error);
       });
+
   }
 
   renderBartStations() {
@@ -239,7 +241,7 @@ export default class App extends React.Component {
         />
       ); }
 
-
+      if (this.state.location.coords.latitude !== null){
       return (
         <View
           style={{
@@ -268,16 +270,16 @@ export default class App extends React.Component {
           </View>
         </View>
       );
-    // } else {
-    //   return (
-    //     <View style={{ flex: 1 }}>
-    //       <ImageBackground
-    //         style={{ width: "100%", height: "100%" }}
-    //         source={require("./assets/loading.png")}
-    //       />
-    //     </View>
-    //   );
-    // }
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          <ImageBackground
+            style={{ width: "100%", height: "100%" }}
+            source={require("./assets/loading.png")}
+          />
+        </View>
+      );
+    }
   }
 }
 
