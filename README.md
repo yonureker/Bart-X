@@ -21,14 +21,15 @@ View on [Snack](https://snack.expo.io/@onureker/587be4).
 
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
-  };```
+  };
+```
 
 - User's location is requested before component loads:
 
 ```componentWillMount() {
     this._getLocationAsync();
-  }```
-
+  }
+```
 
 - Stations display snippets on press.
 - Real-time departure times are received from BART API.
