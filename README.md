@@ -9,10 +9,29 @@ View on [Snack](https://snack.expo.io/@onureker/587be4).
 
 # Functionality
 
-- Trains are colored by their routes.
-- Trains and stations display snippets on p ress.
-- The location of trains are updated by fetching data from Bart API.
-- Asks for permission to track user locations and zooms the map to their coordinates.
+- Asks for permission to track user locations and zooms the map to their coordinates. expo-location package is used with the function below:
+
+```_getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  };```
+
+- User's location is requested before component loads:
+
+```componentWillMount() {
+    this._getLocationAsync();
+  }```
+
+
+- Stations display snippets on press.
+- Real-time departure times are received from BART API.
 
 
 # Technologies and Technical Challenges
