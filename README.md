@@ -1,4 +1,4 @@
-# BartLive!
+### BartLiveMobile!
 
 BartLiveMobile is a mobile app that displays real-time estimated departures using the data fetched from [BART API](http://api.bart.gov/docs/overview/index.aspx).
 
@@ -7,7 +7,7 @@ BartLiveMobile is a mobile app that displays real-time estimated departures usin
 View on [Snack](https://snack.expo.io/@onureker/587be4). 
 
 
-# Functionality
+### Functionality
 
 - Asks for permission to track user locations and zooms the map to their coordinates. expo-location package is used with the function below:
 
@@ -36,7 +36,7 @@ componentWillMount() {
 - Stations display snippets on press.
 - Real-time departure times are received from BART API.
 
-# Technologies:
+### Technologies:
 
 - Frontend: [React Native](https://facebook.github.io/react-native/)
 - Javascript
