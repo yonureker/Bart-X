@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  ImageBackground,
-  Text,
-  View
-} from "react-native";
+import { ImageBackground, Text, View } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -57,10 +53,10 @@ export default class App extends React.Component {
 
   _getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
+    if (status !== "granted") {
       this.setState({
-        errorMessage: 'Permission to access location was denied',
-        location: {coords: { latitude: 37.792874, longitude: -122.39703}}
+        errorMessage: "Permission to access location was denied",
+        location: { coords: { latitude: 37.792874, longitude: -122.39703 } }
       });
     }
 
@@ -82,7 +78,6 @@ export default class App extends React.Component {
       .catch(error => {
         console.log(error);
       });
-
   }
 
   renderBartStations() {
@@ -102,7 +97,7 @@ export default class App extends React.Component {
             key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
-          // onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
+            // onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
           >
             <View
               style={{
@@ -225,9 +220,9 @@ export default class App extends React.Component {
 
   async _cacheResourcesAsync() {
     const images = [
-      require('./assets/splash.png'),
-      require('./assets/station.png'),
-      require('./assets/loading.png')
+      require("./assets/splash.png"),
+      require("./assets/station.png"),
+      require("./assets/loading.png")
     ];
 
     const cacheImages = images.map(image => {
@@ -271,8 +266,17 @@ export default class App extends React.Component {
             {this.renderBartStations()}
             {/* {this.renderTrain()} */}
           </MapView>
-          <View style={{ flex: 1, backgroundColor: '#0099CC', justifyContent: 'center', alignContent: 'center' }}>
-            <Text style={{ fontSize: 15, color: 'white', alignSelf: 'center' }}>Last update at {this.state.lastUpdate}</Text>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#0099CC",
+              justifyContent: "center",
+              alignContent: "center"
+            }}
+          >
+            <Text style={{ fontSize: 15, color: "white", alignSelf: "center" }}>
+              Last update at {this.state.lastUpdate}
+            </Text>
           </View>
         </View>
       );
