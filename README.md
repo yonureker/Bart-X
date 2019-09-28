@@ -5,7 +5,7 @@ BartLiveMobile is a mobile app that displays real-time estimated departures usin
 ![](https://i.ibb.co/b2ZKBYK/Slice-1.png)
 
 
-[![App Preview](http://img.youtube.com/vi/H4SbYDmMZKQ/0.jpg)](https://www.youtube.com/watch?v=H4SbYDmMZKQ)
+[![Watch preview]](https://www.youtube.com/watch?v=H4SbYDmMZKQ)
 
 
 ### Functionality
