@@ -43,7 +43,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.fetchTrain();
-    this.interval = setInterval(() => this.fetchTrain(), 5000);
+    this.interval = setInterval(() => this.fetchTrain(), 3000);
     // this.interval2 = setInterval(() => this.renderBartStations(), 1000);
   }
 
