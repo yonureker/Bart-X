@@ -33,10 +33,6 @@ export default class App extends React.Component {
     };
   }
 
-  // static navigationOptions = {
-  //   title: 'Live Map'
-  // };
-
   componentWillMount() {
     this._getLocationAsync();
   }
@@ -292,12 +288,3 @@ export default class App extends React.Component {
     }
   }
 }
-
-// disabling tabs for now
-//
-// const AppNavigator = createStackNavigator({
-//   Home: App,
-//   Details: DetailsScreen
-// });
-
-// export default createAppContainer(AppNavigator);
