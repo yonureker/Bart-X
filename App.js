@@ -34,13 +34,14 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
+    // ask user location before component mounts
     this._getLocationAsync();
   }
 
   componentDidMount() {
     this.fetchTrain();
+    // check real time info from BART API every 4 seconds
     this.interval = setInterval(() => this.fetchTrain(), 4000);
-    // this.interval2 = setInterval(() => this.renderBartStations(), 1000);
   }
 
   componentWillUnmount() {
@@ -61,6 +62,7 @@ export default class App extends React.Component {
   };
 
   fetchTrain() {
+    // call BART API
     fetch(
       "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
     )
@@ -78,10 +80,12 @@ export default class App extends React.Component {
 
   renderBartStations() {
     return this.state.stationList.map((station, index) => {
+      // uses react-native-maps components
       return (
         <MapView.Marker
           key={index}
           coordinate={{
+            // receives station latitude and longitude from stationDetails.js
             latitude: parseFloat(stationDetails[station.abbr].gtfs_latitude),
             longitude: parseFloat(stationDetails[station.abbr].gtfs_longitude)
           }}
@@ -93,7 +97,6 @@ export default class App extends React.Component {
             key={index}
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
-            // onPress={() => this.props.navigation.navigate('Details', { station: this.state.stationList[index]})}
           >
             <View
               style={{
@@ -124,96 +127,7 @@ export default class App extends React.Component {
     });
   }
 
-  // renderTrain() {
-  //   const stations = this.state.stationList;
-  //   const transferStations = ["MCAR", "12TH", "WOAK", "LAKE", "BAYF"];
-
-  //   return stations.map(station => {
-  //     var stationAbr = station.abbr;
-
-  //     return station.etd.map(route =>
-  //       route.estimate.map((train, index) => {
-  //         let direction = train.direction;
-  //         let minutes = train.minutes;
-
-  //         if (transferStations.includes(stationAbr)) {
-  //           minutesLeft =
-  //             stationDetails[stationAbr]["waypoints"][train.color][direction][
-  //               minutes
-  //             ];
-  //         } else {
-  //           minutesLeft =
-  //             stationDetails[stationAbr]["waypoints"][direction][minutes];
-  //         }
-
-  //         if (minutesLeft !== undefined) {
-  //           //sets train color
-  //           const markerColor = function() {
-  //             switch (train.color) {
-  //               case "GREEN":
-  //                 return greenTrain;
-  //               case "YELLOW":
-  //                 return yellowTrain;
-  //               case "BLUE":
-  //                 return blueTrain;
-  //               case "RED":
-  //                 return redTrain;
-  //               case "ORANGE":
-  //                 return orangeTrain;
-  //               case "PURPLE":
-  //                 return purpleTrain;
-  //               case "WHITE":
-  //                 return yellowTrain;
-  //               default:
-  //                 break;
-  //             }
-  //           };
-
-  //           //moving South direction trains a bit so they don't overlap with North trains on the same location and flicker.
-  //           const preventFlicker = function() {
-  //             switch (direction) {
-  //               case "North":
-  //                 return {
-  //                   latitude: parseFloat(minutesLeft["latitude"]) - 0.0001,
-  //                   longitude: parseFloat(minutesLeft["longitude"]) - 0.0001
-  //                 };
-  //               case "South":
-  //                 return {
-  //                   latitude: parseFloat(minutesLeft["latitude"]) + 0.0001,
-  //                   longitude: parseFloat(minutesLeft["longitude"]) + 0.0001
-  //                 };
-  //               default:
-  //                 break;
-  //             }
-  //           };
-
-  //           const nextStation = function() {
-  //             switch (minutes) {
-  //               case "Leaving":
-  //                 return `Leaving ${station.name}`;
-  //               case "1":
-  //                 return `Next Station: ${station.name} in ${minutes} min`;
-  //               default:
-  //                 return `Next Station: ${station.name} in ${minutes} mins`;
-  //             }
-  //           };
-
-  //           return (
-  //             <MapView.Marker
-  //               key={index}
-  //               coordinate={preventFlicker()}
-  //               image={markerColor()}
-  //               title={`${route.destination} Train`}
-  //               description={nextStation()}
-  //               zIndex={index}
-  //             />
-  //           );
-  //         }
-  //       })
-  //     );
-  //   });
-  // }
-
+  // cache images before initial opening
   async _cacheResourcesAsync() {
     const images = [
       require("./assets/splash.png"),
@@ -230,6 +144,7 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isReady) {
       return (
+        // set this.state.isReady to true after images are cached.
         <AppLoading
           startAsync={this._cacheResourcesAsync}
           onFinish={() => this.setState({ isReady: true })}
@@ -238,6 +153,7 @@ export default class App extends React.Component {
       );
     }
 
+    // wait for valid user location data to load component.
     if (this.state.location.coords.latitude !== null) {
       return (
         <View
@@ -260,7 +176,6 @@ export default class App extends React.Component {
             provider={"google"}
           >
             {this.renderBartStations()}
-            {/* {this.renderTrain()} */}
           </MapView>
           <View
             style={{
