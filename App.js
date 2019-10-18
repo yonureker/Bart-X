@@ -70,6 +70,7 @@ export default class App extends React.Component {
   renderBartStations() {
     return this.state.stationList.map((station, index) => {
       // uses react-native-maps components
+      // https://github.com/react-native-community/react-native-maps/tree/master/docs
       return (
         <MapView.Marker
           key={index}
