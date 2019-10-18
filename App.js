@@ -8,17 +8,6 @@ import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
-// import DetailsScreen from "./detailsScreen";
-// import { createAppContainer } from 'react-navigation';
-// import { createStackNavigator } from 'react-navigation-stack';
-// import { createAppContainer } from "react-navigation";
-// import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
-// import redTrain from "./assets/train-red.png";
-// import yellowTrain from "./assets/train-yellow.png";
-// import blueTrain from "./assets/train-blue.png";
-// import greenTrain from "./assets/train-green.png";
-// import orangeTrain from "./assets/train-orange.png";
-// import purpleTrain from "./assets/train-purple.png";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -165,6 +154,7 @@ export default class App extends React.Component {
             style={{
               flex: 19
             }}
+            // initial MapView is centered on either user location or [37.792874, -122.39703]
             initialRegion={{
               latitude:
                 parseFloat(this.state.location.coords.latitude) || 37.792874,
