@@ -8,7 +8,7 @@ BartLiveMobile is a mobile app that displays real-time estimated departures usin
 
 ### Functionality
 
-- Asks for permission to track user locations and zooms the map to their coordinates. expo-location package is used with the function below:
+- Asks for permission to track user locations and zooms the map to their coordinates. expo-location package is used with the function below::
 
 ```
 _getLocationAsync = async () => {
