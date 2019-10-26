@@ -1,4 +1,4 @@
-### BartLiveMobile!
+### The App
 
 BartLiveMobile is a mobile app that displays real-time estimated departures using the data fetched from [BART API](http://api.bart.gov/docs/overview/index.aspx).
 
