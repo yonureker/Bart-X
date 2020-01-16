@@ -17,6 +17,8 @@ export default function App() {
     getLocation();
   }, []);
 
+  
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       // call BART API
