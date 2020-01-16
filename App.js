@@ -1,74 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ImageBackground, Text, View } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import stationDetails from "./stationDetails.js";
 import stationLogo from "./assets/station.png";
 import StationCallout from "./stationCallout";
+import stationDetails from './stationDetails';
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+export default function App() {
+  const [stationList, setStationList] = useState([]);
+  const [lastUpdate, setLastUpdate] = useState("");
+  const [location, setLocation] = useState({ coords: { latitude: null, longitude: null }});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isReady, setIsReady] = useState(false);
 
-    this.state = {
-      stationList: [],
-      lastUpdate: "",
-      location: { coords: { latitude: null, longitude: null } },
-      errorMessage: null,
-      isReady: false
-    };
-  }
+  useEffect(() => {
+    getLocation();
+  }, []);
 
-  componentWillMount() {
-    // ask user location before component mounts
-    this._getLocationAsync();
-  }
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // call BART API
+      fetch(
+        "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
+      )
+        .then(response => response.json())
+        .then(responseJson => {
+          setStationList(responseJson.root.station);
+          setLastUpdate(responseJson.root.time);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, 1000);
 
-  componentDidMount() {
-    this.fetchTrain();
-    // check real time info from BART API every 4 seconds
-    this.interval = setInterval(() => this.fetchTrain(), 4000);
-  }
+    return () => clearInterval(intervalId);
+  });
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  _getLocationAsync = async () => {
+  const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
-      this.setState({
-        errorMessage: "Permission to access location was denied",
-        location: { coords: { latitude: 37.792874, longitude: -122.39703 } }
-      });
+      // setErrorMessage({
+      //   errorMessage: "Permission to access location was denied"
+      // });
+      setLocation({ coords: { latitude: 37.792874, longitude: -122.39703 } });
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
+    setLocation({ coords: { latitude: location.coords.latitude, longitude: location.coords.longitude }})
   };
 
-  fetchTrain() {
-    // call BART API
-    fetch(
-      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          stationList: responseJson.root.station,
-          lastUpdate: responseJson.root.time
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  renderBartStations() {
-    return this.state.stationList.map((station, index) => {
+  const renderStationData = () => {
+    return stationList.map((station, index) => {
       // uses react-native-maps components
       // https://github.com/react-native-community/react-native-maps/tree/master/docs
       return (
@@ -106,19 +91,15 @@ export default class App extends React.Component {
                 marginBottom: 8
               }}
             >
-              <StationCallout
-                key={index}
-                station={this.state.stationList[index]}
-              />
+              <StationCallout key={index} station={stationList[index]} />
             </View>
           </MapView.Callout>
         </MapView.Marker>
       );
     });
-  }
+  };
 
-  // cache images before initial opening
-  async _cacheResourcesAsync() {
+  const cacheResources = async () => {
     const images = [
       require("./assets/splash.png"),
       require("./assets/station.png"),
@@ -129,68 +110,64 @@ export default class App extends React.Component {
       return Asset.fromModule(image).downloadAsync();
     });
     return Promise.all(cacheImages);
+  };
+
+  if (!isReady) {
+    return (
+      // set this.state.isReady to true after images are cached.
+      <AppLoading
+        startAsync={() => cacheResources()}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    );
   }
 
-  render() {
-    if (!this.state.isReady) {
-      return (
-        // set this.state.isReady to true after images are cached.
-        <AppLoading
-          startAsync={this._cacheResourcesAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />
-      );
-    }
-
-    // wait for valid user location data to load component.
-    if (this.state.location.coords.latitude !== null) {
-      return (
+  // wait for valid user location data to load component.
+  if (location.coords.latitude !== null) {
+    return (
+      <View
+        style={{
+          flex: 1
+        }}
+      >
+        <MapView
+          style={{
+            flex: 19
+          }}
+          // initial MapView is centered on either user location or [37.792874, -122.39703]
+          initialRegion={{
+            latitude: parseFloat(location.coords.latitude) || 37.792874,
+            longitude: parseFloat(location.coords.longitude) || -122.39703,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1
+          }}
+          provider={"google"}
+        >
+          {renderStationData()}
+        </MapView>
         <View
           style={{
-            flex: 1
+            flex: 1,
+            backgroundColor: "#0099CC",
+            justifyContent: "center",
+            alignContent: "center"
           }}
         >
-          <MapView
-            style={{
-              flex: 19
-            }}
-            // initial MapView is centered on either user location or [37.792874, -122.39703]
-            initialRegion={{
-              latitude:
-                parseFloat(this.state.location.coords.latitude) || 37.792874,
-              longitude:
-                parseFloat(this.state.location.coords.longitude) || -122.39703,
-              latitudeDelta: 0.1,
-              longitudeDelta: 0.1
-            }}
-            provider={"google"}
-          >
-            {this.renderBartStations()}
-          </MapView>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "#0099CC",
-              justifyContent: "center",
-              alignContent: "center"
-            }}
-          >
-            <Text style={{ fontSize: 15, color: "white", alignSelf: "center" }}>
-              Last update at {this.state.lastUpdate}
-            </Text>
-          </View>
+          <Text style={{ fontSize: 15, color: "white", alignSelf: "center" }}>
+            Last update at {lastUpdate}
+          </Text>
         </View>
-      );
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <ImageBackground
-            style={{ width: "100%", height: "100%" }}
-            source={require("./assets/loading.png")}
-          />
-        </View>
-      );
-    }
+      </View>
+    );
+  } else {
+    return (
+      <View style={{ flex: 1 }}>
+        <ImageBackground
+          style={{ width: "100%", height: "100%" }}
+          source={require("./assets/loading.png")}
+        />
+      </View>
+    );
   }
 }
