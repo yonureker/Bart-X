@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
-import stationDetails from '../stationDetails';
-import StationCallout from './stationCallout';
+import stationDetails from "../stationDetails";
+import StationCallout from "./stationCallout";
 import stationLogo from "../assets/station.png";
 
 const MapScreen = props => {
@@ -25,14 +25,7 @@ const MapScreen = props => {
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
           >
-            <View
-              style={{
-                marginHorizontal: 5,
-                marginTop: 2,
-                borderBottomWidth: "1px",
-                borderBottomColor: "#c4c1b9"
-              }}
-            >
+            <View style={styles.calloutContainer}>
               <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
             </View>
             <View
@@ -51,35 +44,31 @@ const MapScreen = props => {
     });
   };
 
-
-
-  return(
-  <View
-    style={{
-      flex: 1
-    }}
-  >
-    <MapView
-      style={styles.mapContainer}
-      // initial MapView is centered on either user location or [37.792874, -122.39703]
-      initialRegion={{
-        latitude: parseFloat(props.location.coords.latitude) || 37.792874,
-        longitude: parseFloat(props.location.coords.longitude) || -122.39703,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1
-      }}
-      provider={"google"}
-    >
-      {renderStationData()}
-    </MapView>
+  return (
     <View
-      style={styles.updateTimeContainer}
+      style={{
+        flex: 1
+      }}
     >
-      <Text style={styles.updateTimeText}>
-        Last update at {props.lastUpdate}
-      </Text>
+      <MapView
+        style={styles.mapContainer}
+        // initial MapView is centered on either user location or [37.792874, -122.39703]
+        initialRegion={{
+          latitude: parseFloat(props.location.coords.latitude) || 37.792874,
+          longitude: parseFloat(props.location.coords.longitude) || -122.39703,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1
+        }}
+        provider={"google"}
+      >
+        {renderStationData()}
+      </MapView>
+      <View style={styles.updateTimeContainer}>
+        <Text style={styles.updateTimeText}>
+          Last update at {props.lastUpdate}
+        </Text>
+      </View>
     </View>
-  </View>
   );
 };
 
@@ -93,11 +82,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center"
   },
-  updateTimeText:{
+  updateTimeText: {
     fontSize: 15,
     color: "white",
     alignSelf: "center"
+  },
+  calloutContainer: {
+    marginHorizontal: 5,
+    marginTop: 2,
+    borderBottomWidth: "1px",
+    borderBottomColor: "#c4c1b9"
   }
-})
+});
 
 export default MapScreen;
