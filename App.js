@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, Text, View, StyleSheet } from "react-native";
-import MapView from "react-native-maps";
+import { ImageBackground, View } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import stationLogo from "./assets/station.png";
-import StationCallout from "./components/stationCallout";
-import stationDetails from './stationDetails';
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import MapScreen from './components/mapScreen';
