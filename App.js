@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, View } from "react-native";
+import { ImageBackground, View, SafeAreaView, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
@@ -31,7 +31,7 @@ export default function App() {
         .catch(error => {
           console.log(error);
         });
-    }, 10000);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   });
@@ -76,13 +76,13 @@ export default function App() {
   // wait for valid user location data to load component.
   if (location.coords.latitude !== null) {
     return (
-      <View style={{flex: 1}}>
+      <SafeAreaView style={styles.safeAreaView}>
       <MapScreen stationList={stationList} location={location} lastUpdate={lastUpdate}/>
-      </View>
+      </SafeAreaView>
     );
   } else {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.container}>
         <ImageBackground
           style={{ width: "100%", height: "100%" }}
           source={require("./assets/loading.png")}
@@ -91,3 +91,13 @@ export default function App() {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: "#B6ACAC"
+  }
+})
