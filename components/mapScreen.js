@@ -74,11 +74,11 @@ const MapScreen = props => {
 
 const styles = StyleSheet.create({
   mapContainer: {
-    flex: 19
+    height: '98%'
   },
   updateTimeContainer: {
-    flex: 1,
-    backgroundColor: "#0099CC",
+    height: '5%',
+    backgroundColor: "#B6ACAC",
     justifyContent: "center",
     alignContent: "center"
   },
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   calloutContainer: {
     marginHorizontal: 5,
     marginTop: 2,
-    borderBottomWidth: "1px",
+    borderBottomWidth: 1,
     borderBottomColor: "#c4c1b9"
   }
 });
