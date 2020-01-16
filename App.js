@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, Text, View } from "react-native";
+import { ImageBackground, Text, View, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import stationLogo from "./assets/station.png";
-import StationCallout from "./stationCallout";
+import StationCallout from "./components/stationCallout";
 import stationDetails from './stationDetails';
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
+import MapScreen from './components/mapScreen';
 
 export default function App() {
   const [stationList, setStationList] = useState([]);
@@ -34,7 +35,7 @@ export default function App() {
         .catch(error => {
           console.log(error);
         });
-    }, 1000);
+    }, 10000);
 
     return () => clearInterval(intervalId);
   });
@@ -50,53 +51,6 @@ export default function App() {
 
     let location = await Location.getCurrentPositionAsync({});
     setLocation({ coords: { latitude: location.coords.latitude, longitude: location.coords.longitude }})
-  };
-
-  const renderStationData = () => {
-    return stationList.map((station, index) => {
-      // uses react-native-maps components
-      // https://github.com/react-native-community/react-native-maps/tree/master/docs
-      return (
-        <MapView.Marker
-          key={index}
-          coordinate={{
-            // receives station latitude and longitude from stationDetails.js
-            latitude: parseFloat(stationDetails[station.abbr].gtfs_latitude),
-            longitude: parseFloat(stationDetails[station.abbr].gtfs_longitude)
-          }}
-          image={stationLogo}
-          zIndex={100}
-          tracksInfoWindowChanges={true}
-        >
-          <MapView.Callout
-            key={index}
-            tooltip={true}
-            style={{ backgroundColor: "#ffffff" }}
-          >
-            <View
-              style={{
-                marginHorizontal: 5,
-                marginTop: 2,
-                borderBottomWidth: "1px",
-                borderBottomColor: "#c4c1b9"
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
-            </View>
-            <View
-              style={{
-                marginTop: 5,
-                marginLeft: 5,
-                marginRight: 5,
-                marginBottom: 8
-              }}
-            >
-              <StationCallout key={index} station={stationList[index]} />
-            </View>
-          </MapView.Callout>
-        </MapView.Marker>
-      );
-    });
   };
 
   const cacheResources = async () => {
@@ -126,38 +80,8 @@ export default function App() {
   // wait for valid user location data to load component.
   if (location.coords.latitude !== null) {
     return (
-      <View
-        style={{
-          flex: 1
-        }}
-      >
-        <MapView
-          style={{
-            flex: 19
-          }}
-          // initial MapView is centered on either user location or [37.792874, -122.39703]
-          initialRegion={{
-            latitude: parseFloat(location.coords.latitude) || 37.792874,
-            longitude: parseFloat(location.coords.longitude) || -122.39703,
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1
-          }}
-          provider={"google"}
-        >
-          {renderStationData()}
-        </MapView>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "#0099CC",
-            justifyContent: "center",
-            alignContent: "center"
-          }}
-        >
-          <Text style={{ fontSize: 15, color: "white", alignSelf: "center" }}>
-            Last update at {lastUpdate}
-          </Text>
-        </View>
+      <View style={{flex: 1}}>
+      <MapScreen stationList={stationList} location={location} lastUpdate={lastUpdate}/>
       </View>
     );
   } else {
