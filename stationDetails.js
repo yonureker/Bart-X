@@ -1,3 +1,4 @@
+// this is only used for station coordinates for now
 module.exports = {
   "12TH": {
     name: "12th St. Oakland City Center",
