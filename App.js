@@ -17,7 +17,7 @@ export default function App() {
     getLocation();
   }, []);
 
-  
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: "#B6ACAC"
+    backgroundColor: "#ffffff"
   }
 })

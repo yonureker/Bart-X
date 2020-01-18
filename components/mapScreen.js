@@ -78,13 +78,13 @@ const styles = StyleSheet.create({
   },
   updateTimeContainer: {
     height: '5%',
-    backgroundColor: "#B6ACAC",
+    backgroundColor: "#ffffff",
     justifyContent: "center",
     alignContent: "center"
   },
   updateTimeText: {
     fontSize: 15,
-    color: "white",
+    color: "black",
     alignSelf: "center"
   },
   calloutContainer: {
