@@ -4,6 +4,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
+
 import MapScreen from "./components/mapScreen";
 
 export default function App() {
@@ -12,7 +13,6 @@ export default function App() {
   const [location, setLocation] = useState({
     coords: { latitude: null, longitude: null }
   });
-  const [errorMessage, setErrorMessage] = useState(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -32,9 +32,6 @@ export default function App() {
   const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
-      // setErrorMessage({
-      //   errorMessage: "Permission to access location was denied"
-      // });
       setLocation({ coords: { latitude: 37.792874, longitude: -122.39703 } });
     }
 
