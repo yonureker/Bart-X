@@ -4,12 +4,14 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
-import MapScreen from './components/mapScreen';
+import MapScreen from "./components/mapScreen";
 
 export default function App() {
   const [stationList, setStationList] = useState([]);
   const [lastUpdate, setLastUpdate] = useState("");
-  const [location, setLocation] = useState({ coords: { latitude: null, longitude: null }});
+  const [location, setLocation] = useState({
+    coords: { latitude: null, longitude: null }
+  });
   const [errorMessage, setErrorMessage] = useState(null);
   const [isReady, setIsReady] = useState(false);
 
@@ -18,20 +20,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      // call BART API
-      fetch(
-        "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
-      )
-        .then(response => response.json())
-        .then(responseJson => {
-          setStationList(responseJson.root.station);
-          setLastUpdate(responseJson.root.time);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }, 2000);
+    fetchBartData();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(fetchBartData, 10000);
 
     return () => clearInterval(intervalId);
   });
@@ -46,7 +39,12 @@ export default function App() {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    setLocation({ coords: { latitude: location.coords.latitude, longitude: location.coords.longitude }})
+    setLocation({
+      coords: {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      }
+    });
   };
 
   const cacheResources = async () => {
@@ -60,6 +58,21 @@ export default function App() {
       return Asset.fromModule(image).downloadAsync();
     });
     return Promise.all(cacheImages);
+  };
+
+  const fetchBartData = () => {
+    // call BART API
+    fetch(
+      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
+    )
+      .then(response => response.json())
+      .then(responseJson => {
+        setStationList(responseJson.root.station);
+        setLastUpdate(responseJson.root.time);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   if (!isReady) {
@@ -77,7 +90,11 @@ export default function App() {
   if (location.coords.latitude !== null) {
     return (
       <SafeAreaView style={styles.safeAreaView}>
-      <MapScreen stationList={stationList} location={location} lastUpdate={lastUpdate}/>
+        <MapScreen
+          stationList={stationList}
+          location={location}
+          lastUpdate={lastUpdate}
+        />
       </SafeAreaView>
     );
   } else {
@@ -104,4 +121,4 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   }
-})
+});
