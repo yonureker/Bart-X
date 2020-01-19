@@ -11,25 +11,29 @@ BartLiveMobile is a mobile app that displays real-time estimated departures usin
 - Asks for permission to track user locations and zooms the map to their coordinates. expo-location package is used with the function below::
 
 ```
-_getLocationAsync = async () => {
+const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access location was denied',
-      });
+    if (status !== "granted") {
+      // location is set to [37.792874, -122.39703] if permission is not granted.
+      setLocation({ coords: { latitude: 37.792874, longitude: -122.39703 } });
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
+    setLocation({
+      coords: {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      }
+    });
   };
 ```
 
 - User's location is requested before component loads:
 
 ```
-componentWillMount() {
-    this._getLocationAsync();
-  }
+useEffect(() => {
+    getLocation();
+  }, []);
 ```
 
 - Stations display snippets on press.
