@@ -17,8 +17,6 @@ export default function App() {
     getLocation();
   }, []);
 
-
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       // call BART API
@@ -86,7 +84,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <ImageBackground
-          style={{ width: "100%", height: "100%" }}
+          style={styles.imageBackground}
           source={require("./assets/loading.png")}
         />
       </View>
@@ -100,6 +98,10 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#D1CCCC"
+  },
+  imageBackground: {
+    width: "100%",
+    height: "100%"
   }
 })
