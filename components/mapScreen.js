@@ -25,16 +25,11 @@ const MapScreen = props => {
             tooltip={true}
             style={{ backgroundColor: "#ffffff" }}
           >
-            <View style={styles.calloutContainer}>
+            <View style={styles.calloutHeader}>
               <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
             </View>
             <View
-              style={{
-                marginTop: 5,
-                marginLeft: 5,
-                marginRight: 5,
-                marginBottom: 8
-              }}
+              style={styles.calloutContent}
             >
               <StationCallout key={index} station={props.stationList[index]} />
             </View>
@@ -78,7 +73,7 @@ const styles = StyleSheet.create({
   },
   updateTimeContainer: {
     height: '5%',
-    backgroundColor: "#ffffff",
+    backgroundColor: "#D1CCCC",
     justifyContent: "center",
     alignContent: "center"
   },
@@ -87,11 +82,17 @@ const styles = StyleSheet.create({
     color: "black",
     alignSelf: "center"
   },
-  calloutContainer: {
+  calloutHeader: {
     marginHorizontal: 5,
     marginTop: 2,
     borderBottomWidth: 1,
     borderBottomColor: "#c4c1b9"
+  },
+  calloutContent: {
+    marginTop: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 8
   }
 });
 
