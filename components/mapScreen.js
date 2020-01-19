@@ -56,8 +56,8 @@ const MapScreen = props => {
         initialRegion={{
           latitude: parseFloat(props.location.coords.latitude) || 37.792874,
           longitude: parseFloat(props.location.coords.longitude) || -122.39703,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1
+          latitudeDelta: 0.06,
+          longitudeDelta: 0.06
         }}
         provider={"google"}
       >
