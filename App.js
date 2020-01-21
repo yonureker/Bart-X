@@ -17,9 +17,6 @@ export default function App() {
 
   useEffect(() => {
     getLocation();
-  }, []);
-
-  useEffect(() => {
     fetchBartData();
   }, []);
 
@@ -67,6 +64,7 @@ export default function App() {
         setStationList(responseJson.root.station);
         setLastUpdate(responseJson.root.time);
       })
+      .then(console.log("bart data fetched"))
       .catch(error => {
         console.log(error);
       });
