@@ -8,6 +8,7 @@ import { Provider, useDispatch } from "react-redux";
 import { createStore } from "redux";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
+import { Ionicons } from '@expo/vector-icons';
 
 import ListScreen from "./screens/ListScreen";
 import MapScreen from "./screens/MapScreen";
@@ -103,8 +104,18 @@ const styles = StyleSheet.create({
 });
 
 const TabNavigator = createBottomTabNavigator({
-  List: ListScreen,
-  Map: MapScreen
-});
+  List: {
+    screen: ListScreen,
+    navigationOptions: {
+      tabBarIcon: () => (<Ionicons name="ios-list" size={32} color="black" />)
+    }
+  },
+  Map: {
+    screen: MapScreen,
+    navigationOptions: {
+      tabBarIcon: () => (<Ionicons name="ios-map" size={32} color="black" />)
+    }
+}}
+);
 
 const AppContainer = createAppContainer(TabNavigator);
