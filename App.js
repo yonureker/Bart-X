@@ -4,12 +4,23 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
+import { Provider, useDispatch } from "react-redux";
+import { createStore } from "redux";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createAppContainer } from "react-navigation";
 
-import MapScreen from "./components/mapScreen";
+import ListScreen from "./screens/ListScreen";
+import MapScreen from "./screens/MapScreen";
+import rootReducer from "./reducers/rootReducer";
+
+// const initialState = {
+//   location = { coords: { latitude: null, longitude: null }},
+// };
 
 export default function App() {
-  const [stationList, setStationList] = useState([]);
-  const [lastUpdate, setLastUpdate] = useState("");
+  const store = createStore(rootReducer);
+  
+
   const [location, setLocation] = useState({
     coords: { latitude: null, longitude: null }
   });
@@ -17,14 +28,7 @@ export default function App() {
 
   useEffect(() => {
     getLocation();
-    fetchBartData();
   }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(fetchBartData, 10000);
-
-    return () => clearInterval(intervalId);
-  });
 
   const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -54,22 +58,6 @@ export default function App() {
     return Promise.all(cacheImages);
   };
 
-  const fetchBartData = () => {
-    // call BART API
-    fetch(
-      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson => {
-        setStationList(responseJson.root.station);
-        setLastUpdate(responseJson.root.time);
-      })
-      .then(console.log("bart data fetched"))
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
   if (!isReady) {
     return (
       // set this.state.isReady to true after images are cached.
@@ -84,13 +72,9 @@ export default function App() {
   // wait for valid user location data to load component.
   if (location.coords.latitude !== null) {
     return (
-      <SafeAreaView style={styles.safeAreaView}>
-        <MapScreen
-          stationList={stationList}
-          location={location}
-          lastUpdate={lastUpdate}
-        />
-      </SafeAreaView>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
     );
   } else {
     return (
@@ -117,3 +101,10 @@ const styles = StyleSheet.create({
     height: "100%"
   }
 });
+
+const TabNavigator = createBottomTabNavigator({
+  List: ListScreen,
+  Map: MapScreen
+});
+
+const AppContainer = createAppContainer(TabNavigator);
