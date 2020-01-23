@@ -8,11 +8,11 @@ import { Provider, useDispatch } from "react-redux";
 import { createStore } from "redux";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
-import ListScreen from "./screens/ListScreen";
-import MapScreen from "./screens/MapScreen";
+import LiveMapScreen from "./screens/LiveMapScreen";
 import rootReducer from "./reducers/rootReducer";
+import SystemScreen from "./screens/system-map/SystemScreen";
 
 // const initialState = {
 //   location = { coords: { latitude: null, longitude: null }},
@@ -20,7 +20,6 @@ import rootReducer from "./reducers/rootReducer";
 
 export default function App() {
   const store = createStore(rootReducer);
-  
 
   const [location, setLocation] = useState({
     coords: { latitude: null, longitude: null }
@@ -100,22 +99,25 @@ const styles = StyleSheet.create({
   imageBackground: {
     width: "100%",
     height: "100%"
+  },
+  tabIcon:{
+    marginTop: 5
   }
 });
 
 const TabNavigator = createBottomTabNavigator({
-  List: {
-    screen: ListScreen,
+  Map: {
+    screen: LiveMapScreen,
     navigationOptions: {
-      tabBarIcon: () => (<Ionicons name="ios-list" size={32} color="black" />)
+      tabBarIcon: () => <MaterialCommunityIcons name="google-maps" size={32} color="black" style={styles.tabIcon}/>
     }
   },
-  Map: {
-    screen: MapScreen,
+  SystemMap: {
+    screen: SystemScreen,
     navigationOptions: {
-      tabBarIcon: () => (<Ionicons name="ios-map" size={32} color="black" />)
+      tabBarIcon: () => <Ionicons name="ios-map" size={32} color="black" style={styles.tabIcon}/>
     }
-}}
-);
+  }
+});
 
 const AppContainer = createAppContainer(TabNavigator);
