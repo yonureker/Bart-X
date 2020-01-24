@@ -4,7 +4,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
@@ -12,7 +12,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
 import rootReducer from "./reducers/rootReducer";
-import SystemScreen from "./screens/system-map/SystemScreen";
+import SystemScreen from './screens/system-map/SystemScreen';
 
 // const initialState = {
 //   location = { coords: { latitude: null, longitude: null }},
@@ -106,18 +106,20 @@ const styles = StyleSheet.create({
 });
 
 const TabNavigator = createBottomTabNavigator({
-  Map: {
+  'Live Map': {
     screen: LiveMapScreen,
     navigationOptions: {
       tabBarIcon: () => <MaterialCommunityIcons name="google-maps" size={32} color="black" style={styles.tabIcon}/>
     }
   },
-  SystemMap: {
+  'System Map': {
     screen: SystemScreen,
     navigationOptions: {
       tabBarIcon: () => <Ionicons name="ios-map" size={32} color="black" style={styles.tabIcon}/>
     }
   }
 });
+
+
 
 const AppContainer = createAppContainer(TabNavigator);
