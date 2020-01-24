@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, View, SafeAreaView, StyleSheet } from "react-native";
+import { ImageBackground, View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
@@ -91,10 +91,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  safeAreaView: {
-    flex: 1,
-    backgroundColor: "#D1CCCC"
   },
   imageBackground: {
     width: "100%",
