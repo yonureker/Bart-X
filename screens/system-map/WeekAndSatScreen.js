@@ -27,8 +27,6 @@ const WeekAndSatScreen = props => {
     }
   };
 
-  require("../../assets/week-and-sat-system-map.png")
-
   return (
     <SafeAreaView style={styles.container}>
       <PinchGestureHandler
