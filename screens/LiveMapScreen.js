@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { SafeAreaView } from "react-navigation"
 import MapView from "react-native-maps";
 import Markers from '../components/markers'
 import { useSelector, useDispatch } from 'react-redux';
