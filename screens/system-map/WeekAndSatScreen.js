@@ -1,15 +1,46 @@
 import React from "react";
-import { Text, SafeAreaView, Image, StyleSheet, View } from "react-native";
-import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import { Image, StyleSheet, Dimensions, Animated  } from "react-native";
+import { PinchGestureHandler, State, ScrollView } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-navigation"
 
 const WeekAndSatScreen = props => {
+  const { width } = Dimensions.get("window");
+  const scale = new Animated.Value(1);
+
+  const onZoomEvent = Animated.event(
+    [
+      {
+        nativeEvent: { scale: scale }
+      }
+    ],
+    {
+      useNativeDriver: true
+    }
+  );
+
+  const onZoomStateChange = event => {
+    if (event.nativeEvent.oldState === State.ACTIVE) {
+      Animated.spring(scale, {
+        toValue: 1,
+        useNativeDriver: true
+      }).start();
+    }
+  };
+
+  require("../../assets/week-and-sat-system-map.png")
+
   return (
-    <SafeAreaView contentContainerStyle={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../../assets/week-and-sat-system-map.png")}
-        resizeMode="contain"
-      />
+    <SafeAreaView style={styles.container}>
+      <PinchGestureHandler
+        onGestureEvent={onZoomEvent}
+        onHandlerStateChange={onZoomStateChange}
+      >
+        <Animated.Image
+          style={{ width: width, height: '100%', transform: [{ scale: scale }] }}
+          source={require("../../assets/week-and-sat-system-map.png")}
+          resizeMode="contain"
+        />
+      </PinchGestureHandler>
     </SafeAreaView>
   );
 };
