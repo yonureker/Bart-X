@@ -7,7 +7,7 @@ import { Asset } from "expo-asset";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, SafeAreaView } from "react-navigation";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import LiveMapScreen from "./screens/LiveMapScreen";

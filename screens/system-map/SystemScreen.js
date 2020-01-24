@@ -1,9 +1,8 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigation-tabs';
 import SundayScreen from './SundayScreen';
 import WeekAndSatScreen from './WeekAndSatScreen';
-import { SafeAreaView } from "react-navigation"
 
 const SystemScreen = createMaterialTopTabNavigator({
   'Weekday & Saturday': {screen: WeekAndSatScreen},
@@ -15,7 +14,7 @@ const SystemScreen = createMaterialTopTabNavigator({
 
 function SafeAreaMaterialTopTabBar (props) {
   return (
-    <SafeAreaView>
+    <SafeAreaView styles={styles.container}>
       <MaterialTopTabBar {...props} />
     </SafeAreaView>
   )

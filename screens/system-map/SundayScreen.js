@@ -1,7 +1,6 @@
 import React from "react";
-import { Image, StyleSheet, Dimensions, Animated } from "react-native";
-import { PinchGestureHandler, State, ScrollView } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-navigation";
+import { Dimensions, Animated } from "react-native";
+import { PinchGestureHandler, State } from "react-native-gesture-handler";
 
 const SundayScreen = props => {
   const { width } = Dimensions.get("window");
@@ -28,7 +27,6 @@ const SundayScreen = props => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
       <PinchGestureHandler
         onGestureEvent={onZoomEvent}
         onHandlerStateChange={onZoomStateChange}
@@ -39,16 +37,7 @@ const SundayScreen = props => {
           resizeMode="contain"
         />
       </PinchGestureHandler>
-    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
 
 export default SundayScreen;
