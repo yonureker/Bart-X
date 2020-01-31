@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 // import { SafeAreaView } from "react-navigation"
 import MapView from "react-native-maps";
-import {StyleSheet, SafeAreaView} from 'react-native';
+import {StyleSheet, SafeAreaView, StatusBar} from 'react-native';
 import Markers from '../components/markers'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -20,6 +20,8 @@ const LiveMapScreen = props => {
 
     return () => clearInterval(intervalId);
   });
+
+  
 
   const fetchBartData = () => {
     // setStationList(responseJson.root.station);
@@ -58,6 +60,8 @@ const LiveMapScreen = props => {
       </SafeAreaView>
   )
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
