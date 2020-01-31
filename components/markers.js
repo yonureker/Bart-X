@@ -25,7 +25,7 @@ const Markers = props => {
         <MapView.Callout
           key={index}
           tooltip={true}
-          style={{ backgroundColor: "#ffffff" }}
+          style={styles.calloutContainer}
         >
           <View style={styles.calloutHeader}>
             <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
@@ -47,6 +47,11 @@ const Markers = props => {
 const styles = StyleSheet.create({
   mapContainer: {
     height: "98%"
+  },
+  calloutContainer: {
+    backgroundColor: '#ffffff',
+    borderColor: 'gray',
+    borderRadius: 10
   },
   updateTimeContainer: {
     height: "5%",
