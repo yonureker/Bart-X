@@ -106,12 +106,18 @@ const TabNavigator = createBottomTabNavigator({
     screen: LiveMapScreen,
     navigationOptions: {
       tabBarIcon: () => <MaterialCommunityIcons name="google-maps" size={32} color="black" style={styles.tabIcon}/>
+    },
+    defaultNavigationOptions: {
+      title: 'Live Map'
     }
   },
   'System Map': {
     screen: SystemScreen,
     navigationOptions: {
       tabBarIcon: () => <Ionicons name="ios-map" size={32} color="black" style={styles.tabIcon}/>
+    },
+    defaultNavigationOptions: {
+      title: 'System Map'
     }
   }
 });
