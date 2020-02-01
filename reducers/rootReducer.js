@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import locationReducer from './locationReducer';
-import stationReducer from './stationReducer';
+import userLocationReducer from './userLocationReducer';
+import trainDepartureReducer from './trainDepartureReducer';
+import stationLocationReducer from "./stationLocationReducer";
 
 const rootReducer = combineReducers({
-  location: locationReducer,
-  stationData: stationReducer
+  userLocation: userLocationReducer,
+  trainDepartures: trainDepartureReducer,
+  stationLocations: stationLocationReducer
 })
 
 export default rootReducer;
