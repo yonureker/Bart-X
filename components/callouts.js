@@ -8,22 +8,21 @@ import StationCallout from './stationCallout';
 const Callouts = props => {
   const trainDepartures = useSelector(state => state.trainDepartures)
 
+  const {stationName, stationAbbr } = props;
+
   return (
-    <MapView.Callout key={props.key} tooltip={true} style={styles.calloutContainer}>
-      <View style={styles.calloutHeader}>
-        <Text style={{ fontWeight: "bold" }}>
-          {stationLocations[index].name}
-        </Text>
-      </View>
-      <View style={styles.calloutContent}>
-        <StationCallout
-          key={stationLocations[index].abbr}
-          station={trainDepartures.find(
-            item => item.abbr == stationLocations[index].abbr
-          )}
-        />
-      </View>
-    </MapView.Callout>
+    <MapView.Callout
+          key={stationAbbr}
+          tooltip={true}
+          style={styles.calloutContainer}
+        >
+          <View style={styles.calloutHeader}>
+            <Text style={{ fontWeight: "bold" }}>{stationName}</Text>
+          </View>
+          <View style={styles.calloutContent}>
+            <StationCallout key={stationAbbr} station={trainDepartures.find(item => (item.abbr == stationAbbr))} />
+          </View>
+        </MapView.Callout>
   );
 };
 
