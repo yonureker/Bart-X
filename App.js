@@ -7,8 +7,9 @@ import { Asset } from "expo-asset";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import { createAppContainer, SafeAreaView } from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { enableScreens } from 'react-native-screens';
 
 import LiveMapScreen from "./screens/LiveMapScreen";
 import rootReducer from "./reducers/rootReducer";
@@ -18,7 +19,9 @@ import SystemScreen from './screens/system-map/SystemScreen';
 //   location = { coords: { latitude: null, longitude: null }},
 // };
 
+
 export default function App() {
+  enableScreens();
   const store = createStore(rootReducer);
 
   const [location, setLocation] = useState({
@@ -69,7 +72,7 @@ export default function App() {
     );
   }
 
-  // wait for valid user location data to load component.
+  // wait for valid user location data to before rendering component.
   if (location.coords.latitude !== null) {
     return (
       <Provider store={store}>
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
   }
 });
 
+// Bottom Tab Navigator Setup
 const TabNavigator = createBottomTabNavigator({
   'Live Map': {
     screen: LiveMapScreen,
