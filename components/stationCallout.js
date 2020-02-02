@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 const StationCallout = (props) => {
+  if (props.station !== undefined){
   return(
     props.station.etd.map((route, index) => {
       const approachingTrains = function() {
@@ -32,7 +33,11 @@ const StationCallout = (props) => {
       {approachingTrains()}
       </View>;
     })
-  )
+  )} else {
+    return <View>
+      <Text>No trains!</Text>
+    </View>
+  }
 };
 
 export default StationCallout;
