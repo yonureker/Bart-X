@@ -24,8 +24,7 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "babel-preset-expo": "^8.0.0",
-    "jest": "^24.9.0"
+    "babel-preset-expo": "^8.0.0"
   },
   "private": true
 }
