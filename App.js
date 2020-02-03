@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, View, StyleSheet } from "react-native";
+import { ImageBackground, View, StyleSheet, SafeAreaView } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
@@ -110,18 +110,18 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarIcon: () => <MaterialCommunityIcons name="google-maps" size={32} color="black" style={styles.tabIcon}/>
     },
-    defaultNavigationOptions: {
-      title: 'Live Map'
-    },
+    // defaultNavigationOptions: {
+    //   title: 'Live Map'
+    // },
   },
   'System Map': {
     screen: SystemScreen,
     navigationOptions: {
       tabBarIcon: () => <Ionicons name="ios-map" size={32} color="black" style={styles.tabIcon}/>
     },
-    defaultNavigationOptions: {
-      title: 'System Map'
-    }
+    // defaultNavigationOptions: {
+    //   title: 'System Map'
+    // }
   }
 });
 
