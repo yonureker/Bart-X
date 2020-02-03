@@ -8,9 +8,7 @@ const LiveMapScreen = React.memo((props) => {
   const dispatch = useDispatch();
   // get user location from Redux store
   // this is used to center the map
-  const { latitude, longitude } = useSelector(
-    state => state.userLocation.coords
-  );
+  const { latitude, longitude } = props.screenProps.coords;
 
   useEffect(() => {
     fetchTrainDepartures();
