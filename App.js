@@ -4,7 +4,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { createStore } from "redux";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
@@ -24,9 +24,7 @@ export default function App() {
   enableScreens();
   const store = createStore(rootReducer);
 
-  const [location, setLocation] = useState({
-    coords: { latitude: null, longitude: null }
-  });
+  const [location, setLocation] = useState({coords: { latitude: null, longitude: null }});
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -40,6 +38,7 @@ export default function App() {
     }
 
     let location = await Location.getCurrentPositionAsync({});
+
     setLocation({
       coords: {
         latitude: location.coords.latitude,
@@ -76,7 +75,7 @@ export default function App() {
   if (location.coords.latitude !== null) {
     return (
       <Provider store={store}>
-        <AppContainer />
+        <AppContainer screenProps={location}/>
       </Provider>
     );
   } else {
@@ -113,7 +112,7 @@ const TabNavigator = createBottomTabNavigator({
     },
     defaultNavigationOptions: {
       title: 'Live Map'
-    }
+    },
   },
   'System Map': {
     screen: SystemScreen,
