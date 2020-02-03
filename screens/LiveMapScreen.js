@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import MapView from "react-native-maps";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, StatusBar, View, Text } from "react-native";
+import { SafeAreaView } from 'react-navigation';
 import Markers from "../components/markers";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -61,7 +62,9 @@ const LiveMapScreen = React.memo((props) => {
   // The MapView and Markers are static
   // We only need to update Marker callouts after fetching data
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={{flex: 1}}>
+    <StatusBar />
+    <SafeAreaView style={{flex: 1}}>
       <MapView
         style={{ flex: 1 }}
         initialRegion={{
@@ -70,7 +73,7 @@ const LiveMapScreen = React.memo((props) => {
           latitudeDelta: 0.04,
           longitudeDelta: 0.04
         }}
-        minZoomLevel={9}
+        minZoomLevel={10}
         provider={"google"}
         loadingEnabled={true}
         mapType={"standard"}
@@ -81,7 +84,8 @@ const LiveMapScreen = React.memo((props) => {
       >
         <Markers />
       </MapView>
-    </SafeAreaView>
+      </SafeAreaView>
+      </View>
   );
 });
 
