@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import stationLogo from "../assets/station.png";
 const Markers = React.memo((props) => {
   const stationLocations = useSelector(state => state.stationLocations)
 
-  return stationLocations.map((station) => {
+  return stationLocations.map((station, index) => {
     return (
       <MapView.Marker
         key={station.abbr}
@@ -21,7 +21,7 @@ const Markers = React.memo((props) => {
         zIndex={100}
         tracksInfoWindowChanges={true}
       >
-        <Callouts key={station.abbr} stationName={station.name} stationAbbr={station.abbr} />
+      <Callouts key={station.abbr} stationName={station.name} stationAbbr={station.abbr} />
         {/* <MapView.Callout
           key={station.abbr}
           tooltip={true}
