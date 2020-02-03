@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, StatusBar, View } from "react-native";
+import { SafeAreaView } from 'react-navigation';
 import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigation-tabs';
 import SundayScreen from './SundayScreen';
 import WeekAndSatScreen from './WeekAndSatScreen';
@@ -14,17 +15,18 @@ const SystemScreen = createMaterialTopTabNavigator({
 
 function SafeAreaMaterialTopTabBar (props) {
   return (
-    <SafeAreaView styles={styles.container}>
+    <View style={{flex: 1}}>
+    <StatusBar />
+    <SafeAreaView style={styles.container} >
       <MaterialTopTabBar {...props} />
-    </SafeAreaView>
+      </SafeAreaView>
+      </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
   },
   image: {
     width: "100%",
