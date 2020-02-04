@@ -1,13 +1,16 @@
 import React from "react";
-import { StyleSheet, StatusBar, View } from "react-native";
-import { SafeAreaView } from 'react-navigation';
+import { StyleSheet, StatusBar, View, SafeAreaView } from "react-native";
 import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigation-tabs';
 import SundayScreen from './SundayScreen';
 import WeekAndSatScreen from './WeekAndSatScreen';
 
 const SystemScreen = createMaterialTopTabNavigator({
-  'Weekday & Saturday': {screen: WeekAndSatScreen},
-  'Sunday': SundayScreen
+  'Weekday & Saturday': {screen: WeekAndSatScreen, navigationOptions:{
+    swipeEnabled: false
+  }},
+  'Sunday': {screen :SundayScreen, navigationOptions:{
+    swipeEnabled: false
+  }}
 }, {
   tabBarComponent: SafeAreaMaterialTopTabBar
 }
@@ -15,23 +18,13 @@ const SystemScreen = createMaterialTopTabNavigator({
 
 function SafeAreaMaterialTopTabBar (props) {
   return (
-    <View style={{flex: 1}}>
+    <View >
     <StatusBar />
-    <SafeAreaView style={styles.container} >
+    <SafeAreaView >
       <MaterialTopTabBar {...props} />
       </SafeAreaView>
       </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  image: {
-    width: "100%",
-    height: "100%"
-  }
-});
 
 export default SystemScreen;
