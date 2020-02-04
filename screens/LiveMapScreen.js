@@ -64,7 +64,6 @@ const LiveMapScreen = React.memo((props) => {
   return (
     <View style={{flex: 1}}>
     <StatusBar />
-    <SafeAreaView style={{flex: 1}}>
       <MapView
         style={{ flex: 1 }}
         initialRegion={{
@@ -84,7 +83,6 @@ const LiveMapScreen = React.memo((props) => {
       >
         <Markers />
       </MapView>
-      </SafeAreaView>
       </View>
   );
 });
