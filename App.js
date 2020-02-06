@@ -123,6 +123,8 @@ const TabNavigator = createBottomTabNavigator({
     //   title: 'System Map'
     // }
   }
+}, {
+  initialRouteName: "System Map"
 });
 
 
