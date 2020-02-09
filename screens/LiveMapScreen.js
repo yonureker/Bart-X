@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import MapView from "react-native-maps";
-import { StyleSheet, StatusBar, View, Text } from "react-native";
-import { SafeAreaView } from 'react-navigation';
+import { StyleSheet, StatusBar, View } from "react-native";
+import { useDispatch } from "react-redux";
+
 import Markers from "../components/markers";
-import { useSelector, useDispatch } from "react-redux";
 
 const LiveMapScreen = React.memo((props) => {
   const dispatch = useDispatch();
