@@ -7,7 +7,7 @@ import Callouts from './callouts';
 import stationLogo from "../assets/station.png";
 
 const Markers = React.memo((props) => {
-  const stationLocations = useSelector(state => state.stationLocations)
+  const stationLocations = useSelector(state => state.stationLocations);
 
   return stationLocations.map((station, index) => {
     return (
@@ -22,18 +22,6 @@ const Markers = React.memo((props) => {
         tracksInfoWindowChanges={true}
       >
       <Callouts key={station.abbr} stationName={station.name} stationAbbr={station.abbr} />
-        {/* <MapView.Callout
-          key={station.abbr}
-          tooltip={true}
-          style={styles.calloutContainer}
-        >
-          <View style={styles.calloutHeader}>
-            <Text style={{ fontWeight: "bold" }}>{station.name}</Text>
-          </View>
-          <View style={styles.calloutContent}>
-            <StationCallout key={station.abbr} station={trainDepartures.find(item => (item.abbr == station.abbr))} />
-          </View>
-        </MapView.Callout> */}
       </MapView.Marker>
     );
   });
