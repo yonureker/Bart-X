@@ -1,64 +1,17 @@
 import React, { useEffect } from "react";
 import MapView from "react-native-maps";
 import { StyleSheet, StatusBar, View } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Markers from "../components/markers";
 
 const LiveMapScreen = React.memo((props) => {
   const dispatch = useDispatch();
+  const { latitude, longitude } = useSelector(state => state.userLocation.coords)
   // get user location from Redux store
   // this is used to center the map
-  const { latitude, longitude } = props.screenProps.coords;
 
-  useEffect(() => {
-    fetchTrainDepartures();
-  }, []);
-
-  useEffect(() => {
-    fetchStationLocation();
-  }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 10000);
-
-    return () => clearInterval(intervalId);
-  });
-
-  const fetchStationLocation = () => {
-    fetch(
-      "http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson =>
-        dispatch({
-          type: "RECEIVE_STATION_LOCATIONS",
-          payload: responseJson.root.stations.station
-        })
-      )
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const fetchTrainDepartures = () => {
-    // setStationList(responseJson.root.station);
-    // setLastUpdate(responseJson.root.time);)
-    // call BART API
-    fetch(
-      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson =>
-        dispatch({
-          type: "RECEIVE_TRAIN_DEPARTURE_DATA",
-          payload: responseJson.root.station
-        })
-      )
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  
   // The MapView and Markers are static
   // We only need to update Marker callouts after fetching data
   return (
