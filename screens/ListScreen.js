@@ -110,7 +110,7 @@ const ListScreen = props => {
     return (
       <View style={styles.container}>
         <StatusBar/>
-        <SafeAreaView><StationList stations={stationsWithDistance}/></SafeAreaView>
+        <SafeAreaView style={{width: '100%'}}><StationList stations={stationsWithDistance}/></SafeAreaView>
       </View>
     );
   } else {
@@ -123,7 +123,7 @@ const ListScreen = props => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" }
+  container: { flex: 1, justifyContent: "center", alignItems: "center"}
 });
 
 export default ListScreen;
