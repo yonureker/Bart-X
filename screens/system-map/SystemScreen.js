@@ -18,9 +18,9 @@ const SystemScreen = createMaterialTopTabNavigator({
 
 function SafeAreaMaterialTopTabBar (props) {
   return (
-    <View >
+    <View>
     <StatusBar />
-    <SafeAreaView >
+    <SafeAreaView style={{paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
       <MaterialTopTabBar {...props} />
       </SafeAreaView>
       </View>
