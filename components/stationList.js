@@ -10,12 +10,15 @@ const StationList = props => {
     <FlatList
       data={stationList}
       renderItem={({ item }) => (
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigate('StationDetails', {
+          station: item.name,
+          fetchTrainDepartures: props.fetchTrainDepartures
+        })}>
           <View>
-            <Text>{item.name}</Text>
+            <Text style={styles.stationTitle}>{item.name}</Text>
           </View>
           <View>
-            <Text>
+            <Text style={styles.stationDistance}>
               {(item.distance).toFixed(2)} miles
             </Text>
           </View>
@@ -28,11 +31,18 @@ const StationList = props => {
 
 const styles = StyleSheet.create({
   button: {
-    width: 300,
     height: 50,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10
+    borderColor: '#F0F4F5',
+    borderBottomWidth: 1,
+    paddingLeft: 10,
+    marginTop: 10,
+    borderRadius: 10
+  },
+  stationTitle: {
+    fontSize: 20
+  },
+  stationDistance: {
+    fontSize: 12
   }
 })
 
