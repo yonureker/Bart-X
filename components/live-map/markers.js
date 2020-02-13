@@ -4,7 +4,7 @@ import MapView from "react-native-maps";
 import { useSelector } from 'react-redux';
 
 import Callouts from './callouts';
-import stationLogo from "../assets/station.png";
+import stationLogo from '../../assets/station.png';
 
 const Markers = React.memo((props) => {
   const stationLocations = useSelector(state => state.stationLocations);
