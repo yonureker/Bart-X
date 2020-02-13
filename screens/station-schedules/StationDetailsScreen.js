@@ -1,11 +1,27 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, {useState, useCallback} from "react";
+import { View, Text, StyleSheet, RefreshControl } from "react-native";
 import { useSelector } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
+// for pulldown refresh
+function wait(timeout) {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
+
 const StationDetailsScreen = props => {
+  const [refreshing, setRefreshing] = useState(false);
   const departures = useSelector(state => state.trainDepartures);
+
+  // for pulldown refresh
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+  // for pulldown refresh
+  wait(2000).then(() => setRefreshing(false));
+  }, [refreshing]);
 
   const selectedStation = departures.find(
     item => item.name == props.navigation.state.params.station
@@ -42,7 +58,7 @@ const StationDetailsScreen = props => {
       <View style={{...styles.train, alignItems: 'center'}}><Text>No trains available!</Text></View>
     )
   } else {
-    return <ScrollView>{trainList()}</ScrollView>;
+    return <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>{trainList()}</ScrollView>;
   }
 };
 
