@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { ImageBackground, View, StyleSheet, SafeAreaView } from "react-native";
-import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
+import React, { useState } from "react";
+import { StyleSheet } from "react-native";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import { Provider } from "react-redux";
@@ -9,43 +7,26 @@ import { createStore } from "redux";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { enableScreens } from 'react-native-screens';
+import { enableScreens } from "react-native-screens";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
-import rootReducer from "./reducers/rootReducer";
-import SystemScreen from './screens/system-map/SystemScreen';
+import ListScreen from "./screens/station-schedules/ListScreen";
+import SystemScreen from "./screens/system-map/SystemScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
-// const initialState = {
-//   location = { coords: { latitude: null, longitude: null }},
-// };
+import rootReducer from "./reducers/rootReducer";
+
+// initialize the redux store
 
 
 export default function App() {
+  //for faster navigation https://github.com/kmagiera/react-native-screens
   enableScreens();
+
   const store = createStore(rootReducer);
 
-  const [location, setLocation] = useState({coords: { latitude: null, longitude: null }});
+  // variable to check if image caching is ready
   const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    getLocation();
-  }, []);
-
-  const getLocation = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      setLocation({ coords: { latitude: 37.792874, longitude: -122.39703 } });
-    }
-
-    let location = await Location.getCurrentPositionAsync({});
-
-    setLocation({
-      coords: {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude
-      }
-    });
-  };
 
   const cacheResources = async () => {
     const images = [
@@ -62,7 +43,7 @@ export default function App() {
 
   if (!isReady) {
     return (
-      // set this.state.isReady to true after images are cached.
+      // set isReady to true after images are cached.
       <AppLoading
         startAsync={() => cacheResources()}
         onFinish={() => setIsReady(true)}
@@ -71,23 +52,11 @@ export default function App() {
     );
   }
 
-  // wait for valid user location data to before rendering component.
-  if (location.coords.latitude !== null) {
-    return (
-      <Provider store={store}>
-        <AppContainer screenProps={location}/>
-      </Provider>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.imageBackground}
-          source={require("./assets/loading.png")}
-        />
-      </View>
-    );
-  }
+  return (
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -98,29 +67,70 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
-  tabIcon:{
-    marginTop: 5
+  tabIcon: {
+    marginTop: 3
   }
 });
 
 // Bottom Tab Navigator Setup
-const TabNavigator = createBottomTabNavigator({
-  'Live Map': {
-    screen: LiveMapScreen,
-    navigationOptions: {
-      tabBarIcon: () => <MaterialCommunityIcons name="google-maps" size={32} color="black" style={styles.tabIcon}/>
+const TabNavigator = createBottomTabNavigator(
+  {
+    "Station List": {
+      screen: ListScreen,
+      navigationOptions: {
+        tabBarIcon: () => (
+          <Ionicons
+            name="md-list"
+            size={32}
+            color="black"
+            style={styles.tabIcon}
+          />
+        )
+      }
     },
+    "Live Map": {
+      screen: LiveMapScreen,
+      navigationOptions: {
+        tabBarIcon: () => (
+          <MaterialCommunityIcons
+            name="google-maps"
+            size={32}
+            color="black"
+            style={styles.tabIcon}
+          />
+        )
+      }
+    },
+    "System Map": {
+      screen: SystemScreen,
+      navigationOptions: {
+        tabBarIcon: () => (
+          <Ionicons
+            name="ios-map"
+            size={32}
+            color="black"
+            style={styles.tabIcon}
+          />
+        )
+      }
+    },
+    // "Settings": {
+    //   screen: SettingsScreen,
+    //   navigationOptions: {
+    //     tabBarIcon: () => (
+    //       <Ionicons
+    //         name="md-settings"
+    //         size={32}
+    //         color="black"
+    //         style={styles.tabIcon}
+    //       />
+    //     )
+    //   }
+    // },
   },
-  'System Map': {
-    screen: SystemScreen,
-    navigationOptions: {
-      tabBarIcon: () => <Ionicons name="ios-map" size={32} color="black" style={styles.tabIcon}/>
-    },
+  {
+    initialRouteName: "Station List"
   }
-}, {
-  initialRouteName: "System Map"
-});
-
-
+);
 
 const AppContainer = createAppContainer(TabNavigator);
