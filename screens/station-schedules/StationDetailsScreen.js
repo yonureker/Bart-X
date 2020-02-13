@@ -5,9 +5,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
 const StationDetailsScreen = props => {
-  const stationList = useSelector(state => state.trainDepartures);
+  const departures = useSelector(state => state.trainDepartures);
 
-  const selectedStation = stationList.find(
+  const selectedStation = departures.find(
     item => item.name == props.navigation.state.params.station
   );
 
@@ -37,7 +37,13 @@ const StationDetailsScreen = props => {
       });
     });
 
-  return <ScrollView>{trainList()}</ScrollView>;
+  if (selectedStation === undefined) {
+    return(
+      <View style={{...styles.train, alignItems: 'center'}}><Text>No trains available!</Text></View>
+    )
+  } else {
+    return <ScrollView>{trainList()}</ScrollView>;
+  }
 };
 
 StationDetailsScreen.navigationOptions = ({navigation}) => ({
