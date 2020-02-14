@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from "react";
+import React, { useState, useCallback } from "react";
 import { View, Text, StyleSheet, RefreshControl } from "react-native";
 import { useSelector } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
@@ -19,57 +19,120 @@ const StationDetailsScreen = props => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
 
-  // for pulldown refresh
-  wait(2000).then(() => setRefreshing(false));
+    // for pulldown refresh
+    wait(2000).then(() => setRefreshing(false));
   }, [refreshing]);
 
   const selectedStation = departures.find(
     item => item.name == props.navigation.state.params.station
   );
 
-  const trainList = () =>
-    selectedStation.etd.map((route) => {
-      return route.estimate.map((train, index) => {
-        const color = train.color.toLowerCase();
+  const sortedTrainList = () => {
+    let mappedStation = [];
 
-        return (
-          <View style={styles.train} key={index}>
-            <View style={{ ...styles.left, backgroundColor: color }}></View>
-            <View style={styles.mid}>
-              <View>
-                <Text style={{ fontSize: 20 }}>{route.destination}</Text>
-              </View>
-              <View>
-                <Text style={{ color: "#A2AEB1" }}>
-                  {train.length} cars | Platform {train.platform}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.right}>
-              <Text style={{ fontSize: 20 }}>{train.minutes}</Text>
-            </View>
-          </View>
-        );
+    selectedStation.etd.map(route => {
+      route.estimate.map(train => {
+        const newMap = new Object();
+        newMap["destination"] = route.destination;
+        newMap["platform"] = train.platform;
+        newMap["length"] = train.length;
+        newMap["color"] = train.color.toLowerCase();
+
+        if (train.minutes === 'Leaving') {
+          newMap['minutes'] = 0;
+        } else {
+          newMap["minutes"] = Number(train.minutes);
+        }
+
+        mappedStation.push(newMap);
       });
     });
 
+    mappedStation.sort((a, b) => (a.minutes > b.minutes ? 1 : -1));
+
+    return mappedStation.map((train, index) => {
+      return (
+        <View style={styles.train} key={index}>
+          <View style={{ ...styles.left, backgroundColor: train.color }}></View>
+          <View style={styles.mid}>
+            <View>
+              <Text style={{ fontSize: 20 }}>{train.destination}</Text>
+            </View>
+            <View>
+              <Text style={{ color: "#A2AEB1" }}>
+                {train.length} cars | Platform {train.platform}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.right}>
+            <Text style={{ fontSize: 20 }}>{train.minutes}</Text>
+          </View>
+        </View>
+      );
+    });
+  };
+
   if (selectedStation === undefined) {
-    return(
-      <View style={{...styles.train, alignItems: 'center'}}><Text>No trains available!</Text></View>
-    )
+    return (
+      <View style={{ ...styles.train, alignItems: "center" }}>
+        <Text>No trains available!</Text>
+      </View>
+    );
   } else {
-    return <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>{trainList()}</ScrollView>;
+    return (
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {sortedTrainList()}
+      </ScrollView>
+    );
   }
 };
 
-StationDetailsScreen.navigationOptions = ({navigation}) => ({
+// const trainList = () =>
+//   selectedStation.etd.map((route) => {
+//     return route.estimate.map((train, index) => {
+//       const color = train.color.toLowerCase();
+
+//       return (
+//         <View style={styles.train} key={index}>
+//           <View style={{ ...styles.left, backgroundColor: color }}></View>
+//           <View style={styles.mid}>
+//             <View>
+//               <Text style={{ fontSize: 20 }}>{route.destination}</Text>
+//             </View>
+//             <View>
+//               <Text style={{ color: "#A2AEB1" }}>
+//                 {train.length} cars | Platform {train.platform}
+//               </Text>
+//             </View>
+//           </View>
+//           <View style={styles.right}>
+//             <Text style={{ fontSize: 20 }}>{train.minutes}</Text>
+//           </View>
+//         </View>
+//       );
+//     });
+//   });
+
+// if (selectedStation === undefined) {
+//   return(
+//     <View style={{...styles.train, alignItems: 'center'}}><Text>No trains available!</Text></View>
+//   )
+// } else {
+//   return <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>{trainList()}</ScrollView>;
+// }
+
+StationDetailsScreen.navigationOptions = ({ navigation }) => ({
   title: navigation.state.params.station,
   headerLeft: () => (
     <Ionicons
       name="md-locate"
       size={25}
       color="black"
-      style={{marginLeft: 20}}
+      style={{ marginLeft: 20 }}
       onPress={() => navigation.goBack()}
     />
   ),
@@ -78,7 +141,7 @@ StationDetailsScreen.navigationOptions = ({navigation}) => ({
       name="md-refresh"
       size={25}
       color="black"
-      style={{marginRight: 20}}
+      style={{ marginRight: 20 }}
       onPress={() => navigation.state.params.fetchTrainDepartures()}
     />
   )
