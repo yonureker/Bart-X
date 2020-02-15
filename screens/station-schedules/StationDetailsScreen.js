@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
-import trainIcon from '../../assets/train.png';
-
 // for pulldown refresh
 function wait(timeout) {
   return new Promise(resolve => {
