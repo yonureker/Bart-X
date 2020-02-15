@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from "react";
-import { View, Text, StyleSheet, RefreshControl } from "react-native";
+import { View, Text, StyleSheet, RefreshControl, Image } from "react-native";
 import { useSelector } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+
+import trainIcon from '../../assets/train.png';
 
 // for pulldown refresh
 function wait(timeout) {
