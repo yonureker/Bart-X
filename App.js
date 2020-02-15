@@ -31,8 +31,12 @@ export default function App() {
   const cacheResources = async () => {
     const images = [
       require("./assets/splash.png"),
+      require("./assets/icon.png"),
       require("./assets/station.png"),
-      require("./assets/loading.png")
+      require("./assets/loading.png"),
+      require("./assets/train.png"),
+      require("./assets/sunday-system-map.png"),
+      require("./assets/week-and-sat-system-map.png")
     ];
 
     const cacheImages = images.map(image => {
