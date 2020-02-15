@@ -34,7 +34,6 @@ export default function App() {
       require("./assets/icon.png"),
       require("./assets/station.png"),
       require("./assets/loading.png"),
-      require("./assets/train.png"),
       require("./assets/sunday-system-map.png"),
       require("./assets/week-and-sat-system-map.png")
     ];
