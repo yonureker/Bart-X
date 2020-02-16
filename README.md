@@ -107,58 +107,88 @@ const ListScreen = createStackNavigator(
 );
 ```
 
+System Map Tab features a top tab navigator for weekday vs. weekend maps:
 
+```javascript
+const SystemScreen = createMaterialTopTabNavigator(
+  {
+    "Weekday & Saturday": {
+      screen: WeekAndSatScreen,
+      navigationOptions: {
+        swipeEnabled: false
+      }
+    },
+    Sunday: {
+      screen: SundayScreen,
+      navigationOptions: {
+        swipeEnabled: false
+      }
+    }
+  },
+  {
+    tabBarComponent: SafeAreaMaterialTopTabBar
+  }
+);
+```
 
 ### User Location
 
-- Asks for permission to track user location and zooms the map to their coordinates. expo-location package is used with the function below::
+- The app asks for user permission to track their location. The location is then dispatched to Redux store to be used for the calculation of closest stations and centering the map view around the coordinates.
 
 ```javascript
 const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
-      // location is set to [37.792874, -122.39703] if permission is not granted.
-      setLocation({ coords: { latitude: 37.792874, longitude: -122.39703 } });
+      dispatch({
+        type: "RECEIVE_USER_LOCATION",
+        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } }
+      });
     }
 
-    let location = await Location.getCurrentPositionAsync({});
-    setLocation({
-      coords: {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude
-      }
+    let location = await Location.getCurrentPositionAsync({
+      accuracy: Location.Accuracy.High
+    });
+
+    dispatch({
+      type: "RECEIVE_USER_LOCATION",
+      payload: location
     });
   };
 ```
 
-- User's location is requested before component loads:
-
-```javascript
-useEffect(() => {
-    getLocation();
-  }, []);
-```
-
 ### Real Time BART data
 
-- Receiving the real time data is done by a simple fetch function. 
+- Receiving the real time data is done by a simple fetch function. The response is then dispatched to Redux store.
 
 ```javascript
-const fetchBartData = () => {
+const fetchTrainDepartures = () => {
+    // setStationList(responseJson.root.station);
+    // setLastUpdate(responseJson.root.time);)
+    // call BART API
     fetch(
       "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
     )
       .then(response => response.json())
-      .then(responseJson => {
-        setStationList(responseJson.root.station);
-        setLastUpdate(responseJson.root.time);
-      })
+      .then(responseJson =>
+        dispatch({
+          type: "RECEIVE_TRAIN_DEPARTURE_DATA",
+          payload: responseJson.root.station
+        })
+      )
       .catch(error => {
         console.log(error);
       });
   };
-  ```
+```
 
+The app receives new data every 5 seconds.
+
+```javascript
+useEffect(() => {
+    const intervalId = setInterval(fetchTrainDepartures, 5000);
+    return () => clearInterval(intervalId);
+  });
+```
 
 
 ### Author
