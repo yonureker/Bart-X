@@ -13,11 +13,7 @@ import LiveMapScreen from "./screens/LiveMapScreen";
 import ListScreen from "./screens/station-schedules/ListScreen";
 import SystemScreen from "./screens/system-map/SystemScreen";
 import AboutScreen from "./screens/AboutScreen";
-
 import rootReducer from "./reducers/rootReducer";
-
-// initialize the redux store
-
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
@@ -117,7 +113,7 @@ const TabNavigator = createBottomTabNavigator(
         )
       }
     },
-    "About": {
+    About: {
       screen: AboutScreen,
       navigationOptions: {
         tabBarIcon: () => (
@@ -129,7 +125,7 @@ const TabNavigator = createBottomTabNavigator(
           />
         )
       }
-    },
+    }
   },
   {
     initialRouteName: "Station List"
