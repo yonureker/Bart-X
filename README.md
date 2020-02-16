@@ -32,9 +32,86 @@ Station List | Real Time Departures | Map View | System Maps
 
 ## Functionality
 
+### Redux
+
+The combination of Redux + React Navigation makes things very easy. Rather than passing params around with `() => props.navigation.navigate('MyScreen', params: {})`, using useSelector hook is a great way to pull whatever is needed from state.
+
+User location, station locations and real time departures are placed in redux store.
+
+```javascript
+import { combineReducers } from "redux";
+import userLocationReducer from './userLocationReducer';
+import trainDepartureReducer from './trainDepartureReducer';
+import stationLocationReducer from "./stationLocationReducer";
+
+const rootReducer = combineReducers({
+  userLocation: userLocationReducer,
+  trainDepartures: trainDepartureReducer,
+  stationLocations: stationLocationReducer
+})
+
+export default rootReducer;
+```
+
+### Navigation
+
+Using React Navigation for the first time, it was challenging to combine multiple navigations; but I am happy with the final product. The bottom navigator is setup in App.js file:
+
+```javascript
+const TabNavigator = createBottomTabNavigator(
+  {
+    "Station List": {
+      screen: ListScreen,
+      navigationOptions: {
+        //...
+      }
+    },
+    "Live Map": {
+      screen: LiveMapScreen,
+      navigationOptions: {
+        //...
+      }
+    },
+    "System Map": {
+      screen: SystemScreen,
+      navigationOptions: {
+        //...
+      }
+    },
+    About: {
+      screen: AboutScreen,
+      navigationOptions: {
+        //...
+      }
+    }
+  },
+  {
+    initialRouteName: "Station List"
+  }
+);
+
+const AppContainer = createAppContainer(TabNavigator);
+```
+
+The app also has a stack navigator to display train details screen after pressing on a station from the list:
+
+```javascript
+const ListScreen = createStackNavigator(
+  {
+    StationList: StationListScreen,
+    StationDetails: StationDetailsScreen
+  },
+  {
+    initialRouteName: "StationList"
+  }
+);
+```
+
+
+
 ### User Location
 
-- Asks for permission to track user locations and zooms the map to their coordinates. expo-location package is used with the function below::
+- Asks for permission to track user location and zooms the map to their coordinates. expo-location package is used with the function below::
 
 ```javascript
 const getLocation = async () => {
