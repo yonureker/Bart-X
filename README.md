@@ -190,6 +190,34 @@ useEffect(() => {
   });
 ```
 
+### Closest Stations
+
+After receiving user location and station locations and dispatching them to redux store; the calculation is done with the help of geolib library.
+
+```javascript
+const calculateDistance = () => {
+    // const userLocation = useSelector(state => state.userLocation);
+    // const stations = useSelector(state => state.stationLocations);
+    return stations.map(station => {
+      return {
+        ...station,
+        distance: convertDistance(
+          getDistance(
+            {
+              latitude: station.gtfs_latitude,
+              longitude: station.gtfs_longitude
+            },
+            {
+              latitude: String(userLocation.coords.latitude),
+              longitude: String(userLocation.coords.longitude)
+            }
+          ),
+          "mi"
+        )
+      };
+    });
+  };
+```
 
 ### Author
 
