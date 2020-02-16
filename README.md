@@ -1,10 +1,16 @@
-## The App
+## BartLiveMobile
 
-BartLiveMobile is a mobile app that displays real-time estimated departures using the data fetched from [BART API](http://api.bart.gov/docs/overview/index.aspx).
+BartLiveMobile is a mobile app that displays real-time BART departures with the help of [BART API](http://api.bart.gov/docs/overview/index.aspx).
 
-[Download on the Apple Store](https://apps.apple.com/us/app/bartlivemobile/id1480753570)
+* [Download on the Apple Store](https://apps.apple.com/us/app/bartlivemobile/id1480753570)
+* Google Play app currently under review. Will be published soon.
 
-![](https://i.ibb.co/b2ZKBYK/Slice-1.png)
+## ScreenShots
+
+Station List | Real Time Departures | Map View | System Maps
+------ | ------ | ------ | ------
+![Image](https://i.imgur.com/uDjdHE9.png) | ![Image](https://i.imgur.com/YuT9EAY.png) | ![Image](https://i.imgur.com/TzzGPnC.png) | ![Image](https://i.imgur.com/2sekTXQ.png) |
+
 
 ## Functionality
 
