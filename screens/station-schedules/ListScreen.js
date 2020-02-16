@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-
-
-import StationListScreen from './StationListScreen';
-import StationDetailsScreen from './StationDetailsScreen'
 import { createStackNavigator } from "react-navigation-stack";
+
+import StationListScreen from "./StationListScreen";
+import StationDetailsScreen from "./StationDetailsScreen";
 
 const ListScreen = createStackNavigator(
   {
     StationList: StationListScreen,
-    StationDetails: StationDetailsScreen,
+    StationDetails: StationDetailsScreen
   },
   {
-    initialRouteName: 'StationList',
+    initialRouteName: "StationList"
   }
-)
-
-
+);
 
 export default ListScreen;

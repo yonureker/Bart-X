@@ -1,30 +1,46 @@
 import React from "react";
-import { StyleSheet, StatusBar, View, SafeAreaView } from "react-native";
-import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigation-tabs';
-import SundayScreen from './SundayScreen';
-import WeekAndSatScreen from './WeekAndSatScreen';
+import { StatusBar, View, SafeAreaView } from "react-native";
+import {
+  createMaterialTopTabNavigator,
+  MaterialTopTabBar
+} from "react-navigation-tabs";
 
-const SystemScreen = createMaterialTopTabNavigator({
-  'Weekday & Saturday': {screen: WeekAndSatScreen, navigationOptions:{
-    swipeEnabled: false
-  }},
-  'Sunday': {screen :SundayScreen, navigationOptions:{
-    swipeEnabled: false
-  }}
-}, {
-  tabBarComponent: SafeAreaMaterialTopTabBar
-}
-)
+import SundayScreen from "./SundayScreen";
+import WeekAndSatScreen from "./WeekAndSatScreen";
 
-function SafeAreaMaterialTopTabBar (props) {
+const SystemScreen = createMaterialTopTabNavigator(
+  {
+    "Weekday & Saturday": {
+      screen: WeekAndSatScreen,
+      navigationOptions: {
+        swipeEnabled: false
+      }
+    },
+    Sunday: {
+      screen: SundayScreen,
+      navigationOptions: {
+        swipeEnabled: false
+      }
+    }
+  },
+  {
+    tabBarComponent: SafeAreaMaterialTopTabBar
+  }
+);
+
+function SafeAreaMaterialTopTabBar(props) {
   return (
     <View>
-    <StatusBar />
-    <SafeAreaView style={{paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
-      <MaterialTopTabBar {...props} />
+      <StatusBar />
+      <SafeAreaView
+        style={{
+          paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+        }}
+      >
+        <MaterialTopTabBar {...props} />
       </SafeAreaView>
-      </View>
-  )
+    </View>
+  );
 }
 
 export default SystemScreen;

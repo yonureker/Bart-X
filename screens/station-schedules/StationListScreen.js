@@ -18,7 +18,7 @@ const StationListScreen = props => {
   const dispatch = useDispatch();
   const userLocation = useSelector(state => state.userLocation);
   const stations = useSelector(state => state.stationLocations);
-  const departures = useSelector(state => state.trainDepartures)
+  const departures = useSelector(state => state.trainDepartures);
 
   useEffect(() => {
     getLocation();
@@ -32,14 +32,9 @@ const StationListScreen = props => {
     fetchStationLocation();
   }, []);
 
-  // useEffect(() => {
-  //   calculateDistance();
-  // }, []);
-
   useEffect(() => {
     const intervalId = setInterval(fetchTrainDepartures, 5000);
     return () => clearInterval(intervalId);
-    
   });
 
   const fetchStationLocation = () => {
@@ -86,7 +81,9 @@ const StationListScreen = props => {
       });
     }
 
-    let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
+    let location = await Location.getCurrentPositionAsync({
+      accuracy: Location.Accuracy.High
+    });
 
     dispatch({
       type: "RECEIVE_USER_LOCATION",
@@ -134,7 +131,7 @@ const StationListScreen = props => {
     return (
       <View style={styles.container}>
         <Text>Loading Stations</Text>
-        <ActivityIndicator size="large" color="blue"/>
+        <ActivityIndicator size="large" color="blue" />
       </View>
     );
   }
