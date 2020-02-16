@@ -12,7 +12,7 @@ import { enableScreens } from "react-native-screens";
 import LiveMapScreen from "./screens/LiveMapScreen";
 import ListScreen from "./screens/station-schedules/ListScreen";
 import SystemScreen from "./screens/system-map/SystemScreen";
-import SettingsScreen from "./screens/SettingsScreen";
+import AboutScreen from "./screens/AboutScreen";
 
 import rootReducer from "./reducers/rootReducer";
 
@@ -117,19 +117,19 @@ const TabNavigator = createBottomTabNavigator(
         )
       }
     },
-    // "Settings": {
-    //   screen: SettingsScreen,
-    //   navigationOptions: {
-    //     tabBarIcon: () => (
-    //       <Ionicons
-    //         name="md-settings"
-    //         size={32}
-    //         color="black"
-    //         style={styles.tabIcon}
-    //       />
-    //     )
-    //   }
-    // },
+    "About": {
+      screen: AboutScreen,
+      navigationOptions: {
+        tabBarIcon: () => (
+          <Ionicons
+            name="ios-information-circle"
+            size={32}
+            color="black"
+            style={styles.tabIcon}
+          />
+        )
+      }
+    },
   },
   {
     initialRouteName: "Station List"
