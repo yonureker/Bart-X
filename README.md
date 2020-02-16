@@ -5,11 +5,29 @@ BartLiveMobile is a mobile app that displays real-time BART departures with the 
 * [Download on the Apple Store](https://apps.apple.com/us/app/bartlivemobile/id1480753570)
 * Google Play app currently under review. Will be published soon.
 
-## ScreenShots
+##  iPhone Screenshots
 
 Station List | Real Time Departures | Map View | System Maps
 ------ | ------ | ------ | ------
 ![Image](https://i.imgur.com/uDjdHE9.png) | ![Image](https://i.imgur.com/YuT9EAY.png) | ![Image](https://i.imgur.com/TzzGPnC.png) | ![Image](https://i.imgur.com/2sekTXQ.png) |
+
+## Android Screenshots
+
+Station List | Real Time Departures | Map View | System Maps
+------ | ------ | ------ | ------
+![Image](https://i.imgur.com/Ew85IjH.png) | ![Image](https://i.imgur.com/aIw4RpH.png) | ![Image](https://i.imgur.com/aFm5EFs.png) | ![Image](https://i.imgur.com/bBG2Cfp.png) |
+
+### Technologies:
+
+- [React Native](https://facebook.github.io/react-native/)
+- [React Navigation](https://reactnavigation.org/)
+- [Redux](https://redux.js.org/)
+- [React Native Maps](https://github.com/react-native-community/react-native-maps)
+- [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+- [Expo](https://expo.io/)
+- [Google Maps API](https://developers.google.com/maps/documentation/)
+- [Bart API](https://api.bart.gov/docs/overview/index.aspx)
+- Javascript
 
 
 ## Functionality
@@ -64,14 +82,7 @@ const fetchBartData = () => {
   };
   ```
 
-### Technologies:
 
-- Frontend: [React Native](https://facebook.github.io/react-native/)
-- Javascript
-- [Expo](https://expo.io/)
-- [Google Maps API](https://developers.google.com/maps/documentation/)
-- [Bart API](https://api.bart.gov/docs/overview/index.aspx)
-- [React-native-maps](https://github.com/react-native-community/react-native-maps)
 
 ### Author
 
