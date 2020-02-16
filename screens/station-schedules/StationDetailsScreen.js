@@ -36,10 +36,10 @@ const StationDetailsScreen = props => {
         newMap["destination"] = route.destination;
         newMap["platform"] = train.platform;
         newMap["length"] = train.length;
-        newMap["color"] = train.color.toLowerCase();
+        newMap["color"] = train.hexcolor;
 
-        if (train.minutes === 'Leaving') {
-          newMap['minutes'] = 0;
+        if (train.minutes === "Leaving") {
+          newMap["minutes"] = 0;
         } else {
           newMap["minutes"] = Number(train.minutes);
         }
@@ -53,7 +53,7 @@ const StationDetailsScreen = props => {
     return mappedStation.map((train, index) => {
       return (
         <View style={styles.train} key={index}>
-          <View style={{ ...styles.left, backgroundColor: train.color }}></View>
+          <View style={{ ...styles.left, backgroundColor: train.color}}></View>
           <View style={styles.mid}>
             <View>
               <Text style={{ fontSize: 20 }}>{train.destination}</Text>
@@ -65,7 +65,8 @@ const StationDetailsScreen = props => {
             </View>
           </View>
           <View style={styles.right}>
-            <Text style={{ fontSize: 20 }}>{train.minutes}</Text>
+            <View><Text style={{ fontSize: 20 }}>{train.minutes}</Text></View>
+            <View><Text style={{ fontSize: 14 }}>min</Text></View>
           </View>
         </View>
       );
@@ -90,40 +91,6 @@ const StationDetailsScreen = props => {
     );
   }
 };
-
-// const trainList = () =>
-//   selectedStation.etd.map((route) => {
-//     return route.estimate.map((train, index) => {
-//       const color = train.color.toLowerCase();
-
-//       return (
-//         <View style={styles.train} key={index}>
-//           <View style={{ ...styles.left, backgroundColor: color }}></View>
-//           <View style={styles.mid}>
-//             <View>
-//               <Text style={{ fontSize: 20 }}>{route.destination}</Text>
-//             </View>
-//             <View>
-//               <Text style={{ color: "#A2AEB1" }}>
-//                 {train.length} cars | Platform {train.platform}
-//               </Text>
-//             </View>
-//           </View>
-//           <View style={styles.right}>
-//             <Text style={{ fontSize: 20 }}>{train.minutes}</Text>
-//           </View>
-//         </View>
-//       );
-//     });
-//   });
-
-// if (selectedStation === undefined) {
-//   return(
-//     <View style={{...styles.train, alignItems: 'center'}}><Text>No trains available!</Text></View>
-//   )
-// } else {
-//   return <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>{trainList()}</ScrollView>;
-// }
 
 StationDetailsScreen.navigationOptions = ({ navigation }) => ({
   title: navigation.state.params.station,
@@ -159,13 +126,15 @@ const styles = StyleSheet.create({
     paddingRight: 10
   },
   left: {
-    width: "5%",
-    borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 50
+    width: "3%",
+    marginTop: 2,
+    marginBottom: 2,
+    borderColor: "black",
+    borderWidth: 1
+    // borderRadius: 50
   },
   mid: {
-    width: "70%",
+    width: "72%",
     justifyContent: "space-evenly",
     flexDirection: "column",
     paddingLeft: 10
@@ -173,7 +142,7 @@ const styles = StyleSheet.create({
   right: {
     width: "20%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   }
 });
 
