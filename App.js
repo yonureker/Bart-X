@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import { createAppContainer } from "react-navigation";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { enableScreens } from "react-native-screens";
 
-import LiveMapScreen from "./screens/LiveMapScreen";
-import ListScreen from "./screens/station-schedules/ListScreen";
-import SystemScreen from "./screens/system-map/SystemScreen";
-import AboutScreen from "./screens/AboutScreen";
 import rootReducer from "./reducers/rootReducer";
+import AppContainer from './AppContainer';
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
@@ -57,79 +50,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  imageBackground: {
-    width: "100%",
-    height: "100%"
-  },
-  tabIcon: {
-    marginTop: 3
-  }
-});
-
-// Bottom Tab Navigator Setup
-const TabNavigator = createBottomTabNavigator(
-  {
-    "Station List": {
-      screen: ListScreen,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <Ionicons
-            name="md-list"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    },
-    "Live Map": {
-      screen: LiveMapScreen,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <MaterialCommunityIcons
-            name="google-maps"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    },
-    "System Map": {
-      screen: SystemScreen,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <Ionicons
-            name="ios-map"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    },
-    About: {
-      screen: AboutScreen,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <Ionicons
-            name="ios-information-circle"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    }
-  },
-  {
-    initialRouteName: "Station List"
-  }
-);
-
-const AppContainer = createAppContainer(TabNavigator);
