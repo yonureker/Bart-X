@@ -25,52 +25,8 @@ const StationListScreen = props => {
   }, []);
 
   useEffect(() => {
-    fetchTrainDepartures();
+    calculateDistance();
   }, []);
-
-  useEffect(() => {
-    fetchStationLocation();
-  }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 5000);
-    return () => clearInterval(intervalId);
-  });
-
-  const fetchStationLocation = () => {
-    fetch(
-      "http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson =>
-        dispatch({
-          type: "RECEIVE_STATION_LOCATIONS",
-          payload: responseJson.root.stations.station
-        })
-      )
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const fetchTrainDepartures = () => {
-    // setStationList(responseJson.root.station);
-    // setLastUpdate(responseJson.root.time);)
-    // call BART API
-    fetch(
-      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson =>
-        dispatch({
-          type: "RECEIVE_TRAIN_DEPARTURE_DATA",
-          payload: responseJson.root.station
-        })
-      )
-      .catch(error => {
-        console.log(error);
-      });
-  };
 
   const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -112,16 +68,14 @@ const StationListScreen = props => {
     });
   };
 
-  const stationsWithDistance = calculateDistance();
-
-  if (userLocation && stations.length !== 0 && departures.length !== 0) {
+  if (userLocation.coords.latitude !== null) {
     return (
       <View style={styles.container}>
         <StatusBar />
         <SafeAreaView style={{ width: "100%" }}>
           <StationList
             navigate={props.navigation.navigate}
-            stations={stationsWithDistance}
+            stations={calculateDistance()}
             fetchTrainDepartures={() => fetchTrainDepartures}
           />
         </SafeAreaView>
@@ -130,8 +84,12 @@ const StationListScreen = props => {
   } else {
     return (
       <View style={styles.container}>
-        <Text>Loading Stations</Text>
-        <ActivityIndicator size="large" color="blue" />
+        <View>
+          <Text>Loading Stations</Text>
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <ActivityIndicator size="large" color="black" />
+        </View>
       </View>
     );
   }
