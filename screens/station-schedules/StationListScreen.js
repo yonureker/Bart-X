@@ -1,54 +1,25 @@
 import React, { useEffect } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   StatusBar,
   SafeAreaView,
-  ActivityIndicator
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
+import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 
 import StationList from "../../components/stationList";
 
 const StationListScreen = props => {
-  const dispatch = useDispatch();
-  const userLocation = useSelector(state => state.userLocation);
-  const stations = useSelector(state => state.stationLocations);
-  const departures = useSelector(state => state.trainDepartures);
-
-  useEffect(() => {
-    getLocation();
-  }, []);
+  const userLocation = useSelector(state => state.userLocation)
+  const { stations : { station } } = require('../../stations');
 
   useEffect(() => {
     calculateDistance();
-  }, []);
-
-  const getLocation = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      dispatch({
-        type: "RECEIVE_USER_LOCATION",
-        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } }
-      });
-    }
-
-    let location = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.High
-    });
-
-    dispatch({
-      type: "RECEIVE_USER_LOCATION",
-      payload: location
-    });
-  };
+  });
 
   const calculateDistance = () => {
-    return stations.map(station => {
+    return station.map(station => {
       return {
         ...station,
         distance: convertDistance(
@@ -68,7 +39,6 @@ const StationListScreen = props => {
     });
   };
 
-  if (userLocation.coords.latitude !== null) {
     return (
       <View style={styles.container}>
         <StatusBar />
@@ -80,19 +50,7 @@ const StationListScreen = props => {
           />
         </SafeAreaView>
       </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <View>
-          <Text>Loading Stations</Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <ActivityIndicator size="large" color="black" />
-        </View>
-      </View>
-    );
-  }
+    )
 };
 
 StationListScreen.navigationOptions = {

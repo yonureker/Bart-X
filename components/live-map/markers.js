@@ -1,27 +1,26 @@
-import React, {useState} from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import MapView from "react-native-maps";
-import { useSelector } from 'react-redux';
 
 import Callouts from './callouts';
 import stationLogo from '../../assets/station.png';
 
 const Markers = React.memo((props) => {
-  const stationLocations = useSelector(state => state.stationLocations);
+  const { stations : { station } } = require('../../stations');
 
-  return stationLocations.map((station, index) => {
+  return station.map((trainStation, index) => {
     return (
       <MapView.Marker
-        key={station.abbr}
+        key={trainStation.abbr}
         coordinate={{
-          latitude: parseFloat(station.gtfs_latitude),
-          longitude: parseFloat(station.gtfs_longitude)
+          latitude: parseFloat(trainStation.gtfs_latitude),
+          longitude: parseFloat(trainStation.gtfs_longitude)
         }}
         image={stationLogo}
         zIndex={100}
         tracksInfoWindowChanges={true}
       >
-      <Callouts key={station.abbr} stationName={station.name} stationAbbr={station.abbr} />
+      <Callouts key={trainStation.abbr} stationName={trainStation.name} stationAbbr={trainStation.abbr} />
       </MapView.Marker>
     );
   });

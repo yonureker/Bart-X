@@ -1,6 +1,5 @@
 import React from "react";
 import { View, FlatList, Text, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const StationList = props => {
