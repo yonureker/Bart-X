@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Alert } from "react-native";
-import { useDispatch } from "react-redux";
+import { StyleSheet, Alert, ImageBackground, View, Text } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { createAppContainer } from "react-navigation";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -14,6 +14,7 @@ import AboutScreen from "./screens/AboutScreen";
 
 export default function AppContainer() {
   const dispatch = useDispatch();
+  const userLocation = useSelector(state => state.userLocation);
 
   useEffect(() => {
     getLocation();
@@ -21,10 +22,6 @@ export default function AppContainer() {
 
   useEffect(() => {
     fetchTrainDepartures();
-  }, []);
-
-  useEffect(() => {
-    fetchStationLocation();
   }, []);
 
   useEffect(() => {
@@ -51,22 +48,6 @@ export default function AppContainer() {
     });
   };
 
-  const fetchStationLocation = () => {
-    fetch(
-      "http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson =>
-        dispatch({
-          type: "RECEIVE_STATION_LOCATIONS",
-          payload: responseJson.root.stations.station
-        })
-      )
-      .catch(error => {
-        Alert.alert(error);
-      });
-  };
-
   const fetchTrainDepartures = () => {
     // setStationList(responseJson.root.station);
     // setLastUpdate(responseJson.root.time);)
@@ -86,7 +67,21 @@ export default function AppContainer() {
       });
   };
 
-  return <AppWrapper />;
+  if (
+    userLocation.coords.latitude !== null &&
+    userLocation.coords.latitude !== undefined
+  ) {
+    return <AppWrapper />;
+  } else {
+    return (
+      <View>
+        <ImageBackground
+          source={require("./assets/loading.png")}
+          style={{ width: "100%", height: "100%" }}
+        ></ImageBackground>
+      </View>
+    );
+  }
 }
 
 // Bottom Tab Navigator Setup
