@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Alert, ImageBackground, View, Text } from "react-native";
+import { StyleSheet, ImageBackground, View, Text, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { createAppContainer } from "react-navigation";
 import * as Location from "expo-location";
@@ -39,7 +39,7 @@ export default function AppContainer() {
     }
 
     let location = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.High
+      accuracy: Platform.OS === "android" ? Location.Accuracy.Low : Location.Accuracy.Lowest
     });
 
     dispatch({
@@ -63,7 +63,7 @@ export default function AppContainer() {
         })
       )
       .catch(error => {
-        Alert.alert(error);
+        console.log(error);
       });
   };
 
