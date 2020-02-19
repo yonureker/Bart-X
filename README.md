@@ -176,7 +176,7 @@ const fetchTrainDepartures = () => {
         })
       )
       .catch(error => {
-        Alert.alert(error);
+        console.log(error);
       });
   };
 ```
