@@ -12,7 +12,8 @@ function wait(timeout) {
 }
 
 const StationDetailsScreen = props => {
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(false)
+  const [pullDownView, setPullDownView] = useState(true)
   const departures = useSelector(state => state.trainDepartures);
 
   // for pulldown refresh
@@ -20,7 +21,7 @@ const StationDetailsScreen = props => {
     setRefreshing(true);
 
     // for pulldown refresh
-    wait(2000).then(() => setRefreshing(false));
+    wait(2000).then(() => {setRefreshing(false); setPullDownView(false)});
   }, [refreshing]);
 
   const selectedStation = departures.find(
@@ -73,6 +74,14 @@ const StationDetailsScreen = props => {
     });
   };
 
+  const pullDown = () => {
+    if (pullDownView){
+      return(
+        <View style={styles.pullDown}><Text style={{color: 'white'}}>Pull down to refresh</Text></View>
+      )
+    }
+  }
+
   if (selectedStation === undefined) {
     return (
       <View style={{ ...styles.train, alignItems: "center" }}>
@@ -86,13 +95,15 @@ const StationDetailsScreen = props => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+        {pullDown()} 
         {sortedTrainList()}
       </ScrollView>
     );
   }
 };
 
-StationDetailsScreen.navigationOptions = ({ navigation }) => ({
+StationDetailsScreen.navigationOptions = ({navigation}) => (
+  {
   title: navigation.state.params.station,
   headerLeft: () => (
     <Ionicons
@@ -103,16 +114,17 @@ StationDetailsScreen.navigationOptions = ({ navigation }) => ({
       onPress={() => navigation.goBack()}
     />
   ),
-  headerRight: () => (
-    <Ionicons
-      name="md-refresh"
-      size={25}
-      color="black"
-      style={{ marginRight: 20 }}
-      onPress={() => navigation.state.params.fetchTrainDepartures()}
-    />
-  )
-});
+  // headerRight: () => (
+  //   <Ionicons
+  //     name="md-refresh"
+  //     size={25}
+  //     color="black"
+  //     style={{ marginRight: 20 }}
+  //     onPress={() => console.log('hello')}
+  //   />
+  // )
+}
+);
 
 const styles = StyleSheet.create({
   train: {
@@ -143,6 +155,16 @@ const styles = StyleSheet.create({
     width: "20%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  pullDown: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '50%',
+    backgroundColor: '#0099CC',
+    flex: 1,
+    alignSelf: 'center',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   }
 });
 
