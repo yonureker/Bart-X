@@ -1,16 +1,29 @@
 import React, { useEffect } from "react";
-import { StyleSheet, ImageBackground, View, Text, Platform } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  View,
+  Text,
+  Platform
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { createAppContainer } from "react-navigation";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+import * as firebase from "firebase";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
 import ListScreen from "./screens/station-schedules/ListScreen";
 import SystemScreen from "./screens/system-map/SystemScreen";
 import AboutScreen from "./screens/AboutScreen";
+import { firebaseConfig } from "./config/firebaseConfig";
+
+require("firebase/firestore");
+
+firebase.initializeApp(firebaseConfig);
+let db = firebase.firestore();
 
 export default function AppContainer() {
   const dispatch = useDispatch();
@@ -20,14 +33,7 @@ export default function AppContainer() {
     getLocation();
   }, []);
 
-  useEffect(() => {
-    fetchTrainDepartures();
-  }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 5000);
-    return () => clearInterval(intervalId);
-  });
+  
 
   const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -39,32 +45,27 @@ export default function AppContainer() {
     }
 
     let location = await Location.getCurrentPositionAsync({
-      accuracy: Platform.OS === "android" ? Location.Accuracy.Low : Location.Accuracy.Lowest
+      accuracy:
+        Platform.OS === "android"
+          ? Location.Accuracy.Low
+          : Location.Accuracy.Lowest
     });
 
     dispatch({
       type: "RECEIVE_USER_LOCATION",
       payload: location
     });
-  };
 
-  const fetchTrainDepartures = () => {
-    // setStationList(responseJson.root.station);
-    // setLastUpdate(responseJson.root.time);)
-    // call BART API
-    fetch(
-      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
-    )
-      .then(response => response.json())
-      .then(responseJson =>
-        dispatch({
-          type: "RECEIVE_TRAIN_DEPARTURE_DATA",
-          payload: responseJson.root.station
-        })
-      )
-      .catch(error => {
-        console.log(error);
-      });
+    db.collection("users")
+      .add({
+        location: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
+        },
+        timestamp: {
+          created: firebase.firestore.Timestamp.fromDate(new Date())
+        }
+      })
   };
 
   if (

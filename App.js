@@ -8,6 +8,7 @@ import { enableScreens } from "react-native-screens";
 import rootReducer from "./reducers/rootReducer";
 import AppContainer from './AppContainer';
 
+
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
   enableScreens();
