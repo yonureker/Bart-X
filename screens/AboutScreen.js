@@ -4,13 +4,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AboutScreen = props => {
   const handlePress = () => {
-    Linking.openURL("http://onureker.com");
+    Linking.openURL("https://www.linkedin.com/in/onureker/");
   };
 
   return (
     <View style={styles.container}>
       <View>
-        <Text>Version 1.3.2</Text>
+        <Text>Version 1.3.5</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View>
