@@ -11,3 +11,4 @@ web-report/
 *.json
 app.json*
 *json*
+config
