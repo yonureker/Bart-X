@@ -10,8 +10,8 @@ const StationList = props => {
       data={stationList}
       renderItem={({ item }) => (
         <TouchableOpacity style={styles.button} onPress={() => props.navigate('StationDetails', {
-          station: item.name,
-          fetchTrainDepartures: props.fetchTrainDepartures
+          abbr: item.abbr,
+          name: item.name
         })}>
           <View>
             <Text style={styles.stationTitle}>{item.name}</Text>
