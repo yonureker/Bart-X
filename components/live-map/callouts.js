@@ -1,14 +1,42 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import StationCallout from './stationCallout';
 
 const Callouts = props => {
   const trainDepartures = useSelector(state => state.trainDepartures)
-
   const {stationName, stationAbbr } = props;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchTrainDepartures();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(fetchTrainDepartures, 10000);
+    return () => clearInterval(intervalId);
+  });
+
+  const fetchTrainDepartures = () => {
+    // setStationList(responseJson.root.station);
+    // setLastUpdate(responseJson.root.time);)
+    // call BART API
+    fetch(
+      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
+    )
+      .then(response => response.json())
+      .then(responseJson =>
+        dispatch({
+          type: "RECEIVE_TRAIN_DEPARTURE_DATA",
+          payload: responseJson.root.station
+        })
+      )
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
     <MapView.Callout
