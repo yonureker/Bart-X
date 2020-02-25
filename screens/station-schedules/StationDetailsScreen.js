@@ -1,8 +1,13 @@
-import React, { useState, useCallback } from "react";
-import { View, Text, StyleSheet, RefreshControl} from "react-native";
-import { useSelector } from "react-redux";
+import React, { useState, useCallback, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  RefreshControl,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import * as SecureStore from 'expo-secure-store';
 
 // for pulldown refresh
 function wait(timeout) {
@@ -12,21 +17,47 @@ function wait(timeout) {
 }
 
 const StationDetailsScreen = props => {
-  const [refreshing, setRefreshing] = useState(false)
-  const [pullDownView, setPullDownView] = useState(true)
-  const departures = useSelector(state => state.trainDepartures);
+  const [refreshing, setRefreshing] = useState(false);
+  const [pullDownView, setPullDownView] = useState(true);
+  const [selectedStation, setSelectedStation] = useState(false);
 
-  // for pulldown refresh
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-
-    // for pulldown refresh
-    wait(2000).then(() => {setRefreshing(false); setPullDownView(false)});
+    wait(1000).then(() => {
+      setRefreshing(false);
+      setPullDownView(false);
+    });
   }, [refreshing]);
 
-  const selectedStation = departures.find(
-    item => item.name == props.navigation.state.params.station
-  );
+  useEffect(() => {
+    fetchTrainDepartures();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(fetchTrainDepartures, 5000);
+    return () => clearInterval(intervalId);
+  });
+
+  useEffect(() => {
+    getFavoriteStatus();
+  }, [])
+
+  const getFavoriteStatus = async() => {
+    const result = await SecureStore.getItemAsync(props.navigation.state.params.abbr)
+
+    props.navigation.setParams({favorite: result});
+  }
+
+  const fetchTrainDepartures = () => {
+    fetch(
+      `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${props.navigation.state.params.abbr}&key=MW9S-E7SL-26DU-VV8V&json=y`
+    )
+      .then(response => response.json())
+      .then(responseJson => setSelectedStation(responseJson.root.station[0]))
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   const sortedTrainList = () => {
     let mappedStation = [];
@@ -54,7 +85,7 @@ const StationDetailsScreen = props => {
     return mappedStation.map((train, index) => {
       return (
         <View style={styles.train} key={index}>
-          <View style={{ ...styles.left, backgroundColor: train.color}}></View>
+          <View style={{ ...styles.left, backgroundColor: train.color }}></View>
           <View style={styles.mid}>
             <View>
               <Text style={{ fontSize: 20 }}>{train.destination}</Text>
@@ -66,8 +97,12 @@ const StationDetailsScreen = props => {
             </View>
           </View>
           <View style={styles.right}>
-            <View><Text style={{ fontSize: 20 }}>{train.minutes}</Text></View>
-            <View><Text style={{ fontSize: 14 }}>min</Text></View>
+            <View>
+              <Text style={{ fontSize: 20 }}>{train.minutes}</Text>
+            </View>
+            <View>
+              <Text style={{ fontSize: 14 }}>min</Text>
+            </View>
           </View>
         </View>
       );
@@ -75,14 +110,16 @@ const StationDetailsScreen = props => {
   };
 
   const pullDown = () => {
-    if (pullDownView){
-      return(
-        <View style={styles.pullDown}><Text style={{color: 'white'}}>Pull down to refresh</Text></View>
-      )
+    if (pullDownView) {
+      return (
+        <View style={styles.pullDown}>
+          <Text style={{ color: "white" }}>Pull down to refresh</Text>
+        </View>
+      );
     }
-  }
+  };
 
-  if (selectedStation === undefined) {
+  if (selectedStation.etd === undefined) {
     return (
       <View style={{ ...styles.train, alignItems: "center" }}>
         <Text>No trains available!</Text>
@@ -95,36 +132,49 @@ const StationDetailsScreen = props => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {pullDown()} 
+        {pullDown()}
         {sortedTrainList()}
       </ScrollView>
     );
   }
 };
 
-StationDetailsScreen.navigationOptions = ({navigation}) => (
-  {
-  title: navigation.state.params.station,
+StationDetailsScreen.navigationOptions = ({navigation}) => {
+  const { name, favorite, abbr } = navigation.state.params
+
+
+return({
+  title: name,
+  headerStyle: {
+    backgroundColor: '#EBF2F5'
+  },
   headerLeft: () => (
     <Ionicons
       name="md-locate"
-      size={25}
+      size={30}
       color="black"
       style={{ marginLeft: 20 }}
       onPress={() => navigation.goBack()}
     />
   ),
-  // headerRight: () => (
-  //   <Ionicons
-  //     name="md-refresh"
-  //     size={25}
-  //     color="black"
-  //     style={{ marginRight: 20 }}
-  //     onPress={() => console.log('hello')}
-  //   />
-  // )
-}
-);
+  headerRight: () => (
+
+    <MaterialIcons
+      name={favorite === 'favorite' ? 'favorite' : 'favorite-border'}
+      size={30}
+      color="red"
+      style={{ marginRight: 20 }}
+      onPress={() => {
+        if (favorite === 'favorite'){
+          SecureStore.setItemAsync(abbr, 'not favorite').then(navigation.setParams({favorite: 'not favorite'}))
+        } else {
+          SecureStore.setItemAsync(abbr, 'favorite').then(navigation.setParams({favorite: 'favorite'}))
+        }
+      }}
+    
+    />
+  )
+})};
 
 const styles = StyleSheet.create({
   train: {
@@ -135,7 +185,7 @@ const styles = StyleSheet.create({
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
     paddingLeft: 1,
-    paddingRight: 10
+    paddingRight: 10,
   },
   left: {
     width: "3%",
@@ -143,7 +193,6 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     borderColor: "black",
     borderWidth: 1
-    // borderRadius: 50
   },
   mid: {
     width: "72%",
@@ -154,18 +203,20 @@ const styles = StyleSheet.create({
   right: {
     width: "20%",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   pullDown: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '50%',
-    backgroundColor: '#0099CC',
+    justifyContent: "center",
+    alignItems: "center",
+    width: "50%",
+    backgroundColor: "#0099CC",
     flex: 1,
-    alignSelf: 'center',
+    alignSelf: "center",
     borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderBottomRightRadius: 10
   }
 });
 
 export default StationDetailsScreen;
+
+// SecureStore.setItemAsync(String(navigation.state.params.abbr), 'favorite').then(value => navigation.setParams({favorite: !navigation.state.params.favorite}))

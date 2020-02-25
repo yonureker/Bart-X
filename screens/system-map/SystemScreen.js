@@ -13,7 +13,7 @@ const SystemScreen = createMaterialTopTabNavigator(
     "Weekday & Saturday": {
       screen: WeekAndSatScreen,
       navigationOptions: {
-        swipeEnabled: false
+        swipeEnabled: false,
       }
     },
     Sunday: {
@@ -24,7 +24,7 @@ const SystemScreen = createMaterialTopTabNavigator(
     }
   },
   {
-    tabBarComponent: SafeAreaMaterialTopTabBar
+    tabBarComponent: SafeAreaMaterialTopTabBar,
   }
 );
 

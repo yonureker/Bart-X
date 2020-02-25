@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "expo": "^36.0.0",
+    "expo-secure-store": "^8.0.0",
     "firebase": "^7.9.0",
     "geolib": "^3.2.1",
     "react": "16.9.0",
@@ -22,6 +23,7 @@
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "2.0.0-alpha.12",
     "react-navigation": "^4.1.1",
+    "react-navigation-drawer": "^2.4.0",
     "react-navigation-stack": "^1.10.3",
     "react-navigation-tabs": "^2.7.0",
     "react-redux": "^7.2.0",

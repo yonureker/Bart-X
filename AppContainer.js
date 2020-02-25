@@ -15,7 +15,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import * as firebase from "firebase";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
-import ListScreen from "./screens/station-schedules/ListScreen";
+import StationScreen from "./screens/station-schedules/StationScreen";
 import SystemScreen from "./screens/system-map/SystemScreen";
 import AboutScreen from "./screens/AboutScreen";
 import { firebaseConfig } from "./config/firebaseConfig";
@@ -89,7 +89,7 @@ export default function AppContainer() {
 const TabNavigator = createBottomTabNavigator(
   {
     "Station List": {
-      screen: ListScreen,
+      screen: StationScreen,
       navigationOptions: {
         tabBarIcon: () => (
           <Ionicons
@@ -142,7 +142,8 @@ const TabNavigator = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Station List"
+    initialRouteName: "Station List",
+    headerMode: 'none'
   }
 );
 

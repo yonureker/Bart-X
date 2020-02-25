@@ -61,7 +61,7 @@ Using React Navigation for the first time, it was challenging to combine multipl
 const TabNavigator = createBottomTabNavigator(
   {
     "Station List": {
-      screen: ListScreen,
+      screen: AllStationsScreen,
       navigationOptions: {
         //...
       }
@@ -96,7 +96,7 @@ const AppContainer = createAppContainer(TabNavigator);
 The app also has a stack navigator to display train details screen after pressing on a station from the list:
 
 ```javascript
-const ListScreen = createStackNavigator(
+const AllStationsScreen = createStackNavigator(
   {
     StationList: StationListScreen,
     StationDetails: StationDetailsScreen

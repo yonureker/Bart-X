@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, View, StatusBar, SafeAreaView, StyleSheet } from "react-native";
 import PinchZoomView from "react-native-pinch-zoom-view";
 
 const WeekAndSatScreen = props => {
@@ -13,5 +13,20 @@ const WeekAndSatScreen = props => {
     </PinchZoomView>
   );
 };
+
+WeekAndSatScreen.navigationOptions = ({ navigation }) => (
+  {
+  headerTitle: 'Hi',
+  headerLeft: () => (
+    <Ionicons
+      name="md-locate"
+      size={25}
+      color="black"
+      style={{ marginLeft: 20 }}
+      onPress={() => navigation.goBack()}
+    />
+  )
+}
+);
 
 export default WeekAndSatScreen;

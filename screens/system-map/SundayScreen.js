@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, StatusBar, SafeAreaView, StyleSheet, View } from "react-native";
 import PinchZoomView from 'react-native-pinch-zoom-view';
 
 const SundayScreen = props => {
