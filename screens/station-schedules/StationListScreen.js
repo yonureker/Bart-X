@@ -14,8 +14,6 @@ import StationList from "../../components/stationList";
 const StationListScreen = props => {
   const userLocation = useSelector(state => state.userLocation)
   const { stations : { station } } = require('../../stations');
-
-  console.log(props);
   
   useEffect(() => {
     calculateDistance();
@@ -58,15 +56,15 @@ const StationListScreen = props => {
 StationListScreen.navigationOptions = ({navigation}) => ( {
   title: "Closest Stations",
   headerMode: 'screen',
-  headerRight: () => (
-    <MaterialIcons
-      name="settings"
-      size={30}
-      color="blue"
-      style={{ marginRight: 20 }}
-      onPress={() => navigation.toggleDrawer()}
-    />
-  )
+  // headerRight: () => (
+  //   <MaterialIcons
+  //     name="settings"
+  //     size={30}
+  //     color="blue"
+  //     style={{ marginRight: 20 }}
+  //     onPress={() => navigation.toggleDrawer()}
+  //   />
+  // )
 });
 
 const styles = StyleSheet.create({

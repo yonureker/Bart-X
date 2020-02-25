@@ -3,15 +3,14 @@ import { createStackNavigator } from "react-navigation-stack";
 import StationListScreen from "./StationListScreen";
 import StationDetailsScreen from "./StationDetailsScreen";
 
-const FavoriteStationsScreen = createStackNavigator(
+const ListScreen = createStackNavigator(
   {
     StationList: StationListScreen,
     StationDetails: StationDetailsScreen
   },
   {
-    initialRouteName: "StationList",
-    headerMode: 'screen',
+    initialRouteName: "StationList"
   }
 );
 
-export default FavoriteStationsScreen;
+export default ListScreen;
