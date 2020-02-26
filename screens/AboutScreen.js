@@ -10,7 +10,7 @@ const AboutScreen = props => {
   return (
     <View style={styles.container}>
       <View>
-        <Text>Version 1.3.5</Text>
+        <Text>Version 1.3.6</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View>
