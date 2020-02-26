@@ -3,7 +3,6 @@ import {
   StyleSheet,
   ImageBackground,
   View,
-  Text,
   Platform
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,12 +12,13 @@ import * as Permissions from "expo-permissions";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import * as firebase from "firebase";
+import { firebaseConfig } from "./config/firebaseConfig";
+import * as SecureStore from 'expo-secure-store';
 
 import LiveMapScreen from "./screens/LiveMapScreen";
-import SystemScreen from "./screens/system-map/SystemScreen";
+import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
 import AboutScreen from "./screens/AboutScreen";
-import { firebaseConfig } from "./config/firebaseConfig";
-import ListScreen from "./screens/station-schedules/ListScreen";
+import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
 
 require("firebase/firestore");
 
@@ -33,7 +33,9 @@ export default function AppContainer() {
     getLocation();
   }, []);
 
-  
+  useEffect(() => {
+    usageCounter();
+  }, []);
 
   const getLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -56,17 +58,27 @@ export default function AppContainer() {
       payload: location
     });
 
-    db.collection("users")
-      .add({
-        location: {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude
-        },
-        timestamp: {
-          created: firebase.firestore.Timestamp.fromDate(new Date())
-        }
-      })
+    // db.collection("users")
+    //   .add({
+    //     location: {
+    //       latitude: location.coords.latitude,
+    //       longitude: location.coords.longitude
+    //     },
+    //     timestamp: {
+    //       created: firebase.firestore.Timestamp.fromDate(new Date())
+    //     }
+    //   })
   };
+
+  const usageCounter = async() => {
+    const usage = await SecureStore.getItemAsync('counter')
+
+    if (usage == null){
+      await SecureStore.setItemAsync('counter', '1')
+    } else {
+      await SecureStore.setItemAsync('counter', String(Number(usage) + 1))
+    }
+  }
 
   if (
     userLocation.coords.latitude !== null &&
@@ -89,7 +101,7 @@ export default function AppContainer() {
 const TabNavigator = createBottomTabNavigator(
   {
     "Station List": {
-      screen: ListScreen,
+      screen: AllStationsNavigator,
       navigationOptions: {
         tabBarIcon: () => (
           <Ionicons
@@ -115,7 +127,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     },
     "System Map": {
-      screen: SystemScreen,
+      screen: SystemMapNavigator,
       navigationOptions: {
         tabBarIcon: () => (
           <Ionicons

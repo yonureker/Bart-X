@@ -7,8 +7,8 @@ module.exports.stations = {
           gtfs_longitude: "-122.271450",
           address: "1245 Broadway",
           city: "Oakland",
-          county: "alameda",
           state: "CA",
+          county: "alameda",
           zipcode: "94612"
         },
         {
