@@ -15,14 +15,11 @@ const Callouts = props => {
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 10000);
+    const intervalId = setInterval(fetchTrainDepartures, 15000);
     return () => clearInterval(intervalId);
   });
 
   const fetchTrainDepartures = () => {
-    // setStationList(responseJson.root.station);
-    // setLastUpdate(responseJson.root.time);)
-    // call BART API
     fetch(
       "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
     )
