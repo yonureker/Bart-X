@@ -110,7 +110,7 @@ const AllStationsScreen = createStackNavigator(
 System Map Tab features a top tab navigator for weekday vs. weekend maps:
 
 ```javascript
-const SystemScreen = createMaterialTopTabNavigator(
+const SystemMapNavigator = createMaterialTopTabNavigator(
   {
     "Weekday & Saturday": {
       screen: WeekAndSatScreen,
