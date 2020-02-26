@@ -124,7 +124,7 @@ const StationDetailsScreen = props => {
     const usage = await SecureStore.getItemAsync("counter");
     const askedforReview = await SecureStore.getItemAsync("askedReview");
 
-    if (usage === "3" && askedforReview === null) {
+    if (usage === "2" && askedforReview === null) {
       StoreReview.requestReview();
       await SecureStore.setItemAsync("askedReview", "true");
     }
