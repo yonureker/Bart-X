@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { View, FlatList, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import * as SecureStore from 'expo-secure-store';
 
 const StationList = props => {
   const stationList = props.stations.sort((a,b) => a.distance > b.distance ? 1 : -1);

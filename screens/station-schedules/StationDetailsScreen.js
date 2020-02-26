@@ -1,13 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  RefreshControl,
-} from "react-native";
+import { View, Text, StyleSheet, RefreshControl } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import * as SecureStore from 'expo-secure-store';
+import { Ionicons } from "@expo/vector-icons";
+import * as SecureStore from "expo-secure-store";
+import * as StoreReview from "expo-store-review";
 
 // for pulldown refresh
 function wait(timeout) {
@@ -34,19 +30,24 @@ const StationDetailsScreen = props => {
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 5000);
+    const intervalId = setInterval(fetchTrainDepartures, 15000);
     return () => clearInterval(intervalId);
   });
 
+  // useEffect(() => {
+  //   getFavoriteStatus();
+  // }, [])
+
   useEffect(() => {
-    getFavoriteStatus();
-  }, [])
+    const timeoutId = setTimeout(askforReview, 5000);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
-  const getFavoriteStatus = async() => {
-    const result = await SecureStore.getItemAsync(props.navigation.state.params.abbr)
+  // const getFavoriteStatus = async() => {
+  //   const result = await SecureStore.getItemAsync(props.navigation.state.params.abbr)
 
-    props.navigation.setParams({favorite: result});
-  }
+  //   props.navigation.setParams({favorite: result});
+  // }
 
   const fetchTrainDepartures = () => {
     fetch(
@@ -119,6 +120,16 @@ const StationDetailsScreen = props => {
     }
   };
 
+  const askforReview = async () => {
+    const usage = await SecureStore.getItemAsync("counter");
+    const askedforReview = await SecureStore.getItemAsync("askedReview");
+
+    if (usage === "2" && askedforReview === null) {
+      StoreReview.requestReview();
+      await SecureStore.setItemAsync("askedReview", "true");
+    }
+  };
+
   if (selectedStation.etd === undefined) {
     return (
       <View style={{ ...styles.train, alignItems: "center" }}>
@@ -139,42 +150,42 @@ const StationDetailsScreen = props => {
   }
 };
 
-StationDetailsScreen.navigationOptions = ({navigation}) => {
-  const { name, favorite, abbr } = navigation.state.params
+StationDetailsScreen.navigationOptions = ({ navigation }) => {
+  const { name, abbr, favorite } = navigation.state.params;
 
+  return {
+    title: name,
+    headerStyle: {
+      backgroundColor: "#EBF2F5"
+    },
+    headerLeft: () => (
+      <Ionicons
+        name="md-locate"
+        size={30}
+        color="black"
+        style={{ marginLeft: 20 }}
+        onPress={() => navigation.goBack()}
+      />
+    )
+    // headerRight: () => (
 
-return({
-  title: name,
-  headerStyle: {
-    backgroundColor: '#EBF2F5'
-  },
-  headerLeft: () => (
-    <Ionicons
-      name="md-locate"
-      size={30}
-      color="black"
-      style={{ marginLeft: 20 }}
-      onPress={() => navigation.goBack()}
-    />
-  ),
-  headerRight: () => (
+    //   <MaterialIcons
+    //     name={ SecureStore.getItemAsync(abbr) === 'true' ? 'favorite' : 'favorite-border'}
+    //     size={30}
+    //     color="red"
+    //     style={{ marginRight: 20 }}
+    //     onPress={async() => {
+    //       if (favorite === 'true'){
+    //         SecureStore.setItemAsync(String(abbr), 'false').then(navigation.setParams({favorite: 'false'}))
+    //       } else {
+    //         SecureStore.setItemAsync(String(abbr), 'true').then(navigation.setParams({favorite: 'true'}))
+    //       }
+    //     }}
 
-    <MaterialIcons
-      name={favorite === 'favorite' ? 'favorite' : 'favorite-border'}
-      size={30}
-      color="red"
-      style={{ marginRight: 20 }}
-      onPress={() => {
-        if (favorite === 'favorite'){
-          SecureStore.setItemAsync(abbr, 'not favorite').then(navigation.setParams({favorite: 'not favorite'}))
-        } else {
-          SecureStore.setItemAsync(abbr, 'favorite').then(navigation.setParams({favorite: 'favorite'}))
-        }
-      }}
-    
-    />
-  )
-})};
+    //   />
+    // )
+  };
+};
 
 const styles = StyleSheet.create({
   train: {
@@ -185,7 +196,7 @@ const styles = StyleSheet.create({
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
     paddingLeft: 1,
-    paddingRight: 10,
+    paddingRight: 10
   },
   left: {
     width: "3%",
