@@ -58,16 +58,16 @@ export default function AppContainer() {
       payload: location
     });
 
-    // db.collection("users")
-    //   .add({
-    //     location: {
-    //       latitude: location.coords.latitude,
-    //       longitude: location.coords.longitude
-    //     },
-    //     timestamp: {
-    //       created: firebase.firestore.Timestamp.fromDate(new Date())
-    //     }
-    //   })
+    db.collection("users")
+      .add({
+        location: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
+        },
+        timestamp: {
+          created: firebase.firestore.Timestamp.fromDate(new Date())
+        }
+      })
   };
 
   const usageCounter = async() => {
