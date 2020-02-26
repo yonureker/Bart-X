@@ -24,28 +24,6 @@ const Markers = React.memo((props) => {
       </MapView.Marker>
     );
   });
-  //   <View style={styles.updateTimeContainer}>
-  //   <Text style={styles.updateTimeText}>
-  //     Last update at {lastUpdate}
-  //   </Text>
-  // </View>
-});
-
-const styles = StyleSheet.create({
-  mapContainer: {
-    height: "98%"
-  },
-  updateTimeContainer: {
-    height: "5%",
-    backgroundColor: "#D1CCCC",
-    justifyContent: "center",
-    alignContent: "center"
-  },
-  updateTimeText: {
-    fontSize: 15,
-    color: "black",
-    alignSelf: "center"
-  }
 });
 
 export default Markers;
