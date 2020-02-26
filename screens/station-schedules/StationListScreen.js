@@ -1,20 +1,16 @@
 import React, { useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  StatusBar,
-  SafeAreaView,
-} from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import StationList from "../../components/stationList";
 
 const StationListScreen = props => {
-  const userLocation = useSelector(state => state.userLocation)
-  const { stations : { station } } = require('../../stations');
-  
+  const userLocation = useSelector(state => state.userLocation);
+  const {
+    stations: { station }
+  } = require("../../stations");
+
   useEffect(() => {
     calculateDistance();
   });
@@ -40,31 +36,23 @@ const StationListScreen = props => {
     });
   };
 
-    return (
-      <View style={styles.container}>
-        <View style={{ flex: 1, width: "100%" }}>
-          <StationList
-            style={{flex: 1}}
-            navigate={props.navigation.navigate}
-            stations={calculateDistance()}
-          />
-        </View>
+  return (
+    <View style={styles.container}>
+      <StatusBar />
+      <View style={{ flex: 1, width: "100%" }}>
+        <StationList
+          style={{ flex: 1 }}
+          navigate={props.navigation.navigate}
+          stations={calculateDistance()}
+        />
       </View>
-    )
+    </View>
+  );
 };
 
-StationListScreen.navigationOptions = ({navigation}) => ( {
+StationListScreen.navigationOptions = ({ navigation }) => ({
   title: "Closest Stations",
-  headerMode: 'screen',
-  // headerRight: () => (
-  //   <MaterialIcons
-  //     name="settings"
-  //     size={30}
-  //     color="blue"
-  //     style={{ marginRight: 20 }}
-  //     onPress={() => navigation.toggleDrawer()}
-  //   />
-  // )
+  headerMode: "screen"
 });
 
 const styles = StyleSheet.create({
