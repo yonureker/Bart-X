@@ -155,9 +155,7 @@ StationDetailsScreen.navigationOptions = ({ navigation }) => {
 
   return {
     title: name,
-    headerStyle: {
-      backgroundColor: "#EBF2F5"
-    },
+    headerForceInset: { top: 'never', bottom: 'never' },
     headerLeft: () => (
       <Ionicons
         name="md-locate"
