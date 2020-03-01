@@ -9,7 +9,8 @@ const AllStationsNavigator = createStackNavigator(
     StationDetails: StationDetailsScreen
   },
   {
-    initialRouteName: "StationList"
+    initialRouteName: "StationList",
+    headerMode: 'screen',
   }
 );
 
