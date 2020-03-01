@@ -1,6 +1,6 @@
 import React from "react";
 import MapView from "react-native-maps";
-import { StyleSheet, StatusBar, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 
 import Markers from "../components/live-map/markers";
@@ -15,7 +15,6 @@ const LiveMapScreen = React.memo(props => {
   // We only need to update Marker callouts after fetching data
   return (
     <View style={styles.container}>
-      <StatusBar />
       <MapView
         style={{ flex: 1 }}
         region={{
