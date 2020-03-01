@@ -7,6 +7,8 @@ import { enableScreens } from "react-native-screens";
 
 import rootReducer from "./reducers/rootReducer";
 import AppContainer from './AppContainer';
+import { StatusBar } from "react-native";
+import {SafeAreaView} from 'react-navigation'
 
 
 export default function App() {
@@ -47,7 +49,12 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <SafeAreaView style={{
+          flex: 1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+        }}>
+          <StatusBar />
       <AppContainer />
+      </SafeAreaView>
     </Provider>
   );
 }
