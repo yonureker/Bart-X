@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 
@@ -38,7 +38,6 @@ const StationListScreen = props => {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
       <View style={{ flex: 1, width: "100%" }}>
         <StationList
           style={{ flex: 1 }}
@@ -52,11 +51,12 @@ const StationListScreen = props => {
 
 StationListScreen.navigationOptions = ({ navigation }) => ({
   title: "Closest Stations",
-  headerMode: "screen"
+  headerForceInset: { top: 'never', bottom: 'never' }
+  // headerMode: "screen"
 });
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" }
+  container: { flex: 1, justifyContent: "center", alignItems: "center"}
 });
 
 export default StationListScreen;
