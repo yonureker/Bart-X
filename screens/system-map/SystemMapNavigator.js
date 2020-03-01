@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, View, SafeAreaView } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabBar
@@ -31,14 +31,13 @@ const SystemMapNavigator = createMaterialTopTabNavigator(
 function SafeAreaMaterialTopTabBar(props) {
   return (
     <View>
-      <StatusBar />
-      <SafeAreaView
-        style={{
+      {/* <SafeAreaView */}
+        {/* style={{
           paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
         }}
-      >
+      > */}
         <MaterialTopTabBar {...props} />
-      </SafeAreaView>
+      {/* </SafeAreaView> */}
     </View>
   );
 }
