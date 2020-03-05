@@ -42,7 +42,7 @@ const Callouts = props => {
           style={styles.calloutContainer}
         >
           <View style={styles.calloutHeader}>
-            <Text style={{ fontWeight: "bold" }}>{stationName}</Text>
+            <Text style={styles.stationName}>{stationName}</Text>
           </View>
           <View style={styles.calloutContent}>
             <StationCallout key={stationAbbr} station={trainDepartures.find(item => (item.abbr == stationAbbr))} />
@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginBottom: 8
+  },
+  stationName: {
+    fontWeight: "bold"
   }
 })
 

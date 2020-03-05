@@ -38,7 +38,7 @@ const StationListScreen = props => {
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1, width: "100%" }}>
+      <View style={{ flex: 1, width: "100%", backgroundColor: 'black' }}>
         <StationList
           style={{ flex: 1 }}
           navigate={props.navigation.navigate}

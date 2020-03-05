@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Linking } from "react-native";
+import { View, Text, StyleSheet, Linking, StatusBar } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AboutScreen = props => {
@@ -12,7 +12,7 @@ const AboutScreen = props => {
       <View>
         <Text>Version 1.3.7</Text>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View style={styles.content}>
         <View>
           <Text>Built with React Native</Text>
         </View>
@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center"
+  },
+  content: {
+    flexDirection: "row",
     alignItems: "center"
   },
   author: {
