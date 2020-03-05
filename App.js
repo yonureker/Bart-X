@@ -7,8 +7,9 @@ import { enableScreens } from "react-native-screens";
 
 import rootReducer from "./reducers/rootReducer";
 import AppContainer from './AppContainer';
-import { StatusBar } from "react-native";
-import {SafeAreaView} from 'react-navigation'
+import { StatusBar, StyleSheet } from "react-native";
+import {SafeAreaView} from 'react-navigation';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
   enableScreens();
 
   const store = createStore(rootReducer);
-
+  const colorScheme = useColorScheme();
   // variable to check if image caching is ready
   const [isReady, setIsReady] = useState(false);
 
@@ -47,14 +48,27 @@ export default function App() {
     );
   }
 
+  const statusBarStyle = colorScheme === 'dark' ? 'light-content' : 'dark-content'
+
   return (
     <Provider store={store}>
-      <SafeAreaView style={{
-          flex: 1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-        }}>
-          <StatusBar />
+      <AppearanceProvider>
+      <StatusBar barStyle={statusBarStyle} />
+      <SafeAreaView style={styles.container}>
       <AppContainer />
       </SafeAreaView>
+      </AppearanceProvider>
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    backgroundColor: 'black'
+  },
+  darkThemeContainer: {
+    backgroundColor: 'black'
+  }
+})
