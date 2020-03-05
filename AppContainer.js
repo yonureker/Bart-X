@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  ImageBackground,
-  View,
-  Platform
-} from "react-native";
+import { StyleSheet, ImageBackground, View, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { createAppContainer } from "react-navigation";
 import * as Location from "expo-location";
@@ -13,7 +8,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import * as firebase from "firebase";
 import { firebaseConfig } from "./config/firebaseConfig";
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
 import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
@@ -58,27 +53,27 @@ export default function AppContainer() {
       payload: location
     });
 
-    db.collection("users")
-      .add({
-        location: {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude
-        },
-        timestamp: {
-          created: firebase.firestore.Timestamp.fromDate(new Date())
-        }
-      })
+    // db.collection("users")
+    //   .add({
+    //     location: {
+    //       latitude: location.coords.latitude,
+    //       longitude: location.coords.longitude
+    //     },
+    //     timestamp: {
+    //       created: firebase.firestore.Timestamp.fromDate(new Date())
+    //     }
+    //   })
   };
 
-  const usageCounter = async() => {
-    const usage = await SecureStore.getItemAsync('counter')
+  const usageCounter = async () => {
+    const usage = await SecureStore.getItemAsync("counter");
 
-    if (usage == null){
-      await SecureStore.setItemAsync('counter', '1')
+    if (usage == null) {
+      await SecureStore.setItemAsync("counter", "1");
     } else {
-      await SecureStore.setItemAsync('counter', String(Number(usage) + 1))
+      await SecureStore.setItemAsync("counter", String(Number(usage) + 1));
     }
-  }
+  };
 
   if (
     userLocation.coords.latitude !== null &&
@@ -87,12 +82,10 @@ export default function AppContainer() {
     return <AppWrapper />;
   } else {
     return (
-      <View>
-        <ImageBackground
-          source={require("./assets/loading.png")}
-          style={{ width: "100%", height: "100%" }}
-        ></ImageBackground>
-      </View>
+      <ImageBackground
+        source={require("./assets/loading.png")}
+        style={styles.imageBackground}
+      ></ImageBackground>
     );
   }
 }
@@ -155,7 +148,7 @@ const TabNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: "Station List",
-    headerMode: 'none'
+    headerMode: "none"
   }
 );
 
