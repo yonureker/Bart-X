@@ -6,11 +6,10 @@ import { createStore } from "redux";
 import { enableScreens } from "react-native-screens";
 
 import rootReducer from "./reducers/rootReducer";
-import AppContainer from './AppContainer';
+import AppContainer from "./AppContainer";
 import { StatusBar, StyleSheet } from "react-native";
-import {SafeAreaView} from 'react-navigation';
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
-
+import { SafeAreaView } from "react-navigation";
+import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
@@ -48,15 +47,16 @@ export default function App() {
     );
   }
 
-  const statusBarStyle = colorScheme === 'dark' ? 'light-content' : 'dark-content'
+  const statusBarStyle =
+    colorScheme === "dark" ? "light-content" : "dark-content";
 
   return (
     <Provider store={store}>
       <AppearanceProvider>
-      <StatusBar barStyle={statusBarStyle} />
-      <SafeAreaView style={styles.container}>
-      <AppContainer />
-      </SafeAreaView>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}>
+            <AppContainer />
+        </SafeAreaView>
       </AppearanceProvider>
     </Provider>
   );
@@ -66,9 +66,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    backgroundColor: 'black'
   },
   darkThemeContainer: {
-    backgroundColor: 'black'
+    backgroundColor: "black"
   }
-})
+});

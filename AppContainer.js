@@ -1,24 +1,26 @@
 import React, { useEffect } from "react";
-import { StyleSheet, ImageBackground, View, Platform } from "react-native";
+import { StyleSheet, ImageBackground, Platform, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { createAppContainer } from "react-navigation";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "react-navigation-tabs";
 import * as firebase from "firebase";
-import { firebaseConfig } from "./config/firebaseConfig";
 import * as SecureStore from "expo-secure-store";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import LiveMapScreen from "./screens/LiveMapScreen";
 import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
 import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
+import { firebaseConfig } from "./config/firebaseConfig";
 
 require("firebase/firestore");
 
 firebase.initializeApp(firebaseConfig);
 let db = firebase.firestore();
+
+const Tab = createBottomTabNavigator();
 
 export default function AppContainer() {
   const dispatch = useDispatch();
@@ -75,11 +77,74 @@ export default function AppContainer() {
     }
   };
 
+  const Tab = createBottomTabNavigator();
+
   if (
     userLocation.coords.latitude !== null &&
     userLocation.coords.latitude !== undefined
   ) {
-    return <AppWrapper />;
+    return (
+      <NavigationContainer>
+      <Tab.Navigator initialRouteName="Station List">
+        <Tab.Screen
+          name="Station List"
+          component={AllStationsNavigator}
+          options={{
+            tabBarIcon: () => (
+              <Ionicons
+                name="md-list"
+                size={32}
+                color="black"
+                style={styles.tabIcon}
+              />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="Live Map"
+          component={LiveMapScreen}
+          options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons
+                name="google-maps"
+                size={32}
+                color="black"
+                style={styles.tabIcon}
+              />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="System Map"
+          component={SystemMapNavigator}
+          options={{
+            tabBarIcon: () => (
+              <Ionicons
+                name="ios-map"
+                size={32}
+                color="black"
+                style={styles.tabIcon}
+              />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="About"
+          component={AboutScreen}
+          options={{
+            tabBarIcon: () => (
+              <Ionicons
+                name="ios-information-circle"
+                size={32}
+                color="black"
+                style={styles.tabIcon}
+              />
+            )
+          }}
+        />
+      </Tab.Navigator>
+      </NavigationContainer>
+    );
   } else {
     return (
       <ImageBackground
@@ -89,68 +154,6 @@ export default function AppContainer() {
     );
   }
 }
-
-// Bottom Tab Navigator Setup
-const TabNavigator = createBottomTabNavigator(
-  {
-    "Station List": {
-      screen: AllStationsNavigator,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <Ionicons
-            name="md-list"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    },
-    "Live Map": {
-      screen: LiveMapScreen,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <MaterialCommunityIcons
-            name="google-maps"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    },
-    "System Map": {
-      screen: SystemMapNavigator,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <Ionicons
-            name="ios-map"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    },
-    About: {
-      screen: AboutScreen,
-      navigationOptions: {
-        tabBarIcon: () => (
-          <Ionicons
-            name="ios-information-circle"
-            size={32}
-            color="black"
-            style={styles.tabIcon}
-          />
-        )
-      }
-    }
-  },
-  {
-    initialRouteName: "Station List",
-    headerMode: "none"
-  }
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -164,5 +167,3 @@ const styles = StyleSheet.create({
     marginTop: 3
   }
 });
-
-const AppWrapper = createAppContainer(TabNavigator);

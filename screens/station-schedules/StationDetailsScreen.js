@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
 import * as StoreReview from "expo-store-review";
+import { useColorScheme } from "react-native-appearance";
 
 // for pulldown refresh
 function wait(timeout) {
@@ -16,6 +17,7 @@ const StationDetailsScreen = props => {
   const [refreshing, setRefreshing] = useState(false);
   const [pullDownView, setPullDownView] = useState(true);
   const [selectedStation, setSelectedStation] = useState(false);
+  const colorScheme = useColorScheme();
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -51,7 +53,7 @@ const StationDetailsScreen = props => {
 
   const fetchTrainDepartures = () => {
     fetch(
-      `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${props.navigation.state.params.abbr}&key=MW9S-E7SL-26DU-VV8V&json=y`
+      `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${props.route.params.abbr}&key=MW9S-E7SL-26DU-VV8V&json=y`
     )
       .then(response => response.json())
       .then(responseJson => setSelectedStation(responseJson.root.station[0]))
@@ -85,24 +87,24 @@ const StationDetailsScreen = props => {
 
     return mappedStation.map((train, index) => {
       return (
-        <View style={styles.train} key={index}>
+        <View style={[styles.train, backgroundStyle]} key={index}>
           <View style={{ ...styles.left, backgroundColor: train.color }}></View>
           <View style={styles.mid}>
             <View>
-              <Text style={{ fontSize: 20 }}>{train.destination}</Text>
+              <Text style={[styles.destinationText, textStyle]}>{train.destination}</Text>
             </View>
             <View>
-              <Text style={{ color: "#A2AEB1" }}>
+              <Text style={[styles.platformText, textStyle]}>
                 {train.length} cars | Platform {train.platform}
               </Text>
             </View>
           </View>
           <View style={styles.right}>
             <View>
-              <Text style={{ fontSize: 20 }}>{train.minutes}</Text>
+              <Text style={[styles.minutesText, textStyle]}>{train.minutes}</Text>
             </View>
             <View>
-              <Text style={{ fontSize: 14 }}>min</Text>
+              <Text style={{ fontSize: 14, ...textStyle }}>min</Text>
             </View>
           </View>
         </View>
@@ -130,6 +132,9 @@ const StationDetailsScreen = props => {
     }
   };
 
+  const backgroundStyle = colorScheme === "dark" ? styles.darkBackground : null;
+  const textStyle = colorScheme === "dark" ? styles.lightText : null;
+
   if (selectedStation.etd === undefined) {
     return (
       <View style={{ ...styles.train, alignItems: "center" }}>
@@ -139,6 +144,7 @@ const StationDetailsScreen = props => {
   } else {
     return (
       <ScrollView
+        style={backgroundStyle}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -150,40 +156,40 @@ const StationDetailsScreen = props => {
   }
 };
 
-StationDetailsScreen.navigationOptions = ({ navigation }) => {
-  const { name, abbr, favorite } = navigation.state.params;
+// StationDetailsScreen.navigationOptions = ({ navigation }) => {
+//   const { name, abbr, favorite } = navigation.state.params;
 
-  return {
-    title: name,
-    headerForceInset: { top: 'never', bottom: 'never' },
-    headerLeft: () => (
-      <Ionicons
-        name="md-locate"
-        size={30}
-        color="black"
-        style={{ marginLeft: 20 }}
-        onPress={() => navigation.goBack()}
-      />
-    )
-    // headerRight: () => (
-
-    //   <MaterialIcons
-    //     name={ SecureStore.getItemAsync(abbr) === 'true' ? 'favorite' : 'favorite-border'}
+//   return {
+//     title: name,
+//     headerForceInset: { top: "never", bottom: "never" },
+    // headerLeft: () => (
+    //   <Ionicons
+    //     name="md-locate"
     //     size={30}
-    //     color="red"
-    //     style={{ marginRight: 20 }}
-    //     onPress={async() => {
-    //       if (favorite === 'true'){
-    //         SecureStore.setItemAsync(String(abbr), 'false').then(navigation.setParams({favorite: 'false'}))
-    //       } else {
-    //         SecureStore.setItemAsync(String(abbr), 'true').then(navigation.setParams({favorite: 'true'}))
-    //       }
-    //     }}
-
+    //     color="black"
+    //     style={{ marginLeft: 20 }}
+    //     onPress={() => navigation.goBack()}
     //   />
     // )
-  };
-};
+//     // headerRight: () => (
+
+//     //   <MaterialIcons
+//     //     name={ SecureStore.getItemAsync(abbr) === 'true' ? 'favorite' : 'favorite-border'}
+//     //     size={30}
+//     //     color="red"
+//     //     style={{ marginRight: 20 }}
+//     //     onPress={async() => {
+//     //       if (favorite === 'true'){
+//     //         SecureStore.setItemAsync(String(abbr), 'false').then(navigation.setParams({favorite: 'false'}))
+//     //       } else {
+//     //         SecureStore.setItemAsync(String(abbr), 'true').then(navigation.setParams({favorite: 'true'}))
+//     //       }
+//     //     }}
+
+//     //   />
+//     // )
+//   };
+// };
 
 const styles = StyleSheet.create({
   train: {
@@ -223,6 +229,21 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10
+  },
+  destinationText: {
+    fontSize: 20
+  },
+  platformText: {
+    color: "#A2AEB1"
+  },
+  minutesText: {
+    fontSize: 20
+  },
+  darkBackground: {
+    backgroundColor: "black"
+  },
+  lightText: {
+    color: 'white'
   }
 });
 
