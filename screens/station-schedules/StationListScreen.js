@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
+import { useColorScheme } from 'react-native-appearance';
 
 import StationList from "../../components/stationList";
 
 const StationListScreen = props => {
+  const colorScheme = useColorScheme();
   const userLocation = useSelector(state => state.userLocation);
   const {
     stations: { station }
@@ -36,11 +38,13 @@ const StationListScreen = props => {
     });
   };
 
+  const containerStyle = colorScheme === 'dark' ? styles.darkContainer : styles.lightContainer;
+
   return (
-    <View style={styles.container}>
-      <View style={{ flex: 1, width: "100%", backgroundColor: 'black' }}>
+    <View style={[styles.container, containerStyle]}>
+      <View style={styles.listContainer}>
         <StationList
-          style={{ flex: 1 }}
+          style={{flex: 1}}
           navigate={props.navigation.navigate}
           stations={calculateDistance()}
         />
@@ -49,14 +53,20 @@ const StationListScreen = props => {
   );
 };
 
-StationListScreen.navigationOptions = ({ navigation }) => ({
-  title: "Closest Stations",
-  headerForceInset: { top: 'never', bottom: 'never' }
-  // headerMode: "screen"
-});
+
+
+// StationListScreen.navigationOptions = ({ navigation }) => (
+//   {
+//   title: "Closest Stations",
+//   headerForceInset: { top: "never", bottom: "never" }
+//   }
+// );
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center"}
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  listContainer: { flex: 1, width: "100%" },
+  lightContainer: {backgroundColor: 'white'},
+  darkContainer: {backgroundColor: 'black'}
 });
 
 export default StationListScreen;
