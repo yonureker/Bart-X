@@ -3,10 +3,13 @@ import StationDetailsScreen from "./StationDetailsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
+import { useColorScheme } from "react-native-appearance";
 
 const Stack = createStackNavigator();
 
 export default function AllStationsNavigator() {
+  const scheme = useColorScheme();
+
   return (
     <Stack.Navigator
       initialRouteName="StationList"
@@ -18,11 +21,12 @@ export default function AllStationsNavigator() {
         component={StationDetailsScreen}
         options={({ route, navigation }) => ({
           title: route.params.name,
+          headerForceInset: { top: "never", bottom: "never" },
           headerLeft: () => (
             <Ionicons
               name="md-locate"
               size={30}
-              color="black"
+              color={scheme === "dark" ? "white" : "black"}
               style={{ marginLeft: 20 }}
               onPress={() => navigation.goBack()}
             />
@@ -31,4 +35,4 @@ export default function AllStationsNavigator() {
       />
     </Stack.Navigator>
   );
-};
+}

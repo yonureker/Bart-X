@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, Text, StyleSheet, RefreshControl } from "react-native";
+import { View, Text, StyleSheet, RefreshControl, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
@@ -32,7 +32,7 @@ const StationDetailsScreen = props => {
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 15000);
+    const intervalId = setInterval(fetchTrainDepartures, 10000);
     return () => clearInterval(intervalId);
   });
 
@@ -91,7 +91,9 @@ const StationDetailsScreen = props => {
           <View style={{ ...styles.left, backgroundColor: train.color }}></View>
           <View style={styles.mid}>
             <View>
-              <Text style={[styles.destinationText, textStyle]}>{train.destination}</Text>
+              <Text style={[styles.destinationText, textStyle]}>
+                {train.destination}
+              </Text>
             </View>
             <View>
               <Text style={[styles.platformText, textStyle]}>
@@ -101,7 +103,9 @@ const StationDetailsScreen = props => {
           </View>
           <View style={styles.right}>
             <View>
-              <Text style={[styles.minutesText, textStyle]}>{train.minutes}</Text>
+              <Text style={[styles.minutesText, textStyle]}>
+                {train.minutes}
+              </Text>
             </View>
             <View>
               <Text style={{ fontSize: 14, ...textStyle }}>min</Text>
@@ -126,19 +130,20 @@ const StationDetailsScreen = props => {
     const usage = await SecureStore.getItemAsync("counter");
     const askedforReview = await SecureStore.getItemAsync("askedReview");
 
-    if (usage === "2" && askedforReview === null) {
+    if (usage === "5" && askedforReview === null) {
       StoreReview.requestReview();
       await SecureStore.setItemAsync("askedReview", "true");
     }
   };
 
-  const backgroundStyle = colorScheme === "dark" ? styles.darkBackground : null;
+  const backgroundStyle =
+    colorScheme === "dark" ? styles.darkBackground : styles.lightBackground;
   const textStyle = colorScheme === "dark" ? styles.lightText : null;
 
   if (selectedStation.etd === undefined) {
     return (
       <View style={{ ...styles.train, alignItems: "center" }}>
-        <Text>No trains available!</Text>
+        <Text style={textStyle}>No trains available!</Text>
       </View>
     );
   } else {
@@ -162,15 +167,15 @@ const StationDetailsScreen = props => {
 //   return {
 //     title: name,
 //     headerForceInset: { top: "never", bottom: "never" },
-    // headerLeft: () => (
-    //   <Ionicons
-    //     name="md-locate"
-    //     size={30}
-    //     color="black"
-    //     style={{ marginLeft: 20 }}
-    //     onPress={() => navigation.goBack()}
-    //   />
-    // )
+// headerLeft: () => (
+//   <Ionicons
+//     name="md-locate"
+//     size={30}
+//     color="black"
+//     style={{ marginLeft: 20 }}
+//     onPress={() => navigation.goBack()}
+//   />
+// )
 //     // headerRight: () => (
 
 //     //   <MaterialIcons
@@ -242,8 +247,11 @@ const styles = StyleSheet.create({
   darkBackground: {
     backgroundColor: "black"
   },
+  lightBackground: {
+    backgroundColor: "white"
+  },
   lightText: {
-    color: 'white'
+    color: "white"
   }
 });
 

@@ -1,6 +1,6 @@
 import React from "react";
 import MapView from "react-native-maps";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import { useSelector } from "react-redux";
 
 import Markers from "../components/live-map/markers";
@@ -9,7 +9,8 @@ const LiveMapScreen = React.memo(props => {
   const { latitude, longitude } = useSelector(
     state => state.userLocation.coords
   );
-  
+
+  const customMap = require("../customMap.json");
 
   // The MapView and Markers are static
   // We only need to update Marker callouts after fetching data
@@ -27,6 +28,7 @@ const LiveMapScreen = React.memo(props => {
         provider={null}
         loadingEnabled={true}
         mapType={"standard"}
+        customMapStyle={Platform.OS === "android" ? customMap : null}
         showsPointsOfInterest={false}
         showsBuildings={false}
         showsTraffic={false}

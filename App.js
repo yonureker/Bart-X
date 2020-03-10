@@ -7,7 +7,7 @@ import { enableScreens } from "react-native-screens";
 
 import rootReducer from "./reducers/rootReducer";
 import AppContainer from "./AppContainer";
-import { StatusBar, StyleSheet } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
@@ -46,16 +46,17 @@ export default function App() {
       />
     );
   }
-
   const statusBarStyle =
     colorScheme === "dark" ? "light-content" : "dark-content";
+  const darkThemeContainer =
+    colorScheme === "dark" ? styles.darkThemeContainer : null;
 
   return (
     <Provider store={store}>
       <AppearanceProvider>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView style={styles.container}>
-            <AppContainer />
+        <StatusBar barStyle={statusBarStyle} />
+        <SafeAreaView style={[styles.container, darkThemeContainer]}>
+          <AppContainer />
         </SafeAreaView>
       </AppearanceProvider>
     </Provider>
@@ -64,8 +65,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    flex: 1
   },
   darkThemeContainer: {
     backgroundColor: "black"

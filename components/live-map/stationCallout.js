@@ -1,10 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-const StationCallout = (props) => {
-  if (props.station !== undefined){
-  return(
-    props.station.etd.map((route, index) => {
+const StationCallout = props => {
+  if (props.station !== undefined) {
+    return props.station.etd.map((route, index) => {
       const approachingTrains = function() {
         trainText = `${route.destination} in`;
 
@@ -29,14 +28,14 @@ const StationCallout = (props) => {
         return <Text>{trainText}</Text>;
       };
 
-      return <View key={index}>
-      {approachingTrains()}
-      </View>;
-    })
-  )} else {
-    return <View>
-      <Text>No trains!</Text>
-    </View>
+      return <View key={index}>{approachingTrains()}</View>;
+    });
+  } else {
+    return (
+      <View>
+        <Text>No trains!</Text>
+      </View>
+    );
   }
 };
 

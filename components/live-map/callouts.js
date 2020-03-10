@@ -1,13 +1,13 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-import StationCallout from './stationCallout';
+import StationCallout from "./stationCallout";
 
 const Callouts = props => {
-  const trainDepartures = useSelector(state => state.trainDepartures)
-  const {stationName, stationAbbr } = props;
+  const trainDepartures = useSelector(state => state.trainDepartures);
+  const { stationName, stationAbbr } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,24 +37,27 @@ const Callouts = props => {
 
   return (
     <MapView.Callout
+      key={stationAbbr}
+      tooltip={true}
+      style={styles.calloutContainer}
+    >
+      <View style={styles.calloutHeader}>
+        <Text style={styles.stationName}>{stationName}</Text>
+      </View>
+      <View style={styles.calloutContent}>
+        <StationCallout
           key={stationAbbr}
-          tooltip={true}
-          style={styles.calloutContainer}
-        >
-          <View style={styles.calloutHeader}>
-            <Text style={styles.stationName}>{stationName}</Text>
-          </View>
-          <View style={styles.calloutContent}>
-            <StationCallout key={stationAbbr} station={trainDepartures.find(item => (item.abbr == stationAbbr))} />
-          </View>
-        </MapView.Callout>
+          station={trainDepartures.find(item => item.abbr == stationAbbr)}
+        />
+      </View>
+    </MapView.Callout>
   );
 };
 
 const styles = StyleSheet.create({
   calloutContainer: {
-    backgroundColor: '#ffffff',
-    borderColor: 'gray',
+    backgroundColor: "#ffffff",
+    borderColor: "gray",
     borderRadius: 15,
     padding: 5
   },
@@ -73,6 +76,6 @@ const styles = StyleSheet.create({
   stationName: {
     fontWeight: "bold"
   }
-})
+});
 
 export default Callouts;

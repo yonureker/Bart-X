@@ -1,27 +1,32 @@
 import React from "react";
 import { View, Text, StyleSheet, Linking, StatusBar } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
 const AboutScreen = props => {
+  const scheme = useColorScheme();
+
   const handlePress = () => {
     Linking.openURL("https://www.linkedin.com/in/onureker/");
   };
 
+  const fontColor = scheme === "dark" ? styles.darkFont : null;
+
   return (
     <View style={styles.container}>
       <View>
-        <Text>Version 1.3.7</Text>
+        <Text style={[styles.font, fontColor]}>Version 1.3.7</Text>
       </View>
       <View style={styles.content}>
         <View>
-          <Text>Built with React Native</Text>
+          <Text style={[styles.font, fontColor]}>Built with React Native</Text>
         </View>
         <View>
           <MaterialCommunityIcons name="react" size={25} color="#61DBFB" />
         </View>
       </View>
       <View style={styles.author}>
-        <Text>
+        <Text style={[styles.font, fontColor]}>
           Created by{" "}
           <Text
             style={{ textDecorationLine: "underline" }}
@@ -47,6 +52,9 @@ const styles = StyleSheet.create({
   },
   author: {
     marginTop: 50
+  },
+  darkFont: {
+    color: "white"
   }
 });
 

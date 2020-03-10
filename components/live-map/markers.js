@@ -2,11 +2,13 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 
-import Callouts from './callouts';
-import stationLogo from '../../assets/station.png';
+import Callouts from "./callouts";
+import stationLogo from "../../assets/station.png";
 
-const Markers = React.memo((props) => {
-  const { stations : { station } } = require('../../stations');
+const Markers = React.memo(props => {
+  const {
+    stations: { station }
+  } = require("../../stations");
 
   return station.map((trainStation, index) => {
     return (
@@ -20,7 +22,11 @@ const Markers = React.memo((props) => {
         zIndex={100}
         tracksInfoWindowChanges={true}
       >
-      <Callouts key={trainStation.abbr} stationName={trainStation.name} stationAbbr={trainStation.abbr} />
+        <Callouts
+          key={trainStation.abbr}
+          stationName={trainStation.name}
+          stationAbbr={trainStation.abbr}
+        />
       </MapView.Marker>
     );
   });
