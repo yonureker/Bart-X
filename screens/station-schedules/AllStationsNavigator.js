@@ -2,7 +2,7 @@ import StationListScreen from "./StationListScreen";
 import StationDetailsScreen from "./StationDetailsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
 
@@ -10,6 +10,35 @@ const Stack = createStackNavigator();
 
 export default function AllStationsNavigator(props) {
   const scheme = useColorScheme();
+  const {
+    stations: { station }
+  } = require("../../stations");
+  const [favorite, setFavorite] = useState({});
+
+  useEffect(() => {
+    getFavoriteStatus();
+  }, []);
+
+  const getFavoriteStatus = () => {
+    station.map(async item => {
+      const abbr = item.abbr;
+      const status = await SecureStore.getItemAsync(abbr);
+
+      setFavorite(prevState => ({ ...prevState, [abbr]: status }));
+    });
+  };
+
+  const updateFavoriteStatus = async abbr => {
+    const status = await SecureStore.getItemAsync(abbr);
+
+    if (status !== "true") {
+      await SecureStore.setItemAsync(abbr, "true");
+      setFavorite({ ...favorite, [abbr]: "true" });
+    } else {
+      await SecureStore.setItemAsync(abbr, "false");
+      setFavorite({ ...favorite, [abbr]: "false" });
+    }
+  };
 
   return (
     <Stack.Navigator
@@ -35,13 +64,14 @@ export default function AllStationsNavigator(props) {
           headerRight: () => (
             <MaterialIcons
               name={
-                SecureStore.getItemAsync(route.params.abbr) !== "true"
+                favorite[route.params.abbr] === "true"
                   ? "favorite"
                   : "favorite-border"
               }
               size={30}
               color="red"
               style={{ marginRight: 20 }}
+              onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
           )
         })}
