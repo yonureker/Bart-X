@@ -59,17 +59,6 @@ export default function AppContainer() {
       type: "RECEIVE_USER_LOCATION",
       payload: location
     });
-
-    // db.collection("users")
-    //   .add({
-    //     location: {
-    //       latitude: location.coords.latitude,
-    //       longitude: location.coords.longitude
-    //     },
-    //     timestamp: {
-    //       created: .firestore.Timestamp.fromDate(new Date())
-    //     }
-    //   })
   };
 
   const usageCounter = async () => {
