@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { View, Text, StyleSheet, RefreshControl, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Ionicons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
 import * as StoreReview from "expo-store-review";
 import { useColorScheme } from "react-native-appearance";
@@ -36,20 +35,10 @@ const StationDetailsScreen = props => {
     return () => clearInterval(intervalId);
   });
 
-  // useEffect(() => {
-  //   getFavoriteStatus();
-  // }, [])
-
   useEffect(() => {
     const timeoutId = setTimeout(askforReview, 5000);
     return () => clearTimeout(timeoutId);
   }, []);
-
-  // const getFavoriteStatus = async() => {
-  //   const result = await SecureStore.getItemAsync(props.navigation.state.params.abbr)
-
-  //   props.navigation.setParams({favorite: result});
-  // }
 
   const fetchTrainDepartures = () => {
     fetch(
@@ -161,41 +150,6 @@ const StationDetailsScreen = props => {
   }
 };
 
-// StationDetailsScreen.navigationOptions = ({ navigation }) => {
-//   const { name, abbr, favorite } = navigation.state.params;
-
-//   return {
-//     title: name,
-//     headerForceInset: { top: "never", bottom: "never" },
-// headerLeft: () => (
-//   <Ionicons
-//     name="md-locate"
-//     size={30}
-//     color="black"
-//     style={{ marginLeft: 20 }}
-//     onPress={() => navigation.goBack()}
-//   />
-// )
-//     // headerRight: () => (
-
-//     //   <MaterialIcons
-//     //     name={ SecureStore.getItemAsync(abbr) === 'true' ? 'favorite' : 'favorite-border'}
-//     //     size={30}
-//     //     color="red"
-//     //     style={{ marginRight: 20 }}
-//     //     onPress={async() => {
-//     //       if (favorite === 'true'){
-//     //         SecureStore.setItemAsync(String(abbr), 'false').then(navigation.setParams({favorite: 'false'}))
-//     //       } else {
-//     //         SecureStore.setItemAsync(String(abbr), 'true').then(navigation.setParams({favorite: 'true'}))
-//     //       }
-//     //     }}
-
-//     //   />
-//     // )
-//   };
-// };
-
 const styles = StyleSheet.create({
   train: {
     height: 60,
@@ -256,5 +210,3 @@ const styles = StyleSheet.create({
 });
 
 export default StationDetailsScreen;
-
-// SecureStore.setItemAsync(String(navigation.state.params.abbr), 'favorite').then(value => navigation.setParams({favorite: !navigation.state.params.favorite}))
