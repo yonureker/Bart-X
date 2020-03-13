@@ -3,6 +3,7 @@ import StationDetailsScreen from "./StationDetailsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
+import { View, Text } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
 
@@ -57,7 +58,7 @@ export default function AllStationsNavigator(props) {
               name="md-locate"
               size={30}
               color={scheme === "dark" ? "white" : "black"}
-              style={{ marginLeft: 20 }}
+              style={{ marginLeft: 15 }}
               onPress={() => navigation.goBack()}
             />
           ),
@@ -70,7 +71,7 @@ export default function AllStationsNavigator(props) {
               }
               size={30}
               color="red"
-              style={{ marginRight: 20 }}
+              style={{ marginRight: 15 }}
               onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
           )
