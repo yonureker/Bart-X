@@ -21,6 +21,7 @@ const StationDetailsScreen = props => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     wait(1000).then(() => {
+      fetchTrainDepartures();
       setRefreshing(false);
       setPullDownView(false);
     });
@@ -46,6 +47,7 @@ const StationDetailsScreen = props => {
     )
       .then(response => response.json())
       .then(responseJson => setSelectedStation(responseJson.root.station[0]))
+      .then()
       .catch(error => {
         console.log(error);
       });
