@@ -17,7 +17,7 @@ const Callouts = props => {
   useEffect(() => {
     const intervalId = setInterval(fetchTrainDepartures, 15000);
     return () => clearInterval(intervalId);
-  });
+  });//
 
   const fetchTrainDepartures = () => {
     fetch(
