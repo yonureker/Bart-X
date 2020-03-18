@@ -8,7 +8,7 @@ import StationCallout from "./stationCallout";
 const Callouts = props => {
   const trainDepartures = useSelector(state => state.trainDepartures);
   const { stationName, stationAbbr } = props;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();//
 
   useEffect(() => {
     fetchTrainDepartures();
