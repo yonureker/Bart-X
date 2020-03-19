@@ -8,7 +8,7 @@ import StationCallout from "./stationCallout";
 const Callouts = props => {
   const trainDepartures = useSelector(state => state.trainDepartures);
   const { stationName, stationAbbr } = props;
-  const dispatch = useDispatch();//
+  const dispatch = useDispatch(); //
 
   useEffect(() => {
     fetchTrainDepartures();
@@ -17,7 +17,7 @@ const Callouts = props => {
   useEffect(() => {
     const intervalId = setInterval(fetchTrainDepartures, 15000);
     return () => clearInterval(intervalId);
-  });//
+  }); //
 
   const fetchTrainDepartures = () => {
     fetch(
