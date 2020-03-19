@@ -47,7 +47,6 @@ const StationDetailsScreen = props => {
     )
       .then(response => response.json())
       .then(responseJson => setSelectedStation(responseJson.root.station[0]))
-      .then()
       .catch(error => {
         console.log(error);
       });
