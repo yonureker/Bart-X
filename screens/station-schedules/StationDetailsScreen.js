@@ -5,7 +5,7 @@ import * as SecureStore from "expo-secure-store";
 import * as StoreReview from "expo-store-review";
 import { useColorScheme } from "react-native-appearance";
 
-// for pulldown refresh
+// for pulldown refresh//
 function wait(timeout) {
   return new Promise(resolve => {
     setTimeout(resolve, timeout);
