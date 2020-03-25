@@ -1,11 +1,11 @@
-import StationListScreen from "./StationListScreen";
-import StationDetailsScreen from "./StationDetailsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
+
+import StationListScreen from "./StationListScreen";
+import StationDetailsScreen from "./StationDetailsScreen";
 
 const Stack = createStackNavigator();
 

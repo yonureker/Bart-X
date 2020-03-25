@@ -4,12 +4,12 @@ import { Asset } from "expo-asset";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { enableScreens } from "react-native-screens";
-
-import rootReducer from "./reducers/rootReducer";
-import AppContainer from "./AppContainer";
 import { StatusBar, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
+
+import rootReducer from "./reducers/rootReducer";
+import AppContainer from "./AppContainer";
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens

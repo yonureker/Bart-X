@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  ImageBackground,
-  Platform,
-  View,
-  Text
-} from "react-native";
+import { StyleSheet, ImageBackground, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";

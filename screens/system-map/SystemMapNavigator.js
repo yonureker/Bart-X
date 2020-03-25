@@ -1,9 +1,9 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { StyleSheet, StatusBar } from "react-native";
 
 import SundayScreen from "./SundayScreen";
 import WeekAndSatScreen from "./WeekAndSatScreen";
-import { StyleSheet, StatusBar } from "react-native";
 
 const Tab = createMaterialTopTabNavigator();
 
