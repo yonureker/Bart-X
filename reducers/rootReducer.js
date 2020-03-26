@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-
 import userLocationReducer from "./userLocationReducer";
 import trainDepartureReducer from "./trainDepartureReducer";
 

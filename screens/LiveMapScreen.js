@@ -12,7 +12,6 @@ const LiveMapScreen = React.memo(props => {
   );
 
   const isFocused = useIsFocused();
-
   const customMap = require("../customMap.json");
 
   // The MapView and Markers are static
