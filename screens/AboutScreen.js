@@ -32,7 +32,7 @@ const AboutScreen = props => {
             style={{ textDecorationLine: "underline" }}
             onPress={() => handlePress()}
           >
-            Onur Eker
+            Onur Eker.
           </Text>
         </Text>
       </View>
