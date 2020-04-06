@@ -221,4 +221,4 @@ const calculateDistance = () => {
 
 ### Author
 
-Built with :heart: by Onur Eker - 2020.
+Built with :heart: by Onur Eker - 2019.
