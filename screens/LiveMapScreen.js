@@ -20,7 +20,7 @@ const LiveMapScreen = React.memo(props => {
     return (
       <View style={styles.container}>
         <MapView
-          style={{ flex: 1 }}
+          style={styles.container}
           region={{
             latitude: parseFloat(latitude) || 37.792874,
             longitude: parseFloat(longitude) || -122.39703,
