@@ -36,7 +36,7 @@ Station List | Real Time Departures | Map View | System Maps
 
 The combination of Redux + React Navigation makes things very easy. Rather than passing params around with `() => props.navigation.navigate('MyScreen', params: {})`, using useSelector hook is a great way to pull whatever is needed from state.
 
-User location, station locations and real time departures are placed in redux store.
+User location, station locations and real time departures are placed in Redux store.
 
 ```javascript
 import { combineReducers } from "redux";
