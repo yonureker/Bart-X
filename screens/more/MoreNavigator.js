@@ -10,4 +10,4 @@ export default function MoreNavigator() {
       <Drawer.Screen name="AboutScreen" component={AboutScreen} />
     </Drawer.Navigator>
   );
-}
+};
