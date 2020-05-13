@@ -110,7 +110,7 @@ const StationDetailsScreen = props => {
     if (pullDownView) {
       return (
         <View style={styles.pullDown}>
-          <Text style={{ color: "white" }}>Pull down to refresh</Text>
+          <Text style={{ color: "white" }}>Pull down to refresh. Auto-refresh every 10 seconds.</Text>
         </View>
       );
     }
@@ -183,12 +183,14 @@ const styles = StyleSheet.create({
   pullDown: {
     justifyContent: "center",
     alignItems: "center",
-    width: "50%",
+    width: '100%',
+    paddingLeft: 20,
+    paddingRight: 20,
     backgroundColor: "#0099CC",
     flex: 1,
     alignSelf: "center",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5
   },
   destinationText: {
     fontSize: 20
