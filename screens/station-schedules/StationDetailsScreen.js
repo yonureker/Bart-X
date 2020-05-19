@@ -73,6 +73,7 @@ const StationDetailsScreen = props => {
       });
     });
 
+    //update this later
     mappedStation.sort((a, b) => (a.minutes > b.minutes ? 1 : -1));
 
     return mappedStation.map((train, index) => {
