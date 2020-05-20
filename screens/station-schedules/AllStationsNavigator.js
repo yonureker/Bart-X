@@ -45,8 +45,21 @@ export default function AllStationsNavigator(props) {
     <Stack.Navigator
       initialRouteName="StationList"
       screenOptions={{ gestureEnabled: false }}
+      
     >
-      <Stack.Screen name="Closest Stations" component={StationListScreen} />
+      <Stack.Screen name="Closest Stations" component={StationListScreen} options={({ route, navigation }) => ({
+        headerRight: () => (
+          <MaterialIcons
+            name="search"
+            size={30}
+            color="black"
+            style={{ marginRight: 15 }}
+            onPress={() => navigation.setParams({
+              displaySearchBar: true
+            })}
+          />
+        )
+      })}/>
       <Stack.Screen
         name="StationDetails"
         component={StationDetailsScreen}
