@@ -17,7 +17,6 @@ import LiveMapScreen from "./screens/LiveMapScreen";
 import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
 import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
-import { computeDestinationPoint } from "geolib";
 
 const Tab = createBottomTabNavigator();
 
