@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function AllStationsNavigator(props) {
   const scheme = useColorScheme();
   const {
-    stations: { station }
+    stations: { station },
   } = require("../../stations");
   const [favorite, setFavorite] = useState({});
 
@@ -21,15 +21,15 @@ export default function AllStationsNavigator(props) {
   }, []);
 
   const getFavoriteStatus = () => {
-    station.map(async item => {
+    station.map(async (item) => {
       const abbr = item.abbr;
       const status = await SecureStore.getItemAsync(abbr);
 
-      setFavorite(prevState => ({ ...prevState, [abbr]: status }));
+      setFavorite((prevState) => ({ ...prevState, [abbr]: status }));
     });
   };
 
-  const updateFavoriteStatus = async abbr => {
+  const updateFavoriteStatus = async (abbr) => {
     const status = await SecureStore.getItemAsync(abbr);
 
     if (status !== "true") {
@@ -44,22 +44,30 @@ export default function AllStationsNavigator(props) {
   return (
     <Stack.Navigator
       initialRouteName="StationList"
-      screenOptions={{ gestureEnabled: false }}
-      
+      screenOptions={{
+        gestureEnabled: false,
+      }}
     >
-      <Stack.Screen name="Closest Stations" component={StationListScreen} options={({ route, navigation }) => ({
-        headerRight: () => (
-          <MaterialIcons
-            name="search"
-            size={30}
-            color="black"
-            style={{ marginRight: 15 }}
-            onPress={() => navigation.setParams({
-              displaySearchBar: true
-            })}
-          />
-        )
-      })}/>
+      <Stack.Screen
+        name="Closest Stations"
+        component={StationListScreen}
+        initialParams={{ displaySearchBar: false }}
+        options={({ route, navigation }) => ({
+          headerRight: () => (
+            <MaterialIcons
+              name="search"
+              size={30}
+              color="black"
+              style={{ marginRight: 15 }}
+              onPress={() =>
+                navigation.setParams({
+                  displaySearchBar: true,
+                })
+              }
+            />
+          ),
+        })}
+      />
       <Stack.Screen
         name="StationDetails"
         component={StationDetailsScreen}
@@ -87,7 +95,7 @@ export default function AllStationsNavigator(props) {
               style={{ marginRight: 15 }}
               onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
-          )
+          ),
         })}
       />
     </Stack.Navigator>
