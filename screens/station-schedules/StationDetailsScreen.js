@@ -111,12 +111,13 @@ const StationDetailsScreen = props => {
     if (pullDownView) {
       return (
         <View style={styles.pullDown}>
-          <Text style={{ color: "white" }}>Pull-down for manual refresh. Auto-refreshes every 15 sec.</Text>
+          <Text style={{ color: "white" }}>Pull-down for manual refresh</Text>
         </View>
       );
     }
   };
 
+  // asking user for rating, if used the app 5 times.
   const askforReview = async () => {
     const usage = await SecureStore.getItemAsync("counter");
     const askedforReview = await SecureStore.getItemAsync("askedReview");
@@ -184,15 +185,15 @@ const styles = StyleSheet.create({
   pullDown: {
     justifyContent: "center",
     alignItems: "center",
-    width: '95%',
+    width: "75%",
     height: 20,
     paddingLeft: 5,
     paddingRight: 5,
-    backgroundColor: "#7A88B0",
+    backgroundColor: "#3167ED",
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     flex: 1,
-    alignSelf: "center",
+    alignSelf: "center"
   },
   destinationText: {
     fontSize: 20
