@@ -16,7 +16,10 @@ const StationList = props => {
 
   return (
     <FlatList
-      data={stationList.filter(station => station.name.includes(props.searchText))}
+      // filter data by the query input
+      data={stationList.filter(station =>
+        station.name.includes(props.searchText)
+      )}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.button}
