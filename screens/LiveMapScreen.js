@@ -42,8 +42,6 @@ const LiveMapScreen = React.memo(props => {
         </MapView>
       </View>
     );
-  } else {
-    return <View></View>;
   }
 });
 
