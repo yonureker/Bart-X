@@ -9,7 +9,7 @@ import { SafeAreaView } from "react-navigation";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
 import rootReducer from "./reducers/rootReducer";
-import AppContainer from "./AppContainer";
+import Navigation from "./Navigation";
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
@@ -56,7 +56,7 @@ export default function App() {
       <AppearanceProvider>
         <StatusBar barStyle={statusBarStyle} />
         <SafeAreaView style={[styles.container, darkThemeContainer]}>
-          <AppContainer />
+          <Navigation />
         </SafeAreaView>
       </AppearanceProvider>
     </Provider>
