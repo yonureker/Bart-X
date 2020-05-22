@@ -16,6 +16,7 @@ const StationList = props => {
 
   return (
     <FlatList
+      style={{width: '100%'}}
       // filter data by the query input
       data={stationList.filter(station =>
         station.name.includes(props.searchText)
@@ -47,15 +48,15 @@ const StationList = props => {
 
 const styles = StyleSheet.create({
   button: {
-    height: 50,
+    height: 45,
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
     paddingLeft: 10,
-    marginTop: 10,
-    borderRadius: 10
+    marginTop: 8,
+    borderRadius: 10,
   },
   stationTitle: {
-    fontSize: 20
+    fontSize: 18
   },
   lightTitle: {
     color: "black"
