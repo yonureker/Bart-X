@@ -67,10 +67,7 @@ export default function Navigation() {
 
   const Tab = createBottomTabNavigator();
 
-  if (
-    userLocation.coords.latitude !== null &&
-    userLocation.coords.latitude !== undefined
-  ) {
+  if (userLocation.coords.latitude) {
     return (
       <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
         <Tab.Navigator initialRouteName="Station List">
