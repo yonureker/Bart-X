@@ -57,7 +57,7 @@ export default function AllStationsNavigator(props) {
             <MaterialIcons
               name="search"
               size={30}
-              color="black"
+              color={scheme === "dark" ? "white" : "black"}
               style={{ marginRight: 15 }}
               onPress={() =>
                 navigation.setParams({
