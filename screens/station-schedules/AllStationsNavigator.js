@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function AllStationsNavigator(props) {
   const scheme = useColorScheme();
   const {
-    stations: { station },
+    stations: { station }
   } = require("../../stations");
   const [favorite, setFavorite] = useState({});
 
@@ -21,15 +21,15 @@ export default function AllStationsNavigator(props) {
   }, []);
 
   const getFavoriteStatus = () => {
-    station.map(async (item) => {
+    station.map(async item => {
       const abbr = item.abbr;
       const status = await SecureStore.getItemAsync(abbr);
 
-      setFavorite((prevState) => ({ ...prevState, [abbr]: status }));
+      setFavorite(prevState => ({ ...prevState, [abbr]: status }));
     });
   };
 
-  const updateFavoriteStatus = async (abbr) => {
+  const updateFavoriteStatus = async abbr => {
     const status = await SecureStore.getItemAsync(abbr);
 
     if (status !== "true") {
@@ -45,7 +45,7 @@ export default function AllStationsNavigator(props) {
     <Stack.Navigator
       initialRouteName="StationList"
       screenOptions={{
-        gestureEnabled: false,
+        gestureEnabled: false
       }}
     >
       <Stack.Screen
@@ -61,11 +61,11 @@ export default function AllStationsNavigator(props) {
               style={{ marginRight: 15 }}
               onPress={() =>
                 navigation.setParams({
-                  displaySearchBar: true,
+                  displaySearchBar: true
                 })
               }
             />
-          ),
+          )
         })}
       />
       <Stack.Screen
@@ -95,7 +95,7 @@ export default function AllStationsNavigator(props) {
               style={{ marginRight: 15 }}
               onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
-          ),
+          )
         })}
       />
     </Stack.Navigator>

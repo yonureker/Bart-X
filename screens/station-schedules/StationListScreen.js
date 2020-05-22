@@ -7,15 +7,15 @@ import { useColorScheme } from "react-native-appearance";
 import StationList from "../../components/stationList";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const StationListScreen = (props) => {
+const StationListScreen = props => {
   const [searchText, setsearchText] = useState("");
   const colorScheme = useColorScheme();
   const [searchBar, setSearchBar] = useState(
     props.route.params.displaySearchBar
   );
-  const userLocation = useSelector((state) => state.userLocation);
+  const userLocation = useSelector(state => state.userLocation);
   const {
-    stations: { station },
+    stations: { station }
   } = require("../../stations");
 
   // only calculate distance once
@@ -30,22 +30,22 @@ const StationListScreen = (props) => {
 
   // calculationg distance to each station
   const calculateDistance = () => {
-    return station.map((station) => {
+    return station.map(station => {
       return {
         ...station,
         distance: convertDistance(
           getDistance(
             {
               latitude: station.gtfs_latitude,
-              longitude: station.gtfs_longitude,
+              longitude: station.gtfs_longitude
             },
             {
               latitude: String(userLocation.coords.latitude),
-              longitude: String(userLocation.coords.longitude),
+              longitude: String(userLocation.coords.longitude)
             }
           ),
           "mi"
-        ),
+        )
       };
     });
   };
@@ -60,7 +60,7 @@ const StationListScreen = (props) => {
               placeholder="Search Station"
               placeholderTextColor="black"
               // capitalize the first char in case autocapitalize doesn't work
-              onChangeText={(searchText) =>
+              onChangeText={searchText =>
                 setsearchText(
                   searchText.charAt(0).toUpperCase() + searchText.slice(1)
                 )
@@ -75,7 +75,7 @@ const StationListScreen = (props) => {
               backgroundColor: "white",
               borderRadius: 5,
               paddingLeft: 10,
-              paddingRight: 10,
+              paddingRight: 10
             }}
           >
             <TouchableOpacity
@@ -86,7 +86,7 @@ const StationListScreen = (props) => {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                height: 30,
+                height: 30
               }}
             >
               <Text>Cancel</Text>
@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     alignItems: "center",
-    justifyContent: "space-between",
-  },
+    justifyContent: "space-between"
+  }
 });
 
 export default StationListScreen;

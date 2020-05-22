@@ -185,13 +185,13 @@ const styles = StyleSheet.create({
   pullDown: {
     justifyContent: "center",
     alignItems: "center",
-    width: "75%",
+    width: "95%",
     height: 20,
     paddingLeft: 5,
     paddingRight: 5,
     backgroundColor: "#3167ED",
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
+    // borderBottomLeftRadius: 5,
+    // borderBottomRightRadius: 5,
     flex: 1,
     alignSelf: "center"
   },
