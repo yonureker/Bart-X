@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, Linking } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
 
-const AboutScreen = props => {
+const AboutScreen = (props) => {
   const scheme = useColorScheme();
 
   const handlePress = () => {
@@ -32,8 +32,9 @@ const AboutScreen = props => {
             style={{ textDecorationLine: "underline" }}
             onPress={() => handlePress()}
           >
-            Onur Eker.
+            Onur Eker
           </Text>
+          .
         </Text>
       </View>
     </View>
@@ -44,18 +45,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   content: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   author: {
-    marginTop: 50
+    marginTop: 50,
   },
   darkFont: {
-    color: "white"
-  }
+    color: "white",
+  },
 });
 
 export default AboutScreen;
