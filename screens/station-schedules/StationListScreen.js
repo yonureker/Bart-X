@@ -58,7 +58,7 @@ const StationListScreen = (props) => {
           <View>
             <TextInput
               placeholder="Search Station"
-              placeholderTextColor={colorScheme === "dark" ? 'white' : 'dark'}
+              placeholderTextColor={colorScheme === "dark" ? 'white' : 'black'}
               // capitalize the first char in case autocapitalize doesn't work
               onChangeText={(searchText) =>
                 setsearchText(
