@@ -1,10 +1,11 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
 
 import StationListScreen from "./StationListScreen";
+import FavoriteListScreen from "./FavoriteListScreen";
 import StationDetailsScreen from "./StationDetailsScreen";
 
 const Stack = createStackNavigator();
@@ -47,6 +48,11 @@ export default function AllStationsNavigator(props) {
       screenOptions={{
         gestureEnabled: false
       }}
+      screenOptions={{
+        headerTitleStyle: {
+          fontSize: 20
+        }
+      }}
     >
       <Stack.Screen
         name="Closest Stations"
@@ -56,13 +62,54 @@ export default function AllStationsNavigator(props) {
           headerRight: () => (
             <MaterialIcons
               name="search"
-              size={30}
+              size={32}
               color={scheme === "dark" ? "white" : "black"}
-              style={{ marginRight: 15 }}
+              style={{ marginRight: 10 }}
               onPress={() =>
                 navigation.setParams({
                   displaySearchBar: true
                 })
+              }
+            />
+          ),
+          headerLeft: () => (
+            <MaterialCommunityIcons
+              name="heart-box"
+              size={32}
+              color={scheme === "dark" ? "white" : "black"}
+              style={{ marginLeft: 10 }}
+              onPress={() =>{ navigation.navigate('Favorite Stations') }
+                
+              }
+            />
+          )
+        })}
+      />
+      <Stack.Screen
+        name="Favorite Stations"
+        component={FavoriteListScreen}
+        initialParams={{ displaySearchBar: false, favorites: favorite }}
+        options={({ route, navigation }) => ({
+          headerRight: () => (
+            <MaterialIcons
+              name="search"
+              size={32}
+              color={scheme === "dark" ? "white" : "black"}
+              style={{ marginRight: 10 }}
+              onPress={() =>
+                navigation.setParams({
+                  displaySearchBar: true
+                })
+              }
+            />
+          ),
+          headerLeft: () => (
+            <MaterialCommunityIcons
+              name="map-marker-distance"
+              size={32}
+              color={scheme === "dark" ? "white" : "black"}
+              style={{ marginLeft: 10 }}
+              onPress={() =>{ navigation.navigate('Closest Stations') }
               }
             />
           )
@@ -77,9 +124,9 @@ export default function AllStationsNavigator(props) {
           headerLeft: () => (
             <Ionicons
               name="md-locate"
-              size={30}
+              size={32}
               color={scheme === "dark" ? "white" : "black"}
-              style={{ marginLeft: 15 }}
+              style={{ marginLeft: 10 }}
               onPress={() => navigation.goBack()}
             />
           ),
@@ -90,12 +137,12 @@ export default function AllStationsNavigator(props) {
                   ? "favorite"
                   : "favorite-border"
               }
-              size={30}
+              size={32}
               color="red"
-              style={{ marginRight: 15 }}
+              style={{ marginRight: 10 }}
               onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
-          )
+          ),
         })}
       />
     </Stack.Navigator>
