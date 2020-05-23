@@ -130,8 +130,8 @@ const FavoriteListScreen = (props) => {
     if (!Object.values(favorite).includes("true")){
       return (
         <View style={styles.container}>
-          <MaterialCommunityIcons style={{marginBottom: 20}} name="heart-multiple" size={150} color="red" />
-          <Text style={{fontSize: 20}}>No favorites yet? See <Text style={{textDecorationLine: 'underline'}} onPress={() => props.navigation.navigate('Closest Stations')}>closest stations</Text>.</Text>
+          <MaterialCommunityIcons style={{marginBottom: 80}} name="heart-multiple" size={150} color="red" />
+          <Text style={{fontSize: 20, color: colorScheme === "dark" ? 'white' : 'black'}}>No favorites yet? See <Text style={{textDecorationLine: 'underline'}} onPress={() => props.navigation.navigate('Closest Stations')}>closest stations</Text>.</Text>
         </View>
       )
     } else {
