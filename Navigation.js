@@ -18,8 +18,6 @@ import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
 import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
 
-const Tab = createBottomTabNavigator();
-
 export default function Navigation() {
   const dispatch = useDispatch();
   const userLocation = useSelector(state => state.userLocation);
