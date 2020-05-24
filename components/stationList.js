@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   stationTitle: {
-    fontSize: 18
+    fontSize: 20
   },
   lightTitle: {
     color: "black"
