@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: 'center'
   },
   author: {
     marginTop: 50,
@@ -57,6 +58,9 @@ const styles = StyleSheet.create({
   darkFont: {
     color: "white",
   },
+  font: {
+    fontSize: 20
+  }
 });
 
 export default AboutScreen;
