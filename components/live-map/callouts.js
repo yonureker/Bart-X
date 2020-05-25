@@ -1,34 +1,37 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import MapView from "react-native-maps";
 import { useSelector, useDispatch } from "react-redux";
 
-import StationCallout from "./stationCallout";
+import CalloutText from "./calloutText";
 
 const Callouts = props => {
-  const trainDepartures = useSelector(state => state.trainDepartures);
+  // const trainDepartures = useSelector(state => state.trainDepartures);
   const { stationName, stationAbbr } = props;
-  const dispatch = useDispatch(); //
+  // const dispatch = useDispatch(); //
+
+  const [stationData, setStationData] = useState([])
 
   useEffect(() => {
     fetchTrainDepartures();
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 15000);
+    const intervalId = setInterval(fetchTrainDepartures, 100000);
     return () => clearInterval(intervalId);
-  }); //
+  }); 
 
   const fetchTrainDepartures = () => {
     fetch(
-      "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=MW9S-E7SL-26DU-VV8V&json=y"
+      `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${props.stationAbbr}&key=MW9S-E7SL-26DU-VV8V&json=y`
     )
       .then(response => response.json())
       .then(responseJson =>
-        dispatch({
-          type: "RECEIVE_TRAIN_DEPARTURE_DATA",
-          payload: responseJson.root.station
-        })
+        // dispatch({
+        //   type: "RECEIVE_TRAIN_DEPARTURE_DATA",
+        //   payload: responseJson.root.station
+        // })
+        setStationData(responseJson.root.station[0])
       )
       .catch(error => {
         console.log(error);
@@ -45,9 +48,12 @@ const Callouts = props => {
         <Text style={styles.stationName}>{stationName}</Text>
       </View>
       <View style={styles.calloutContent}>
-        <StationCallout
+        <CalloutText
           key={stationAbbr}
-          station={trainDepartures.find(item => item.abbr == stationAbbr)}
+          station={
+            // trainDepartures.find(item => item.abbr == stationAbbr)
+            stationData
+          }
         />
       </View>
     </MapView.Callout>
