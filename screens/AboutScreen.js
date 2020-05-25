@@ -15,7 +15,7 @@ const AboutScreen = (props) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={[styles.font, fontColor]}>Version 1.5</Text>
+        <Text style={[styles.font, fontColor]}>Version 1.5.1</Text>
       </View>
       <View style={styles.content}>
         <View>
