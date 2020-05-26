@@ -16,11 +16,12 @@ const StationList = props => {
 
   return (
     <FlatList
-      style={{width: '100%'}}
+      style={{ width: "100%" }}
       // filter data by the query input
       data={stationList.filter(station =>
         station.name.includes(props.searchText)
       )}
+      initialNumToRender={15}
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.button}
@@ -49,11 +50,11 @@ const StationList = props => {
 const styles = StyleSheet.create({
   button: {
     height: 45,
-    borderColor: "#F0F4F5",
+    borderColor: "#DFE5E7",
     borderBottomWidth: 1,
     paddingLeft: 10,
     marginTop: 8,
-    borderRadius: 10,
+    borderRadius: 10
   },
   stationTitle: {
     fontSize: 20
