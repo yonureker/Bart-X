@@ -1,5 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Ionicons, MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  MaterialIcons,
+  MaterialCommunityIcons
+} from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
@@ -78,9 +82,9 @@ export default function AllStationsNavigator(props) {
               size={32}
               color={scheme === "dark" ? "white" : "black"}
               style={{ marginLeft: 10 }}
-              onPress={() =>{ navigation.navigate('Favorite Stations') }
-                
-              }
+              onPress={() => {
+                navigation.navigate("Favorite Stations");
+              }}
             />
           )
         })}
@@ -109,8 +113,9 @@ export default function AllStationsNavigator(props) {
               size={32}
               color={scheme === "dark" ? "white" : "black"}
               style={{ marginLeft: 10 }}
-              onPress={() =>{ navigation.navigate('Closest Stations') }
-              }
+              onPress={() => {
+                navigation.navigate("Closest Stations");
+              }}
             />
           )
         })}
@@ -142,7 +147,7 @@ export default function AllStationsNavigator(props) {
               style={{ marginRight: 10 }}
               onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
-          ),
+          )
         })}
       />
     </Stack.Navigator>
