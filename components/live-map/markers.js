@@ -5,10 +5,12 @@ import { View, Text } from "react-native";
 import Callouts from "./callouts";
 import stationLogo from "../../assets/station.png";
 
-const Markers = React.memo((props) => {
+const Markers = React.memo(props => {
   const {
-    stations: { station },
+    stations: { station }
   } = require("../../stations");
+
+  const [clickedMarkerRef, setClickedMarkerRef] = useState("");
 
   return station.map((trainStation, index) => {
     return (
@@ -21,11 +23,13 @@ const Markers = React.memo((props) => {
         image={stationLogo}
         zIndex={100}
         tracksInfoWindowChanges={true}
+        onPress={() => setClickedMarkerRef(index)}
       >
         <Callouts
           key={trainStation.abbr}
           stationName={trainStation.name}
           stationAbbr={trainStation.abbr}
+          showCallOut={clickedMarkerRef === index}
         />
       </MapView.Marker>
     );
