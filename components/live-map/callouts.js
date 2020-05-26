@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 import { useSelector, useDispatch } from "react-redux";
 
