@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
     paddingLeft: 1,
-    paddingRight: 10,
+    paddingRight: 10
   },
   left: {
     width: "3%",
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   darkBackground: {
-    backgroundColor: "black",
+    backgroundColor: "black"
   },
   lightBackground: {
     backgroundColor: "white"
