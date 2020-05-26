@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Linking } from "react-native";
 import { MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
 
-const AboutScreen = (props) => {
+const AboutScreen = props => {
   const scheme = useColorScheme();
 
   const handlePress = () => {
@@ -45,18 +45,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   content: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: "center"
   },
   author: {
-    marginTop: 50,
+    marginTop: 50
   },
   darkFont: {
-    color: "white",
+    color: "white"
   },
   font: {
     fontSize: 20
