@@ -10,16 +10,20 @@ const Callouts = props => {
   const { stationName, stationAbbr } = props;
   // const dispatch = useDispatch(); //
 
-  const [stationData, setStationData] = useState([])
+  const [stationData, setStationData] = useState([]);
 
   useEffect(() => {
-    fetchTrainDepartures();
-  }, []);
+    if (props.showCallOut === true) {
+      fetchTrainDepartures();
+    }
+  }, [props.showCallOut]);
 
   useEffect(() => {
-    const intervalId = setInterval(fetchTrainDepartures, 100000);
-    return () => clearInterval(intervalId);
-  }); 
+    if (props.showCallOut === true) {
+      const intervalId = setInterval(fetchTrainDepartures, 5000);
+      return () => clearInterval(intervalId);
+    }
+  });
 
   const fetchTrainDepartures = () => {
     fetch(
@@ -48,13 +52,7 @@ const Callouts = props => {
         <Text style={styles.stationName}>{stationName}</Text>
       </View>
       <View style={styles.calloutContent}>
-        <CalloutText
-          key={stationAbbr}
-          station={
-            // trainDepartures.find(item => item.abbr == stationAbbr)
-            stationData
-          }
-        />
+        <CalloutText key={stationAbbr} station={stationData} />
       </View>
     </MapView.Callout>
   );
