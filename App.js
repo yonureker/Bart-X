@@ -34,6 +34,7 @@ export default function App() {
     const cacheImages = images.map(image => {
       return Asset.fromModule(image).downloadAsync();
     });
+
     return Promise.all(cacheImages);
   };
 
@@ -54,12 +55,12 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <AppearanceProvider>
+      {/* <AppearanceProvider> */}
         <StatusBar barStyle={statusBarStyle} />
         <SafeAreaView style={[styles.container, darkThemeContainer]}>
           <Navigation />
         </SafeAreaView>
-      </AppearanceProvider>
+      {/* </AppearanceProvider> */}
     </Provider>
   );
 }
