@@ -41,7 +41,7 @@ const FavoriteListScreen = props => {
 
   // only calculate distance once
   useEffect(() => {
-    calculateDistance();
+    // calculateDistance();
   }, []);
 
   // watch for the click to the search button on the header
