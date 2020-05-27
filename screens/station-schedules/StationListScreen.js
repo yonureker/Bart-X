@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect, u } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
@@ -17,10 +17,11 @@ const StationListScreen = props => {
   const {
     stations: { station }
   } = require("../../stations");
+  const [stationData, setStationData] = useState([])
 
-  // only calculate distance once
-  useEffect(() => {
-    calculateDistance();
+  //only calculate distance once
+  useLayoutEffect(() => {
+    calculateDistance()
   }, []);
 
   // watch for the click to the search button on the header
@@ -30,7 +31,7 @@ const StationListScreen = props => {
 
   // calculationg distance to each station
   const calculateDistance = () => {
-    return station.map(station => {
+    setStationData(station.map(station => {
       return {
         ...station,
         distance: convertDistance(
@@ -47,7 +48,7 @@ const StationListScreen = props => {
           "mi"
         )
       };
-    });
+    }))
   };
 
   // function for displaying the search bar
@@ -110,7 +111,7 @@ const StationListScreen = props => {
         <StationList
           searchText={searchText}
           navigate={props.navigation.navigate}
-          stations={calculateDistance()}
+          stations={stationData}
         />
       </View>
     </View>
