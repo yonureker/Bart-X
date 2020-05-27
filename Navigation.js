@@ -8,7 +8,7 @@ import * as SecureStore from "expo-secure-store";
 import {
   NavigationContainer,
   DefaultTheme,
-  DarkTheme
+  DarkTheme,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native-appearance";
@@ -19,41 +19,50 @@ import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
 
 export default function Navigation() {
+  // redux hook
   const dispatch = useDispatch();
-  const userLocation = useSelector(state => state.userLocation);
+
+  // get user location from state
+  const userLocation = useSelector((state) => state.userLocation);
+
+  // check dark / light mode
   const scheme = useColorScheme();
 
   useEffect(() => {
-    getLocation();
+    receiveUserLocation();
   }, []);
 
+  // check how many times the app is opened by the user
+  // this counter will be used to ask for user rating
   useEffect(() => {
-    usageCounter();
+    appUsageCounter();
   }, []);
 
-  const getLocation = async () => {
+  const receiveUserLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
       dispatch({
         type: "RECEIVE_USER_LOCATION",
-        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } }
+        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } },
       });
     }
 
+    // set accuracy to low to quickly receive user location
     let location = await Location.getCurrentPositionAsync({
       accuracy:
         Platform.OS === "android"
           ? Location.Accuracy.Low
-          : Location.Accuracy.Lowest
+          : Location.Accuracy.Lowest,
     });
 
+    // dispatch to redux store
     dispatch({
       type: "RECEIVE_USER_LOCATION",
-      payload: location
+      payload: location,
     });
   };
 
-  const usageCounter = async () => {
+  const appUsageCounter = async () => {
     const usage = await SecureStore.getItemAsync("counter");
 
     if (usage == null) {
@@ -65,7 +74,7 @@ export default function Navigation() {
 
   const Tab = createBottomTabNavigator();
 
-  if (userLocation) {
+  if (userLocation.coords.latitude !== null) {
     return (
       <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
         <Tab.Navigator initialRouteName="Station List">
@@ -80,7 +89,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -94,7 +103,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -108,7 +117,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -122,7 +131,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
         </Tab.Navigator>
@@ -140,13 +149,13 @@ export default function Navigation() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   imageBackground: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   tabIcon: {
-    marginTop: 3
-  }
+    marginTop: 3,
+  },
 });
