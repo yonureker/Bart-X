@@ -54,7 +54,7 @@ export default function AllStationsNavigator(props) {
       }}
       screenOptions={{
         headerTitleStyle: {
-          fontSize: 20
+          fontSize: 18
         }
       }}
     >
