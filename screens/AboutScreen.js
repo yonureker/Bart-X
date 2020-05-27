@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     color: "white"
   },
   font: {
-    fontSize: 20
+    fontSize: 18
   }
 });
 
