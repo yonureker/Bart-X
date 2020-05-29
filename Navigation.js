@@ -85,7 +85,7 @@ export default function Navigation() {
               tabBarIcon: () => (
                 <Ionicons
                   name="md-list"
-                  size={32}
+                  size={28}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
@@ -99,7 +99,7 @@ export default function Navigation() {
               tabBarIcon: () => (
                 <MaterialCommunityIcons
                   name="google-maps"
-                  size={32}
+                  size={28}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
@@ -113,7 +113,7 @@ export default function Navigation() {
               tabBarIcon: () => (
                 <Ionicons
                   name="ios-map"
-                  size={32}
+                  size={28}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
@@ -127,7 +127,7 @@ export default function Navigation() {
               tabBarIcon: () => (
                 <Ionicons
                   name="ios-information-circle"
-                  size={32}
+                  size={28}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
@@ -156,6 +156,6 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   tabIcon: {
-    marginTop: 3,
+    marginTop: 5,
   },
 });
