@@ -6,7 +6,7 @@ import { useIsFocused } from "@react-navigation/native";
 
 import Markers from "../components/live-map/markers";
 
-const LiveMapScreen = React.memo(props => {
+const LiveMapScreen = React.memo(() => {
   const { latitude, longitude } = useSelector(
     state => state.userLocation.coords
   );
@@ -37,6 +37,7 @@ const LiveMapScreen = React.memo(props => {
           showsTraffic={false}
           showsIndoors={false}
           showsCompass={true}
+          showsUserLocation={true}
         >
           <Markers />
         </MapView>
