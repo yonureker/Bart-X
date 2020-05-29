@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
 
-import StationListScreen from "./StationListScreen";
+import ClosestStationListScreen from "./ClosestStationListScreen";
 import FavoriteListScreen from "./FavoriteListScreen";
 import StationDetailsScreen from "./StationDetailsScreen";
 
@@ -60,7 +60,7 @@ export default function AllStationsNavigator(props) {
     >
       <Stack.Screen
         name="Closest Stations"
-        component={StationListScreen}
+        component={ClosestStationListScreen}
         initialParams={{ displaySearchBar: false }}
         options={({ route, navigation }) => ({
           headerRight: () => (
