@@ -3,7 +3,7 @@ import { StyleSheet, ImageBackground, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
 import {
   NavigationContainer,
@@ -17,6 +17,7 @@ import LiveMapScreen from "./screens/LiveMapScreen";
 import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
 import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
+import TripPlannerHomeScreen from "./screens/trip-planner/TripPlannerHomeScreen";
 
 export default function Navigation() {
   // redux hook
@@ -100,6 +101,20 @@ export default function Navigation() {
                 <MaterialCommunityIcons
                   name="google-maps"
                   size={28}
+                  color={scheme === "dark" ? "white" : "black"}
+                  style={styles.tabIcon}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Trip Planner"
+            component={TripPlannerHomeScreen}
+            options={{
+              tabBarIcon: () => (
+                <SimpleLineIcons
+                  name="note"
+                  size={24}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
