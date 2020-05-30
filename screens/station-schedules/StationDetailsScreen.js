@@ -8,12 +8,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // for pulldown refresh
 function wait(timeout) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(resolve, timeout);
   });
 }
 
-const StationDetailsScreen = (props) => {
+const StationDetailsScreen = props => {
   const [refreshing, setRefreshing] = useState(false);
   const [pullDownView, setPullDownView] = useState(true);
   const [selectedStation, setSelectedStation] = useState(false);
@@ -46,9 +46,9 @@ const StationDetailsScreen = (props) => {
     fetch(
       `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${props.route.params.abbr}&key=MW9S-E7SL-26DU-VV8V&json=y`
     )
-      .then((response) => response.json())
-      .then((responseJson) => setSelectedStation(responseJson.root.station[0]))
-      .catch((error) => {
+      .then(response => response.json())
+      .then(responseJson => setSelectedStation(responseJson.root.station[0]))
+      .catch(error => {
         console.log(error);
       });
   };
@@ -56,8 +56,8 @@ const StationDetailsScreen = (props) => {
   const sortedTrainList = () => {
     let mappedStation = [];
 
-    selectedStation.etd.map((route) => {
-      route.estimate.map((train) => {
+    selectedStation.etd.map(route => {
+      route.estimate.map(train => {
         const newMap = new Object();
         newMap["destination"] = route.destination;
         newMap["platform"] = train.platform;
@@ -147,7 +147,7 @@ const StationDetailsScreen = (props) => {
         <Text
           style={{
             fontSize: 18,
-            color: colorScheme === "dark" ? "white" : "black",
+            color: colorScheme === "dark" ? "white" : "black"
           }}
         >
           There are no scheduled trains for this station.
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   train: {
     height: 60,
@@ -183,25 +183,25 @@ const styles = StyleSheet.create({
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
     paddingLeft: 1,
-    paddingRight: 10,
+    paddingRight: 10
   },
   left: {
     width: "3%",
     marginTop: 2,
     marginBottom: 2,
     borderColor: "black",
-    borderWidth: 1,
+    borderWidth: 1
   },
   mid: {
     width: "72%",
     justifyContent: "space-evenly",
     flexDirection: "column",
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   right: {
     width: "20%",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   pullDown: {
     justifyContent: "center",
@@ -214,26 +214,26 @@ const styles = StyleSheet.create({
     // borderBottomLeftRadius: 5,
     // borderBottomRightRadius: 5,
     flex: 1,
-    alignSelf: "center",
+    alignSelf: "center"
   },
   destinationText: {
-    fontSize: 18,
+    fontSize: 18
   },
   platformText: {
-    color: "#A2AEB1",
+    color: "#A2AEB1"
   },
   minutesText: {
-    fontSize: 18,
+    fontSize: 18
   },
   darkBackground: {
-    backgroundColor: "black",
+    backgroundColor: "black"
   },
   lightBackground: {
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
   lightText: {
-    color: "white",
-  },
+    color: "white"
+  }
 });
 
 export default StationDetailsScreen;
