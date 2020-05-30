@@ -1,7 +1,7 @@
 const initialState = false;
 
 const searchBarReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case "SHOW_SEARCH_BAR":
       return true;
     case "HIDE_SEARCH_BAR":
@@ -9,6 +9,6 @@ const searchBarReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default searchBarReducer;

@@ -1,7 +1,7 @@
-const initialState = '';
+const initialState = "";
 
 const searchTextReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case "SET_SEARCH_TEXT":
       return action.payload;
     case "RESET_SEARCH_TEXT":
@@ -9,6 +9,6 @@ const searchTextReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default searchTextReducer;

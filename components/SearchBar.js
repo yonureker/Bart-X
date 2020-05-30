@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import {View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
-import {useColorScheme} from 'react-native-appearance';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  Text
+} from "react-native";
+import { useColorScheme } from "react-native-appearance";
+import { useDispatch, useSelector } from "react-redux";
 
-const SearchBar = (props) => {
+const SearchBar = props => {
   const colorScheme = useColorScheme();
   const dispatch = useDispatch();
   const searchBarVisible = useSelector(state => state.searchBar);
@@ -18,9 +24,9 @@ const SearchBar = (props) => {
             placeholder="Search Station"
             placeholderTextColor={colorScheme === "dark" ? "white" : "black"}
             // capitalize the first char in case autocapitalize doesn't work
-            onChangeText={(searchText) =>
+            onChangeText={searchText =>
               dispatch({
-                type: 'SET_SEARCH_TEXT',
+                type: "SET_SEARCH_TEXT",
                 payload: searchText
               })
             }
@@ -34,24 +40,24 @@ const SearchBar = (props) => {
             backgroundColor: "white",
             borderRadius: 5,
             paddingLeft: 10,
-            paddingRight: 10,
+            paddingRight: 10
           }}
         >
           <TouchableOpacity
             onPress={() => {
               dispatch({
-                type: 'RESET_SEARCH_TEXT',
-                payload: ''
-              })
-              
+                type: "RESET_SEARCH_TEXT",
+                payload: ""
+              });
+
               dispatch({
-                type: 'HIDE_SEARCH_BAR'
-              })
+                type: "HIDE_SEARCH_BAR"
+              });
             }}
             style={{
               alignItems: "center",
               justifyContent: "center",
-              height: 30,
+              height: 30
             }}
           >
             <Text>Cancel</Text>
@@ -62,7 +68,7 @@ const SearchBar = (props) => {
   } else {
     return null;
   }
-}
+};
 
 const styles = StyleSheet.create({
   searchBar: {
@@ -80,11 +86,11 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   lightSearchBar: {
-    backgroundColor: "#E6E8ED",
+    backgroundColor: "#E6E8ED"
   },
   darkSearchBar: {
-    backgroundColor: "#434447",
-  },
-})
+    backgroundColor: "#434447"
+  }
+});
 
 export default SearchBar;
