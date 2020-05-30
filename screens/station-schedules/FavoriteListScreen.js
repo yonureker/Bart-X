@@ -9,14 +9,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import StationList from "../../components/stationList";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useIsFocused } from "@react-navigation/native";
+import SearchBar from "../../components/SearchBar";
 
 const FavoriteListScreen = props => {
-  const [searchText, setsearchText] = useState("");
   const colorScheme = useColorScheme();
-  const [searchBar, setSearchBar] = useState(
-    props.route.params.displaySearchBar
-  );
   const userLocation = useSelector(state => state.userLocation);
+  const searchText = useSelector(state => state.searchText);
+  const displaySearchBar = useSelector(state => state.searchBar);
+
   const {
     stations: { station }
   } = require("../../stations");
@@ -41,13 +41,8 @@ const FavoriteListScreen = props => {
 
   // only calculate distance once
   useEffect(() => {
-    // calculateDistance();
+    calculateDistance();
   }, []);
-
-  // watch for the click to the search button on the header
-  useEffect(() => {
-    setSearchBar(props.route.params.displaySearchBar);
-  }, [props.route.params]);
 
   const favoriteStations = station.filter(
     elem => favorite[elem.abbr] === "true"
@@ -73,53 +68,6 @@ const FavoriteListScreen = props => {
         )
       };
     });
-  };
-
-  // function for displaying the search bar
-  const searchBarComponent = () => {
-    if (searchBar) {
-      return (
-        <View style={[styles.searchBar, searchBarStyle]}>
-          <View>
-            <TextInput
-              placeholder="Search Station"
-              placeholderTextColor={colorScheme === "dark" ? "white" : "black"}
-              // capitalize the first char in case autocapitalize doesn't work
-              onChangeText={searchText =>
-                setsearchText(
-                  searchText.charAt(0).toUpperCase() + searchText.slice(1)
-                )
-              }
-              autoCapitalize="words"
-              autoFocus={true}
-              maxLength={40}
-            ></TextInput>
-          </View>
-          <View
-            style={{
-              backgroundColor: "white",
-              borderRadius: 5,
-              paddingLeft: 10,
-              paddingRight: 10
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                setSearchBar(false);
-                setsearchText("");
-              }}
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                height: 30
-              }}
-            >
-              <Text>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    }
   };
 
   // styling for light / dark mode
@@ -158,7 +106,7 @@ const FavoriteListScreen = props => {
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={styles.listContainer}>
-          {searchBarComponent()}
+          <SearchBar display={displaySearchBar} />
           <StationList
             searchText={searchText}
             navigate={props.navigation.navigate}
