@@ -7,6 +7,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
+import { useDispatch, useSelector } from 'react-redux';
 
 import ClosestStationListScreen from "./ClosestStationListScreen";
 import FavoriteListScreen from "./FavoriteListScreen";
@@ -15,6 +16,7 @@ import StationDetailsScreen from "./StationDetailsScreen";
 const Stack = createStackNavigator();
 
 export default function AllStationsNavigator(props) {
+  const dispatch = useDispatch();
   const scheme = useColorScheme();
   const {
     stations: { station }
@@ -70,8 +72,8 @@ export default function AllStationsNavigator(props) {
               color={scheme === "dark" ? "white" : "black"}
               style={{ marginRight: 10 }}
               onPress={() =>
-                navigation.setParams({
-                  displaySearchBar: true
+                dispatch({
+                  type: "SHOW_SEARCH_BAR"
                 })
               }
             />
