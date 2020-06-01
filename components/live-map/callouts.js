@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import CalloutText from "./calloutText";
 
 const Callouts = props => {
-  // const trainDepartures = useSelector(state => state.trainDepartures);
   const { stationName, stationAbbr } = props;
   // const dispatch = useDispatch(); //
 
