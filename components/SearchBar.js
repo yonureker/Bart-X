@@ -1,15 +1,9 @@
-import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Text
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import { useDispatch, useSelector } from "react-redux";
 
-const SearchBar = props => {
+const SearchBar = () => {
   const colorScheme = useColorScheme();
   const dispatch = useDispatch();
   const searchBarVisible = useSelector(state => state.searchBar);
