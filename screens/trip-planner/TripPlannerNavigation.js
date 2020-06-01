@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export default function TripPlannerNavigator(props) {
   const scheme = useColorScheme();
   const {
-    stations: { station }
+    stations: { station },
   } = require("../../stations");
 
   return (
@@ -16,10 +16,14 @@ export default function TripPlannerNavigator(props) {
       initialRouteName="TripPlanner Home"
       screenOptions={{
         gestureEnabled: false,
-        headerTitleStyle: { fontSize: 18 }
+        headerTitleStyle: { fontSize: 18 },
       }}
     >
-      <Stack.Screen name="TripPlanner Home" component={TripPlannerHomeScreen} />
+      <Stack.Screen
+        name="TripPlanner Home"
+        component={TripPlannerHomeScreen}
+        options={{ title: "Trip Planner" }}
+      />
     </Stack.Navigator>
   );
 }
