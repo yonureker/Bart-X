@@ -1,22 +1,20 @@
-import React, { useEffect, useState, useLayoutEffect, u } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 import { useColorScheme } from "react-native-appearance";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import StationList from "../../components/stationList";
+import SearchBar from "../../components/SearchBar";
 
-
-const ClosestStationListScreen = (props) => {
-  const [searchText, setsearchText] = useState("");
+const ClosestStationListScreen = props => {
   const colorScheme = useColorScheme();
-  const [searchBar, setSearchBar] = useState(
-    props.route.params.displaySearchBar
-  );
-  const userLocation = useSelector((state) => state.userLocation);
+  const userLocation = useSelector(state => state.userLocation);
+  const searchText = useSelector(state => state.searchText);
+  const displaySearchBar = useSelector(state => state.searchBar);
   const {
-    stations: { station },
+    stations: { station }
   } = require("../../stations");
   const [stationData, setStationData] = useState([]);
 
@@ -25,92 +23,38 @@ const ClosestStationListScreen = (props) => {
     calculateDistance();
   }, []);
 
-  // watch for the click to the search button on the header
-  useEffect(() => {
-    setSearchBar(props.route.params.displaySearchBar);
-  }, [props.route.params]);
-
   // calculationg distance to each station
   const calculateDistance = () => {
     setStationData(
-      station.map((station) => {
+      station.map(station => {
         return {
           ...station,
           distance: convertDistance(
             getDistance(
               {
                 latitude: station.gtfs_latitude,
-                longitude: station.gtfs_longitude,
+                longitude: station.gtfs_longitude
               },
               {
                 latitude: String(userLocation.coords.latitude),
-                longitude: String(userLocation.coords.longitude),
+                longitude: String(userLocation.coords.longitude)
               }
             ),
             "mi"
-          ),
+          )
         };
       })
     );
   };
 
-  // function for displaying the search bar
-  const searchBarComponent = () => {
-    if (searchBar) {
-      return (
-        <View style={[styles.searchBar, searchBarStyle]}>
-          <View>
-            <TextInput
-              placeholder="Search Station"
-              placeholderTextColor={colorScheme === "dark" ? "white" : "black"}
-              // capitalize the first char in case autocapitalize doesn't work
-              onChangeText={(searchText) =>
-                setsearchText(
-                  searchText.charAt(0).toUpperCase() + searchText.slice(1)
-                )
-              }
-              autoCapitalize="words"
-              autoFocus={true}
-              maxLength={40}
-            ></TextInput>
-          </View>
-          <View
-            style={{
-              backgroundColor: "white",
-              borderRadius: 5,
-              paddingLeft: 10,
-              paddingRight: 10,
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                setSearchBar(false);
-                setsearchText("");
-              }}
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                height: 30,
-              }}
-            >
-              <Text>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    }
-  };
-
   // styling for light / dark mode
   const containerStyle =
     colorScheme === "dark" ? styles.darkContainer : styles.lightContainer;
-  const searchBarStyle =
-    colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
 
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={styles.listContainer}>
-        {searchBarComponent()}
+        <SearchBar display={displaySearchBar} />
         <StationList
           searchText={searchText}
           navigate={props.navigation.navigate}
@@ -125,18 +69,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   listContainer: {
     flex: 1,
     width: "100%",
-    alignItems: "center",
+    alignItems: "center"
   },
   lightContainer: {
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
   darkContainer: {
-    backgroundColor: "black",
+    backgroundColor: "black"
   },
   searchBar: {
     flexDirection: "row",
@@ -153,10 +97,10 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   lightSearchBar: {
-    backgroundColor: "#E6E8ED",
+    backgroundColor: "#E6E8ED"
   },
   darkSearchBar: {
-    backgroundColor: "#434447",
+    backgroundColor: "#434447"
   },
   serviceAdvisory: {
     backgroundColor: "red",
@@ -164,7 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     height: 30
-  },
+  }
 });
 
 export default ClosestStationListScreen;
