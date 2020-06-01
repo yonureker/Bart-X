@@ -30,7 +30,7 @@ const AboutScreen = props => {
           Created by{" "}
           <Text
             style={{ textDecorationLine: "underline" }}
-            onPress={() => handlePress()}
+            onPress={handlePress}
           >
             Onur Eker
           </Text>
