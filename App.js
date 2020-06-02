@@ -7,7 +7,7 @@ import { enableScreens } from "react-native-screens";
 import { StatusBar, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
-// import logger from 'redux-logger';
+import logger from "redux-logger";
 
 import rootReducer from "./reducers/rootReducer";
 import Navigation from "./Navigation";
@@ -56,10 +56,10 @@ export default function App() {
   return (
     <Provider store={store}>
       {/* <AppearanceProvider> */}
-        <StatusBar barStyle={statusBarStyle} />
-        <SafeAreaView style={[styles.container, darkThemeContainer]}>
-          <Navigation />
-        </SafeAreaView>
+      <StatusBar barStyle={statusBarStyle} />
+      <SafeAreaView style={[styles.container, darkThemeContainer]}>
+        <Navigation />
+      </SafeAreaView>
       {/* </AppearanceProvider> */}
     </Provider>
   );
