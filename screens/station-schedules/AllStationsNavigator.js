@@ -7,7 +7,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 import ClosestStationListScreen from "./ClosestStationListScreen";
 import FavoriteListScreen from "./FavoriteListScreen";
@@ -103,8 +103,8 @@ export default function AllStationsNavigator(props) {
               color={scheme === "dark" ? "white" : "black"}
               style={{ marginRight: 10 }}
               onPress={() =>
-                navigation.setParams({
-                  displaySearchBar: true
+                dispatch({
+                  type: "SHOW_SEARCH_BAR"
                 })
               }
             />
@@ -127,7 +127,7 @@ export default function AllStationsNavigator(props) {
         component={StationDetailsScreen}
         options={({ route, navigation }) => ({
           title: route.params.name,
-          headerForceInset: { top: "never", bottom: "never" },
+          // headerForceInset: { top: "never", bottom: "never" },
           headerLeft: () => (
             <Ionicons
               name="md-locate"
