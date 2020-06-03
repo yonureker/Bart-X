@@ -25,8 +25,6 @@ const TripPlannerHomeScreen = (props) => {
     name: "Select Destination",
   });
 
-  console.log(props);
-
   // console.log(`selectedDate is ${selectedDate.toLocaleDateString()}`);
   // console.log(`selectedTime is ${selectedTime}`);
 
@@ -115,7 +113,9 @@ const TripPlannerHomeScreen = (props) => {
               props.navigation.navigate("TripPlanner Results", {
                 option: option,
                 departure: departure,
-                destination: destination
+                destination: destination,
+                time: selectedTime,
+                date: selectedDate.toLocaleDateString()
               })
             }
           >
