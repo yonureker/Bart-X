@@ -1,21 +1,11 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Text,
-  Modal,
-  Button,
-  Picker,
-} from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, Modal, Button, Picker } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
-import StationList from "../../components/stationList";
-
-const TripPlannerHomeScreen = () => {
+const TripPlannerHomeScreen = (props) => {
   const {
     stations: { station },
   } = require("../../stations");
@@ -24,16 +14,45 @@ const TripPlannerHomeScreen = () => {
   const [departurePicker, setDeparturePicker] = useState(false);
   const [destinationPicker, setDestinationPicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState(
+    updateTimeFormat(new Date())
+  );
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [option, setOption] = useState("depart");
 
-  const [departure, setDeparture] = useState({name: 'Select Departure'});
-  const [destination, setDestination] = useState({name: 'Select Destination'});
+  const [departure, setDeparture] = useState({ name: "Select Departure" });
+  const [destination, setDestination] = useState({
+    name: "Select Destination",
+  });
 
-  console.log(departure.name);
+  console.log(props);
+
+  // console.log(`selectedDate is ${selectedDate.toLocaleDateString()}`);
+  // console.log(`selectedTime is ${selectedTime}`);
+
+  // console.log(option)
+
+  // current Selected Date Sun Jun 14 2020 16:53:29 GMT-0700 (PDT)
+  // need date as mm/dd/yyyy      04/30/2020
+  // need time as h:mm+am/pm      03:33pm
+
+  function updateTimeFormat(x) {
+    let splitted = x.toLocaleTimeString().split(" ");
+    const time = splitted[0];
+    const period = splitted[1];
+    const formatted = time.slice(0, time.length - 3) + period.toLowerCase();
+
+    return formatted;
+  }
 
   const changeTab = (index) => {
     setSelectedIndex(index);
+
+    if (index === 0) {
+      setOption("depart");
+    } else {
+      setOption("arrive");
+    }
   };
 
   const searchBarStyle =
@@ -74,13 +93,34 @@ const TripPlannerHomeScreen = () => {
         </View>
       </View>
       <View style={[styles.searchBar, searchBarStyle]}>
-      <View style={{ width: "100%" }}>
-        <TouchableOpacity onPress={() => setDateModal(true)}>
-          <Text>
-            {String(selectedDate).slice(0, 15)} /{" "}
-            {String(selectedDate).slice(16, 21)}
-          </Text>
-        </TouchableOpacity>
+        <View style={{ width: "100%" }}>
+          <TouchableOpacity onPress={() => setDateModal(true)}>
+            <Text>
+              {String(selectedDate).slice(0, 15)} /{" "}
+              {String(selectedDate).slice(16, 21)}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View
+        style={[
+          styles.searchBar,
+          searchBarStyle,
+          { backgroundColor: "#4DCA55" },
+        ]}
+      >
+        <View style={{ width: "100%", alignItems: "center" }}>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate("TripPlanner Results", {
+                option: option,
+                departure: departure,
+                destination: destination
+              })
+            }
+          >
+            <Text>Find Trains</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -104,7 +144,10 @@ const TripPlannerHomeScreen = () => {
             <DateTimePicker
               mode="datetime"
               value={selectedDate}
-              onChange={(event, selectedDate) => setSelectedDate(selectedDate)}
+              onChange={(event, selectedDate) => {
+                setSelectedTime(updateTimeFormat(selectedDate));
+                setSelectedDate(selectedDate);
+              }}
             />
           </View>
         </View>
@@ -128,14 +171,16 @@ const TripPlannerHomeScreen = () => {
           </View>
           <View>
             <Picker
-              selectedValue={departure}
-              onValueChange={(itemValue, itemIndex) => setDeparture(itemValue)}
+              selectedValue={departure.name}
+              onValueChange={(itemValue, itemIndex) =>
+                setDeparture(station[itemIndex])
+              }
             >
               {station.map((station) => (
                 <Picker.Item
-                  key={station.abbr}
+                  key={station.name}
                   label={station.name}
-                  value={station}
+                  value={station.name}
                 />
               ))}
             </Picker>
@@ -161,16 +206,16 @@ const TripPlannerHomeScreen = () => {
           </View>
           <View>
             <Picker
-              selectedValue={destination}
+              selectedValue={destination.name}
               onValueChange={(itemValue, itemIndex) =>
-                setDestination(itemValue)
+                setDestination(station[itemIndex])
               }
             >
               {station.map((station) => (
                 <Picker.Item
-                  key={station.abbr}
+                  key={station.name}
                   label={station.name}
-                  value={station}
+                  value={station.name}
                 />
               ))}
             </Picker>
