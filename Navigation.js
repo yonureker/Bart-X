@@ -21,7 +21,7 @@ import LiveMapScreen from "./screens/LiveMapScreen";
 import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
 import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
-import TripPlannerHomeScreen from "./screens/trip-planner/TripPlannerHomeScreen";
+import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigation";
 
 export default function Navigation() {
   // redux hook
@@ -113,7 +113,7 @@ export default function Navigation() {
           />
           <Tab.Screen
             name="Trip Planner"
-            component={TripPlannerHomeScreen}
+            component={TripPlannerNavigator}
             options={{
               tabBarIcon: () => (
                 <SimpleLineIcons
