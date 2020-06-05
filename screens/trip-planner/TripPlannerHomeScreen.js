@@ -20,9 +20,27 @@ const TripPlannerHomeScreen = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [option, setOption] = useState("depart");
 
-  const [departure, setDeparture] = useState({ name: "Select Departure" });
+  const [departure, setDeparture] = useState({
+    "abbr": "ASHB",
+    "address": "3100 Adeline Street",
+    "city": "Berkeley",
+    "county": "alameda",
+    "gtfs_latitude": "37.852803",
+    "gtfs_longitude": "-122.270062",
+    "name": "Ashby",
+    "state": "CA",
+    "zipcode": "94703",
+  });
   const [destination, setDestination] = useState({
-    name: "Select Destination",
+    "abbr": "DUBL",
+    "address": "5801 Owens Dr.",
+    "city": "Pleasanton",
+    "county": "alameda",
+    "gtfs_latitude": "37.701687",
+    "gtfs_longitude": "-121.899179",
+    "name": "Dublin/Pleasanton",
+    "state": "CA",
+    "zipcode": "94588",
   });
 
   // console.log(`selectedDate is ${selectedDate.toLocaleDateString()}`);
