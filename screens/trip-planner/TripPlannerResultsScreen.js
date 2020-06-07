@@ -23,7 +23,7 @@ const TripPlannerResultsScreen = (props) => {
 
   const fetchTripResults = () => {
     fetch(
-      `http://api.bart.gov/api/sched.aspx?cmd=${option}&orig=${departure.abbr}&dest=${destination.abbr}&date=${date}&key=MW9S-E7SL-26DU-VV8V&b=2&a=4&time=${time}&l=1&json=y`
+      `http://api.bart.gov/api/sched.aspx?cmd=${option}&orig=${departure.abbr}&dest=${destination.abbr}&date=${date}&key=MW9S-E7SL-26DU-VV8V&b=0&a=4&time=${time}&l=1&json=y`
     )
       .then((response) => response.json())
       .then((responseJson) => setData(responseJson.root.schedule.request));
@@ -39,9 +39,7 @@ const TripPlannerResultsScreen = (props) => {
         <View style={styles.container}>
           {data.trip.map((elem, index) => (
             <View style={styles.tripBox}>
-               <View style={{flexDirection: 'row'}}>
-                    <Text>Trip</Text>
-                    </View>
+              <View style={{marginLeft: 25}}><Text style={{fontSize: 25, fontWeight: 'bold'}}>Option {index + 1}</Text></View>
               {elem.leg.map((x, index) => (
                 <View>
                   <View style={[styles.train, backgroundStyle, {borderBottomWidth: 0}]}>
@@ -138,7 +136,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tripBox: {
-    padding: 5,
     marginBottom: 20,
     width: "100%",
     backgroundColor: "#E6E8ED",
@@ -152,8 +149,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
-    paddingLeft: 1,
-    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5
+
   },
   left: {
     width: "3%",
@@ -180,6 +178,10 @@ const styles = StyleSheet.create({
   },
   platformText: {
     color: "#A2AEB1",
+  },
+  tripTitle:{
+    fontWeight: 'bold',
+    fontSize: 18
   },
   minutesText: {
     fontSize: 13,
