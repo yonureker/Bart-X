@@ -39,7 +39,7 @@ const TripPlannerResultsScreen = (props) => {
         <View style={styles.container}>
           {data.trip.map((elem, index) => (
             <View style={styles.tripBox}>
-              <View style={{marginLeft: 25}}><Text style={{fontSize: 25, fontWeight: 'bold'}}>Option {index + 1}</Text></View>
+              <View style={{marginLeft: 15, marginBottom: 20}}><Text style={{fontSize: 25, fontWeight: 'bold'}}>Option {index + 1}</Text></View>
               {elem.leg.map((x, index) => (
                 <View>
                   <View style={[styles.train, backgroundStyle, {borderBottomWidth: 0}]}>
