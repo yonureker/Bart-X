@@ -1,4 +1,4 @@
-## BartLiveMobile
+## Bart X
 
 BartLiveMobile is a mobile app that displays real-time BART departures with the data received from [BART API](http://api.bart.gov/docs/overview/index.aspx).
 
