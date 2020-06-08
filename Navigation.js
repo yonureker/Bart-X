@@ -116,9 +116,9 @@ export default function Navigation() {
             component={TripPlannerNavigator}
             options={{
               tabBarIcon: () => (
-                <SimpleLineIcons
-                  name="note"
-                  size={24}
+                <MaterialCommunityIcons
+                  name="transit-transfer"
+                  size={28}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
