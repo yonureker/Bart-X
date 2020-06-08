@@ -39,7 +39,7 @@ const TripPlannerResultsScreen = (props) => {
         <View style={styles.container}>
           {data.trip.map((elem, index) => (
             <View style={styles.tripBox}>
-              <View style={{marginLeft: 15, marginBottom: 20}}><Text style={{fontSize: 25, fontWeight: 'bold'}}>Option {index + 1}</Text></View>
+              <View style={{marginLeft: 10, marginBottom: 10}}><Text style={{fontSize: 18}}>Option {index + 1}</Text></View>
               {elem.leg.map((x, index) => (
                 <View>
                   <View style={[styles.train, backgroundStyle, {borderBottomWidth: 0}]}>
@@ -134,14 +134,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: 20
   },
   tripBox: {
-    marginBottom: 20,
+    marginBottom: 30,
     width: "100%",
-    backgroundColor: "#E6E8ED",
-    borderWidth: 1,
-    borderColor: "#E6E8ED",
-    borderRadius: 1,
+    borderColor: "#E6E8ED"
   },
   train: {
     height: 60,
