@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { uaState, useEffect } from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { useColorScheme } from "react-native-appearance";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const TripPlannerResultsScreen = (props) => {
   const { date, departure, destination, time, option } = props.route.params;
@@ -38,18 +38,40 @@ const TripPlannerResultsScreen = (props) => {
       <ScrollView>
         <View style={styles.container}>
           {data.trip.map((elem, index) => (
-            <View style={styles.tripBox}>
-              <View style={{marginLeft: 10, marginBottom: 10}}><Text style={{fontSize: 18}}>Option {index + 1}</Text></View>
+            <View style={styles.tripBox} key={index}>
+              <View style={{ marginLeft: 10, marginBottom: 10 }}>
+                <Text style={[textStyle, { fontSize: 18, fontWeight: 'bold' }]}>
+                  Option {index + 1}
+                </Text>
+              </View>
               {elem.leg.map((x, index) => (
-                <View>
-                  <View style={[styles.train, backgroundStyle, {borderBottomWidth: 0}]}>
+                <View key={index}>
+                  <View
+                    style={[
+                      styles.train,
+                      backgroundStyle,
+                      { borderBottomWidth: 0 },
+                    ]}
+                  >
                     <View
-                      style={[styles.left, {backgroundColor: route.find(elem => elem.routeID === x["@line"])["hexcolor"]}]}
+                      style={[
+                        styles.left,
+                        {
+                          backgroundColor: route.find(
+                            (elem) => elem.routeID === x["@line"]
+                          )["hexcolor"],
+                        },
+                      ]}
                     ></View>
                     <View style={styles.mid}>
                       <View>
                         <Text style={[styles.destinationText, textStyle]}>
-                          Board @{station.find(elem => elem.abbr === x["@origin"])["name"]}
+                          Board @
+                          {
+                            station.find((elem) => elem.abbr === x["@origin"])[
+                              "name"
+                            ]
+                          }
                         </Text>
                       </View>
                       <View>
@@ -69,12 +91,22 @@ const TripPlannerResultsScreen = (props) => {
 
                   <View style={[styles.train, backgroundStyle]}>
                     <View
-                      style={{ ...styles.left, backgroundColor: route.find(elem => elem.routeID === x["@line"])["hexcolor"] }}
+                      style={{
+                        ...styles.left,
+                        backgroundColor: route.find(
+                          (elem) => elem.routeID === x["@line"]
+                        )["hexcolor"],
+                      }}
                     ></View>
                     <View style={styles.mid}>
                       <View>
                         <Text style={[styles.destinationText, textStyle]}>
-                          Arrive @{station.find(elem => elem.abbr === x["@destination"])["name"]}
+                          Arrive @
+                          {
+                            station.find(
+                              (elem) => elem.abbr === x["@destination"]
+                            )["name"]
+                          }
                         </Text>
                       </View>
                       <View>
@@ -94,10 +126,13 @@ const TripPlannerResultsScreen = (props) => {
 
                   {index !== elem.leg.length - 1 && (
                     <View style={[styles.train, backgroundStyle]}>
-                      <View
-                        style={[styles.left, {borderWidth: 0}]}
-                      >
-                        <MaterialCommunityIcons name="transit-connection" color="black" size={40} style={{paddingRight: 40}} />
+                      <View style={[styles.left, { borderWidth: 0 }]}>
+                        <MaterialCommunityIcons
+                          name="transit-connection"
+                          color={colorScheme === "dark" ? "white" : "black"}
+                          size={40}
+                          style={{ paddingRight: 40 }}
+                        />
                       </View>
                       <View style={styles.mid}>
                         <View>
@@ -134,12 +169,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 20
+    paddingTop: 20,
   },
   tripBox: {
     marginBottom: 30,
     width: "100%",
-    borderColor: "#E6E8ED"
+    borderColor: "#E6E8ED",
   },
   train: {
     height: 60,
@@ -148,8 +183,7 @@ const styles = StyleSheet.create({
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
     paddingTop: 5,
-    paddingBottom: 5
-
+    paddingBottom: 5,
   },
   left: {
     width: "3%",
@@ -157,8 +191,8 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     borderColor: "black",
     borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   mid: {
     width: "75%",
@@ -177,9 +211,9 @@ const styles = StyleSheet.create({
   platformText: {
     color: "#A2AEB1",
   },
-  tripTitle:{
-    fontWeight: 'bold',
-    fontSize: 18
+  tripTitle: {
+    fontWeight: "bold",
+    fontSize: 18,
   },
   minutesText: {
     fontSize: 13,
