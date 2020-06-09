@@ -74,6 +74,8 @@ const TripPlannerHomeScreen = (props) => {
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
 
+  const colorStyle = colorScheme === "dark" ? 'white' : 'black';
+
   return (
     <View style={styles.container}>
       <View style={{ width: "95%" }}>
@@ -97,21 +99,21 @@ const TripPlannerHomeScreen = (props) => {
       <View style={[styles.searchBar, searchBarStyle]}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity onPress={() => setDeparturePicker(true)}>
-            <Text>{departure.name}</Text>
+            <Text style={{color: colorStyle}}>{departure.name}</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={[styles.searchBar, searchBarStyle]}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity onPress={() => setDestinationPicker(true)}>
-            <Text>{destination.name}</Text>
+            <Text style={{color: colorStyle}}>{destination.name}</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={[styles.searchBar, searchBarStyle]}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity onPress={() => setDateModal(true)}>
-            <Text>
+            <Text style={{color: colorStyle}}>
               {String(selectedDate).slice(0, 15)} /{" "}
               {String(selectedDate).slice(16, 21)}
             </Text>
@@ -146,10 +148,10 @@ const TripPlannerHomeScreen = (props) => {
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
             <View>
-              <Button
+              {/* <Button
                 title="Cancel"
                 onPress={() => setDateModal(false)}
-              ></Button>
+              ></Button> */}
             </View>
             <View>
               <Button
@@ -175,10 +177,10 @@ const TripPlannerHomeScreen = (props) => {
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
             <View>
-              <Button
+              {/* <Button
                 title="Cancel"
                 onPress={() => setDeparturePicker(false)}
-              ></Button>
+              ></Button> */}
             </View>
             <View>
               <Button
@@ -210,10 +212,10 @@ const TripPlannerHomeScreen = (props) => {
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
             <View>
-              <Button
+              {/* <Button
                 title="Cancel"
                 onPress={() => setDestinationPicker(false)}
-              ></Button>
+              ></Button> */}
             </View>
             <View>
               <Button
