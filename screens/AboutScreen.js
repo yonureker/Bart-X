@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Linking } from "react-native";
-import { MaterialCommunityIcons, Fontisto } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
 
 const AboutScreen = props => {
