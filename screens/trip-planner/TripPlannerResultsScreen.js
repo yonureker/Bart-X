@@ -1,4 +1,4 @@
-import React, { uaState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
