@@ -3,18 +3,18 @@ import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const TripPlannerResultsScreen = (props) => {
+const TripPlannerResultsScreen = props => {
   const { date, departure, destination, time, option } = props.route.params;
 
   const [data, setData] = useState({});
   const colorScheme = useColorScheme();
 
   const {
-    stations: { station },
+    stations: { station }
   } = require("../../stations");
 
   const {
-    routes: { route },
+    routes: { route }
   } = require("../../routes");
 
   useEffect(() => {
@@ -25,8 +25,8 @@ const TripPlannerResultsScreen = (props) => {
     fetch(
       `http://api.bart.gov/api/sched.aspx?cmd=${option}&orig=${departure.abbr}&dest=${destination.abbr}&date=${date}&key=MW9S-E7SL-26DU-VV8V&b=0&a=4&time=${time}&l=1&json=y`
     )
-      .then((response) => response.json())
-      .then((responseJson) => setData(responseJson.root.schedule.request));
+      .then(response => response.json())
+      .then(responseJson => setData(responseJson.root.schedule.request));
   };
 
   const backgroundStyle =
@@ -40,7 +40,7 @@ const TripPlannerResultsScreen = (props) => {
           {data.trip.map((elem, index) => (
             <View style={styles.tripBox} key={index}>
               <View style={{ marginLeft: 10, marginBottom: 10 }}>
-                <Text style={[textStyle, { fontSize: 18, fontWeight: 'bold' }]}>
+                <Text style={[textStyle, { fontSize: 18, fontWeight: "bold" }]}>
                   Option {index + 1}
                 </Text>
               </View>
@@ -50,7 +50,7 @@ const TripPlannerResultsScreen = (props) => {
                     style={[
                       styles.train,
                       backgroundStyle,
-                      { borderBottomWidth: 0 },
+                      { borderBottomWidth: 0 }
                     ]}
                   >
                     <View
@@ -58,9 +58,9 @@ const TripPlannerResultsScreen = (props) => {
                         styles.left,
                         {
                           backgroundColor: route.find(
-                            (elem) => elem.routeID === x["@line"]
-                          )["hexcolor"],
-                        },
+                            elem => elem.routeID === x["@line"]
+                          )["hexcolor"]
+                        }
                       ]}
                     ></View>
                     <View style={styles.mid}>
@@ -68,7 +68,7 @@ const TripPlannerResultsScreen = (props) => {
                         <Text style={[styles.destinationText, textStyle]}>
                           Board @
                           {
-                            station.find((elem) => elem.abbr === x["@origin"])[
+                            station.find(elem => elem.abbr === x["@origin"])[
                               "name"
                             ]
                           }
@@ -94,8 +94,8 @@ const TripPlannerResultsScreen = (props) => {
                       style={{
                         ...styles.left,
                         backgroundColor: route.find(
-                          (elem) => elem.routeID === x["@line"]
-                        )["hexcolor"],
+                          elem => elem.routeID === x["@line"]
+                        )["hexcolor"]
                       }}
                     ></View>
                     <View style={styles.mid}>
@@ -104,7 +104,7 @@ const TripPlannerResultsScreen = (props) => {
                           Arrive @
                           {
                             station.find(
-                              (elem) => elem.abbr === x["@destination"]
+                              elem => elem.abbr === x["@destination"]
                             )["name"]
                           }
                         </Text>
@@ -169,12 +169,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 20,
+    paddingTop: 20
   },
   tripBox: {
     marginBottom: 30,
     width: "100%",
-    borderColor: "#E6E8ED",
+    borderColor: "#E6E8ED"
   },
   train: {
     height: 60,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
     paddingTop: 5,
-    paddingBottom: 5,
+    paddingBottom: 5
   },
   left: {
     width: "3%",
@@ -192,41 +192,41 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   mid: {
     width: "75%",
     justifyContent: "space-evenly",
     flexDirection: "column",
-    paddingLeft: 5,
+    paddingLeft: 5
   },
   right: {
     width: "18%",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   destinationText: {
-    fontSize: 16,
+    fontSize: 16
   },
   platformText: {
-    color: "#A2AEB1",
+    color: "#A2AEB1"
   },
   tripTitle: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 18
   },
   minutesText: {
-    fontSize: 13,
+    fontSize: 13
   },
   darkBackground: {
-    backgroundColor: "black",
+    backgroundColor: "black"
   },
   lightBackground: {
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
   lightText: {
-    color: "white",
-  },
+    color: "white"
+  }
 });
 
 export default TripPlannerResultsScreen;

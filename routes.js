@@ -6,7 +6,7 @@ module.exports.routes = {
       routeID: "ROUTE 19",
       number: "19",
       hexcolor: "#D5CFA3",
-      color: "BEIGE",
+      color: "BEIGE"
     },
     {
       name: "Coliseum to Oakland Airport",
@@ -14,7 +14,7 @@ module.exports.routes = {
       routeID: "ROUTE 20",
       number: "20",
       hexcolor: "#D5CFA3",
-      color: "BEIGE",
+      color: "BEIGE"
     },
     {
       name: "Daly City to Dublin/Pleasanton",
@@ -22,7 +22,7 @@ module.exports.routes = {
       routeID: "ROUTE 12",
       number: "12",
       hexcolor: "#0099CC",
-      color: "BLUE",
+      color: "BLUE"
     },
     {
       name: "Dublin/Pleasanton to Daly City",
@@ -30,7 +30,7 @@ module.exports.routes = {
       routeID: "ROUTE 11",
       number: "11",
       hexcolor: "#0099CC",
-      color: "BLUE",
+      color: "BLUE"
     },
     {
       name: "Daly City to Warm Springs/South Fremont",
@@ -38,7 +38,7 @@ module.exports.routes = {
       routeID: "ROUTE 6",
       number: "6",
       hexcolor: "#339933",
-      color: "GREEN",
+      color: "GREEN"
     },
     {
       name: "Warm Springs/South Fremont to Daly City",
@@ -46,7 +46,7 @@ module.exports.routes = {
       routeID: "ROUTE 5",
       number: "5",
       hexcolor: "#339933",
-      color: "GREEN",
+      color: "GREEN"
     },
     {
       name: "Warm Springs/South Fremont to Richmond",
@@ -54,7 +54,7 @@ module.exports.routes = {
       routeID: "ROUTE 3",
       number: "3",
       hexcolor: "#FF9933",
-      color: "ORANGE",
+      color: "ORANGE"
     },
     {
       name: "Richmond to Warm Springs/South Fremont",
@@ -62,7 +62,7 @@ module.exports.routes = {
       routeID: "ROUTE 4",
       number: "4",
       hexcolor: "#FF9933",
-      color: "ORANGE",
+      color: "ORANGE"
     },
     {
       name: "Millbrae to San Francisco International Airport",
@@ -70,7 +70,7 @@ module.exports.routes = {
       routeID: "ROUTE 13",
       number: "13",
       hexcolor: "#C463C5",
-      color: "",
+      color: ""
     },
     {
       name: "San Francisco International Airport to Millbrae",
@@ -78,7 +78,7 @@ module.exports.routes = {
       routeID: "ROUTE 14",
       number: "14",
       hexcolor: "#C463C5",
-      color: "",
+      color: ""
     },
     {
       name: "Millbrae/Daly City to Richmond",
@@ -86,7 +86,7 @@ module.exports.routes = {
       routeID: "ROUTE 8",
       number: "8",
       hexcolor: "#FF0000",
-      color: "RED",
+      color: "RED"
     },
     {
       name: "Richmond to Daly City/Millbrae",
@@ -94,7 +94,7 @@ module.exports.routes = {
       routeID: "ROUTE 7",
       number: "7",
       hexcolor: "#FF0000",
-      color: "RED",
+      color: "RED"
     },
     {
       name: "Millbrae/SFIA to Antioch",
@@ -102,7 +102,7 @@ module.exports.routes = {
       routeID: "ROUTE 2",
       number: "2",
       hexcolor: "#FFFF33",
-      color: "YELLOW",
+      color: "YELLOW"
     },
     {
       name: "Antioch to SFIA/Millbrae",
@@ -110,7 +110,7 @@ module.exports.routes = {
       routeID: "ROUTE 1",
       number: "1",
       hexcolor: "#FFFF33",
-      color: "YELLOW",
-    },
-  ],
+      color: "YELLOW"
+    }
+  ]
 };

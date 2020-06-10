@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 
 import TripPlannerHomeScreen from "./TripPlannerHomeScreen";
-import TripPlannerResultsScreen from "./TripPlannerResultsScreen"
+import TripPlannerResultsScreen from "./TripPlannerResultsScreen";
 
 const Stack = createStackNavigator();
 
 export default function TripPlannerNavigator(props) {
   const scheme = useColorScheme();
   const {
-    stations: { station },
+    stations: { station }
   } = require("../../stations");
 
   return (
@@ -18,7 +18,7 @@ export default function TripPlannerNavigator(props) {
       initialRouteName="TripPlanner Home"
       screenOptions={{
         gestureEnabled: false,
-        headerTitleStyle: { fontSize: 18 },
+        headerTitleStyle: { fontSize: 18 }
       }}
     >
       <Stack.Screen

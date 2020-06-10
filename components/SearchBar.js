@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import { useDispatch, useSelector } from "react-redux";
 

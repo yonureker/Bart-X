@@ -9,7 +9,7 @@ module.exports.stations = {
       city: "Oakland",
       state: "CA",
       county: "alameda",
-      zipcode: "94612",
+      zipcode: "94612"
     },
     {
       name: "16th St. Mission",
@@ -20,7 +20,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94110",
+      zipcode: "94110"
     },
     {
       name: "19th St. Oakland",
@@ -31,7 +31,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94612",
+      zipcode: "94612"
     },
     {
       name: "24th St. Mission",
@@ -42,7 +42,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94110",
+      zipcode: "94110"
     },
     {
       name: "Antioch",
@@ -53,7 +53,7 @@ module.exports.stations = {
       city: "Antioch",
       county: "Contra Costa",
       state: "CA",
-      zipcode: "94509",
+      zipcode: "94509"
     },
     {
       name: "Ashby",
@@ -64,7 +64,7 @@ module.exports.stations = {
       city: "Berkeley",
       county: "alameda",
       state: "CA",
-      zipcode: "94703",
+      zipcode: "94703"
     },
     {
       name: "Balboa Park",
@@ -75,7 +75,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94112",
+      zipcode: "94112"
     },
     {
       name: "Bay Fair",
@@ -86,7 +86,7 @@ module.exports.stations = {
       city: "San Leandro",
       county: "alameda",
       state: "CA",
-      zipcode: "94578",
+      zipcode: "94578"
     },
     {
       name: "Berryessa/North San Jose",
@@ -97,7 +97,7 @@ module.exports.stations = {
       city: "San Jose",
       county: "Santa Clara",
       state: "CA",
-      zipcode: "95133",
+      zipcode: "95133"
     },
     {
       name: "Castro Valley",
@@ -108,7 +108,7 @@ module.exports.stations = {
       city: "Castro Valley",
       county: "alameda",
       state: "CA",
-      zipcode: "94546",
+      zipcode: "94546"
     },
     {
       name: "Civic Center/UN Plaza",
@@ -119,7 +119,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94102",
+      zipcode: "94102"
     },
     {
       name: "Coliseum",
@@ -130,7 +130,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94621",
+      zipcode: "94621"
     },
     {
       name: "Colma",
@@ -141,7 +141,7 @@ module.exports.stations = {
       city: "Colma",
       county: "sanmateo",
       state: "CA",
-      zipcode: "94014",
+      zipcode: "94014"
     },
     {
       name: "Concord",
@@ -152,7 +152,7 @@ module.exports.stations = {
       city: "Concord",
       county: "contracosta",
       state: "CA",
-      zipcode: "94520",
+      zipcode: "94520"
     },
     {
       name: "Daly City",
@@ -163,7 +163,7 @@ module.exports.stations = {
       city: "Daly City",
       county: "sanmateo",
       state: "CA",
-      zipcode: "94014",
+      zipcode: "94014"
     },
     {
       name: "Downtown Berkeley",
@@ -174,7 +174,7 @@ module.exports.stations = {
       city: "Berkeley",
       county: "alameda",
       state: "CA",
-      zipcode: "94704",
+      zipcode: "94704"
     },
     {
       name: "Dublin/Pleasanton",
@@ -185,7 +185,7 @@ module.exports.stations = {
       city: "Pleasanton",
       county: "alameda",
       state: "CA",
-      zipcode: "94588",
+      zipcode: "94588"
     },
     {
       name: "El Cerrito del Norte",
@@ -196,7 +196,7 @@ module.exports.stations = {
       city: "El Cerrito",
       county: "contracosta",
       state: "CA",
-      zipcode: "94530",
+      zipcode: "94530"
     },
     {
       name: "El Cerrito Plaza",
@@ -207,7 +207,7 @@ module.exports.stations = {
       city: "El Cerrito",
       county: "contracosta",
       state: "CA",
-      zipcode: "94530",
+      zipcode: "94530"
     },
     {
       name: "Embarcadero",
@@ -218,7 +218,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94111",
+      zipcode: "94111"
     },
     {
       name: "Fremont",
@@ -229,7 +229,7 @@ module.exports.stations = {
       city: "Fremont",
       county: "alameda",
       state: "CA",
-      zipcode: "94536",
+      zipcode: "94536"
     },
     {
       name: "Fruitvale",
@@ -240,7 +240,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94601",
+      zipcode: "94601"
     },
     {
       name: "Glen Park",
@@ -251,7 +251,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94131",
+      zipcode: "94131"
     },
     {
       name: "Hayward",
@@ -262,7 +262,7 @@ module.exports.stations = {
       city: "Hayward",
       county: "alameda",
       state: "CA",
-      zipcode: "94541",
+      zipcode: "94541"
     },
     {
       name: "Lafayette",
@@ -273,7 +273,7 @@ module.exports.stations = {
       city: "Lafayette",
       county: "contracosta",
       state: "CA",
-      zipcode: "94549",
+      zipcode: "94549"
     },
     {
       name: "Lake Merritt",
@@ -284,7 +284,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94607",
+      zipcode: "94607"
     },
     {
       name: "MacArthur",
@@ -295,7 +295,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94609",
+      zipcode: "94609"
     },
     {
       name: "Millbrae",
@@ -306,7 +306,7 @@ module.exports.stations = {
       city: "Millbrae",
       county: "sanmateo",
       state: "CA",
-      zipcode: "94030",
+      zipcode: "94030"
     },
     {
       name: "Milpitas",
@@ -317,7 +317,7 @@ module.exports.stations = {
       city: "Milpitas",
       county: "Santa Clara",
       state: "CA",
-      zipcode: "95035",
+      zipcode: "95035"
     },
     {
       name: "Montgomery St.",
@@ -328,7 +328,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94104",
+      zipcode: "94104"
     },
     {
       name: "North Berkeley",
@@ -339,7 +339,7 @@ module.exports.stations = {
       city: "Berkeley",
       county: "alameda",
       state: "CA",
-      zipcode: "94702",
+      zipcode: "94702"
     },
     {
       name: "North Concord/Martinez",
@@ -350,7 +350,7 @@ module.exports.stations = {
       city: "Concord",
       county: "contracosta",
       state: "CA",
-      zipcode: "94520",
+      zipcode: "94520"
     },
     {
       name: "Oakland International Airport",
@@ -361,7 +361,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94621",
+      zipcode: "94621"
     },
     {
       name: "Orinda",
@@ -372,7 +372,7 @@ module.exports.stations = {
       city: "Orinda",
       county: "contracosta",
       state: "CA",
-      zipcode: "94563",
+      zipcode: "94563"
     },
     {
       name: "Pittsburg/Bay Point",
@@ -383,7 +383,7 @@ module.exports.stations = {
       city: "Pittsburg",
       county: "contracosta",
       state: "CA",
-      zipcode: "94565",
+      zipcode: "94565"
     },
     {
       name: "Pittsburg Center",
@@ -394,7 +394,7 @@ module.exports.stations = {
       city: "Pittsburg",
       county: "Contra Costa",
       state: "CA",
-      zipcode: "94565",
+      zipcode: "94565"
     },
     {
       name: "Pleasant Hill/Contra Costa Centre",
@@ -405,7 +405,7 @@ module.exports.stations = {
       city: "Walnut Creek",
       county: "contracosta",
       state: "CA",
-      zipcode: "94597",
+      zipcode: "94597"
     },
     {
       name: "Powell St.",
@@ -416,7 +416,7 @@ module.exports.stations = {
       city: "San Francisco",
       county: "sanfrancisco",
       state: "CA",
-      zipcode: "94102",
+      zipcode: "94102"
     },
     {
       name: "Richmond",
@@ -427,7 +427,7 @@ module.exports.stations = {
       city: "Richmond",
       county: "contracosta",
       state: "CA",
-      zipcode: "94801",
+      zipcode: "94801"
     },
     {
       name: "Rockridge",
@@ -438,7 +438,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94618",
+      zipcode: "94618"
     },
     {
       name: "San Bruno",
@@ -449,7 +449,7 @@ module.exports.stations = {
       city: "San Bruno",
       county: "sanmateo",
       state: "CA",
-      zipcode: "94066",
+      zipcode: "94066"
     },
     {
       name: "San Francisco International Airport",
@@ -460,7 +460,7 @@ module.exports.stations = {
       city: "San Francisco Int'l Airport",
       county: "sanmateo",
       state: "CA",
-      zipcode: "94128",
+      zipcode: "94128"
     },
     {
       name: "San Leandro",
@@ -471,7 +471,7 @@ module.exports.stations = {
       city: "San Leandro",
       county: "alameda",
       state: "CA",
-      zipcode: "94577",
+      zipcode: "94577"
     },
     {
       name: "South Hayward",
@@ -482,7 +482,7 @@ module.exports.stations = {
       city: "Hayward",
       county: "alameda",
       state: "CA",
-      zipcode: "94544",
+      zipcode: "94544"
     },
     {
       name: "South San Francisco",
@@ -493,7 +493,7 @@ module.exports.stations = {
       city: "South San Francisco",
       county: "sanmateo",
       state: "CA",
-      zipcode: "94080",
+      zipcode: "94080"
     },
     {
       name: "Union City",
@@ -504,7 +504,7 @@ module.exports.stations = {
       city: "Union City",
       county: "alameda",
       state: "CA",
-      zipcode: "94587",
+      zipcode: "94587"
     },
     {
       name: "Walnut Creek",
@@ -515,7 +515,7 @@ module.exports.stations = {
       city: "Walnut Creek",
       county: "contracosta",
       state: "CA",
-      zipcode: "94596",
+      zipcode: "94596"
     },
     {
       name: "Warm Springs/South Fremont",
@@ -526,7 +526,7 @@ module.exports.stations = {
       city: "Fremont",
       county: "alameda",
       state: "CA",
-      zipcode: "94539",
+      zipcode: "94539"
     },
     {
       name: "West Dublin/Pleasanton",
@@ -537,7 +537,7 @@ module.exports.stations = {
       city: "Dublin",
       county: "alameda",
       state: "CA",
-      zipcode: "94568",
+      zipcode: "94568"
     },
     {
       name: "West Oakland",
@@ -548,7 +548,7 @@ module.exports.stations = {
       city: "Oakland",
       county: "alameda",
       state: "CA",
-      zipcode: "94607",
-    },
-  ],
+      zipcode: "94607"
+    }
+  ]
 };
