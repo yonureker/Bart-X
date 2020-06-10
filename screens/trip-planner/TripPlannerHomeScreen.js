@@ -21,26 +21,26 @@ const TripPlannerHomeScreen = (props) => {
   const [option, setOption] = useState("depart");
 
   const [departure, setDeparture] = useState({
-    "abbr": "ASHB",
-    "address": "3100 Adeline Street",
-    "city": "Berkeley",
-    "county": "alameda",
-    "gtfs_latitude": "37.852803",
-    "gtfs_longitude": "-122.270062",
-    "name": "Ashby",
-    "state": "CA",
-    "zipcode": "94703",
+    abbr: "ASHB",
+    address: "3100 Adeline Street",
+    city: "Berkeley",
+    county: "alameda",
+    gtfs_latitude: "37.852803",
+    gtfs_longitude: "-122.270062",
+    name: "Ashby",
+    state: "CA",
+    zipcode: "94703",
   });
   const [destination, setDestination] = useState({
-    "abbr": "DUBL",
-    "address": "5801 Owens Dr.",
-    "city": "Pleasanton",
-    "county": "alameda",
-    "gtfs_latitude": "37.701687",
-    "gtfs_longitude": "-121.899179",
-    "name": "Dublin/Pleasanton",
-    "state": "CA",
-    "zipcode": "94588",
+    abbr: "DUBL",
+    address: "5801 Owens Dr.",
+    city: "Pleasanton",
+    county: "alameda",
+    gtfs_latitude: "37.701687",
+    gtfs_longitude: "-121.899179",
+    name: "Dublin/Pleasanton",
+    state: "CA",
+    zipcode: "94588",
   });
 
   // console.log(`selectedDate is ${selectedDate.toLocaleDateString()}`);
@@ -74,7 +74,7 @@ const TripPlannerHomeScreen = (props) => {
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
 
-  const colorStyle = colorScheme === "dark" ? 'white' : 'black';
+  const colorStyle = colorScheme === "dark" ? "white" : "black";
 
   return (
     <View style={styles.container}>
@@ -99,21 +99,21 @@ const TripPlannerHomeScreen = (props) => {
       <View style={[styles.searchBar, searchBarStyle]}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity onPress={() => setDeparturePicker(true)}>
-            <Text style={{color: colorStyle}}>{departure.name}</Text>
+            <Text style={{ color: colorStyle }}>{departure.name}</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={[styles.searchBar, searchBarStyle]}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity onPress={() => setDestinationPicker(true)}>
-            <Text style={{color: colorStyle}}>{destination.name}</Text>
+            <Text style={{ color: colorStyle }}>{destination.name}</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={[styles.searchBar, searchBarStyle]}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity onPress={() => setDateModal(true)}>
-            <Text style={{color: colorStyle}}>
+            <Text style={{ color: colorStyle }}>
               {String(selectedDate).slice(0, 15)} /{" "}
               {String(selectedDate).slice(16, 21)}
             </Text>
@@ -127,21 +127,21 @@ const TripPlannerHomeScreen = (props) => {
           { backgroundColor: "#4DCA55" },
         ]}
       >
-        <View style={{ width: "100%", alignItems: "center" }}>
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate("TripPlanner Results", {
-                option: option,
-                departure: departure,
-                destination: destination,
-                time: selectedTime,
-                date: selectedDate.toLocaleDateString()
-              })
-            }
-          >
-            <Text>Find Trains</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={{ width: "100%",height: '100%', justifyContent: 'center'}}>
+            <TouchableOpacity
+              onPress={() =>
+                props.navigation.navigate("TripPlanner Results", {
+                  option: option,
+                  departure: departure,
+                  destination: destination,
+                  time: selectedTime,
+                  date: selectedDate.toLocaleDateString(),
+                })
+              }
+            >
+              <Text style={{alignSelf: 'center'}}>Find Trains</Text>
+            </TouchableOpacity>
+          </View>
       </View>
 
       <Modal visible={dateModal} transparent>
@@ -149,8 +149,8 @@ const TripPlannerHomeScreen = (props) => {
           <View style={styles.modalBox}>
             <View>
               {/* <Button
-                title="Cancel"
-                onPress={() => setDateModal(false)}
+                title="Now"
+                onPress={() => setSelectedDate(new Date())}
               ></Button> */}
             </View>
             <View>
@@ -184,7 +184,7 @@ const TripPlannerHomeScreen = (props) => {
             </View>
             <View>
               <Button
-                title="Select"
+                title="Select Departure"
                 onPress={() => setDeparturePicker(false)}
               ></Button>
             </View>
@@ -219,7 +219,7 @@ const TripPlannerHomeScreen = (props) => {
             </View>
             <View>
               <Button
-                title="Select"
+                title="Select Destination"
                 onPress={() => setDestinationPicker(false)}
               ></Button>
             </View>
