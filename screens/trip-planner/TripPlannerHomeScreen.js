@@ -43,15 +43,6 @@ const TripPlannerHomeScreen = props => {
     zipcode: "94588"
   });
 
-  // console.log(`selectedDate is ${selectedDate.toLocaleDateString()}`);
-  // console.log(`selectedTime is ${selectedTime}`);
-
-  // console.log(option)
-
-  // current Selected Date Sun Jun 14 2020 16:53:29 GMT-0700 (PDT)
-  // need date as mm/dd/yyyy      04/30/2020
-  // need time as h:mm+am/pm      03:33pm
-
   function updateTimeFormat(x) {
     let splitted = x.toLocaleTimeString().split(" ");
     const time = splitted[0];
@@ -132,7 +123,7 @@ const TripPlannerHomeScreen = props => {
         >
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate("TripPlanner Results", {
+              props.navigation.navigate("TripPlanner Results Navigator", {
                 option: option,
                 departure: departure,
                 destination: destination,
