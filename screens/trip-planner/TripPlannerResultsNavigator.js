@@ -24,9 +24,9 @@ export default function TripPlannerResultsNavigator(props) {
       .then((responseJson) => setData(responseJson.root.schedule.request));
   };
 
-  const backgroundStyle =
-    colorScheme === "dark" ? styles.darkBackground : styles.lightBackground;
-  const textStyle = colorScheme === "dark" ? styles.lightText : null;
+  // const backgroundStyle =
+  //   colorScheme === "dark" ? styles.darkBackground : styles.lightBackground;
+  // const textStyle = colorScheme === "dark" ? styles.lightText : null;
 
   if (data.trip) {
     return (
