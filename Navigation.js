@@ -8,7 +8,7 @@ import * as SecureStore from "expo-secure-store";
 import {
   NavigationContainer,
   DefaultTheme,
-  DarkTheme,
+  DarkTheme
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native-appearance";
@@ -24,7 +24,7 @@ export default function Navigation() {
   const dispatch = useDispatch();
 
   // get user location from state
-  const userLocation = useSelector((state) => state.userLocation);
+  const userLocation = useSelector(state => state.userLocation);
 
   // check dark / light mode
   const scheme = useColorScheme();
@@ -44,7 +44,7 @@ export default function Navigation() {
     if (status !== "granted") {
       dispatch({
         type: "RECEIVE_USER_LOCATION",
-        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } },
+        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } }
       });
     }
 
@@ -53,13 +53,13 @@ export default function Navigation() {
       accuracy:
         Platform.OS === "android"
           ? Location.Accuracy.Low
-          : Location.Accuracy.Lowest,
+          : Location.Accuracy.Lowest
     });
 
     // dispatch to redux store
     dispatch({
       type: "RECEIVE_USER_LOCATION",
-      payload: location,
+      payload: location
     });
   };
 
@@ -78,7 +78,7 @@ export default function Navigation() {
   if (userLocation.coords.latitude !== null) {
     return (
       <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Tab.Navigator initialRouteName="Trip Planner">
+        <Tab.Navigator initialRouteName="Station List">
           <Tab.Screen
             name="Station List"
             component={AllStationsNavigator}
@@ -90,7 +90,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              ),
+              )
             }}
           />
           <Tab.Screen
@@ -104,7 +104,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              ),
+              )
             }}
           />
           <Tab.Screen
@@ -118,7 +118,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              ),
+              )
             }}
           />
           <Tab.Screen
@@ -132,7 +132,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              ),
+              )
             }}
           />
           <Tab.Screen
@@ -146,7 +146,7 @@ export default function Navigation() {
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
                 />
-              ),
+              )
             }}
           />
         </Tab.Navigator>
@@ -164,13 +164,13 @@ export default function Navigation() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   imageBackground: {
     width: "100%",
-    height: "100%",
+    height: "100%"
   },
   tabIcon: {
-    marginTop: 5,
-  },
+    marginTop: 5
+  }
 });
