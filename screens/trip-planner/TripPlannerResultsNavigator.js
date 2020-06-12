@@ -1,6 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
-import { useColorScheme } from "react-native-appearance";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import TripPlannerResults from "../../components/TripPlannerResults";
@@ -10,7 +9,6 @@ const Tab = createMaterialTopTabNavigator();
 export default function TripPlannerResultsNavigator(props) {
   const { date, departure, destination, time, option } = props.route.params;
   const [data, setData] = useState({});
-  const colorScheme = useColorScheme();
 
   useLayoutEffect(() => {
     fetchTripResults();
@@ -23,10 +21,6 @@ export default function TripPlannerResultsNavigator(props) {
       .then(response => response.json())
       .then(responseJson => setData(responseJson.root.schedule.request));
   };
-
-  // const backgroundStyle =
-  //   colorScheme === "dark" ? styles.darkBackground : styles.lightBackground;
-  // const textStyle = colorScheme === "dark" ? styles.lightText : null;
 
   if (data.trip) {
     return (
