@@ -7,7 +7,10 @@ export default function WeekAndSatScreen() {
     <PinchZoomView minScale={1} maxScale={4}>
       <Image
         style={{ width: "100%", height: "100%" }}
-        source={require("../../assets/week-and-sat-system-map.png")}
+        source={{
+          uri:
+            "https://bart-system-maps.s3-us-west-1.amazonaws.com/week-and-sat-system-map.png"
+        }}
         resizeMode="contain"
       />
     </PinchZoomView>

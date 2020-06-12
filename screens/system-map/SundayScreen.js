@@ -7,7 +7,10 @@ export default function SundayScreen() {
     <PinchZoomView minScale={1} maxScale={4}>
       <Image
         style={{ width: "100%", height: "100%" }}
-        source={require("../../assets/sunday-system-map.png")}
+        source={{
+          uri:
+            "https://bart-system-maps.s3-us-west-1.amazonaws.com/sunday-system-map.png"
+        }}
         resizeMode="contain"
       />
     </PinchZoomView>
