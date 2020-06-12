@@ -16,7 +16,7 @@ export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
   enableScreens();
 
-  const store = createStore(rootReducer, applyMiddleware(logger));
+  const store = createStore(rootReducer);
   const colorScheme = useColorScheme();
   // variable to check if image caching is ready
   const [isReady, setIsReady] = useState(false);
