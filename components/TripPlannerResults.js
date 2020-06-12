@@ -40,8 +40,8 @@ export default function TripPlannerResults(props) {
                   alignItems: "center",
                 }}
               >
-                <Text>Departs</Text>
-                <Text style={{ fontWeight: "bold" }}>
+                <Text style={textStyle}>Departs</Text>
+                <Text style={[textStyle, { fontWeight: "bold" }]}>
                   {trip["@origTimeMin"]}
                 </Text>
               </View>
@@ -52,8 +52,8 @@ export default function TripPlannerResults(props) {
                   alignItems: "center",
                 }}
               >
-                <Text>Trip Time</Text>
-                <Text style={{ fontWeight: "bold" }}>
+                <Text style={textStyle}>Trip Time</Text>
+                <Text style={[textStyle, { fontWeight: "bold" }]}>
                   {trip["@tripTime"]} mins
                 </Text>
               </View>
@@ -64,8 +64,8 @@ export default function TripPlannerResults(props) {
                   alignItems: "center",
                 }}
               >
-                <Text>Arrives</Text>
-                <Text style={{ fontWeight: "bold" }}>
+                <Text style={textStyle}>Arrives</Text>
+                <Text style={[textStyle, { fontWeight: "bold" }]}>
                   {trip["@destTimeMin"]}
                 </Text>
               </View>
@@ -183,7 +183,7 @@ export default function TripPlannerResults(props) {
   } else {
     return (
       <View style={styles.container}>
-        <Text>Not found</Text>
+        <Text>Loading...</Text>
       </View>
     );
   }
