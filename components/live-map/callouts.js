@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
-import { useSelector, useDispatch } from "react-redux";
 
 import CalloutText from "./calloutText";
 
