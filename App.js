@@ -15,20 +15,22 @@ export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
   enableScreens();
 
+  // redux store
   const store = createStore(rootReducer);
   const colorScheme = useColorScheme();
   // variable to check if image caching is ready
   const [isReady, setIsReady] = useState(false);
 
+  // cache assets
   const cacheResources = async () => {
     const images = [
       require("./assets/splash.png"),
       require("./assets/icon.png"),
       require("./assets/station.png"),
-      require("./assets/loading.png")
+      require("./assets/loading.png"),
     ];
 
-    const cacheImages = images.map(image => {
+    const cacheImages = images.map((image) => {
       return Asset.fromModule(image).downloadAsync();
     });
 
@@ -62,9 +64,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   darkThemeContainer: {
-    backgroundColor: "black"
-  }
+    backgroundColor: "black",
+  },
 });
