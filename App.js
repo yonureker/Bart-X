@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
 import { enableScreens } from "react-native-screens";
 import { StatusBar, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
-import { AppearanceProvider, useColorScheme } from "react-native-appearance";
-import logger from "redux-logger";
+import { useColorScheme } from "react-native-appearance";
 
 import rootReducer from "./reducers/rootReducer";
 import Navigation from "./Navigation";
@@ -26,9 +25,7 @@ export default function App() {
       require("./assets/splash.png"),
       require("./assets/icon.png"),
       require("./assets/station.png"),
-      require("./assets/loading.png"),
-      require("./assets/sunday-system-map.png"),
-      require("./assets/week-and-sat-system-map.png")
+      require("./assets/loading.png")
     ];
 
     const cacheImages = images.map(image => {
@@ -55,12 +52,10 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      {/* <AppearanceProvider> */}
       <StatusBar barStyle={statusBarStyle} />
       <SafeAreaView style={[styles.container, darkThemeContainer]}>
         <Navigation />
       </SafeAreaView>
-      {/* </AppearanceProvider> */}
     </Provider>
   );
 }
