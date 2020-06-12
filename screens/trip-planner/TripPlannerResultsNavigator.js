@@ -20,8 +20,8 @@ export default function TripPlannerResultsNavigator(props) {
     fetch(
       `http://api.bart.gov/api/sched.aspx?cmd=${option}&orig=${departure.abbr}&dest=${destination.abbr}&date=${date}&key=MW9S-E7SL-26DU-VV8V&b=0&a=4&time=${time}&l=1&json=y`
     )
-      .then((response) => response.json())
-      .then((responseJson) => setData(responseJson.root.schedule.request));
+      .then(response => response.json())
+      .then(responseJson => setData(responseJson.root.schedule.request));
   };
 
   // const backgroundStyle =
@@ -32,8 +32,8 @@ export default function TripPlannerResultsNavigator(props) {
     return (
       <Tab.Navigator swipeEnabled={true} style={styles.navigator}>
         {data.trip.map((trip, index) => (
-          <Tab.Screen key={index} name={String(trip["@destTimeMin"])}>
-            {(props) => (
+          <Tab.Screen key={index} name={`Option ${index + 1}`}>
+            {props => (
               <TripPlannerResults
                 {...props}
                 trip={trip}
@@ -47,7 +47,7 @@ export default function TripPlannerResultsNavigator(props) {
   } else {
     return (
       <Tab.Navigator swipeEnabled={true} style={styles.navigator}>
-        <Tab.Screen name="Hello" component={TripPlannerResults} />
+        <Tab.Screen name="Loading..." component={TripPlannerResults} />
       </Tab.Navigator>
     );
   }
@@ -55,6 +55,6 @@ export default function TripPlannerResultsNavigator(props) {
 
 const styles = StyleSheet.create({
   navigator: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+  }
 });
