@@ -7,7 +7,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import ClosestStationListScreen from "./ClosestStationListScreen";
 import FavoriteListScreen from "./FavoriteListScreen";

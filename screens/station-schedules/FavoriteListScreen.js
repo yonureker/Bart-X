@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, TextInput, Text, Button } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 import { useColorScheme } from "react-native-appearance";

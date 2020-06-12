@@ -3,7 +3,6 @@ import { View, StyleSheet, TextInput, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 import { useColorScheme } from "react-native-appearance";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 import StationList from "../../components/stationList";
 import SearchBar from "../../components/SearchBar";
