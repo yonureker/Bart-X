@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Modal, Button, Picker } from "react-native";
+import { View, StyleSheet, Text, Modal, Button, Picker, Alert } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -122,7 +122,11 @@ const TripPlannerHomeScreen = props => {
           style={{ width: "100%", height: "100%", justifyContent: "center" }}
         >
           <TouchableOpacity
-            onPress={() =>
+            onPress={() => {
+              if (departure.name === destination.name){
+                return (Alert.alert(`Destination and departure can't be the same`))
+              }
+              
               props.navigation.navigate("TripPlanner Results Navigator", {
                 option: option,
                 departure: departure,
@@ -130,6 +134,7 @@ const TripPlannerHomeScreen = props => {
                 time: selectedTime,
                 date: selectedDate.toLocaleDateString()
               })
+            }
             }
           >
             <Text style={{ alignSelf: "center" }}>Find Trains</Text>
