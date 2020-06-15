@@ -10,7 +10,7 @@ const Tab = createMaterialTopTabNavigator();
 function SystemMapNavigator() {
   return (
     <Tab.Navigator swipeEnabled={false} style={styles.navigator}>
-      <Tab.Screen name="Weekday & Saturday" component={WeekAndSatScreen} />
+      <Tab.Screen name='Weekday & Saturday' component={WeekAndSatScreen} />
       <Tab.Screen name="Sunday" component={SundayScreen} />
     </Tab.Navigator>
   );
