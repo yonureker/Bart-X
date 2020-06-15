@@ -14,10 +14,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native-appearance";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
-import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
 import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigator";
 import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator"
+import MoreScreenStack from "./screens/more/MoreScreenStack";
 
 export default function Navigation() {
   // redux hook
@@ -137,7 +137,7 @@ export default function Navigation() {
           />
           <Tab.Screen
             name="More"
-            component={AboutScreen}
+            component={MoreScreenStack}
             options={{
               tabBarIcon: () => (
                 <Ionicons
