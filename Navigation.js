@@ -14,10 +14,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native-appearance";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
-import SystemMapNavigator from "./screens/system-map/SystemMapNavigator";
 import AboutScreen from "./screens/AboutScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
 import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigator";
+import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator"
 
 export default function Navigation() {
   // redux hook
@@ -122,12 +122,12 @@ export default function Navigation() {
             }}
           />
           <Tab.Screen
-            name="System Map"
-            component={SystemMapNavigator}
+            name="Advisories"
+            component={AdvisoryNavigator}
             options={{
               tabBarIcon: () => (
-                <Ionicons
-                  name="ios-map"
+                <MaterialCommunityIcons
+                  name="bell-alert"
                   size={28}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
@@ -136,7 +136,7 @@ export default function Navigation() {
             }}
           />
           <Tab.Screen
-            name="About"
+            name="More"
             component={AboutScreen}
             options={{
               tabBarIcon: () => (
