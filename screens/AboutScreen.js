@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Linking } from "react-native";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const AboutScreen = (props) => {
   const scheme = useColorScheme();
@@ -16,16 +17,25 @@ const AboutScreen = (props) => {
       iconName: "star-box",
       iconLibrary: "MaterialCommunityIcons",
       title: "Rate Bart X",
+      link: () => {
+        Linking.openURL(
+          "https://apps.apple.com/us/app/bart-x/id1480753570?action=write-review"
+        );
+      },
     },
     {
       iconName: "email-box",
       iconLibrary: "MaterialCommunityIcons",
       title: "Send Feedback",
+      link: () => {
+        Linking.openURL("mailto:yonureker@gmail.com");
+      },
     },
     {
-      iconName: "rocket",
+      iconName: "map-legend",
       iconLibrary: "MaterialCommunityIcons",
-      title: "Version",
+      title: "System Maps",
+      link: () => props.navigation.navigate("Weekday & Saturday"),
     },
   ];
 
@@ -54,20 +64,35 @@ const AboutScreen = (props) => {
           .
         </Text>
       </View> */}
-
-      {items.map((item, index) => (
-        <View style={styles.item} key={index}>
-          <View style={styles.itemLeft}>
-            <MaterialCommunityIcons name={item.iconName} size={35} color="black" />
-          </View>
-          <View style={styles.itemMid}>
-            <Text style={styles.font}>{item.title}</Text>
-          </View>
-          <View style={styles.itemRight}>
-          <MaterialCommunityIcons name="chevron-right" size={35} color="black" />
-          </View>
-        </View>
-      ))}
+      <View style={styles.container}>
+        {items.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={item.link}
+            style={{ alignItems: "center" }}
+          >
+            <View style={styles.item} key={index}>
+              <View style={styles.itemLeft}>
+                <MaterialCommunityIcons
+                  name={item.iconName}
+                  size={35}
+                  color="black"
+                />
+              </View>
+              <View style={styles.itemMid}>
+                <Text style={styles.font}>{item.title}</Text>
+              </View>
+              <View style={styles.itemRight}>
+                <MaterialCommunityIcons
+                  name="chevron-right"
+                  size={35}
+                  color="gray"
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 };
@@ -90,7 +115,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   font: {
-    fontSize: 20,
+    fontSize: 18,
   },
   item: {
     width: "85%",
@@ -102,14 +127,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   itemLeft: {
-    width: '15%'
+    width: "12%",
   },
   itemMid: {
-    width: '75%'
+    width: "75%",
   },
   itemRight: {
-    width: '25%'
-  }
+    width: "25%",
+  },
 });
 
 export default AboutScreen;
