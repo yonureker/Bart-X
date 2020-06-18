@@ -19,7 +19,7 @@ const StationList = props => {
       style={{ width: "100%" }}
       // filter data by the query input
       data={stationList.filter(station =>
-        station.name.includes(props.searchText)
+        station.name.toLowerCase().includes(props.searchText.toLowerCase())
       )}
       initialNumToRender={15}
       renderItem={({ item }) => (
