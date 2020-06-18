@@ -27,10 +27,10 @@ export default function App() {
       require("./assets/splash.png"),
       require("./assets/icon.png"),
       require("./assets/station.png"),
-      require("./assets/loading.png"),
+      require("./assets/loading.png")
     ];
 
-    const cacheImages = images.map((image) => {
+    const cacheImages = images.map(image => {
       return Asset.fromModule(image).downloadAsync();
     });
 
@@ -64,9 +64,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   darkThemeContainer: {
-    backgroundColor: "black",
-  },
+    backgroundColor: "black"
+  }
 });
