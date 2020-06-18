@@ -16,7 +16,7 @@ import { useColorScheme } from "react-native-appearance";
 import LiveMapScreen from "./screens/LiveMapScreen";
 import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
 import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigator";
-import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator"
+import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator";
 import MoreScreenStack from "./screens/more/MoreScreenStack";
 
 export default function Navigation() {
@@ -141,7 +141,7 @@ export default function Navigation() {
             options={{
               tabBarIcon: () => (
                 <Ionicons
-                  name="ios-information-circle"
+                  name="ios-more"
                   size={28}
                   color={scheme === "dark" ? "white" : "black"}
                   style={styles.tabIcon}
