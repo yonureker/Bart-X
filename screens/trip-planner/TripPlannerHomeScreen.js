@@ -83,7 +83,7 @@ const TripPlannerHomeScreen = props => {
           selectedIndex={selectedIndex}
           tabStyle={{
             borderRadius: 10,
-            borderColor: "#E6E8ED",
+            borderColor: colorScheme === "dark" ? "black" : "white",
             backgroundColor: "white",
             height: 40,
             marginBottom: 5,
@@ -263,12 +263,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 40,
-    borderWidth: 1,
     width: "95%",
-    borderColor: "#E6E8ED",
     borderRadius: 10,
     paddingLeft: 10,
-    // paddingRight: 10,
     marginBottom: 5,
     marginTop: 5
   },
