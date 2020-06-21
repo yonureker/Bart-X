@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const MoreScreen = (props) => {
+const MoreScreen = props => {
   const scheme = useColorScheme();
   const fontColor = scheme === "dark" ? styles.darkThemeFont : null;
   const backgroundColor = scheme === "dark" ? styles.darkThemeBackground : null;
@@ -18,9 +18,9 @@ const MoreScreen = (props) => {
           title: "Onur Eker",
           link: () => {
             Linking.openURL("https://www.linkedin.com/in/onureker/");
-          },
-        },
-      ],
+          }
+        }
+      ]
     },
     {
       title: "SUPPORT THE APP",
@@ -32,19 +32,18 @@ const MoreScreen = (props) => {
             Linking.openURL(
               "https://apps.apple.com/us/app/bart-x/id1480753570?action=write-review"
             );
-          },
+          }
         },
         {
           iconName: "share",
           title: "Share with Friends",
           link: () => {
             Share.share({
-              url: "https://apps.apple.com/us/app/bartlivemobile/id1480753570",
+              url: "https://apps.apple.com/us/app/bartlivemobile/id1480753570"
             });
-          },
-        },
-        
-      ],
+          }
+        }
+      ]
     },
     {
       title: "EXTRAS",
@@ -52,10 +51,10 @@ const MoreScreen = (props) => {
         {
           iconName: "map-legend",
           title: "BART System Maps",
-          link: () => props.navigation.navigate("System Map"),
-        },
-      ],
-    },
+          link: () => props.navigation.navigate("System Map")
+        }
+      ]
+    }
   ];
 
   return (
@@ -71,7 +70,7 @@ const MoreScreen = (props) => {
               onPress={item.link}
               style={{ borderBottomWidth: 1, borderBottomColor: "#F0F4F5" }}
             >
-              <View style={[styles.item, backgroundColor] } key={index}>
+              <View style={[styles.item, backgroundColor]} key={index}>
                 <View style={styles.itemLeft}>
                   <MaterialCommunityIcons
                     name={item.iconName}
@@ -103,26 +102,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    width: "100%"
   },
   box: {
     justifyContent: "center",
     alignItems: "flex-start",
-    width: "100%",
+    width: "100%"
   },
   boxTitle: {
     marginBottom: 10,
     marginTop: 20,
-    marginLeft: 20,
+    marginLeft: 20
   },
   darkThemeFont: {
-    color: "white",
+    color: "white"
   },
   darkThemeBackground: {
-    backgroundColor: 'black'
+    backgroundColor: "black"
   },
   font: {
-    fontSize: 18,
+    fontSize: 18
   },
   item: {
     width: "100%",
@@ -131,19 +130,19 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
   itemLeft: {
     width: "15%",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   itemMid: {
-    width: "70%",
+    width: "70%"
   },
   itemRight: {
-    width: "20%",
-  },
+    width: "20%"
+  }
 });
 
 export default MoreScreen;
