@@ -20,7 +20,6 @@
     "expo-secure-store": "~8.1.0",
     "expo-store-review": "~2.1.0",
     "geolib": "^3.2.1",
-    "nodemailer": "^6.4.10",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.0.tar.gz",
