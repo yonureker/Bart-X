@@ -15,25 +15,11 @@ export default function AdvisoryNavigator() {
       initialRouteName="Advisories"
       screenOptions={{
         headerTitleStyle: {
-          fontSize: 18,
-        },
+          fontSize: 18
+        }
       }}
     >
-      <Stack.Screen
-        name="Advisories"
-        component={AdvisoryScreen}
-        // options={({ route, navigation }) => ({
-        //   headerRight: () => (
-        //     <MaterialCommunityIcons
-        //       name="refresh"
-        //       size={32}
-        //       color={scheme === "dark" ? "white" : "black"}
-        //       style={{ marginRight: 10 }}
-        //       onPress={() => console.log("hello")}
-        //     />
-        //   ),
-        // })}
-      />
+      <Stack.Screen name="Advisories" component={AdvisoryScreen} />
     </Stack.Navigator>
   );
 }
