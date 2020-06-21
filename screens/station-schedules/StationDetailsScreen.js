@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, Text, StyleSheet, RefreshControl } from "react-native";
+import { View, Text, StyleSheet, RefreshControl, ActivityIndicator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import * as SecureStore from "expo-secure-store";
 import * as StoreReview from "expo-store-review";
@@ -63,7 +63,6 @@ const StationDetailsScreen = props => {
         newMap["platform"] = train.platform;
         newMap["length"] = train.length;
         newMap["color"] = train.hexcolor;
-        newMap["direction"] = train.direction;
 
         if (train.minutes === "Leaving") {
           newMap["minutes"] = 0;
@@ -90,8 +89,7 @@ const StationDetailsScreen = props => {
             </View>
             <View>
               <Text style={[styles.platformText, textStyle]}>
-                {train.length} cars | Platform {train.platform} |{" "}
-                {train.direction}bound
+                {train.length} cars | Platform {train.platform}
               </Text>
             </View>
           </View>
@@ -125,7 +123,14 @@ const StationDetailsScreen = props => {
     const usage = await SecureStore.getItemAsync("counter");
     const askedforReview = await SecureStore.getItemAsync("askedReview");
 
-    if (usage === "5" && askedforReview === null) {
+    if (
+      (usage === "5" ||
+        usage === "10" ||
+        usage === "15" ||
+        usage === "20" ||
+        usage === "25") &&
+      askedforReview === null
+    ) {
       StoreReview.requestReview();
       await SecureStore.setItemAsync("askedReview", "true");
     }
@@ -134,6 +139,14 @@ const StationDetailsScreen = props => {
   const backgroundStyle =
     colorScheme === "dark" ? styles.darkBackground : styles.lightBackground;
   const textStyle = colorScheme === "dark" ? styles.lightText : null;
+
+  if (selectedStation === false){
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="gray" />
+      </View>
+    )
+  };
 
   if (selectedStation.etd === undefined) {
     return (
@@ -211,8 +224,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5,
     backgroundColor: "#3167ED",
-    // borderBottomLeftRadius: 5,
-    // borderBottomRightRadius: 5,
     flex: 1,
     alignSelf: "center"
   },
