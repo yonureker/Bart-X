@@ -29,10 +29,6 @@ const Callouts = props => {
     )
       .then(response => response.json())
       .then(responseJson =>
-        // dispatch({
-        //   type: "RECEIVE_TRAIN_DEPARTURE_DATA",
-        //   payload: responseJson.root.station
-        // })
         setStationData(responseJson.root.station[0])
       )
       .catch(error => {
