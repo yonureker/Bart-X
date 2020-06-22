@@ -5,6 +5,7 @@ import { StyleSheet, StatusBar } from "react-native";
 import SystemMapNavigator from "../system-map/SystemMapNavigator";
 import MoreScreen from "../more/MoreScreen";
 import FeedbackScreen from "../more/FeedbackScreen";
+import SchedulesScreen from "../more/SchedulesScreen";
 
 const Stack = createStackNavigator();
 
@@ -13,6 +14,7 @@ function MoreScreenStack() {
     <Stack.Navigator initialRouteName="Bart X">
       <Stack.Screen name="Bart X" component={MoreScreen} />
       <Stack.Screen name="System Map" component={SystemMapNavigator} />
+      <Stack.Screen name="Schedules" component={SchedulesScreen} />
     </Stack.Navigator>
   );
 }
