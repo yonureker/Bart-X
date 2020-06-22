@@ -18,7 +18,7 @@ const Callouts = props => {
 
   useEffect(() => {
     if (props.showCallOut === true) {
-      const intervalId = setInterval(fetchTrainDepartures, 5000);
+      const intervalId = setInterval(fetchTrainDepartures, 10000);
       return () => clearInterval(intervalId);
     }
   });
@@ -28,9 +28,7 @@ const Callouts = props => {
       `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${props.stationAbbr}&key=MW9S-E7SL-26DU-VV8V&json=y`
     )
       .then(response => response.json())
-      .then(responseJson =>
-        setStationData(responseJson.root.station[0])
-      )
+      .then(responseJson => setStationData(responseJson.root.station[0]))
       .catch(error => {
         console.log(error);
       });
