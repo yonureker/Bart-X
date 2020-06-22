@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { useColorScheme } from "react-native-appearance";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useColorScheme } from "react-native-appearance";
 
 export default function TripPlannerResults(props) {
   const { trip } = props;
@@ -176,6 +176,11 @@ export default function TripPlannerResults(props) {
                 )}
               </View>
             ))}
+          </View>
+          <View style={{ width: "70%" }}>
+            <Text style={{ textAlign: "center", color: "gray" }}>
+              Departures are subject to delays and may vary from real-time data.
+            </Text>
           </View>
         </View>
       </ScrollView>
