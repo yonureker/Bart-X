@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text } from "react-native";
 
 const CalloutText = props => {
-
   if (props.station.etd !== undefined) {
     return props.station.etd.map((route, index) => {
       const approachingTrains = function() {
