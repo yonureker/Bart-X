@@ -177,6 +177,9 @@ const StationDetailsScreen = props => {
       >
         {pullDown()}
         {sortedTrainList()}
+        <View style={{alignItems: 'center', marginTop: 10}}>
+        <Text style={{color: 'gray'}}>Departures auto-refresh every 10 seconds.</Text>
+        </View>
       </ScrollView>
     );
   }
