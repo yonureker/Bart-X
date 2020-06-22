@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -38,30 +38,59 @@ export default function AdvisoryScreen(props) {
       });
   };
 
-  return (
-    <View style={styles.container}>
-      {advisories.map((advisory, index) => (
-        <View key={index} style={[styles.advisoryItem, backgroundColor]}>
-          <View style={styles.advisoryItemLogo}>
-            <MaterialCommunityIcons name="alert" size={40} color="red" />
-          </View>
-          <View
-            style={
-              advisory.description["#cdata-section"] === "No delays reported"
-                ? styles.advisoryItemText
-                : [styles.advisoryItemText, { alignItems: "center" }]
-            }
-          >
-            <View>
-              <Text style={[styles.advisoryItemTextFont, fontColor]}>
-                {advisory.description["#cdata-section"]}
-              </Text>
+  if (advisories == false) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="gray" />
+      </View>
+    );
+  }
+
+  if (advisories[0].description["#cdata-section"] === "No delays reported.") {
+    return (
+      <View style={styles.container}>
+        <MaterialCommunityIcons
+          style={{ marginBottom: 80 }}
+          name="bell-off-outline"
+          size={150}
+          color="#0099D8"
+        />
+        <Text
+          style={{
+            fontSize: 18,
+            color: scheme === "dark" ? "white" : "black"
+          }}
+        >
+          There are no delays reported at the moment.
+        </Text>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        {advisories.map((advisory, index) => (
+          <View key={index} style={[styles.advisoryItem, backgroundColor]}>
+            <View style={styles.advisoryItemLogo}>
+              <MaterialCommunityIcons name="alert" size={40} color="red" />
+            </View>
+            <View
+              style={
+                advisory.description["#cdata-section"] === "No delays reported"
+                  ? styles.advisoryItemText
+                  : [styles.advisoryItemText, { alignItems: "center" }]
+              }
+            >
+              <View>
+                <Text style={[styles.advisoryItemTextFont, fontColor]}>
+                  {advisory.description["#cdata-section"]}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-      ))}
-    </View>
-  );
+        ))}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
