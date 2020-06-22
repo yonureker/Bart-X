@@ -52,6 +52,11 @@ const MoreScreen = props => {
           iconName: "map-legend",
           title: "BART System Maps",
           link: () => props.navigation.navigate("System Map")
+        },
+        {
+          iconName: "clock",
+          title: "BART Schedules in PDF",
+          link: () => props.navigation.navigate("Schedules")
         }
       ]
     }
