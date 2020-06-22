@@ -98,6 +98,9 @@ const MoreScreen = props => {
           ))}
         </View>
       ))}
+      <View style={{ alignItems: "center", marginTop: 30 }}>
+        <Text style={{ color: "gray" }}>Bart X - Version 1.6.2</Text>
+      </View>
     </View>
   );
 };
