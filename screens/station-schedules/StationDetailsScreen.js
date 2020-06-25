@@ -1,5 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, Text, StyleSheet, RefreshControl, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  RefreshControl,
+  ActivityIndicator
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import * as SecureStore from "expo-secure-store";
 import * as StoreReview from "expo-store-review";
@@ -21,7 +27,7 @@ const StationDetailsScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    wait(1000).then(() => {
+    wait(500).then(() => {
       fetchTrainDepartures();
       setRefreshing(false);
       setPullDownView(false);
@@ -30,6 +36,7 @@ const StationDetailsScreen = props => {
 
   useEffect(() => {
     fetchTrainDepartures();
+    checkPullDownStatus();
   }, []);
 
   useEffect(() => {
@@ -120,19 +127,22 @@ const StationDetailsScreen = props => {
 
   // asking user for rating, if used the app 5 times.
   const askforReview = async () => {
-    const usage = await SecureStore.getItemAsync("counter");
+    const appUsageCounter = await SecureStore.getItemAsync("counter");
     const askedforReview = await SecureStore.getItemAsync("askedReview");
 
-    if (
-      (usage === "5" ||
-        usage === "10" ||
-        usage === "15" ||
-        usage === "20" ||
-        usage === "25") &&
-      askedforReview === null
-    ) {
+    if (appUsageCounter === "10" && askedforReview === null) {
       StoreReview.requestReview();
       await SecureStore.setItemAsync("askedReview", "true");
+    }
+  };
+
+  const checkPullDownStatus = async () => {
+    const pullDownCounter = await SecureStore.getItemAsync("pullDownCounter");
+
+    if (pullDownCounter == null || Number(pullDownCounter) < 4) {
+      setPullDownView(true);
+    } else {
+      setPullDownView(false);
     }
   };
 
@@ -140,13 +150,13 @@ const StationDetailsScreen = props => {
     colorScheme === "dark" ? styles.darkBackground : styles.lightBackground;
   const textStyle = colorScheme === "dark" ? styles.lightText : null;
 
-  if (selectedStation === false){
+  if (selectedStation === false) {
     return (
       <View style={styles.container}>
         <ActivityIndicator size="large" color="gray" />
       </View>
-    )
-  };
+    );
+  }
 
   if (selectedStation.etd === undefined) {
     return (
@@ -177,8 +187,10 @@ const StationDetailsScreen = props => {
       >
         {pullDown()}
         {sortedTrainList()}
-        <View style={{alignItems: 'center', marginTop: 10}}>
-        <Text style={{color: 'gray'}}>Departures auto-refresh every 10 seconds.</Text>
+        <View style={{ alignItems: "center", margin: 10 }}>
+          <Text style={{ color: "gray" }}>
+            Departures auto-refresh every 10 seconds.
+          </Text>
         </View>
       </ScrollView>
     );
