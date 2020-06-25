@@ -1,11 +1,9 @@
-import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet, StatusBar } from "react-native";
-
-import SystemMapNavigator from "../system-map/SystemMapNavigator";
+import React from "react";
+import { StatusBar, StyleSheet } from "react-native";
 import MoreScreen from "../more/MoreScreen";
-import FeedbackScreen from "../more/FeedbackScreen";
 import SchedulesScreen from "../more/SchedulesScreen";
+import SystemMapNavigator from "../system-map/SystemMapNavigator";
 
 const Stack = createStackNavigator();
 
