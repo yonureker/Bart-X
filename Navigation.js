@@ -41,26 +41,27 @@ export default function Navigation() {
 
   const receiveUserLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
     if (status !== "granted") {
       dispatch({
         type: "RECEIVE_USER_LOCATION",
         payload: { coords: { latitude: 37.792874, longitude: -122.39703 } }
       });
+    } else {
+      // set accuracy to low to quickly receive user location
+      let location = await Location.getCurrentPositionAsync({
+        accuracy:
+          Platform.OS === "android"
+            ? Location.Accuracy.Low
+            : Location.Accuracy.Lowest
+      });
+
+      // dispatch to redux store
+      dispatch({
+        type: "RECEIVE_USER_LOCATION",
+        payload: location
+      });
     }
-
-    // set accuracy to low to quickly receive user location
-    let location = await Location.getCurrentPositionAsync({
-      accuracy:
-        Platform.OS === "android"
-          ? Location.Accuracy.Low
-          : Location.Accuracy.Lowest
-    });
-
-    // dispatch to redux store
-    dispatch({
-      type: "RECEIVE_USER_LOCATION",
-      payload: location
-    });
   };
 
   const appUsageCounter = async () => {
