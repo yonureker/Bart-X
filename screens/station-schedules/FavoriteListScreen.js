@@ -7,7 +7,6 @@ import * as SecureStore from "expo-secure-store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import StationList from "../../components/stationList";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useIsFocused } from "@react-navigation/native";
 import SearchBar from "../../components/SearchBar";
 
