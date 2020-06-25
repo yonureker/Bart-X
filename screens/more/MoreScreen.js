@@ -99,7 +99,7 @@ const MoreScreen = props => {
         </View>
       ))}
       <View style={{ alignItems: "center", marginTop: 30 }}>
-        <Text style={{ color: "gray" }}>Bart X - Version 1.6.2</Text>
+        <Text style={{ color: "gray" }}>Version 1.6.0</Text>
       </View>
     </View>
   );
