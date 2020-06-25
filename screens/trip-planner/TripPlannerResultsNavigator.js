@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import TripPlannerResults from "../../components/TripPlannerResults";
@@ -16,7 +16,7 @@ export default function TripPlannerResultsNavigator(props) {
 
   const fetchTripResults = () => {
     fetch(
-      `http://api.bart.gov/api/sched.aspx?cmd=${option}&orig=${departure.abbr}&dest=${destination.abbr}&date=${date}&key=MW9S-E7SL-26DU-VV8V&b=0&a=4&time=${time}&l=1&json=y`
+      `http://api.bart.gov/api/sched.aspx?cmd=${option}&orig=${departure.abbr}&dest=${destination.abbr}&date=${date}&key=MW9S-E7SL-26DU-VV8V&b=1&a=3&time=${time}&l=1&json=y`
     )
       .then(response => response.json())
       .then(responseJson => setData(responseJson.root.schedule.request));
