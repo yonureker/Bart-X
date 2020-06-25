@@ -1,15 +1,14 @@
-import React, { useState } from "react";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
+import React, { useState } from "react";
+import { StatusBar, StyleSheet } from "react-native";
+import { useColorScheme } from "react-native-appearance";
+import { enableScreens } from "react-native-screens";
+import { SafeAreaView } from "react-navigation";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { enableScreens } from "react-native-screens";
-import { StatusBar, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import { useColorScheme } from "react-native-appearance";
-
-import rootReducer from "./reducers/rootReducer";
 import Navigation from "./Navigation";
+import rootReducer from "./reducers/rootReducer";
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
