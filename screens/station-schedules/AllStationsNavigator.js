@@ -25,6 +25,7 @@ export default function AllStationsNavigator(props) {
 
   useEffect(() => {
     getFavoriteStatus();
+    setpullDownCounter();
   }, []);
 
   const getFavoriteStatus = () => {
@@ -45,6 +46,19 @@ export default function AllStationsNavigator(props) {
     } else {
       await SecureStore.setItemAsync(abbr, "false");
       setFavorite({ ...favorite, [abbr]: "false" });
+    }
+  };
+
+  const setpullDownCounter = async () => {
+    const pullDownCounter = await SecureStore.getItemAsync("pullDownCounter");
+
+    if (pullDownCounter == null) {
+      await SecureStore.setItemAsync("pullDownCounter", "1");
+    } else {
+      await SecureStore.setItemAsync(
+        "pullDownCounter",
+        String(Number(pullDownCounter) + 1)
+      );
     }
   };
 
@@ -88,7 +102,9 @@ export default function AllStationsNavigator(props) {
                 navigation.navigate("Favorite Stations");
               }}
             />
-          )
+          ),
+          // set title to center for Android (default: left)
+          headerTitleAlign: "center"
         })}
       />
       <Stack.Screen
@@ -119,7 +135,9 @@ export default function AllStationsNavigator(props) {
                 navigation.navigate("Closest Stations");
               }}
             />
-          )
+          ),
+          // set title to center for Android (default: left)
+          headerTitleAlign: "center"
         })}
       />
       <Stack.Screen
@@ -149,7 +167,8 @@ export default function AllStationsNavigator(props) {
               style={{ marginRight: 10 }}
               onPress={() => updateFavoriteStatus(route.params.abbr)}
             />
-          )
+          ),
+          headerTitleAlign: "center"
         })}
       />
     </Stack.Navigator>
