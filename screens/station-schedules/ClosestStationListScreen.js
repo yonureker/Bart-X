@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
-import { View, StyleSheet, TextInput, Text } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useLayoutEffect } from "react";
+import { View, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 import { useColorScheme } from "react-native-appearance";
 
