@@ -6,25 +6,24 @@ import {
   Modal,
   Button,
   Picker,
-  Alert
+  Alert,
 } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
-const TripPlannerHomeScreen = props => {
+const TripPlannerHomeScreen = (props) => {
   const {
-    stations: { station }
+    stations: { station },
   } = require("../../stations");
   const colorScheme = useColorScheme();
   const [dateModal, setDateModal] = useState(false);
+  const [timeModal, setTimeModal] = useState(false);
   const [departurePicker, setDeparturePicker] = useState(false);
   const [destinationPicker, setDestinationPicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(
-    updateTimeFormat(new Date())
-  );
+  const [selectedTime, setSelectedTime] = useState(new Date());
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [option, setOption] = useState("depart");
 
@@ -37,7 +36,7 @@ const TripPlannerHomeScreen = props => {
     gtfs_longitude: "-122.270062",
     name: "Ashby",
     state: "CA",
-    zipcode: "94703"
+    zipcode: "94703",
   });
   const [destination, setDestination] = useState({
     abbr: "DUBL",
@@ -48,19 +47,22 @@ const TripPlannerHomeScreen = props => {
     gtfs_longitude: "-121.899179",
     name: "Dublin/Pleasanton",
     state: "CA",
-    zipcode: "94588"
+    zipcode: "94588",
   });
 
-  function updateTimeFormat(x) {
-    let splitted = x.toLocaleTimeString().split(" ");
-    const time = splitted[0];
-    const period = splitted[1];
-    const formatted = time.slice(0, time.length - 3) + period.toLowerCase();
+  
 
-    return formatted;
-  }
 
-  const changeTab = index => {
+  // function updateTimeFormat(x) {
+  //   let splitted = x.toLocaleTimeString().split(" ");
+  //   const time = splitted[0];
+  //   const period = splitted[1];
+  //   const formatted = time.slice(0, time.length - 3) + period.toLowerCase();
+
+  //   return formatted;
+  // }
+
+  const changeTab = (index) => {
     setSelectedIndex(index);
 
     if (index === 0) {
@@ -70,6 +72,16 @@ const TripPlannerHomeScreen = props => {
     }
   };
 
+  String.prototype.splice = function(index, count, add) {
+    if (index < 0) {
+      index = this.length + index;
+      if (index < 0) {
+        index = 0;
+      }
+    }
+    return this.slice(0, index) + (add || "") + this.slice(index + count);
+  }
+
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
 
@@ -77,7 +89,7 @@ const TripPlannerHomeScreen = props => {
 
   return (
     <View style={styles.container}>
-      <View style={{ width: "95%" }}>
+      <View style={{ width: "95%"}}>
         <SegmentedControlTab
           values={["Depart At", "Arrive At"]}
           selectedIndex={selectedIndex}
@@ -87,7 +99,7 @@ const TripPlannerHomeScreen = props => {
             backgroundColor: "white",
             height: 40,
             marginBottom: 5,
-            marginTop: 5
+            marginTop: 5,
           }}
           lastTabStyle={{ marginLeft: 10 }}
           borderRadius={10}
@@ -95,6 +107,7 @@ const TripPlannerHomeScreen = props => {
         />
       </View>
 
+      <View style={{width: '95%'}}>
       <View style={[styles.searchBar, searchBarStyle]}>
         <View style={{ width: "100%" }}>
           <TouchableOpacity onPress={() => setDeparturePicker(true)}>
@@ -109,21 +122,31 @@ const TripPlannerHomeScreen = props => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={[styles.searchBar, searchBarStyle]}>
-        <View style={{ width: "100%" }}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={[styles.searchBar, searchBarStyle, {width: '48%'}]}>
+        <View>
           <TouchableOpacity onPress={() => setDateModal(true)}>
             <Text style={{ color: colorStyle }}>
-              {String(selectedDate).slice(0, 15)} /{" "}
-              {String(selectedDate).slice(16, 21)}
+              {selectedDate.toLocaleDateString()}
             </Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View style={[styles.searchBar, searchBarStyle, {width: '48%'}]}>
+        <View>
+          <TouchableOpacity onPress={() => setTimeModal(true)}>
+            <Text style={{ color: colorStyle }}>
+              {selectedTime.toLocaleTimeString().splice(4,3)}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
       </View>
       <View
         style={[
           styles.searchBar,
           searchBarStyle,
-          { backgroundColor: "#4DCA55" }
+          { backgroundColor: "#4DCA55" },
         ]}
       >
         <View
@@ -141,7 +164,7 @@ const TripPlannerHomeScreen = props => {
                 option: option,
                 departure: departure,
                 destination: destination,
-                time: selectedTime,
+                time: selectedTime.toLocaleTimeString().slice(0,4) + `pm`,
                 date: selectedDate.toLocaleDateString()
               });
             }}
@@ -150,30 +173,50 @@ const TripPlannerHomeScreen = props => {
           </TouchableOpacity>
         </View>
       </View>
+      </View>
 
       <Modal visible={dateModal} transparent>
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
             <View>
-              {/* <Button
-                title="Now"
-                onPress={() => setSelectedDate(new Date())}
-              ></Button> */}
             </View>
             <View>
               <Button
-                title="Select"
+                title="Select Date"
                 onPress={() => setDateModal(false)}
               ></Button>
             </View>
           </View>
           <View>
             <DateTimePicker
-              mode="datetime"
+              mode="date"
               value={selectedDate}
-              onChange={(event, selectedDate) => {
-                setSelectedTime(updateTimeFormat(selectedDate));
-                setSelectedDate(selectedDate);
+              onChange={(event, date) => {
+                setSelectedDate(date);
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
+
+      <Modal visible={timeModal} transparent>
+        <View style={styles.modalContent}>
+          <View style={styles.modalBox}>
+            <View>
+            </View>
+            <View>
+              <Button
+                title="Select Time"
+                onPress={() => setTimeModal(false)}
+              ></Button>
+            </View>
+          </View>
+          <View>
+            <DateTimePicker
+              mode="time"
+              value={selectedTime}
+              onChange={(event, time) => {
+                setSelectedTime(time);
               }}
             />
           </View>
@@ -203,7 +246,7 @@ const TripPlannerHomeScreen = props => {
                 setDeparture(station[itemIndex])
               }
             >
-              {station.map(station => (
+              {station.map((station) => (
                 <Picker.Item
                   key={station.name}
                   label={station.name}
@@ -218,12 +261,7 @@ const TripPlannerHomeScreen = props => {
       <Modal visible={destinationPicker} transparent>
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
-            <View>
-              {/* <Button
-                title="Cancel"
-                onPress={() => setDestinationPicker(false)}
-              ></Button> */}
-            </View>
+            <View></View>
             <View>
               <Button
                 title="Select Destination"
@@ -238,7 +276,7 @@ const TripPlannerHomeScreen = props => {
                 setDestination(station[itemIndex])
               }
             >
-              {station.map(station => (
+              {station.map((station) => (
                 <Picker.Item
                   key={station.name}
                   label={station.name}
@@ -257,37 +295,37 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   searchBar: {
     flexDirection: "row",
     alignItems: "center",
     height: 40,
-    width: "95%",
+    // width: "95%",
     borderRadius: 10,
     paddingLeft: 10,
     marginBottom: 5,
-    marginTop: 5
+    marginTop: 5,
   },
   lightSearchBar: {
-    backgroundColor: "#E6E8ED"
+    backgroundColor: "#E6E8ED",
   },
   darkSearchBar: {
-    backgroundColor: "#434447"
+    backgroundColor: "#434447",
   },
   modalContent: {
     position: "absolute",
     bottom: 0,
     backgroundColor: "white",
-    width: "100%"
+    width: "100%",
   },
   modalBox: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 10,
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });
 
 export default TripPlannerHomeScreen;
