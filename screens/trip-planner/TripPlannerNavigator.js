@@ -24,12 +24,12 @@ export default function TripPlannerNavigator(props) {
       <Stack.Screen
         name="TripPlanner Home"
         component={TripPlannerHomeScreen}
-        options={{ title: "Trip Planner" }}
+        options={{ title: "Trip Planner", headerTitleAlign: "center" }}
       />
       <Stack.Screen
         name="TripPlanner Results Navigator"
         component={TripPlannerResultsNavigator}
-        options={{ title: "Results" }}
+        options={{ title: "Results", headerTitleAlign: "center" }}
       />
     </Stack.Navigator>
   );
