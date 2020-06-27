@@ -7,6 +7,7 @@ import {
   Button,
   Picker,
   Alert,
+  Platform,
 } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -50,9 +51,6 @@ const TripPlannerHomeScreen = (props) => {
     zipcode: "94588",
   });
 
-  
-
-
   // function updateTimeFormat(x) {
   //   let splitted = x.toLocaleTimeString().split(" ");
   //   const time = splitted[0];
@@ -72,7 +70,7 @@ const TripPlannerHomeScreen = (props) => {
     }
   };
 
-  String.prototype.splice = function(index, count, add) {
+  String.prototype.splice = function (index, count, add) {
     if (index < 0) {
       index = this.length + index;
       if (index < 0) {
@@ -80,7 +78,7 @@ const TripPlannerHomeScreen = (props) => {
       }
     }
     return this.slice(0, index) + (add || "") + this.slice(index + count);
-  }
+  };
 
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
@@ -89,7 +87,7 @@ const TripPlannerHomeScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ width: "95%"}}>
+      <View style={{ width: "95%" }}>
         <SegmentedControlTab
           values={["Depart At", "Arrive At"]}
           selectedIndex={selectedIndex}
@@ -107,79 +105,78 @@ const TripPlannerHomeScreen = (props) => {
         />
       </View>
 
-      <View style={{width: '95%'}}>
-      <View style={[styles.searchBar, searchBarStyle]}>
-        <View style={{ width: "100%" }}>
-          <TouchableOpacity onPress={() => setDeparturePicker(true)}>
-            <Text style={{ color: colorStyle }}>{departure.name}</Text>
-          </TouchableOpacity>
+      <View style={{ width: "95%" }}>
+        <View style={[styles.searchBar, searchBarStyle]}>
+          <View style={{ width: "100%" }}>
+            <TouchableOpacity onPress={() => setDeparturePicker(true)}>
+              <Text style={{ color: colorStyle }}>{departure.name}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={[styles.searchBar, searchBarStyle]}>
-        <View style={{ width: "100%" }}>
-          <TouchableOpacity onPress={() => setDestinationPicker(true)}>
-            <Text style={{ color: colorStyle }}>{destination.name}</Text>
-          </TouchableOpacity>
+        <View style={[styles.searchBar, searchBarStyle]}>
+          <View style={{ width: "100%" }}>
+            <TouchableOpacity onPress={() => setDestinationPicker(true)}>
+              <Text style={{ color: colorStyle }}>{destination.name}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-      <View style={[styles.searchBar, searchBarStyle, {width: '48%'}]}>
-        <View>
-          <TouchableOpacity onPress={() => setDateModal(true)}>
-            <Text style={{ color: colorStyle }}>
-              {selectedDate.toLocaleDateString()}
-            </Text>
-          </TouchableOpacity>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View style={[styles.searchBar, searchBarStyle, { width: "48%" }]}>
+            <View>
+              <TouchableOpacity onPress={() => setDateModal(true)}>
+                <Text style={{ color: colorStyle }}>
+                  {selectedDate.toLocaleDateString()}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={[styles.searchBar, searchBarStyle, { width: "48%" }]}>
+            <View>
+              <TouchableOpacity onPress={() => setTimeModal(true)}>
+                <Text style={{ color: colorStyle }}>
+                  {selectedTime.toLocaleTimeString().splice(4, 3)}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      </View>
-      <View style={[styles.searchBar, searchBarStyle, {width: '48%'}]}>
-        <View>
-          <TouchableOpacity onPress={() => setTimeModal(true)}>
-            <Text style={{ color: colorStyle }}>
-              {selectedTime.toLocaleTimeString().splice(4,3)}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      </View>
-      <View
-        style={[
-          styles.searchBar,
-          searchBarStyle,
-          { backgroundColor: "#4DCA55" },
-        ]}
-      >
         <View
-          style={{ width: "100%", height: "100%", justifyContent: "center" }}
+          style={[
+            styles.searchBar,
+            searchBarStyle,
+            { backgroundColor: "#4DCA55" },
+          ]}
         >
-          <TouchableOpacity
-            onPress={() => {
-              if (departure.name === destination.name) {
-                return Alert.alert(
-                  `Destination and departure can't be the same`
-                );
-              }
-
-              props.navigation.navigate("TripPlanner Results Navigator", {
-                option: option,
-                departure: departure,
-                destination: destination,
-                time: selectedTime.toLocaleTimeString().slice(0,4) + `pm`,
-                date: selectedDate.toLocaleDateString()
-              });
-            }}
+          <View
+            style={{ width: "100%", height: "100%", justifyContent: "center" }}
           >
-            <Text style={{ alignSelf: "center" }}>Find Trains</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (departure.name === destination.name) {
+                  return Alert.alert(
+                    `Destination and departure can't be the same`
+                  );
+                }
+
+                props.navigation.navigate("TripPlanner Results Navigator", {
+                  option: option,
+                  departure: departure,
+                  destination: destination,
+                  time: selectedTime.toLocaleTimeString().slice(0, 4) + `pm`,
+                  date: selectedDate.toLocaleDateString(),
+                });
+              }}
+            >
+              <Text style={{ alignSelf: "center" }}>Find Trains</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
       </View>
 
       <Modal visible={dateModal} transparent>
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
-            <View>
-            </View>
+            <View></View>
             <View>
               <Button
                 title="Select Date"
@@ -199,11 +196,12 @@ const TripPlannerHomeScreen = (props) => {
         </View>
       </Modal>
 
+      
+
       <Modal visible={timeModal} transparent>
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
-            <View>
-            </View>
+            <View></View>
             <View>
               <Button
                 title="Select Time"
@@ -227,10 +225,6 @@ const TripPlannerHomeScreen = (props) => {
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
             <View>
-              {/* <Button
-                title="Cancel"
-                onPress={() => setDeparturePicker(false)}
-              ></Button> */}
             </View>
             <View>
               <Button
@@ -329,3 +323,5 @@ const styles = StyleSheet.create({
 });
 
 export default TripPlannerHomeScreen;
+
+// <DatePicker 
