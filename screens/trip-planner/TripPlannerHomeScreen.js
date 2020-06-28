@@ -51,14 +51,21 @@ const TripPlannerHomeScreen = (props) => {
     zipcode: "94588",
   });
 
-  // function updateTimeFormat(x) {
-  //   let splitted = x.toLocaleTimeString().split(" ");
-  //   const time = splitted[0];
-  //   const period = splitted[1];
-  //   const formatted = time.slice(0, time.length - 3) + period.toLowerCase();
+  const selectedLocalTime =
+    Platform.OS === "ios"
+      ? selectedTime.toLocaleTimeString()
+      : to12Hours(selectedTime.toLocaleTimeString());
+  const selectedLocalDate = selectedDate.toLocaleDateString();
 
-  //   return formatted;
-  // }
+  String.prototype.splice = function (index, count, add) {
+    if (index < 0) {
+      index = this.length + index;
+      if (index < 0) {
+        index = 0;
+      }
+    }
+    return this.slice(0, index) + (add || "") + this.slice(index + count);
+  };
 
   const changeTab = (index) => {
     setSelectedIndex(index);
@@ -70,15 +77,20 @@ const TripPlannerHomeScreen = (props) => {
     }
   };
 
-  String.prototype.splice = function (index, count, add) {
-    if (index < 0) {
-      index = this.length + index;
-      if (index < 0) {
-        index = 0;
-      }
+  function to12Hours(time) {
+    let hours = time.slice(0, 2);
+    let period = "";
+
+    if (hours > 12) {
+      hours = hours % 12;
+      period = " PM";
+    } else {
+      hours = hours % 12;
+      period = " AM";
     }
-    return this.slice(0, index) + (add || "") + this.slice(index + count);
-  };
+
+    return hours + time.slice(2) + period;
+  }
 
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
@@ -108,34 +120,65 @@ const TripPlannerHomeScreen = (props) => {
       <View style={{ width: "95%" }}>
         <View style={[styles.searchBar, searchBarStyle]}>
           <View style={{ width: "100%" }}>
+          {Platform.OS === 'ios'&& 
             <TouchableOpacity onPress={() => setDeparturePicker(true)}>
               <Text style={{ color: colorStyle }}>{departure.name}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
+
+          {Platform.OS === 'android' && <Picker
+              selectedValue={departure.name}
+              onValueChange={(itemValue, itemIndex) =>
+                setDeparture(station[itemIndex])
+              }
+            >
+              {station.map((station) => (
+                <Picker.Item
+                  key={station.name}
+                  label={station.name}
+                  value={station.name}
+                />
+              ))}
+            </Picker>}
           </View>
         </View>
         <View style={[styles.searchBar, searchBarStyle]}>
           <View style={{ width: "100%" }}>
+            {Platform.OS === 'ios'&& 
             <TouchableOpacity onPress={() => setDestinationPicker(true)}>
               <Text style={{ color: colorStyle }}>{destination.name}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
+
+            {Platform.OS === 'android' && <Picker
+              selectedValue={destination.name}
+              onValueChange={(itemValue, itemIndex) =>
+                setDestination(station[itemIndex])
+              }
+            >
+              {station.map((station) => (
+                <Picker.Item
+                  key={station.name}
+                  label={station.name}
+                  value={station.name}
+                />
+              ))}
+            </Picker>}
           </View>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View style={[styles.searchBar, searchBarStyle, { width: "48%" }]}>
             <View>
               <TouchableOpacity onPress={() => setDateModal(true)}>
-                <Text style={{ color: colorStyle }}>
-                  {selectedDate.toLocaleDateString()}
-                </Text>
+                <Text style={{ color: colorStyle }}>{selectedLocalDate}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={[styles.searchBar, searchBarStyle, { width: "48%" }]}>
             <View>
               <TouchableOpacity onPress={() => setTimeModal(true)}>
-                <Text style={{ color: colorStyle }}>
-                  {selectedTime.toLocaleTimeString().splice(4, 3)}
-                </Text>
+                <Text style={{ color: colorStyle }}>{selectedLocalTime.splice(
+                    selectedLocalTime.length - 6,
+                    3
+                  )}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -162,8 +205,11 @@ const TripPlannerHomeScreen = (props) => {
                   option: option,
                   departure: departure,
                   destination: destination,
-                  time: selectedTime.toLocaleTimeString().slice(0, 4) + `pm`,
-                  date: selectedDate.toLocaleDateString(),
+                  time: selectedLocalTime.splice(
+                    selectedLocalTime.length - 6,
+                    4
+                  ),
+                  date: selectedLocalDate,
                 });
               }}
             >
@@ -173,59 +219,94 @@ const TripPlannerHomeScreen = (props) => {
         </View>
       </View>
 
-      <Modal visible={dateModal} transparent>
-        <View style={styles.modalContent}>
-          <View style={styles.modalBox}>
-            <View></View>
+      {Platform.OS === "ios" && (
+        <Modal visible={dateModal} transparent>
+          <View style={styles.modalContent}>
+            {Platform.OS === "ios" && (
+              <View style={styles.modalBox}>
+                <View></View>
+                <View>
+                  <Button
+                    title="Select Date"
+                    onPress={() => setDateModal(false)}
+                  ></Button>
+                </View>
+              </View>
+            )}
+
             <View>
-              <Button
-                title="Select Date"
-                onPress={() => setDateModal(false)}
-              ></Button>
+              <DateTimePicker
+                mode="date"
+                value={selectedDate}
+                onChange={(event, date) => {
+                  setSelectedDate(date);
+                }}
+              />
             </View>
           </View>
-          <View>
-            <DateTimePicker
-              mode="date"
-              value={selectedDate}
-              onChange={(event, date) => {
-                setSelectedDate(date);
-              }}
-            />
-          </View>
-        </View>
-      </Modal>
+        </Modal>
+      )}
 
-      
+      {Platform.OS === "android" && dateModal && (
+        <DateTimePicker
+          mode="date"
+          value={selectedDate}
+          onChange={(event, date) => {
+            if (date === undefined) {
+              setDateModal(false);
+            } else {
+              setDateModal(false);
+              setSelectedDate(date);
+            }
+          }}
+        />
+      )}
 
-      <Modal visible={timeModal} transparent>
-        <View style={styles.modalContent}>
-          <View style={styles.modalBox}>
-            <View></View>
+      {Platform.OS === "ios" && (
+        <Modal visible={timeModal} transparent>
+          <View style={styles.modalContent}>
+            <View style={styles.modalBox}>
+              <View></View>
+              <View>
+                <Button
+                  title="Select Time"
+                  onPress={() => setTimeModal(false)}
+                ></Button>
+              </View>
+            </View>
             <View>
-              <Button
-                title="Select Time"
-                onPress={() => setTimeModal(false)}
-              ></Button>
+              <DateTimePicker
+                mode="time"
+                value={selectedTime}
+                onChange={(event, time) => {
+                  setSelectedTime(time);
+                }}
+              />
             </View>
           </View>
-          <View>
-            <DateTimePicker
-              mode="time"
-              value={selectedTime}
-              onChange={(event, time) => {
-                setSelectedTime(time);
-              }}
-            />
-          </View>
-        </View>
-      </Modal>
+        </Modal>
+      )}
+
+      {Platform.OS === "android" && timeModal && (
+        <DateTimePicker
+          mode="time"
+          display="spinner"
+          value={selectedTime}
+          onChange={(event, time) => {
+            if (time === undefined) {
+              setTimeModal(false);
+            } else {
+              setTimeModal(false);
+              setSelectedTime(time);
+            }
+          }}
+        />
+      )}
 
       <Modal visible={departurePicker} transparent>
         <View style={styles.modalContent}>
           <View style={styles.modalBox}>
-            <View>
-            </View>
+            <View></View>
             <View>
               <Button
                 title="Select Departure"
@@ -324,4 +405,4 @@ const styles = StyleSheet.create({
 
 export default TripPlannerHomeScreen;
 
-// <DatePicker 
+// <DatePicker
