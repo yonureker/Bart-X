@@ -79,7 +79,7 @@ export default function Navigation() {
   if (userLocation.coords.latitude !== null) {
     return (
       <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Tab.Navigator initialRouteName="About">
+        <Tab.Navigator initialRouteName="Station List">
           <Tab.Screen
             name="Station List"
             component={AllStationsNavigator}
