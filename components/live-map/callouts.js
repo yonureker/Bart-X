@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     borderColor: "gray",
     borderRadius: 15,
-    padding: 5
+    padding: 5,
+    flex: 1
   },
   calloutHeader: {
     marginHorizontal: 5,
