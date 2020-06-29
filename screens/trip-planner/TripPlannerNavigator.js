@@ -1,6 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { useColorScheme } from "react-native-appearance";
 
 import TripPlannerHomeScreen from "./TripPlannerHomeScreen";
 import TripPlannerResultsNavigator from "./TripPlannerResultsNavigator";
@@ -8,11 +7,6 @@ import TripPlannerResultsNavigator from "./TripPlannerResultsNavigator";
 const Stack = createStackNavigator();
 
 export default function TripPlannerNavigator(props) {
-  const scheme = useColorScheme();
-  const {
-    stations: { station }
-  } = require("../../stations");
-
   return (
     <Stack.Navigator
       initialRouteName="TripPlanner Home"
