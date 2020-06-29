@@ -4,9 +4,9 @@ import MapView from "react-native-maps";
 import Callouts from "./callouts";
 import stationLogo from "../../assets/station.png";
 
-const Markers = React.memo(props => {
+export default function Markers() {
   const {
-    stations: { station }
+    stations: { station },
   } = require("../../stations");
 
   const [clickedMarkerRef, setClickedMarkerRef] = useState("");
@@ -17,7 +17,7 @@ const Markers = React.memo(props => {
         key={trainStation.abbr}
         coordinate={{
           latitude: parseFloat(trainStation.gtfs_latitude),
-          longitude: parseFloat(trainStation.gtfs_longitude)
+          longitude: parseFloat(trainStation.gtfs_longitude),
         }}
         image={stationLogo}
         zIndex={100}
@@ -33,6 +33,4 @@ const Markers = React.memo(props => {
       </MapView.Marker>
     );
   });
-});
-
-export default Markers;
+}
