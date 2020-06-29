@@ -28,7 +28,11 @@ const CalloutText = props => {
         return <Text>{trainText}</Text>;
       };
 
-      return <View key={index}>{approachingTrains()}</View>;
+      return (
+        <View style={{ flex: 1 }} key={index}>
+          {approachingTrains()}
+        </View>
+      );
     });
   } else {
     return (
