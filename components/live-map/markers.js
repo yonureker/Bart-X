@@ -9,7 +9,8 @@ export default function Markers() {
     stations: { station },
   } = require("../../stations");
 
-  const [clickedMarkerRef, setClickedMarkerRef] = useState("");
+  const [clickedMarkerRef, setClickedMarkerRef] = useState({});
+  console.log(clickedMarkerRef);
 
   return station.map((trainStation, index) => {
     return (
