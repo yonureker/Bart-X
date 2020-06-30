@@ -29,16 +29,14 @@ const CalloutText = props => {
       };
 
       return (
-        <View style={{ flex: 1 }} key={index}>
+        <View key={index}>
           {approachingTrains()}
         </View>
       );
     });
   } else {
     return (
-      <View>
-        <Text>No trains!</Text>
-      </View>
+      null
     );
   }
 };
