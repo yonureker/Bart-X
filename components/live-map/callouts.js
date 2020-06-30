@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
 
@@ -10,11 +10,9 @@ const Callouts = props => {
 
   const [stationData, setStationData] = useState([]);
 
-  useEffect(() => {
-    if (props.showCallOut === true) {
+  useLayoutEffect(() => {
       fetchTrainDepartures();
-    }
-  }, [props.showCallOut]);
+  }, []);
 
   useEffect(() => {
     if (props.showCallOut === true) {
@@ -29,6 +27,7 @@ const Callouts = props => {
     )
       .then(response => response.json())
       .then(responseJson => setStationData(responseJson.root.station[0]))
+      .then(console.log(`${props.stationAbbr} fetched`))
       .catch(error => {
         console.log(error);
       });
@@ -62,13 +61,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginTop: 2,
     borderBottomWidth: 1,
-    borderBottomColor: "#c4c1b9"
+    borderBottomColor: "#c4c1b9",
+    flex: 1
   },
   calloutContent: {
     marginTop: 5,
     marginLeft: 5,
     marginRight: 5,
-    marginBottom: 8
+    marginBottom: 8,
+    flex: 1
   },
   stationName: {
     fontWeight: "bold"
