@@ -1,7 +1,5 @@
 module.exports.routes = {
   route: [
-    ,
-    ,
     {
       hexcolor: "#339933",
       coordinates: [
