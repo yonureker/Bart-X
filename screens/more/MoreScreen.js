@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Linking, Share } from "react-native";
+import { View, Text, StyleSheet, Linking, Share, Platform } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -27,11 +27,17 @@ const MoreScreen = props => {
       items: [
         {
           iconName: "star-box",
-          title: "Rate Bart X on App Store",
+          title: "Rate Bart X",
           link: () => {
-            Linking.openURL(
-              "https://apps.apple.com/us/app/bart-x/id1480753570?action=write-review"
-            );
+            if (Platform.OS === "ios") {
+              Linking.openURL(
+                "https://apps.apple.com/us/app/bart-x/id1480753570?action=write-review"
+              );
+            } else {
+              Linking.openURL(
+                "https://play.google.com/store/apps/details?id=com.onureker.bartlivemobile&hl=en_US"
+              );
+            }
           }
         },
         {
