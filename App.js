@@ -25,7 +25,8 @@ export default function App() {
     const images = [
       require("./assets/splash.png"),
       require("./assets/icon.png"),
-      require("./assets/station.png"),
+      require("./assets/station_ios.png"),
+      require("./assets/station_android.png"),
       require("./assets/loading.png")
     ];
 
@@ -46,6 +47,7 @@ export default function App() {
       />
     );
   }
+
   const statusBarStyle =
     colorScheme === "dark" ? "light-content" : "dark-content";
   const darkThemeContainer =
