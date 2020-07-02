@@ -20,6 +20,7 @@
     "expo-secure-store": "~8.1.0",
     "expo-store-review": "~2.1.0",
     "geolib": "^3.2.1",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.0.tar.gz",
@@ -32,10 +33,10 @@
     "react-native-screens": "~2.2.0",
     "react-native-segmented-control-tab": "^3.4.1",
     "react-native-tab-view": "^2.13.0",
+    "react-native-webview": "8.1.1",
     "react-navigation": "^4.1.1",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "react-native-webview": "8.1.1"
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.1.0"
