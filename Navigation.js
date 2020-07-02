@@ -52,7 +52,7 @@ export default function Navigation() {
       let location = await Location.getCurrentPositionAsync({
         accuracy:
           Platform.OS === "android"
-            ? Location.Accuracy.Low
+            ? Location.Accuracy.High
             : Location.Accuracy.Lowest
       });
 
