@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import MapView from "react-native-maps";
 
 import CalloutText from "./calloutText";
@@ -11,15 +11,19 @@ const Callouts = props => {
   const [stationData, setStationData] = useState([]);
 
   useLayoutEffect(() => {
+    if (Platform.OS === "android") {
       fetchTrainDepartures();
+    }
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (props.showCallOut === true) {
+      fetchTrainDepartures();
+
       const intervalId = setInterval(fetchTrainDepartures, 10000);
       return () => clearInterval(intervalId);
     }
-  });
+  }, [props.showCallOut]);
 
   const fetchTrainDepartures = () => {
     fetch(
@@ -27,7 +31,6 @@ const Callouts = props => {
     )
       .then(response => response.json())
       .then(responseJson => setStationData(responseJson.root.station[0]))
-      .then(console.log(`${props.stationAbbr} fetched`))
       .catch(error => {
         console.log(error);
       });
