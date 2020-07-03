@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import MapView from "react-native-maps";
 
 import Callouts from "./callouts";
-import stationLogo from "../../assets/station.png";
+import station_ios from "../../assets/station_ios.png";
+import station_android from "../../assets/station_android.png";
+import { Platform } from "react-native";
 
 export default function Markers() {
   const {
-    stations: { station },
+    stations: { station }
   } = require("../../stations");
 
   const [clickedMarkerRef, setClickedMarkerRef] = useState({});
-  console.log(clickedMarkerRef);
 
   return station.map((trainStation, index) => {
     return (
@@ -18,9 +19,9 @@ export default function Markers() {
         key={trainStation.abbr}
         coordinate={{
           latitude: parseFloat(trainStation.gtfs_latitude),
-          longitude: parseFloat(trainStation.gtfs_longitude),
+          longitude: parseFloat(trainStation.gtfs_longitude)
         }}
-        image={stationLogo}
+        image={Platform.OS === "ios" ? station_ios : station_android}
         zIndex={100}
         tracksInfoWindowChanges={true}
         onPress={() => setClickedMarkerRef(index)}
