@@ -9,10 +9,22 @@ const Stack = createStackNavigator();
 
 function MoreScreenStack() {
   return (
-    <Stack.Navigator initialRouteName="Bart X">
-      <Stack.Screen name="Bart X" component={MoreScreen} />
-      <Stack.Screen name="System Map" component={SystemMapNavigator} />
-      <Stack.Screen name="Schedules" component={SchedulesScreen} />
+    <Stack.Navigator style={styles.navigator} initialRouteName="Bart X">
+      <Stack.Screen
+        name="Bart X"
+        component={MoreScreen}
+        options={() => ({ headerTitleAlign: "center" })}
+      />
+      <Stack.Screen
+        name="System Map"
+        component={SystemMapNavigator}
+        options={() => ({ headerTitleAlign: "center" })}
+      />
+      <Stack.Screen
+        name="Schedules"
+        component={SchedulesScreen}
+        options={() => ({ headerTitleAlign: "center" })}
+      />
     </Stack.Navigator>
   );
 }
