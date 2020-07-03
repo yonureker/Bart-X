@@ -28,15 +28,13 @@ const CalloutText = props => {
         return <Text>{trainText}</Text>;
       };
 
-      return (
-        <View key={index}>
-          {approachingTrains()}
-        </View>
-      );
+      return <View key={index}>{approachingTrains()}</View>;
     });
   } else {
     return (
-      null
+      <View>
+        <Text>No trains are scheduled for departure!</Text>
+      </View>
     );
   }
 };
