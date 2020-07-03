@@ -13,6 +13,7 @@ import { useColorScheme } from "react-native-appearance";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SegmentedControlTab from "react-native-segmented-control-tab";
+import moment from "moment";
 
 const TripPlannerHomeScreen = props => {
   const {
@@ -51,21 +52,8 @@ const TripPlannerHomeScreen = props => {
     zipcode: "94588"
   });
 
-  const selectedLocalTime =
-    Platform.OS === "ios"
-      ? selectedTime.toLocaleTimeString()
-      : to12Hours(selectedTime.toLocaleTimeString());
-  const selectedLocalDate = selectedDate.toLocaleDateString();
-
-  String.prototype.splice = function(index, count, add) {
-    if (index < 0) {
-      index = this.length + index;
-      if (index < 0) {
-        index = 0;
-      }
-    }
-    return this.slice(0, index) + (add || "") + this.slice(index + count);
-  };
+  const selectedLocalTime = moment(selectedTime).format("hh:mma");
+  const selectedLocalDate = moment(selectedDate).format("MM/DD/YYYY");
 
   const changeTab = index => {
     setSelectedIndex(index);
@@ -76,21 +64,6 @@ const TripPlannerHomeScreen = props => {
       setOption("arrive");
     }
   };
-
-  function to12Hours(time) {
-    let hours = time.slice(0, 2);
-    let period = "";
-
-    if (hours > 12) {
-      hours = hours % 12;
-      period = " PM";
-    } else {
-      hours = hours % 12;
-      period = " AM";
-    }
-
-    return hours + time.slice(2) + period;
-  }
 
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
@@ -181,9 +154,7 @@ const TripPlannerHomeScreen = props => {
           <View style={[styles.searchBar, searchBarStyle, { width: "48%" }]}>
             <View>
               <TouchableOpacity onPress={() => setTimeModal(true)}>
-                <Text style={{ color: colorStyle }}>
-                  {selectedLocalTime.splice(selectedLocalTime.length - 6, 3)}
-                </Text>
+                <Text style={{ color: colorStyle }}>{selectedLocalTime}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -210,10 +181,7 @@ const TripPlannerHomeScreen = props => {
                   option: option,
                   departure: departure,
                   destination: destination,
-                  time: selectedLocalTime.splice(
-                    selectedLocalTime.length - 6,
-                    4
-                  ),
+                  time: selectedLocalTime,
                   date: selectedLocalDate
                 });
               }}
