@@ -349,7 +349,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 40,
-    // width: "95%",
     borderRadius: 10,
     paddingLeft: 10,
     marginBottom: 5,
@@ -377,5 +376,3 @@ const styles = StyleSheet.create({
 });
 
 export default TripPlannerHomeScreen;
-
-// <DatePicker
