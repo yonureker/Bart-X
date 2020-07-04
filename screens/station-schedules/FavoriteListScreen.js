@@ -23,8 +23,6 @@ const FavoriteListScreen = props => {
   const [favorite, setFavorite] = useState({});
   const isFocused = useIsFocused();
 
-  // const favorites = props.route.params.favorites;
-
   useEffect(() => {
     getFavoriteStatus();
   }, [isFocused]);
