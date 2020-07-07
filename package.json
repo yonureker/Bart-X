@@ -18,6 +18,7 @@
     "@react-navigation/native": "^5.0.9",
     "@react-navigation/stack": "^5.1.1",
     "expo": "^37.0.0",
+    "expo-firebase-recaptcha": "^1.1.2",
     "expo-secure-store": "~8.1.0",
     "expo-store-review": "~2.1.0",
     "firebase": "^7.15.5",
