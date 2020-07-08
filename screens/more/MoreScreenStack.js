@@ -4,6 +4,7 @@ import { StatusBar, StyleSheet } from "react-native";
 import MoreScreen from "../more/MoreScreen";
 import SchedulesScreen from "../more/SchedulesScreen";
 import SystemMapNavigator from "../system-map/SystemMapNavigator";
+import BartXRewards from "../bart-x-rewards/BartXRewards";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,12 @@ function MoreScreenStack() {
         component={SchedulesScreen}
         options={() => ({ headerTitleAlign: "center" })}
       />
+      <Stack.Screen
+        name="BartX Rewards"
+        component={BartXRewards}
+        options={() => ({ headerTitleAlign: "center" })}
+      />
+
     </Stack.Navigator>
   );
 }
