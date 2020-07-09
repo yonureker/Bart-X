@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Linking, Share, Platform } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const MoreScreen = props => {
   const scheme = useColorScheme();
@@ -63,6 +64,11 @@ const MoreScreen = props => {
           iconName: "clock",
           title: "BART Schedules in PDF",
           link: () => props.navigation.navigate("Schedules")
+        },
+        {
+          iconName: 'coin',
+          title: "BartX Rewards",
+          link: () => props.navigation.navigate("BartX Rewards")
         }
       ]
     }
@@ -70,6 +76,23 @@ const MoreScreen = props => {
 
   return (
     <View style={styles.container}>
+      <View style={{marginBottom: 10}}><Text>BartX REWARDS</Text></View>
+       <View>
+        <AnimatedCircularProgress
+  size={120}
+  width={15}
+  fill={50}
+  tintColor="red"
+  onAnimationComplete={() => console.log('onAnimationComplete')}
+  backgroundColor="black" >{
+    () => (
+      <Text>
+        500 PTS
+      </Text>
+    )
+  }
+  </AnimatedCircularProgress>
+        </View>
       {boxes.map((box, index) => (
         <View key={index} style={styles.box}>
           <View style={styles.boxTitle}>
