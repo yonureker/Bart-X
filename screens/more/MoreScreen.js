@@ -5,10 +5,15 @@ import { useColorScheme } from "react-native-appearance";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
+
+
+
 const MoreScreen = props => {
   const scheme = useColorScheme();
   const fontColor = scheme === "dark" ? styles.darkThemeFont : null;
   const backgroundColor = scheme === "dark" ? styles.darkThemeBackground : null;
+
+  
 
   const boxes = [
     {
