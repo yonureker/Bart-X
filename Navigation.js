@@ -18,6 +18,7 @@ import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigat
 import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigator";
 import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator";
 import MoreScreenStack from "./screens/more/MoreScreenStack";
+import BartXRewards from "./screens/bart-x-rewards/BartXRewards";
 
 export default function Navigation() {
   // redux hook
@@ -79,7 +80,7 @@ export default function Navigation() {
   if (userLocation.coords.latitude !== null) {
     return (
       <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Tab.Navigator initialRouteName="Station List">
+        <Tab.Navigator initialRouteName="BartX Rewards">
           <Tab.Screen
             name="Station List"
             component={AllStationsNavigator}
@@ -88,7 +89,7 @@ export default function Navigation() {
                 <Ionicons
                   name="md-list"
                   size={28}
-                  color={scheme === "dark" ? "white" : "black"}
+                  color={scheme === "dark" ? "white" : "gray"}
                   style={styles.tabIcon}
                 />
               )
@@ -102,21 +103,21 @@ export default function Navigation() {
                 <MaterialCommunityIcons
                   name="google-maps"
                   size={28}
-                  color={scheme === "dark" ? "white" : "black"}
+                  color={scheme === "dark" ? "white" : "gray"}
                   style={styles.tabIcon}
                 />
               )
             }}
           />
           <Tab.Screen
-            name="Trip Planner"
-            component={TripPlannerNavigator}
+            name="BartX Rewards"
+            component={BartXRewards}
             options={{
               tabBarIcon: () => (
                 <MaterialCommunityIcons
-                  name="transit-transfer"
+                  name="coin"
                   size={28}
-                  color={scheme === "dark" ? "white" : "black"}
+                  color={scheme === "dark" ? "white" : "gray"}
                   style={styles.tabIcon}
                 />
               )
@@ -130,7 +131,7 @@ export default function Navigation() {
                 <MaterialCommunityIcons
                   name="bell-alert"
                   size={28}
-                  color={scheme === "dark" ? "white" : "black"}
+                  color={scheme === "dark" ? "white" : "gray"}
                   style={styles.tabIcon}
                 />
               )
@@ -144,7 +145,7 @@ export default function Navigation() {
                 <Ionicons
                   name="ios-more"
                   size={28}
-                  color={scheme === "dark" ? "white" : "black"}
+                  color={scheme === "dark" ? "white" : "gray"}
                   style={styles.tabIcon}
                 />
               )
