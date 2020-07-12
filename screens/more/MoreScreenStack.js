@@ -5,6 +5,7 @@ import MoreScreen from "../more/MoreScreen";
 import SchedulesScreen from "../more/SchedulesScreen";
 import SystemMapNavigator from "../system-map/SystemMapNavigator";
 import BartXRewards from "../bart-x-rewards/BartXRewards";
+import TripPlannerNavigation from '../trip-planner/TripPlannerNavigator';
 
 const Stack = createStackNavigator();
 
@@ -27,8 +28,8 @@ function MoreScreenStack() {
         options={() => ({ headerTitleAlign: "center" })}
       />
       <Stack.Screen
-        name="BartX Rewards"
-        component={BartXRewards}
+        name="Trip Planner"
+        component={TripPlannerNavigation}
         options={() => ({ headerTitleAlign: "center" })}
       />
 
