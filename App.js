@@ -14,8 +14,6 @@ import rootReducer from "./reducers/rootReducer";
 
 import firebaseConfig from './config/firebaseConfig';
 
-firebase.initializeApp(firebaseConfig);
-
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
