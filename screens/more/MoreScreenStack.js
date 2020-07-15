@@ -4,7 +4,7 @@ import { StatusBar, StyleSheet } from "react-native";
 import MoreScreen from "../more/MoreScreen";
 import SchedulesScreen from "../more/SchedulesScreen";
 import SystemMapNavigator from "../system-map/SystemMapNavigator";
-import BartXRewards from "../bart-x-rewards/BartXRewards";
+import Rewards from "../rewards/RewardsHome";
 import TripPlannerNavigation from '../trip-planner/TripPlannerNavigator';
 
 const Stack = createStackNavigator();
