@@ -71,9 +71,9 @@ const MoreScreen = props => {
           link: () => props.navigation.navigate("Schedules")
         },
         {
-          iconName: 'coin',
-          title: "BartX Rewards",
-          link: () => props.navigation.navigate("BartX Rewards")
+          iconName: 'transit-transfer',
+          title: "Trip Planner",
+          link: () => props.navigation.navigate("Trip Planner")
         }
       ]
     }
@@ -81,23 +81,6 @@ const MoreScreen = props => {
 
   return (
     <View style={styles.container}>
-      <View style={{marginBottom: 10}}><Text>BartX REWARDS</Text></View>
-       <View>
-        <AnimatedCircularProgress
-  size={120}
-  width={15}
-  fill={50}
-  tintColor="red"
-  onAnimationComplete={() => console.log('onAnimationComplete')}
-  backgroundColor="black" >{
-    () => (
-      <Text>
-        500 PTS
-      </Text>
-    )
-  }
-  </AnimatedCircularProgress>
-        </View>
       {boxes.map((box, index) => (
         <View key={index} style={styles.box}>
           <View style={styles.boxTitle}>
