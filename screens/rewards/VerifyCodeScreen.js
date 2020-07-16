@@ -11,14 +11,18 @@ import {
   Alert,
 } from "react-native";
 import {MaterialCommunityIcons} from '@expo/vector-icons';
+import * as firebase from "firebase";
+import "@firebase/auth";
+
 
 export default function VerifyCodeScreen(props) {
+  
+
   const [code, setCode] = useState("");
-  // console.log(props.route.params)
 
   const confirmCode = () => {
     const credential = firebase.auth.PhoneAuthProvider.credential(
-      verificationId,
+      props.route.params.verificationId,
       code
     );
     firebase
