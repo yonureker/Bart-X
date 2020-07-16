@@ -22,17 +22,19 @@ export default function RewardsPhoneScreen(props) {
   const recaptchaVerifier = useRef(null);
 
   // Function to be called when requesting for a verification code
-  const sendVerification = () => {
+  const sendVerification = async () => {
     const phoneProvider = new firebase.auth.PhoneAuthProvider();
-    phoneProvider
-      .verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
-      .then(setVerificationId)
-      .then(
-        props.navigation.navigate("Verify Code", {
-          verificationId: verificationId,
-        })
-      )
-      .catch((error) => console.log(error));
+
+    const verificationId = await phoneProvider.verifyPhoneNumber(
+      phoneNumber,
+      recaptchaVerifier.current
+    );
+
+    setVerificationId(verificationId);
+
+    props.navigation.navigate("Verify Code", {
+      verificationId: verificationId,
+    });
   };
 
   return (
