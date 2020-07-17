@@ -16,7 +16,7 @@ import "@firebase/auth";
 
 
 export default function VerifyCodeScreen(props) {
-  
+
 
   const [code, setCode] = useState("");
 
