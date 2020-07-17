@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
 import {
   TouchableOpacity,
   Text,
@@ -9,79 +9,69 @@ import {
 } from "react-native";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import * as SecureStore from "expo-secure-store";
-import firebaseConfig from "../../config/firebaseConfig";
-import * as firebase from "firebase";
-import { AnimatedCircularProgress } from "react-native-circular-progress";
-
+import * as firebase from "firebase/app";
 import "@firebase/auth";
 
 export default function RewardsHome(props) {
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [code, setCode] = useState("");
-  const [verificationId, setVerificationId] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(null);
-  const recaptchaVerifier = useRef(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  
+  useLayoutEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        setCurrentUser(user)
+        console.log(user)
+      }
+    })
+  }, [currentUser]);
 
-  const user = firebase.auth().currentUser;
+  // const checkCurrentUser = async () => {
+  //   const currentUser = await firebase.auth().currentUser;
+  //   console.log(currentUser);
+  //   setUser(currentUser);
+  // };
 
-  useEffect(() => {
-    checkLogInStatus();
-  }, [loggedIn]);
+  // const logInUser = () => {
+  //   SecureStore.setItemAsync("loggedIn", "true").then(setLoggedIn(true));
+  // };
 
-  const logInUser = () => {
-    SecureStore.setItemAsync("loggedIn", "true").then(setLoggedIn(true));
-  };
+  // const logOutUser = () => {
+  //   SecureStore.setItemAsync("loggedIn", "false").then(setLoggedIn(false));
+  // };
 
-  const logOutUser = () => {
-    SecureStore.setItemAsync("loggedIn", "false").then(setLoggedIn(false));
-  };
+  // const checkLogInStatus = async () => {
+  //   const loggedIn = await SecureStore.getItemAsync("loggedIn");
 
-  const checkLogInStatus = async () => {
-    const loggedIn = await SecureStore.getItemAsync("loggedIn");
+  //   loggedIn === null || loggedIn === "false"
+  //     ? setLoggedIn(false)
+  //     : setLoggedIn(true);
+  // };
 
-    loggedIn === null || loggedIn === "false"
-      ? setLoggedIn(false)
-      : setLoggedIn(true);
-  };
+  // const sendVerification = () => {
+  //   const phoneProvider = new firebase.auth.PhoneAuthProvider();
+  //   phoneProvider
+  //     .verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
+  //     .then(setVerificationId);
+  // };
 
-  const sendVerification = () => {
-    const phoneProvider = new firebase.auth.PhoneAuthProvider();
-    phoneProvider
-      .verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
-      .then(setVerificationId);
-  };
+  // const confirmCode = () => {
+  //   const credential = firebase.auth.PhoneAuthProvider.credential(
+  //     verificationId,
+  //     code
+  //   );
+  //   firebase
+  //     .auth()
+  //     .signInWithCredential(credential)
+  //     .then(logInUser)
+  //     // .then((result) => {
+  //     //   console.log(result);
+  //     // })
+  //     .catch((error) => console.log(error));
+  // };
 
-  const confirmCode = () => {
-    const credential = firebase.auth.PhoneAuthProvider.credential(
-      verificationId,
-      code
-    );
-    firebase
-      .auth()
-      .signInWithCredential(credential)
-      .then(logInUser)
-      // .then((result) => {
-      //   console.log(result);
-      // })
-      .catch((error) => console.log(error));
-  };
-
-  if (loggedIn) {
+  if (currentUser) {
     return (
       <View style={styles.container}>
-        <View>
-          <AnimatedCircularProgress
-            size={120}
-            width={15}
-            fill={50}
-            tintColor="#00e0ff"
-            onAnimationComplete={() => console.log("onAnimationComplete")}
-            backgroundColor="#3d5875"
-          >
-            {(fill) => <Text>500</Text>}
-          </AnimatedCircularProgress>
-        </View>
-        <TouchableOpacity style={styles.sendCode} onPress={logOutUser}>
+        <TouchableOpacity style={styles.sendCode} onPress={() => firebase.auth().signOut().then(setCurrentUser(null))}>
           <Text style={styles.buttonText}>Log Out</Text>
         </TouchableOpacity>
       </View>
@@ -90,39 +80,69 @@ export default function RewardsHome(props) {
 
   return (
     <View style={styles.container}>
-      <View style={{width: '100%', flex: 1, justifyContent: 'center', alignItems: 'center', shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 3,
-},
-shadowOpacity: 0.27,
-shadowRadius: 4.65,
+      <View
+        style={{
+          width: "100%",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 3,
+          },
+          shadowOpacity: 0.27,
+          shadowRadius: 4.65,
 
-elevation: 6}}>
-        <Image style={{height: '100%', width: '100%', borderRadius: 20}} source={require('../../assets/money.jpg')} />
-       </View>
-      <View style={{width: '100%', flex: 1, justifyContent: 'space-evenly', marginTop: 20}}>
-      <View style={{alignSelf: 'flex-start'}}>
-        <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-          Check live departures, get rewards
-        </Text>
+          elevation: 6,
+        }}
+      >
+        <Image
+          style={{ height: "100%", width: "100%", borderRadius: 20 }}
+          source={require("../../assets/money.jpg")}
+        />
       </View>
-      <View style={{marginTop: 15}}>
-        <Text>
-          Become a BartX Rewards member - it's easy and free to join. You'll
-          get points for checking live departures everyday, which you can use to
-          get Bart credits directly into your Clipper Card.
-        </Text>
-      </View>
-      <View style={{marginTop: 15, backgroundColor: '#0A99CB', width: '100%', height: 40, borderRadius: 10, justifyContent: 'center', alignItems: 'center'}}>
-        <TouchableOpacity onPress={() => (props.navigation.navigate('Rewards Phone Screen'))}>
-          <Text style={{color: 'white'}}>Join for free</Text>
-        </TouchableOpacity>
-      </View>
-      <View></View>
-          <View></View>
-          <View></View>
-          <View></View>
+      <View
+        style={{
+          width: "100%",
+          flex: 1,
+          justifyContent: "space-evenly",
+          marginTop: 20,
+        }}
+      >
+        <View style={{ alignSelf: "flex-start" }}>
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+            Check live departures, get rewards
+          </Text>
+        </View>
+        <View style={{ marginTop: 15 }}>
+          <Text>
+            Become a BartX Rewards member - it's easy and free to join. You'll
+            get points for checking live departures everyday, which you can use
+            to get Bart credits directly into your Clipper Card.
+          </Text>
+        </View>
+        <View
+          style={{
+            marginTop: 15,
+            backgroundColor: "#0A99CB",
+            width: "100%",
+            height: 40,
+            borderRadius: 10,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("Rewards Phone Screen")}
+          >
+            <Text style={{ color: "white" }}>Join for free</Text>
+          </TouchableOpacity>
+        </View>
+        <View></View>
+        <View></View>
+        <View></View>
+        <View></View>
       </View>
     </View>
   );
@@ -180,7 +200,7 @@ elevation: 6}}>
   //     </View>
   //   </View>
   // );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -188,7 +208,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "#FFDD19",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20
+    padding: 20,
   },
   textInput: {
     textAlign: "center",
