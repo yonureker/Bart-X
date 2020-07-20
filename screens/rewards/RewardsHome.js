@@ -5,7 +5,7 @@ import {
   TextInput,
   View,
   StyleSheet,
-  Image,
+  Image
 } from "react-native";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import * as SecureStore from "expo-secure-store";
@@ -13,16 +13,16 @@ import * as firebase from "firebase/app";
 import "@firebase/auth";
 
 export default function RewardsHome(props) {
-  const [currentUser, setCurrentUser] = useState(null);
-  
-  useLayoutEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) {
-        setCurrentUser(user)
-        console.log(user)
-      }
-    })
-  }, [currentUser]);
+  // const [currentUser, setCurrentUser] = useState(null);
+
+  // useLayoutEffect(() => {
+  //   firebase.auth().onAuthStateChanged((user) => {
+  //     if (user != null) {
+  //       setCurrentUser(user)
+  //       console.log(user)
+  //     }
+  //   })
+  // }, []);
 
   // const checkCurrentUser = async () => {
   //   const currentUser = await firebase.auth().currentUser;
@@ -68,15 +68,15 @@ export default function RewardsHome(props) {
   //     .catch((error) => console.log(error));
   // };
 
-  if (currentUser) {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.sendCode} onPress={() => firebase.auth().signOut().then(setCurrentUser(null))}>
-          <Text style={styles.buttonText}>Log Out</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  // if (currentUser) {
+  //   return (
+  //     <View style={styles.container}>
+  //       <TouchableOpacity style={styles.sendCode} onPress={() => firebase.auth().signOut().then(setCurrentUser(null))}>
+  //         <Text style={styles.buttonText}>Log Out</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // }
 
   return (
     <View style={styles.container}>
@@ -89,12 +89,12 @@ export default function RewardsHome(props) {
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
-            height: 3,
+            height: 3
           },
           shadowOpacity: 0.27,
           shadowRadius: 4.65,
 
-          elevation: 6,
+          elevation: 6
         }}
       >
         <Image
@@ -107,7 +107,7 @@ export default function RewardsHome(props) {
           width: "100%",
           flex: 1,
           justifyContent: "space-evenly",
-          marginTop: 20,
+          marginTop: 20
         }}
       >
         <View style={{ alignSelf: "flex-start" }}>
@@ -130,7 +130,7 @@ export default function RewardsHome(props) {
             height: 40,
             borderRadius: 10,
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <TouchableOpacity
@@ -208,23 +208,23 @@ const styles = StyleSheet.create({
     // backgroundColor: "#FFDD19",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 20
   },
   textInput: {
-    textAlign: "center",
+    textAlign: "center"
   },
   sendVerification: {
     padding: 10,
     backgroundColor: "#3498db",
-    borderRadius: 10,
+    borderRadius: 10
   },
   sendCode: {
     padding: 10,
     backgroundColor: "#9b59b6",
-    borderRadius: 10,
+    borderRadius: 10
   },
   buttonText: {
     textAlign: "center",
-    color: "#ffffff",
-  },
+    color: "#ffffff"
+  }
 });
