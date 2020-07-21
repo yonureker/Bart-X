@@ -8,18 +8,26 @@ import {
   Image,
   KeyboardAvoidingView,
   Keyboard,
-  Alert,
+  Alert
 } from "react-native";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
-import * as firebase from "firebase";
+import firebase from "../../config/firebaseConfig";
 import "@firebase/auth";
-
-import firebaseConfig from "../../config/firebaseConfig";
 
 export default function RewardsPhoneScreen(props) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationId, setVerificationId] = useState(null);
   const recaptchaVerifier = useRef(null);
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAh5daY7dpGJpr7gVUXQKJzWzF5H_5lgRY",
+    authDomain: "bartlivemobile.firebaseapp.com",
+    databaseURL: "https://bartlivemobile.firebaseio.com",
+    projectId: "bartlivemobile",
+    storageBucket: "bartlivemobile.appspot.com",
+    messagingSenderId: "647805133765",
+    appId: "1:647805133765:web:abc9a4a1b5d3043947e1ac"
+  };
 
   // Function to be called when requesting for a verification code
   const sendVerification = async () => {
@@ -33,7 +41,7 @@ export default function RewardsPhoneScreen(props) {
     setVerificationId(verificationId);
 
     props.navigation.navigate("Verify Code", {
-      verificationId: verificationId,
+      verificationId: verificationId
     });
   };
 
@@ -57,11 +65,11 @@ export default function RewardsPhoneScreen(props) {
             shadowColor: "#000",
             shadowOffset: {
               width: 0,
-              height: 3,
+              height: 3
             },
             shadowOpacity: 0.27,
             shadowRadius: 4.65,
-            elevation: 6,
+            elevation: 6
           }}
         >
           <Image
@@ -74,7 +82,7 @@ export default function RewardsPhoneScreen(props) {
             width: "100%",
             flex: 1,
             justifyContent: "space-evenly",
-            marginTop: 10,
+            marginTop: 10
           }}
         >
           <View style={{ alignSelf: "flex-start" }}>
@@ -93,7 +101,7 @@ export default function RewardsPhoneScreen(props) {
             style={{
               flexDirection: "row",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <View>
@@ -107,8 +115,8 @@ export default function RewardsPhoneScreen(props) {
             </View>
             <View style={{ flex: 1 }}>
               <TextInput
-                placeholder="Enter Your Phone Number"
-                onChangeText={(text) => setPhoneNumber(text)}
+                placeholder="Enter your 10-digit phone number"
+                onChangeText={text => setPhoneNumber('+1' + text)}
                 keyboardType="phone-pad"
                 autoCompleteType="tel"
                 returnKeyType="done"
@@ -123,7 +131,7 @@ export default function RewardsPhoneScreen(props) {
               height: 40,
               borderRadius: 10,
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <TouchableOpacity onPress={sendVerification}>
@@ -143,23 +151,23 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 20
   },
   textInput: {
-    textAlign: "center",
+    textAlign: "center"
   },
   sendVerification: {
     padding: 10,
     backgroundColor: "#3498db",
-    borderRadius: 10,
+    borderRadius: 10
   },
   sendCode: {
     padding: 10,
     backgroundColor: "#9b59b6",
-    borderRadius: 10,
+    borderRadius: 10
   },
   buttonText: {
     textAlign: "center",
-    color: "#ffffff",
-  },
+    color: "#ffffff"
+  }
 });
