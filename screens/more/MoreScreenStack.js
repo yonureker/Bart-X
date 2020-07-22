@@ -5,7 +5,7 @@ import MoreScreen from "../more/MoreScreen";
 import SchedulesScreen from "../more/SchedulesScreen";
 import SystemMapNavigator from "../system-map/SystemMapNavigator";
 import Rewards from "../rewards/RewardsHome";
-import TripPlannerNavigator from '../trip-planner/TripPlannerNavigator';
+import TripPlannerNavigator from "../trip-planner/TripPlannerNavigator";
 
 const Stack = createStackNavigator();
 
@@ -32,7 +32,6 @@ function MoreScreenStack() {
         component={TripPlannerNavigator}
         // options={() => ({ headerTitleAlign: "center" })}
       />
-
     </Stack.Navigator>
   );
 }

@@ -18,7 +18,7 @@ import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigat
 import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigator";
 import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator";
 import MoreScreenStack from "./screens/more/MoreScreenStack";
-import RewardsNavigator from "./screens/bart-x-rewards/RewardsNavigator";
+import RewardsNavigator from "./screens/rewards/RewardsNavigator";
 
 export default function Navigation() {
   // redux hook
@@ -80,7 +80,7 @@ export default function Navigation() {
   if (userLocation.coords.latitude !== null) {
     return (
       <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Tab.Navigator initialRouteName="Rewards">
+        <Tab.Navigator initialRouteName="Station List">
           <Tab.Screen
             name="Station List"
             component={AllStationsNavigator}

@@ -7,13 +7,8 @@ import { enableScreens } from "react-native-screens";
 import { SafeAreaView } from "react-navigation";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import * as firebase from "firebase/app";
 import Navigation from "./Navigation";
 import rootReducer from "./reducers/rootReducer";
-
-
-import firebaseConfig from './config/firebaseConfig';
-
 
 export default function App() {
   //for faster navigation https://github.com/kmagiera/react-native-screens
