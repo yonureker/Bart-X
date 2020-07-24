@@ -7,7 +7,7 @@ import "firebase/firestore";
 let db = firebase.firestore();
 
 export default function MyAccountScreen(props) {
-  const [points, setPoints] = useState(0);
+  const [points, setPoints] = useState(null);
   const user = firebase.auth().currentUser;
 
   useEffect(() => {
