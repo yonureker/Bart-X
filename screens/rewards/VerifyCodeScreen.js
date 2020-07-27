@@ -8,7 +8,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Keyboard,
-  Alert,
+  Alert
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import firebase from "../../config/firebaseConfig";
@@ -39,7 +39,7 @@ export default function VerifyCodeScreen(props) {
     firebase
       .auth()
       .signInWithCredential(credential)
-      .then((result) => {
+      .then(result => {
         if (result.user) {
           props.navigation.navigate("My Account");
         }
@@ -50,11 +50,11 @@ export default function VerifyCodeScreen(props) {
             .set({
               pointsBalance: 10,
               clippercardNumber: null,
-              phoneNumber: firebase.auth().currentUser.phoneNumber,
+              phoneNumber: firebase.auth().currentUser.phoneNumber
             });
         }
       })
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   };
 
   return (
@@ -72,12 +72,12 @@ export default function VerifyCodeScreen(props) {
             shadowColor: "#000",
             shadowOffset: {
               width: 0,
-              height: 3,
+              height: 3
             },
             shadowOpacity: 0.27,
             shadowRadius: 4.65,
 
-            elevation: 6,
+            elevation: 6
           }}
         >
           <Image
@@ -90,7 +90,7 @@ export default function VerifyCodeScreen(props) {
             width: "100%",
             flex: 1,
             justifyContent: "space-evenly",
-            marginTop: 10,
+            marginTop: 10
           }}
         >
           <View style={{ alignSelf: "flex-start" }}>
@@ -105,7 +105,7 @@ export default function VerifyCodeScreen(props) {
             style={{
               flexDirection: "row",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <View>
@@ -119,7 +119,7 @@ export default function VerifyCodeScreen(props) {
             <View style={{ flex: 1 }}>
               <TextInput
                 placeholder="Enter Confirmation Code"
-                onChangeText={(code) => setCode(code)}
+                onChangeText={code => setCode(code)}
                 keyboardType="phone-pad"
                 autoCompleteType="tel"
                 returnKeyType="done"
@@ -134,7 +134,7 @@ export default function VerifyCodeScreen(props) {
               height: 40,
               borderRadius: 10,
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <TouchableOpacity onPress={confirmCode}>
@@ -154,23 +154,23 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 20
   },
   textInput: {
-    textAlign: "center",
+    textAlign: "center"
   },
   sendVerification: {
     padding: 10,
     backgroundColor: "#3498db",
-    borderRadius: 10,
+    borderRadius: 10
   },
   sendCode: {
     padding: 10,
     backgroundColor: "#9b59b6",
-    borderRadius: 10,
+    borderRadius: 10
   },
   buttonText: {
     textAlign: "center",
-    color: "#ffffff",
-  },
+    color: "#ffffff"
+  }
 });

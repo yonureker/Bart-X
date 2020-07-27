@@ -116,7 +116,7 @@ export default function RewardsPhoneScreen(props) {
             <View style={{ flex: 1 }}>
               <TextInput
                 placeholder="Enter your 10-digit phone number"
-                onChangeText={text => setPhoneNumber('+1' + text)}
+                onChangeText={text => setPhoneNumber("+1" + text)}
                 keyboardType="phone-pad"
                 autoCompleteType="tel"
                 returnKeyType="done"

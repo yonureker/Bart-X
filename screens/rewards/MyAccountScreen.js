@@ -15,7 +15,10 @@ export default function MyAccountScreen(props) {
   }, []);
 
   const getAccountBalance = async () => {
-    const userRef = await db.collection("users").doc(user.uid).get();
+    const userRef = await db
+      .collection("users")
+      .doc(user.uid)
+      .get();
     const userPoints = await userRef.data().pointsBalance;
     setPoints(userPoints);
   };
@@ -44,6 +47,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 });

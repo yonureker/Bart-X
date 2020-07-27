@@ -12,7 +12,6 @@ const Stack = createStackNavigator();
 export default function RewardsNavigator(props) {
   const [currentUser, setCurrentUser] = useState(firebase.auth().currentUser);
 
-
   useLayoutEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
@@ -29,7 +28,11 @@ export default function RewardsNavigator(props) {
       <Stack.Screen
         name="Rewards Home"
         component={RewardsHome}
-        options={{ title: "Bart X Rewards", headerTitleAlign: "center", headerLeft: null }}
+        options={{
+          title: "Bart X Rewards",
+          headerTitleAlign: "center",
+          headerLeft: null
+        }}
       />
       <Stack.Screen
         name="Rewards Phone Screen"
