@@ -9,7 +9,7 @@ BartX is a mobile app that displays real-time BART departures with the data rece
 
 Station List | Real Time Departures | Map View | System Maps
 ------ | ------ | ------ | ------
-![Image](https://i.imgur.com/uDjdHE9.png) | ![Image](https://i.imgur.com/YuT9EAY.png) | ![Image](https://i.imgur.com/TzzGPnC.png) | ![Image](https://i.imgur.com/2sekTXQ.png) |
+![Image](https://i.imgur.com/pSVcOIX.png) | ![Image](https://i.imgur.com/YuT9EAY.png) | ![Image](https://i.imgur.com/TzzGPnC.png) | ![Image](https://i.imgur.com/2sekTXQ.png) |
 
 ## Android Screenshots
 
