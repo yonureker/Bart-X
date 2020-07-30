@@ -13,9 +13,9 @@ Station List | Real Time Departures | Map View | System Alerts
 
 ## Android Screenshots
 
-Station List | Real Time Departures | Map View | System Maps
+Station List | Real Time Departures | Map View | System Alerts
 ------ | ------ | ------ | ------
-![Image](https://i.imgur.com/Ew85IjH.png) | ![Image](https://i.imgur.com/aIw4RpH.png) | ![Image](https://i.imgur.com/aFm5EFs.png) | ![Image](https://i.imgur.com/bBG2Cfp.png) |
+![Image](https://i.imgur.com/rUIalvx.png) | ![Image](https://i.imgur.com/XN4iuZp.png) | ![Image](https://i.imgur.com/rxhw44D.png) | ![Image](https://i.imgur.com/Dnq2QAc.png) |
 
 ### Technologies:
 
