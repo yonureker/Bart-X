@@ -78,7 +78,7 @@ const TabNavigator = createBottomTabNavigator(
         //...
       }
     },
-    About: {
+    "About": {
       screen: AboutScreen,
       navigationOptions: {
         //...
