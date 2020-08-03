@@ -30,7 +30,7 @@ function MoreScreenStack() {
       <Stack.Screen
         name="Trip Planner"
         component={TripPlannerNavigator}
-        // options={() => ({ headerTitleAlign: "center" })}
+        options={() => ({ headerTitleAlign: "center" })}
       />
     </Stack.Navigator>
   );
