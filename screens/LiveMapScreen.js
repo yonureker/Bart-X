@@ -26,9 +26,9 @@ const LiveMapScreen = React.memo(() => {
       longitude < -122.8 ||
       longitude > -121.25
     ) {
-      // Alert.alert(
-      //   "The map is centered at Embarcadero station as your location is out of the Bay Area region."
-      // );
+      Alert.alert(
+        "The map is centered at Embarcadero station as your location is out of the Bay Area region."
+      );
       return {
         latitude: 37.792874,
         longitude: -122.39703
