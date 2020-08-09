@@ -18,6 +18,7 @@ const LiveMapScreen = React.memo(() => {
     routes: { route }
   } = require("../routeDetails");
 
+  //
   // if user is out of SF Bay Area, center the map around SF.
   const setMapRegion = () => {
     if (
