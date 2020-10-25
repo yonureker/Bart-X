@@ -54,7 +54,7 @@ export default function VerifyCodeScreen(props) {
             });
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => Alert.alert(error.message));
   };
 
   return (
