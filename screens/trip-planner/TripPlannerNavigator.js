@@ -1,4 +1,4 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import React from "react";
 
 import TripPlannerHomeScreen from "./TripPlannerHomeScreen";
@@ -12,7 +12,8 @@ export default function TripPlannerNavigator(props) {
       initialRouteName="TripPlanner Home"
       screenOptions={{
         gestureEnabled: false,
-        headerTitleStyle: { fontSize: 18 }
+        // headerTitleStyle: { fontSize: 18 }
+        headerShown: false
       }}
     >
       <Stack.Screen
