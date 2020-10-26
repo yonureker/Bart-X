@@ -23,24 +23,6 @@ export default function MyAccountScreen(props) {
     setPoints(userPoints);
   };
 
-  // return (
-  //   <View style={styles.container}>
-  //     <View>
-  //       <Text>You have {points} points</Text>
-  //     </View>
-  //     <TouchableOpacity
-  //       style={styles.sendCode}
-  //       onPress={() =>
-  //         firebase
-  //           .auth()
-  //           .signOut()
-  //           .then(props.navigation.navigate("Rewards Home"))
-  //       }
-  //     >
-  //       <Text>Log Out</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
   return (
     <View style={styles.container}>
       <View
@@ -73,32 +55,14 @@ export default function MyAccountScreen(props) {
         }}
       >
         <View style={{ alignSelf: "flex-start" }}>
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-            You did it!
-          </Text>
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>You did it!</Text>
         </View>
         <View>
           <Text>
-            Thank you for signing up to BartX Rewards! You will receive a text when we launch the program.
+            Thank you for signing up to BartX Rewards! You will receive a text
+            when we launch the program.
           </Text>
         </View>
-        {/* <View
-          style={{
-            marginTop: 15,
-            backgroundColor: "#0A99CB",
-            width: "100%",
-            height: 40,
-            borderRadius: 10,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("Rewards Phone Screen")}
-          >
-            <Text style={{ color: "white" }}>Join The List</Text>
-          </TouchableOpacity>
-        </View> */}
         <View></View>
         <View></View>
         <View></View>
