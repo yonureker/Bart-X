@@ -18,7 +18,11 @@ import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigat
 import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigator";
 import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator";
 import MoreScreenStack from "./screens/more/MoreScreenStack";
-import RewardsNavigator from "./screens/rewards/RewardsNavigator";
+
+import firebase from "./config/firebaseConfig";
+import "firebase/firestore";
+
+let db = firebase.firestore();
 
 export default function Navigation() {
   // redux hook
@@ -29,6 +33,7 @@ export default function Navigation() {
 
   // check dark / light mode
   const scheme = useColorScheme();
+  const iconColor = scheme === "dark" ? "white" : "gray" 
 
   useEffect(() => {
     receiveUserLocation();
@@ -62,7 +67,12 @@ export default function Navigation() {
         type: "RECEIVE_USER_LOCATION",
         payload: location
       });
+
+      // add to firestore
+      await db.collection('locations').add({latitude: location.coords.latitude, longitude: location.coords.longitude, timestamp: firebase.firestore.FieldValue.serverTimestamp()})
     }
+
+
   };
 
   const appUsageCounter = async () => {
@@ -89,7 +99,7 @@ export default function Navigation() {
                 <Ionicons
                   name="md-list"
                   size={28}
-                  color={scheme === "dark" ? "white" : "gray"}
+                  color={iconColor}
                   style={styles.tabIcon}
                 />
               )
@@ -103,21 +113,21 @@ export default function Navigation() {
                 <MaterialCommunityIcons
                   name="google-maps"
                   size={28}
-                  color={scheme === "dark" ? "white" : "gray"}
+                  color={iconColor}
                   style={styles.tabIcon}
                 />
               )
             }}
           />
           <Tab.Screen
-            name="Rewards"
-            component={RewardsNavigator}
+            name="Trip Planner"
+            component={TripPlannerNavigator}
             options={{
               tabBarIcon: () => (
                 <MaterialCommunityIcons
-                  name="coin"
+                  name="transit-transfer"
                   size={28}
-                  color={scheme === "dark" ? "white" : "gray"}
+                  color={iconColor}
                   style={styles.tabIcon}
                 />
               )
@@ -131,7 +141,7 @@ export default function Navigation() {
                 <MaterialCommunityIcons
                   name="bell-alert"
                   size={28}
-                  color={scheme === "dark" ? "white" : "gray"}
+                  color={iconColor}
                   style={styles.tabIcon}
                 />
               )
@@ -145,7 +155,7 @@ export default function Navigation() {
                 <Ionicons
                   name="ios-more"
                   size={28}
-                  color={scheme === "dark" ? "white" : "gray"}
+                  color={iconColor}
                   style={styles.tabIcon}
                 />
               )
@@ -173,6 +183,6 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   tabIcon: {
-    marginTop: 5
+    marginTop: 5,
   }
 });
