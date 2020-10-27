@@ -19,7 +19,7 @@ export default function AdvisoryScreen(props) {
           style={{ marginRight: 10 }}
           onPress={fetchAdvisories}
         />
-      )
+      ),
     });
   }, []);
 
@@ -31,9 +31,9 @@ export default function AdvisoryScreen(props) {
     fetch(
       `https://api.bart.gov/api/bsa.aspx?cmd=bsa&key=MW9S-E7SL-26DU-VV8V&json=y`
     )
-      .then(response => response.json())
-      .then(responseJson => setAdvisories(responseJson.root.bsa))
-      .catch(error => {
+      .then((response) => response.json())
+      .then((responseJson) => setAdvisories(responseJson.root.bsa))
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -58,7 +58,7 @@ export default function AdvisoryScreen(props) {
         <Text
           style={{
             fontSize: 18,
-            color: scheme === "dark" ? "white" : "black"
+            color: scheme === "dark" ? "white" : "black",
           }}
         >
           There are no delays reported at the moment.
@@ -97,26 +97,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   advisoryItem: {
     flexDirection: "row",
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: "#DFE5E7",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   advisoryItemLogo: { justifyContent: "center", alignItems: "center", flex: 1 },
   advisoryItemText: {
     flex: 5,
     padding: 10,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   darkThemeFont: {
-    color: "white"
+    color: "white",
   },
   darkThemeBackground: {
-    backgroundColor: "black"
+    backgroundColor: "black",
   },
-  advisoryItemTextFont: { fontSize: 16 }
+  advisoryItemTextFont: { fontSize: 16 },
 });

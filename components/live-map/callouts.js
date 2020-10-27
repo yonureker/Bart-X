@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useEffect, useState } from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, useColorScheme } from "react-native";
 import MapView from "react-native-maps";
 
 import CalloutText from "./calloutText";
@@ -9,6 +9,8 @@ const Callouts = props => {
   // const dispatch = useDispatch(); //
 
   const [stationData, setStationData] = useState([]);
+
+  const colorScheme = useColorScheme();
 
   useLayoutEffect(() => {
     if (Platform.OS === "android") {
@@ -36,17 +38,20 @@ const Callouts = props => {
       });
   };
 
+  const backgroundStyle = colorScheme === "dark" ? styles.darkThemeContainer : null;
+  const textStyle = colorScheme === "dark" ? styles.darkThemeText : null;
+
   return (
     <MapView.Callout
       key={stationAbbr}
       tooltip={true}
-      style={styles.calloutContainer}
+      style={[styles.calloutContainer, backgroundStyle]}
     >
       <View style={styles.calloutHeader}>
-        <Text style={styles.stationName}>{stationName}</Text>
+        <Text style={[styles.stationName, textStyle]}>{stationName}</Text>
       </View>
       <View style={styles.calloutContent}>
-        <CalloutText key={stationAbbr} station={stationData} />
+        <CalloutText key={stationAbbr} station={stationData} colorScheme={colorScheme} />
       </View>
     </MapView.Callout>
   );
@@ -59,6 +64,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 5,
     flex: 1
+  },
+  darkThemeContainer: {
+    backgroundColor: '#000000'
+  },
+  darkThemeText: {
+    color: '#ffffff'
   },
   calloutHeader: {
     marginHorizontal: 5,

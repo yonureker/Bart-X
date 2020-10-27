@@ -15,6 +15,7 @@ const SearchBar = () => {
   const searchBarVisible = useSelector(state => state.searchBar);
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
+  const textStyle = colorScheme === "dark" ? "white" : "black"
 
   if (searchBarVisible) {
     return (
@@ -33,6 +34,7 @@ const SearchBar = () => {
             autoCapitalize="words"
             autoFocus={true}
             maxLength={40}
+            style={{color: textStyle}}
           ></TextInput>
         </View>
         <View
@@ -74,9 +76,9 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: "row",
     height: 40,
-    borderWidth: 1,
+    // borderWidth: 1,
     width: "95%",
-    borderColor: "#E6E8ED",
+    // borderColor: "#E6E8ED",
     borderRadius: 10,
     paddingLeft: 10,
     paddingRight: 10,

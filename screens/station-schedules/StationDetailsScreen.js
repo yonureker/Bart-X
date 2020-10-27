@@ -86,7 +86,7 @@ const StationDetailsScreen = props => {
 
     return mappedStation.map((train, index) => {
       return (
-        <View style={[styles.train, backgroundStyle]} key={index}>
+        <View style={[styles.train, backgroundStyle, {borderColor: borderStyle}]} key={index}>
           <View style={{ ...styles.left, backgroundColor: train.color }}></View>
           <View style={styles.mid}>
             <View>
@@ -154,6 +154,7 @@ const StationDetailsScreen = props => {
   const backgroundStyle =
     colorScheme === "dark" ? styles.darkBackground : styles.lightBackground;
   const textStyle = colorScheme === "dark" ? styles.lightText : null;
+  const borderStyle = colorScheme === "dark" ? "#2E2A2A" : "#DFE5E7";
 
   if (selectedStation === false) {
     return (
@@ -215,26 +216,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderColor: "#F0F4F5",
     borderBottomWidth: 1,
-    paddingLeft: 1,
-    paddingRight: 10
+    // paddingLeft: 1,
+    // paddingRight: 10,
   },
   left: {
     width: "3%",
     marginTop: 2,
     marginBottom: 2,
     borderColor: "black",
-    borderWidth: 1
+    borderWidth: 1,
   },
   mid: {
-    width: "72%",
+    width: "70%",
     justifyContent: "space-evenly",
     flexDirection: "column",
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   right: {
     width: "20%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   pullDown: {
     justifyContent: "center",

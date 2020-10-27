@@ -1,7 +1,10 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 const CalloutText = props => {
+
+  const textStyle = props.colorScheme === "dark" ? styles.darkThemeText : null;
+
   if (props.station.etd !== undefined) {
     return props.station.etd.map((route, index) => {
       const approachingTrains = function() {
@@ -25,7 +28,7 @@ const CalloutText = props => {
 
         trainText += " mins";
 
-        return <Text>{trainText}</Text>;
+        return <Text style={textStyle}>{trainText}</Text>;
       };
 
       return <View key={index}>{approachingTrains()}</View>;
@@ -33,10 +36,16 @@ const CalloutText = props => {
   } else {
     return (
       <View>
-        <Text>No trains are scheduled for departure!</Text>
+        <Text style={textStyle}>No trains are scheduled for departure!</Text>
       </View>
     );
   }
 };
+
+const styles = StyleSheet.create({
+  darkThemeText: {
+    color: '#ffffff'
+  }
+})
 
 export default CalloutText;

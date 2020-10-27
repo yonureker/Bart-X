@@ -3,7 +3,7 @@ import { View, FlatList, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "react-native-appearance";
 
-const StationList = props => {
+const StationList = (props) => {
   const colorScheme = useColorScheme();
   const stationList = props.stations.sort((a, b) =>
     a.distance > b.distance ? 1 : -1
@@ -13,22 +13,23 @@ const StationList = props => {
     colorScheme === "dark" ? styles.darkTitle : styles.lightTitle;
   const distanceText =
     colorScheme === "dark" ? styles.darkDistance : styles.lightDistance;
+  const borderColor = colorScheme === "dark" ? "#2E2A2A" : "#DFE5E7";
 
   return (
     <FlatList
       style={{ width: "100%" }}
       // filter data by the query input
-      data={stationList.filter(station =>
+      data={stationList.filter((station) =>
         station.name.toLowerCase().includes(props.searchText.toLowerCase())
       )}
       initialNumToRender={15}
       renderItem={({ item }) => (
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.button, { borderColor: borderColor }]}
           onPress={() =>
             props.navigate("StationDetails", {
               abbr: item.abbr,
-              name: item.name
+              name: item.name,
             })
           }
         >
@@ -42,7 +43,7 @@ const StationList = props => {
           </View>
         </TouchableOpacity>
       )}
-      keyExtractor={item => item.abbr}
+      keyExtractor={(item) => item.abbr}
     />
   );
 };
@@ -54,26 +55,26 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingLeft: 10,
     marginTop: 8,
-    borderRadius: 10
+    borderRadius: 10,
   },
   stationTitle: {
-    fontSize: 20
+    fontSize: 20,
   },
   lightTitle: {
-    color: "black"
+    color: "black",
   },
   darkTitle: {
-    color: "white"
+    color: "white",
   },
   lightDistance: {
-    color: "black"
+    color: "black",
   },
   darkDistance: {
-    color: "white"
+    color: "white",
   },
   stationDistance: {
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
 export default StationList;

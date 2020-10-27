@@ -7,7 +7,7 @@ import {
   Button,
   Picker,
   Alert,
-  Platform
+  Platform,
 } from "react-native";
 import { useColorScheme } from "react-native-appearance";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -15,9 +15,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import moment from "moment";
 
-const TripPlannerHomeScreen = props => {
+const TripPlannerHomeScreen = (props) => {
   const {
-    stations: { station }
+    stations: { station },
   } = require("../../stations");
   const colorScheme = useColorScheme();
   const [dateModal, setDateModal] = useState(false);
@@ -38,7 +38,7 @@ const TripPlannerHomeScreen = props => {
     gtfs_longitude: "-122.270062",
     name: "Ashby",
     state: "CA",
-    zipcode: "94703"
+    zipcode: "94703",
   });
   const [destination, setDestination] = useState({
     abbr: "DUBL",
@@ -49,13 +49,13 @@ const TripPlannerHomeScreen = props => {
     gtfs_longitude: "-121.899179",
     name: "Dublin/Pleasanton",
     state: "CA",
-    zipcode: "94588"
+    zipcode: "94588",
   });
 
   const selectedLocalTime = moment(selectedTime).format("hh:mma");
   const selectedLocalDate = moment(selectedDate).format("MM/DD/YYYY");
 
-  const changeTab = index => {
+  const changeTab = (index) => {
     setSelectedIndex(index);
 
     if (index === 0) {
@@ -67,6 +67,8 @@ const TripPlannerHomeScreen = props => {
 
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
+  const modalBackground = colorScheme === "dark" ? styles.darkModal : null;
+  const textStyle = colorScheme === "dark" ? styles.darkThemeText : null;
 
   const colorStyle = colorScheme === "dark" ? "white" : "black";
 
@@ -82,7 +84,7 @@ const TripPlannerHomeScreen = props => {
             backgroundColor: "white",
             height: 40,
             marginBottom: 5,
-            marginTop: 5
+            marginTop: 5,
           }}
           lastTabStyle={{ marginLeft: 10 }}
           borderRadius={10}
@@ -106,7 +108,7 @@ const TripPlannerHomeScreen = props => {
                   setDeparture(station[itemIndex])
                 }
               >
-                {station.map(station => (
+                {station.map((station) => (
                   <Picker.Item
                     key={station.name}
                     label={station.name}
@@ -132,7 +134,7 @@ const TripPlannerHomeScreen = props => {
                   setDestination(station[itemIndex])
                 }
               >
-                {station.map(station => (
+                {station.map((station) => (
                   <Picker.Item
                     key={station.name}
                     label={station.name}
@@ -163,7 +165,7 @@ const TripPlannerHomeScreen = props => {
           style={[
             styles.searchBar,
             searchBarStyle,
-            { backgroundColor: "#4DCA55" }
+            { backgroundColor: "#4DCA55" },
           ]}
         >
           <View
@@ -182,7 +184,7 @@ const TripPlannerHomeScreen = props => {
                   departure: departure,
                   destination: destination,
                   time: selectedLocalTime,
-                  date: selectedLocalDate
+                  date: selectedLocalDate,
                 });
               }}
             >
@@ -194,7 +196,7 @@ const TripPlannerHomeScreen = props => {
 
       {Platform.OS === "ios" && (
         <Modal visible={dateModal} transparent>
-          <View style={styles.modalContent}>
+          <View style={[styles.modalContent, modalBackground]}>
             {Platform.OS === "ios" && (
               <View style={styles.modalBox}>
                 <View></View>
@@ -237,7 +239,7 @@ const TripPlannerHomeScreen = props => {
 
       {Platform.OS === "ios" && (
         <Modal visible={timeModal} transparent>
-          <View style={styles.modalContent}>
+          <View style={[styles.modalContent, modalBackground]}>
             <View style={styles.modalBox}>
               <View></View>
               <View>
@@ -277,8 +279,8 @@ const TripPlannerHomeScreen = props => {
       )}
 
       <Modal visible={departurePicker} transparent>
-        <View style={styles.modalContent}>
-          <View style={styles.modalBox}>
+        <View style={[styles.modalContent, modalBackground, textStyle]}>
+          <View style={[styles.modalBox]}>
             <View></View>
             <View>
               <Button
@@ -293,8 +295,9 @@ const TripPlannerHomeScreen = props => {
               onValueChange={(itemValue, itemIndex) =>
                 setDeparture(station[itemIndex])
               }
+              itemStyle={textStyle}
             >
-              {station.map(station => (
+              {station.map((station) => (
                 <Picker.Item
                   key={station.name}
                   label={station.name}
@@ -307,7 +310,7 @@ const TripPlannerHomeScreen = props => {
       </Modal>
 
       <Modal visible={destinationPicker} transparent>
-        <View style={styles.modalContent}>
+        <View style={[styles.modalContent, modalBackground]}>
           <View style={styles.modalBox}>
             <View></View>
             <View>
@@ -323,8 +326,9 @@ const TripPlannerHomeScreen = props => {
               onValueChange={(itemValue, itemIndex) =>
                 setDestination(station[itemIndex])
               }
+              itemStyle={textStyle}
             >
-              {station.map(station => (
+              {station.map((station) => (
                 <Picker.Item
                   key={station.name}
                   label={station.name}
@@ -343,7 +347,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   searchBar: {
     flexDirection: "row",
@@ -352,26 +356,32 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingLeft: 10,
     marginBottom: 5,
-    marginTop: 5
+    marginTop: 5,
   },
   lightSearchBar: {
-    backgroundColor: "#E6E8ED"
+    backgroundColor: "#E6E8ED",
   },
   darkSearchBar: {
-    backgroundColor: "#434447"
+    backgroundColor: "#434447",
   },
   modalContent: {
     position: "absolute",
     bottom: 0,
     backgroundColor: "white",
-    width: "100%"
+    width: "100%",
   },
   modalBox: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+  },
+  darkModal: {
+    backgroundColor: "black",
+  },
+  darkThemeText: {
+    color: 'white'
   }
 });
 

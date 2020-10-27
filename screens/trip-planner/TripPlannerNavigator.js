@@ -12,8 +12,7 @@ export default function TripPlannerNavigator(props) {
       initialRouteName="TripPlanner Home"
       screenOptions={{
         gestureEnabled: false,
-        // headerTitleStyle: { fontSize: 18 }
-        headerShown: false
+        headerTitleStyle: { fontSize: 18 }
       }}
     >
       <Stack.Screen

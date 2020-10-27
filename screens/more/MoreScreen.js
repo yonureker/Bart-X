@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, Linking, Share, Platform } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorScheme } from "react-native-appearance";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 const MoreScreen = props => {
   const scheme = useColorScheme();
   const fontColor = scheme === "dark" ? styles.darkThemeFont : null;
   const backgroundColor = scheme === "dark" ? styles.darkThemeBackground : null;
+  const borderColor = scheme === "dark" ? "#2E2A2A" : "#DFE5E7";
 
   const boxes = [
     {
@@ -66,9 +66,9 @@ const MoreScreen = props => {
           link: () => props.navigation.navigate("Schedules")
         },
         {
-          iconName: "transit-transfer",
-          title: "Trip Planner",
-          link: () => props.navigation.navigate("Trip Planner")
+          iconName: "coin",
+          title: "BartX Rewards",
+          link: () => props.navigation.navigate("Rewards")
         }
       ]
     }
@@ -85,7 +85,7 @@ const MoreScreen = props => {
             <TouchableOpacity
               key={index}
               onPress={item.link}
-              style={{ borderBottomWidth: 1, borderBottomColor: "#F0F4F5" }}
+              style={[{ borderBottomWidth: 1, borderBottomColor: "#F0F4F5"}, {borderBottomColor: borderColor}]}
             >
               <View style={[styles.item, backgroundColor]} key={index}>
                 <View style={styles.itemLeft}>
