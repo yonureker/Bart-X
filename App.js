@@ -16,7 +16,10 @@ export default function App() {
 
   // redux store
   const store = createStore(rootReducer);
+
+  // check light/dark mode
   const colorScheme = useColorScheme();
+
   // variable to check if image caching is ready
   const [isReady, setIsReady] = useState(false);
 
