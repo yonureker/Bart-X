@@ -18,7 +18,7 @@ import moment from "moment";
 const TripPlannerHomeScreen = (props) => {
   const {
     stations: { station },
-  } = require("../../stations");
+  } = require("../../bartData/stations");
   const colorScheme = useColorScheme();
   const [dateModal, setDateModal] = useState(false);
   const [timeModal, setTimeModal] = useState(false);

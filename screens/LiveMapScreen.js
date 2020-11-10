@@ -16,7 +16,7 @@ const LiveMapScreen = React.memo(() => {
   const customMap = require("../customMap.json");
   const {
     routes: { route }
-  } = require("../routeDetails");
+  } = require("../bartData/routeDetails");
 
   //
   // if user is out of SF Bay Area, center the map around SF.

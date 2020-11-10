@@ -20,7 +20,7 @@ export default function AllStationsNavigator(props) {
   const scheme = useColorScheme();
   const {
     stations: { station }
-  } = require("../../stations");
+  } = require("../../bartData/stations");
   const [favorite, setFavorite] = useState({});
 
   useEffect(() => {

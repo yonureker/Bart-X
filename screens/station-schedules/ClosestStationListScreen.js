@@ -14,7 +14,7 @@ const ClosestStationListScreen = props => {
   const displaySearchBar = useSelector(state => state.searchBar);
   const {
     stations: { station }
-  } = require("../../stations");
+  } = require("../../bartData/stations");
   const [stationData, setStationData] = useState([]);
 
   //only calculate distance once

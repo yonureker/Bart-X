@@ -18,7 +18,7 @@ const FavoriteListScreen = props => {
 
   const {
     stations: { station }
-  } = require("../../stations");
+  } = require("../../bartData/stations");
 
   const [favorite, setFavorite] = useState({});
   const isFocused = useIsFocused();
