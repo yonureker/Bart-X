@@ -8,26 +8,19 @@ import {
   Image,
   KeyboardAvoidingView,
   Keyboard,
-  Alert
+  Alert,
+  useColorScheme
 } from "react-native";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import firebase from "../../config/firebaseConfig";
+import firebaseConfig from "../../config/configSkeleton";
 import "@firebase/auth";
 
 export default function RewardsPhoneScreen(props) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationId, setVerificationId] = useState(null);
   const recaptchaVerifier = useRef(null);
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAh5daY7dpGJpr7gVUXQKJzWzF5H_5lgRY",
-    authDomain: "bartlivemobile.firebaseapp.com",
-    databaseURL: "https://bartlivemobile.firebaseio.com",
-    projectId: "bartlivemobile",
-    storageBucket: "bartlivemobile.appspot.com",
-    messagingSenderId: "647805133765",
-    appId: "1:647805133765:web:abc9a4a1b5d3043947e1ac"
-  };
+  const colorScheme = useColorScheme();
 
   // Function to be called when requesting for a verification code
   const sendVerification = async () => {
@@ -44,6 +37,8 @@ export default function RewardsPhoneScreen(props) {
       verificationId: verificationId
     });
   };
+
+  const textStyle = colorScheme === 'dark' ? styles.darkThemeText : null;
 
   return (
     <KeyboardAvoidingView
@@ -86,12 +81,12 @@ export default function RewardsPhoneScreen(props) {
           }}
         >
           <View style={{ alignSelf: "flex-start" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+            <Text style={[styles.title, textStyle]}>
               What is your phone number?
             </Text>
           </View>
           <View>
-            <Text>
+            <Text style={textStyle}>
               Instead of email, password and unnecessary security questions; you
               can login to your account with only your phone number! Message and
               data rates may apply.
@@ -111,7 +106,7 @@ export default function RewardsPhoneScreen(props) {
               />
             </View>
             <View style={{ paddingLeft: 10, paddingRight: 10 }}>
-              <Text>+1</Text>
+              <Text style={textStyle}>+1</Text>
             </View>
             <View style={{ flex: 1 }}>
               <TextInput
@@ -120,7 +115,7 @@ export default function RewardsPhoneScreen(props) {
                 keyboardType="phone-pad"
                 autoCompleteType="tel"
                 returnKeyType="done"
-                style={{ borderBottomWidth: 1, borderBottomColor: "#DDDDDD" }}
+                style={[styles.textInput, textStyle]}
               ></TextInput>
             </View>
           </View>
@@ -153,21 +148,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20
   },
-  textInput: {
-    textAlign: "center"
-  },
   sendVerification: {
     padding: 10,
     backgroundColor: "#3498db",
     borderRadius: 10
   },
-  sendCode: {
-    padding: 10,
-    backgroundColor: "#9b59b6",
-    borderRadius: 10
-  },
   buttonText: {
     textAlign: "center",
     color: "#ffffff"
-  }
+  },
+  darkThemeText: {
+    color: '#ffffff'
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  textInput: { borderBottomWidth: 1, borderBottomColor: "#DDDDDD" }
 });
