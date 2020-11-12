@@ -8,7 +8,8 @@ import {
   Image,
   KeyboardAvoidingView,
   Keyboard,
-  Alert
+  Alert,
+  useColorScheme
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import firebase from "../../config/firebaseConfig";
@@ -16,6 +17,7 @@ import "@firebase/auth";
 import "firebase/firestore";
 
 // this is needed because of an issue with Firebase JS SDK with React Native
+// https://stackoverflow.com/questions/42829838/react-native-atob-btoa-not-working-without-remote-js-debugging
 import { decode, encode } from "base-64";
 if (!global.btoa) {
   global.btoa = encode;
@@ -29,6 +31,7 @@ let db = firebase.firestore();
 
 export default function VerifyCodeScreen(props) {
   const [code, setCode] = useState("");
+  const colorScheme = useColorScheme();
 
   const confirmCode = () => {
     const credential = firebase.auth.PhoneAuthProvider.credential(
@@ -56,6 +59,8 @@ export default function VerifyCodeScreen(props) {
       })
       .catch(error => Alert.alert(error.message));
   };
+
+  const textStyle = colorScheme === 'dark' ? styles.darkThemeText : null;
 
   return (
     <KeyboardAvoidingView
@@ -94,12 +99,12 @@ export default function VerifyCodeScreen(props) {
           }}
         >
           <View style={{ alignSelf: "flex-start" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+            <Text style={[styles.title, textStyle]}>
               Verify your phone number
             </Text>
           </View>
           <View>
-            <Text>Enter the 6-digit code you received via SMS.</Text>
+            <Text style={textStyle}>Enter the 6-digit code you received via SMS.</Text>
           </View>
           <View
             style={{
@@ -112,7 +117,7 @@ export default function VerifyCodeScreen(props) {
               <MaterialCommunityIcons
                 name="cellphone-message"
                 size={20}
-                color="black"
+                color= {colorScheme === "dark" ? "white" : "black"}
                 style={{ paddingLeft: 10, paddingRight: 10 }}
               />
             </View>
@@ -123,7 +128,7 @@ export default function VerifyCodeScreen(props) {
                 keyboardType="phone-pad"
                 autoCompleteType="tel"
                 returnKeyType="done"
-                style={{ borderBottomWidth: 1, borderBottomColor: "#DDDDDD" }}
+                style={[styles.textInput,textStyle]}
               ></TextInput>
             </View>
           </View>
@@ -156,9 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20
   },
-  textInput: {
-    textAlign: "center"
-  },
   sendVerification: {
     padding: 10,
     backgroundColor: "#3498db",
@@ -172,5 +174,13 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     color: "#ffffff"
-  }
+  },
+  darkThemeText: {
+    color: '#ffffff'
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  textInput: { borderBottomWidth: 1, borderBottomColor: "#DDDDDD" }
 });

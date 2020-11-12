@@ -5,78 +5,15 @@ import {
   TextInput,
   View,
   StyleSheet,
-  Image
+  Image,
+  useColorScheme,
 } from "react-native";
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
-import * as SecureStore from "expo-secure-store";
-import * as firebase from "firebase/app";
 import "@firebase/auth";
 
 export default function RewardsHome(props) {
-  // const [currentUser, setCurrentUser] = useState(null);
+  const colorScheme = useColorScheme();
 
-  // useLayoutEffect(() => {
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     if (user != null) {
-  //       setCurrentUser(user)
-  //       console.log(user)
-  //     }
-  //   })
-  // }, []);
-
-  // const checkCurrentUser = async () => {
-  //   const currentUser = await firebase.auth().currentUser;
-  //   console.log(currentUser);
-  //   setUser(currentUser);
-  // };
-
-  // const logInUser = () => {
-  //   SecureStore.setItemAsync("loggedIn", "true").then(setLoggedIn(true));
-  // };
-
-  // const logOutUser = () => {
-  //   SecureStore.setItemAsync("loggedIn", "false").then(setLoggedIn(false));
-  // };
-
-  // const checkLogInStatus = async () => {
-  //   const loggedIn = await SecureStore.getItemAsync("loggedIn");
-
-  //   loggedIn === null || loggedIn === "false"
-  //     ? setLoggedIn(false)
-  //     : setLoggedIn(true);
-  // };
-
-  // const sendVerification = () => {
-  //   const phoneProvider = new firebase.auth.PhoneAuthProvider();
-  //   phoneProvider
-  //     .verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
-  //     .then(setVerificationId);
-  // };
-
-  // const confirmCode = () => {
-  //   const credential = firebase.auth.PhoneAuthProvider.credential(
-  //     verificationId,
-  //     code
-  //   );
-  //   firebase
-  //     .auth()
-  //     .signInWithCredential(credential)
-  //     .then(logInUser)
-  //     // .then((result) => {
-  //     //   console.log(result);
-  //     // })
-  //     .catch((error) => console.log(error));
-  // };
-
-  // if (currentUser) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <TouchableOpacity style={styles.sendCode} onPress={() => firebase.auth().signOut().then(setCurrentUser(null))}>
-  //         <Text style={styles.buttonText}>Log Out</Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   );
-  // }
+  const textStyle = colorScheme === "dark" ? styles.darkThemeText : null;
 
   return (
     <View style={styles.container}>
@@ -89,11 +26,11 @@ export default function RewardsHome(props) {
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
-            height: 3
+            height: 3,
           },
           shadowOpacity: 0.27,
           shadowRadius: 4.65,
-          elevation: 8
+          elevation: 8,
         }}
       >
         <Image
@@ -106,19 +43,25 @@ export default function RewardsHome(props) {
           width: "100%",
           flex: 1,
           justifyContent: "space-evenly",
-          marginTop: 20
+          marginTop: 20,
         }}
       >
         <View style={{ alignSelf: "flex-start" }}>
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+          <Text style={[styles.title, textStyle]}>
             Check live departures, get rewards
           </Text>
         </View>
-        <View style={{ marginTop: 15 }}>
-          <Text>
+        <View>
+          <Text style={textStyle}>
             Become a BartX Rewards member - it's easy and free to join. You'll
             get points for checking live departures everyday, which you can use
             to get Bart credits directly into your Clipper Card.
+          </Text>
+        </View>
+        <View>
+          <Text style={textStyle}>
+            BartX rewards is being built right now. Be first to know when we
+            launch.
           </Text>
         </View>
         <View
@@ -129,13 +72,13 @@ export default function RewardsHome(props) {
             height: 40,
             borderRadius: 10,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <TouchableOpacity
             onPress={() => props.navigation.navigate("Rewards Phone Screen")}
           >
-            <Text style={{ color: "white" }}>Join for free</Text>
+            <Text style={{ color: "white" }}>Join The List</Text>
           </TouchableOpacity>
         </View>
         <View></View>
@@ -145,60 +88,6 @@ export default function RewardsHome(props) {
       </View>
     </View>
   );
-
-  // return (
-  //   <View style={styles.container}>
-  //     <View style={{ borderWidth: 1 }}>
-  //       <FirebaseRecaptchaVerifierModal
-  //         ref={recaptchaVerifier}
-  //         firebaseConfig={firebaseConfig}
-  //       />
-  //       <View
-  //         style={{
-  //           flexDirection: "row",
-  //           alignItems: "center",
-  //           justifyContent: "center",
-  //           borderWidth: 5,
-  //         }}
-  //       >
-  //         <View
-  //           style={{
-  //             width: "100%",
-  //             alignItems: "center",
-  //             justifyContent: "center",
-  //           }}
-  //         >
-  //           <Text>+1</Text>
-  //         </View>
-  //         <View>
-  //           <TextInput
-  //             placeholder="Enter Phone Number"
-  //             onChangeText={setPhoneNumber}
-  //             keyboardType="phone-pad"
-  //             autoCompleteType="tel"
-  //             style={styles.textInput}
-  //           />
-  //         </View>
-  //       </View>
-
-  //       <TouchableOpacity
-  //         style={styles.sendVerification}
-  //         onPress={sendVerification}
-  //       >
-  //         <Text style={styles.buttonText}>Verify Phone Number</Text>
-  //       </TouchableOpacity>
-  //       <TextInput
-  //         placeholder="Enter Confirmation Code"
-  //         onChangeText={setCode}
-  //         keyboardType="number-pad"
-  //         style={styles.textInput}
-  //       />
-  //       <TouchableOpacity style={styles.sendCode} onPress={confirmCode}>
-  //         <Text style={styles.buttonText}>Confirm</Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   </View>
-  // );
 }
 
 const styles = StyleSheet.create({
@@ -207,23 +96,25 @@ const styles = StyleSheet.create({
     // backgroundColor: "#FFDD19",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20
+    padding: 20,
   },
   textInput: {
-    textAlign: "center"
+    textAlign: "center",
   },
   sendVerification: {
     padding: 10,
     backgroundColor: "#3498db",
-    borderRadius: 10
+    borderRadius: 10,
   },
   sendCode: {
     padding: 10,
     backgroundColor: "#9b59b6",
-    borderRadius: 10
+    borderRadius: 10,
   },
   buttonText: {
     textAlign: "center",
-    color: "#ffffff"
-  }
+    color: "#ffffff",
+  },
+  title: { fontWeight: "bold", fontSize: 20 },
+  darkThemeText: { color: "white" },
 });

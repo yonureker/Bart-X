@@ -1,13 +1,15 @@
-import { AppLoading } from "expo";
-import { Asset } from "expo-asset";
 import React, { useState } from "react";
 import { StatusBar, StyleSheet } from "react-native";
 import { useColorScheme } from "react-native-appearance";
-import { enableScreens } from "react-native-screens";
 import { SafeAreaView } from "react-navigation";
-import { Provider } from "react-redux";
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
 import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { enableScreens } from "react-native-screens";
+
 import Navigation from "./Navigation";
+
 import rootReducer from "./reducers/rootReducer";
 
 export default function App() {
@@ -30,10 +32,10 @@ export default function App() {
       require("./assets/icon.png"),
       require("./assets/station_ios.png"),
       require("./assets/station_android.png"),
-      require("./assets/loading.png")
+      require("./assets/loading.png"),
     ];
 
-    const cacheImages = images.map(image => {
+    const cacheImages = images.map((image) => {
       return Asset.fromModule(image).downloadAsync();
     });
 
@@ -68,9 +70,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   darkThemeContainer: {
-    backgroundColor: "black"
-  }
+    backgroundColor: "black",
+  },
 });

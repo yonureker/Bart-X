@@ -6,7 +6,7 @@ export default function SchedulesScreen() {
     <WebView
       source={{
         uri:
-          "https://bart-pdf-schedules.s3-us-west-1.amazonaws.com/June+22+2020+WD+Service+for+All+Lines.pdf"
+          "https://www.bart.gov/schedules/pdf"
       }}
     />
   );

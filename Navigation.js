@@ -8,7 +8,7 @@ import * as SecureStore from "expo-secure-store";
 import {
   NavigationContainer,
   DefaultTheme,
-  DarkTheme
+  DarkTheme,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native-appearance";
@@ -29,11 +29,11 @@ export default function Navigation() {
   const dispatch = useDispatch();
 
   // get user location from state
-  const userLocation = useSelector(state => state.userLocation);
+  const userLocation = useSelector((state) => state.userLocation);
 
   // check dark / light mode
   const scheme = useColorScheme();
-  const iconColor = scheme === "dark" ? "white" : "gray" 
+  const iconColor = scheme === "dark" ? "white" : "gray";
 
   useEffect(() => {
     receiveUserLocation();
@@ -51,28 +51,25 @@ export default function Navigation() {
     if (status !== "granted") {
       dispatch({
         type: "RECEIVE_USER_LOCATION",
-        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } }
+        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } },
       });
     } else {
-      // set accuracy to low to quickly receive user location
       let location = await Location.getCurrentPositionAsync({
         accuracy:
           Platform.OS === "android"
             ? Location.Accuracy.High
-            : Location.Accuracy.Lowest
+            : Location.Accuracy.Lowest,
       });
 
       // dispatch to redux store
       dispatch({
         type: "RECEIVE_USER_LOCATION",
-        payload: location
+        payload: location,
       });
 
       // add to firestore
-      await db.collection('locations').add({latitude: location.coords.latitude, longitude: location.coords.longitude, timestamp: firebase.firestore.FieldValue.serverTimestamp()})
+      // await db.collection('locations').add({latitude: location.coords.latitude, longitude: location.coords.longitude, timestamp: firebase.firestore.FieldValue.serverTimestamp()})
     }
-
-
   };
 
   const appUsageCounter = async () => {
@@ -87,6 +84,8 @@ export default function Navigation() {
 
   const Tab = createBottomTabNavigator();
 
+
+  // after user location is received
   if (userLocation.coords.latitude !== null) {
     return (
       <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -102,7 +101,7 @@ export default function Navigation() {
                   color={iconColor}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -116,7 +115,7 @@ export default function Navigation() {
                   color={iconColor}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -130,7 +129,7 @@ export default function Navigation() {
                   color={iconColor}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -144,7 +143,7 @@ export default function Navigation() {
                   color={iconColor}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -158,7 +157,7 @@ export default function Navigation() {
                   color={iconColor}
                   style={styles.tabIcon}
                 />
-              )
+              ),
             }}
           />
         </Tab.Navigator>
@@ -176,13 +175,13 @@ export default function Navigation() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   imageBackground: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   tabIcon: {
     marginTop: 5,
-  }
+  },
 });

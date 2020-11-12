@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet, StatusBar, Alert } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import TripPlannerResults from "../../components/TripPlannerResults";
+import TripPlannerResults from "./TripPlannerResults";
 
 const Tab = createMaterialTopTabNavigator();
 

@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, useColorScheme } from "react-native";
 import firebase from "../../config/firebaseConfig";
 import "@firebase/auth";
-import "firebase/firestore";
+// import "firebase/firestore";
 
-let db = firebase.firestore();
+// let db = firebase.firestore();
 
 export default function MyAccountScreen(props) {
   const [points, setPoints] = useState(null);
   const user = firebase.auth().currentUser;
+  const colorScheme = useColorScheme();
 
-  useEffect(() => {
-    getAccountBalance();
-  }, []);
+  // useEffect(() => {
+  //   getAccountBalance();
+  // }, []);
 
-  const getAccountBalance = async () => {
-    const userRef = await db
-      .collection("users")
-      .doc(user.uid)
-      .get();
-    const userPoints = await userRef.data().pointsBalance;
-    setPoints(userPoints);
-  };
+  // const getAccountBalance = async () => {
+  //   const userRef = await db
+  //     .collection("users")
+  //     .doc(user.uid)
+  //     .get();
+  //   const userPoints = await userRef.data().pointsBalance;
+  //   setPoints(userPoints);
+  // };
+
+  const textStyle = colorScheme === 'dark' ? styles.darkThemeText : null;
 
   return (
     <View style={styles.container}>
@@ -50,23 +53,34 @@ export default function MyAccountScreen(props) {
         style={{
           width: "100%",
           flex: 1,
-          justifyContent: "space-evenly",
-          marginTop: 20
+          justifyContent: "flex-start",
+          marginTop: 20,
         }}
       >
-        <View style={{ alignSelf: "flex-start" }}>
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>You did it!</Text>
+        <View >
+          <Text style={[styles.title, textStyle]}>You did it!</Text>
         </View>
-        <View>
-          <Text>
+        <View style={{marginTop: 20}}>
+          <Text style={textStyle}>
             Thank you for signing up to BartX Rewards! You will receive a text
             when we launch the program.
           </Text>
         </View>
+        {/* <TouchableOpacity
+        style={styles.sendCode}
+        onPress={() =>
+          firebase
+            .auth()
+            .signOut()
+            .then(props.navigation.navigate("Rewards Home"))
+        }
+      >
+        <Text>Log Out</Text>
+      </TouchableOpacity> */}
+        {/* <View></View>
         <View></View>
         <View></View>
-        <View></View>
-        <View></View>
+        <View></View> */}
       </View>
     </View>
   );
@@ -96,5 +110,12 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     color: "#ffffff"
+  },
+  darkThemeText: {
+    color: "#ffffff"
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20
   }
 });

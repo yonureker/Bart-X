@@ -9,7 +9,7 @@ import { Platform } from "react-native";
 export default function Markers() {
   const {
     stations: { station }
-  } = require("../../stations");
+  } = require("../../bartData/stations");
 
   const [clickedMarkerRef, setClickedMarkerRef] = useState({});
 

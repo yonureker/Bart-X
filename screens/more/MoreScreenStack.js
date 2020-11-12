@@ -4,7 +4,7 @@ import { StatusBar, StyleSheet } from "react-native";
 import MoreScreen from "../more/MoreScreen";
 import SchedulesScreen from "../more/SchedulesScreen";
 import SystemMapNavigator from "../system-map/SystemMapNavigator";
-import Rewards from "../rewards/RewardsHome";
+import RewardsNavigator from "../rewards/RewardsNavigator";
 import TripPlannerNavigator from "../trip-planner/TripPlannerNavigator";
 
 const Stack = createStackNavigator();
@@ -28,8 +28,8 @@ function MoreScreenStack() {
         options={() => ({ headerTitleAlign: "center" })}
       />
       <Stack.Screen
-        name="Trip Planner"
-        component={TripPlannerNavigator}
+        name="Rewards"
+        component={RewardsNavigator}
         options={() => ({ headerTitleAlign: "center" })}
       />
     </Stack.Navigator>

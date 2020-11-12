@@ -9,6 +9,12 @@ export default function AdvisoryScreen(props) {
   const fontColor = scheme === "dark" ? styles.darkThemeFont : null;
   const backgroundColor = scheme === "dark" ? styles.darkThemeBackground : null;
 
+  function wait(timeout) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, timeout);
+    });
+  }
+
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerRight: () => (

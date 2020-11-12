@@ -18,7 +18,6 @@ const LiveMapScreen = React.memo(() => {
     routes: { route }
   } = require("../bartData/routeDetails");
 
-  //
   // if user is out of SF Bay Area, center the map around SF.
   const setMapRegion = () => {
     if (
@@ -54,6 +53,7 @@ const LiveMapScreen = React.memo(() => {
             latitudeDelta: 0.04,
             longitudeDelta: 0.04
           }}
+          
           minZoomLevel={1}
           provider={null}
           loadingEnabled={true}

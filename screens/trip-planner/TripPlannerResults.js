@@ -13,11 +13,11 @@ export default function TripPlannerResults(props) {
 
   const {
     stations: { station }
-  } = require("../stations");
+  } = require("../../bartData/stations");
 
   const {
     routes: { route }
-  } = require("../routes");
+  } = require("../../bartData/routes");
 
   if (trip) {
     return (
