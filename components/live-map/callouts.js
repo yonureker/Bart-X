@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useEffect, useState } from "react";
-import { View, Text, StyleSheet, Platform, useColorScheme } from "react-native";
+import { View, Text, StyleSheet, Platform, useColorScheme, Alert } from "react-native";
 import MapView from "react-native-maps";
 
 import CalloutText from "./calloutText";
@@ -12,13 +12,13 @@ const Callouts = props => {
 
   const colorScheme = useColorScheme();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (Platform.OS === "android") {
       fetchTrainDepartures();
     }
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (props.showCallOut === true) {
       fetchTrainDepartures();
 
@@ -34,7 +34,7 @@ const Callouts = props => {
       .then(response => response.json())
       .then(responseJson => setStationData(responseJson.root.station[0]))
       .catch(error => {
-        console.log(error);
+        Alert.alert("Data is not available at the moment. Try again in a few seconds.");
       });
   };
 

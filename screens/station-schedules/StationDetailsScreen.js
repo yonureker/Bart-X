@@ -4,7 +4,8 @@ import {
   Text,
   StyleSheet,
   RefreshControl,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import * as SecureStore from "expo-secure-store";
@@ -56,7 +57,7 @@ const StationDetailsScreen = props => {
       .then(response => response.json())
       .then(responseJson => setSelectedStation(responseJson.root.station[0]))
       .catch(error => {
-        console.log(error);
+        Alert.alert("Data is not available at the moment. Try again in a few seconds.");
       });
   };
 

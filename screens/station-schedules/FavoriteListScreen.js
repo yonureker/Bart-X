@@ -11,17 +11,20 @@ import { useIsFocused } from "@react-navigation/native";
 import SearchBar from "../../components/SearchBar";
 
 const FavoriteListScreen = props => {
+  // favorite stations
+  const [favorite, setFavorite] = useState({});
+  const isFocused = useIsFocused();
   const colorScheme = useColorScheme();
   const userLocation = useSelector(state => state.userLocation);
   const searchText = useSelector(state => state.searchText);
   const displaySearchBar = useSelector(state => state.searchBar);
 
+
   const {
     stations: { station }
   } = require("../../bartData/stations");
 
-  const [favorite, setFavorite] = useState({});
-  const isFocused = useIsFocused();
+  
 
   useEffect(() => {
     getFavoriteStatus();
