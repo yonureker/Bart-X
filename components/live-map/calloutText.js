@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 
 const CalloutText = props => {
 
@@ -36,7 +36,7 @@ const CalloutText = props => {
   } else {
     return (
       <View>
-        <Text style={textStyle}>No trains are scheduled for departure!</Text>
+        <ActivityIndicator size="large" animating="true" />
       </View>
     );
   }
