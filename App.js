@@ -53,6 +53,7 @@ export default function App() {
     );
   }
 
+  // light/dark theme styling
   const statusBarStyle =
     colorScheme === "dark" ? "light-content" : "dark-content";
   const darkThemeContainer =

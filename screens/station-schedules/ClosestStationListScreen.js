@@ -10,8 +10,8 @@ import SearchBar from "../../components/SearchBar";
 const ClosestStationListScreen = props => {
   const colorScheme = useColorScheme();
   const userLocation = useSelector(state => state.userLocation);
-  const searchText = useSelector(state => state.searchText);
-  const displaySearchBar = useSelector(state => state.searchBar);
+  const searchText = useSelector(state => state.searchBar.query);
+  const displaySearchBar = useSelector(state => state.searchBar.display);
   const {
     stations: { station }
   } = require("../../bartData/stations");

@@ -28,7 +28,7 @@ export default function Navigation() {
   // redux hook
   const dispatch = useDispatch();
 
-  // get user location from state
+  // get user location from app state
   const userLocation = useSelector((state) => state.userLocation);
 
   // check dark / light mode
@@ -45,26 +45,29 @@ export default function Navigation() {
     appUsageCounter();
   }, []);
 
+  // source: https://docs.expo.io/versions/latest/sdk/location/#usage
   const receiveUserLocation = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== "granted") {
       dispatch({
         type: "RECEIVE_USER_LOCATION",
-        payload: { coords: { latitude: 37.792874, longitude: -122.39703 } },
+        // set user location to embarcadero if user doesn't grant location permission
+        payload: { latitude: 37.792874, longitude: -122.39703 },
       });
     } else {
       let location = await Location.getCurrentPositionAsync({
         accuracy:
           Platform.OS === "android"
-            ? Location.Accuracy.High
+            ? Location.Accuracy.Lowest
             : Location.Accuracy.Lowest,
       });
 
       // dispatch to redux store
+      // will be used to show closest stations and to center the live map.
       dispatch({
         type: "RECEIVE_USER_LOCATION",
-        payload: location,
+        payload: location.coords,
       });
 
       // add to firestore
@@ -83,7 +86,6 @@ export default function Navigation() {
   };
 
   const Tab = createBottomTabNavigator();
-
 
   // after user location is received
   if (userLocation.coords.latitude !== null) {

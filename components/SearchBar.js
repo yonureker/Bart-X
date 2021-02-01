@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 const SearchBar = () => {
   const colorScheme = useColorScheme();
   const dispatch = useDispatch();
-  const searchBarVisible = useSelector(state => state.searchBar);
+  const searchBarVisible = useSelector(state => state.searchBar.display);
   const searchBarStyle =
     colorScheme === "dark" ? styles.darkSearchBar : styles.lightSearchBar;
   const textStyle = colorScheme === "dark" ? "white" : "black"
@@ -76,9 +76,7 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: "row",
     height: 40,
-    // borderWidth: 1,
     width: "95%",
-    // borderColor: "#E6E8ED",
     borderRadius: 10,
     paddingLeft: 10,
     paddingRight: 10,

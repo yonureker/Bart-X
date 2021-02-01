@@ -5,7 +5,7 @@ const initialState = {
 const userLocationReducer = (state = initialState, action) => {
   switch (action.type) {
     case "RECEIVE_USER_LOCATION":
-      return action.payload;
+      return {...state, coords: action.payload};
     default:
       return state;
   }
