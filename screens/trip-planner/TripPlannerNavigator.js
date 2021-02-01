@@ -6,7 +6,7 @@ import TripPlannerResultsNavigator from "./TripPlannerResultsNavigator";
 
 const Stack = createStackNavigator();
 
-export default function TripPlannerNavigator(props) {
+export default function TripPlannerNavigator() {
   return (
     <Stack.Navigator
       initialRouteName="TripPlanner Home"
