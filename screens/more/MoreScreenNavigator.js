@@ -1,20 +1,19 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
-import MoreScreen from "../more/MoreScreen";
-import SchedulesScreen from "../more/SchedulesScreen";
+import MoreMainScreen from "./MoreMainScreen";
+import SchedulesScreen from "./SchedulesScreen";
 import SystemMapNavigator from "../system-map/SystemMapNavigator";
 import RewardsNavigator from "../rewards/RewardsNavigator";
-import TripPlannerNavigator from "../trip-planner/TripPlannerNavigator";
 
 const Stack = createStackNavigator();
 
-function MoreScreenStack() {
+function MoreScreenNavigator() {
   return (
     <Stack.Navigator style={styles.navigator} initialRouteName="Bart X">
       <Stack.Screen
         name="Bart X"
-        component={MoreScreen}
+        component={MoreMainScreen}
         options={() => ({ headerTitleAlign: "center" })}
       />
       <Stack.Screen
@@ -42,4 +41,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MoreScreenStack;
+export default MoreScreenNavigator;

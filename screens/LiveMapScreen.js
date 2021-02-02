@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
 import { useColorScheme } from "react-native-appearance";
 
-import Markers from "../components/live-map/markers";
+import Markers from "../components/live-map/Markers";
 
 const LiveMapScreen = React.memo(() => {
   const { latitude, longitude } = useSelector(

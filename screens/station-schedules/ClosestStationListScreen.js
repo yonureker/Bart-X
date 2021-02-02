@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 import { getDistance, convertDistance } from "geolib";
 import { useColorScheme } from "react-native-appearance";
 
-import StationList from "../../components/stationList";
+import StationList from "../../components/StationList";
 import SearchBar from "../../components/SearchBar";
 
 const ClosestStationListScreen = props => {
   const colorScheme = useColorScheme();
   const userLocation = useSelector(state => state.userLocation);
-  const searchText = useSelector(state => state.searchBar.query);
   const displaySearchBar = useSelector(state => state.searchBar.display);
   const {
     stations: { station }
@@ -55,7 +54,6 @@ const ClosestStationListScreen = props => {
       <View style={styles.listContainer}>
         <SearchBar display={displaySearchBar} />
         <StationList
-          searchText={searchText}
           navigate={props.navigation.navigate}
           stations={stationData}
         />

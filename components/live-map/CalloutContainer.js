@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Platform, useColorScheme, Alert } from "react-native";
 import MapView from "react-native-maps";
 
-import CalloutText from "./calloutText";
+import CalloutContent from "./CalloutContent";
 
-const Callouts = props => {
+const CalloutContainer = props => {
   const { stationName, stationAbbr } = props;
   // const dispatch = useDispatch(); //
 
@@ -51,7 +51,7 @@ const Callouts = props => {
         <Text style={[styles.stationName, textStyle]}>{stationName}</Text>
       </View>
       <View style={styles.calloutContent}>
-        <CalloutText key={stationAbbr} station={stationData} colorScheme={colorScheme} />
+        <CalloutContent key={stationAbbr} station={stationData} colorScheme={colorScheme} />
       </View>
     </MapView.Callout>
   );
@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Callouts;
+export default CalloutContainer;

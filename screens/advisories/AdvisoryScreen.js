@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function AdvisoryScreen(props) {
   const [advisories, setAdvisories] = useState([]);
+
   const scheme = useColorScheme();
   const fontColor = scheme === "dark" ? styles.darkThemeFont : null;
   const backgroundColor = scheme === "dark" ? styles.darkThemeBackground : null;
@@ -15,7 +16,7 @@ export default function AdvisoryScreen(props) {
     });
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     props.navigation.setOptions({
       headerRight: () => (
         <MaterialCommunityIcons
@@ -34,13 +35,15 @@ export default function AdvisoryScreen(props) {
   }, []);
 
   const fetchAdvisories = () => {
+    setAdvisories([]);
+
     fetch(
       `https://api.bart.gov/api/bsa.aspx?cmd=bsa&key=MW9S-E7SL-26DU-VV8V&json=y`
     )
       .then((response) => response.json())
       .then((responseJson) => setAdvisories(responseJson.root.bsa))
       .catch((error) => {
-        console.log(error);
+        Alert.alert("Data is not available at the moment. Try again in a few seconds.");
       });
   };
 
@@ -55,6 +58,7 @@ export default function AdvisoryScreen(props) {
   if (advisories[0].description["#cdata-section"] === "No delays reported.") {
     return (
       <View style={styles.container}>
+        
         <MaterialCommunityIcons
           style={{ marginBottom: 80 }}
           name="bell-off-outline"
@@ -74,6 +78,7 @@ export default function AdvisoryScreen(props) {
   } else {
     return (
       <View style={styles.container}>
+        
         {advisories.map((advisory, index) => (
           <View key={index} style={[styles.advisoryItem, backgroundColor]}>
             <View style={styles.advisoryItemLogo}>
@@ -89,6 +94,7 @@ export default function AdvisoryScreen(props) {
               <View>
                 <Text style={[styles.advisoryItemTextFont, fontColor]}>
                   {advisory.description["#cdata-section"]}
+                  {banner == true && <View><Text>Usdasdd sadsada dasd asd asd sa dsadas das dasd as dasd as dsadpdated now.</Text></View>}
                 </Text>
               </View>
             </View>

@@ -36,19 +36,17 @@ Station List | Real Time Departures | Map View | System Alerts
 
 The combination of Redux + React Navigation makes things very easy. Rather than passing params around with `() => props.navigation.navigate('MyScreen', params: {})`, using useSelector hook is a great way to pull whatever is needed from state.
 
-User location, station locations and real time departures are placed in Redux store.
+User location and search bar related data are saved in Redux store.
 
 ```javascript
 import { combineReducers } from "redux";
-import userLocationReducer from './userLocationReducer';
-import trainDepartureReducer from './trainDepartureReducer';
-import stationLocationReducer from "./stationLocationReducer";
+import userLocationReducer from "./userLocationReducer";
+import searchBarReducer from "./searchBarReducer";
 
 const rootReducer = combineReducers({
   userLocation: userLocationReducer,
-  trainDepartures: trainDepartureReducer,
-  stationLocations: stationLocationReducer
-})
+  searchBar: searchBarReducer
+});
 
 export default rootReducer;
 ```

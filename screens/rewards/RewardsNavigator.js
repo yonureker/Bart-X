@@ -13,7 +13,7 @@ export default function RewardsNavigator(props) {
   const [currentUser, setCurrentUser] = useState(firebase.auth().currentUser);
 
   useLayoutEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
         setCurrentUser(user);
       }
@@ -31,7 +31,7 @@ export default function RewardsNavigator(props) {
         options={{
           title: "Bart X Rewards",
           headerTitleAlign: "center",
-          headerLeft: null
+          headerLeft: null,
         }}
       />
       <Stack.Screen

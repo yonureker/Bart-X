@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MapView from "react-native-maps";
 
-import Callouts from "./callouts";
+import CalloutContainer from "./CalloutContainer";
 import station_ios from "../../assets/station_ios.png";
 import station_android from "../../assets/station_android.png";
 import { Platform } from "react-native";
@@ -26,7 +26,7 @@ export default function Markers() {
         tracksInfoWindowChanges={true}
         onPress={() => setClickedMarkerRef(index)}
       >
-        <Callouts
+        <CalloutContainer
           key={trainStation.abbr}
           stationName={trainStation.name}
           stationAbbr={trainStation.abbr}

@@ -2,8 +2,10 @@ import React from "react";
 import { View, FlatList, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useColorScheme } from "react-native-appearance";
+import { useSelector } from "react-redux";
 
 const StationList = (props) => {
+  const searchText = useSelector(state => state.searchBar.query);
   const colorScheme = useColorScheme();
   const stationList = props.stations.sort((a, b) =>
     a.distance > b.distance ? 1 : -1
@@ -20,7 +22,7 @@ const StationList = (props) => {
       style={{ width: "100%" }}
       // filter data by the query input
       data={stationList.filter((station) =>
-        station.name.toLowerCase().includes(props.searchText.toLowerCase())
+        station.name.toLowerCase().includes(searchText.toLowerCase())
       )}
       initialNumToRender={15}
       renderItem={({ item }) => (

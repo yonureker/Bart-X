@@ -15,7 +15,7 @@ import StationDetailsScreen from "./StationDetailsScreen";
 
 const Stack = createStackNavigator();
 
-export default function AllStationsNavigator(props) {
+export default function StationsNavigator(props) {
   const dispatch = useDispatch();
   const scheme = useColorScheme();
   const {
@@ -41,10 +41,10 @@ export default function AllStationsNavigator(props) {
     const status = await SecureStore.getItemAsync(abbr);
 
     if (status !== "true") {
-      await SecureStore.setItemAsync(abbr, "true");
+      SecureStore.setItemAsync(abbr, "true");
       setFavorite({ ...favorite, [abbr]: "true" });
     } else {
-      await SecureStore.setItemAsync(abbr, "false");
+      SecureStore.setItemAsync(abbr, "false");
       setFavorite({ ...favorite, [abbr]: "false" });
     }
   };

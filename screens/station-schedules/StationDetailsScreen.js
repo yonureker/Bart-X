@@ -128,7 +128,7 @@ const StationDetailsScreen = props => {
 
   // asking user for rating, if used the app 5 times.
   const askforReview = async () => {
-    const appUsageCounter = await SecureStore.getItemAsync("counter");
+    const appUsageCounter = await SecureStore.getItemAsync("appUsageCounter");
     // const askedforReview = await SecureStore.getItemAsync("askedReview");
 
     if (

@@ -14,10 +14,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native-appearance";
 
 import LiveMapScreen from "./screens/LiveMapScreen";
-import AllStationsNavigator from "./screens/station-schedules/AllStationsNavigator";
+import StationsNavigator from "./screens/station-schedules/StationsNavigator";
 import TripPlannerNavigator from "./screens/trip-planner/TripPlannerNavigator";
 import AdvisoryNavigator from "./screens/advisories/AdvisoryNavigator";
-import MoreScreenStack from "./screens/more/MoreScreenStack";
+import MoreScreenNavigator from "./screens/more/MoreScreenNavigator";
 
 import firebase from "./config/firebaseConfig";
 import "firebase/firestore";
@@ -76,12 +76,12 @@ export default function Navigation() {
   };
 
   const appUsageCounter = async () => {
-    const usage = await SecureStore.getItemAsync("counter");
+    const appUsageCounter = await SecureStore.getItemAsync("appUsageCounter");
 
     if (usage == null) {
-      await SecureStore.setItemAsync("counter", "1");
+      SecureStore.setItemAsync("appUsageCounter", "1");
     } else {
-      await SecureStore.setItemAsync("counter", String(Number(usage) + 1));
+      SecureStore.setItemAsync("appUsageCounter", String(Number(appUsageCounter) + 1));
     }
   };
 
@@ -94,7 +94,7 @@ export default function Navigation() {
         <Tab.Navigator initialRouteName="Station List">
           <Tab.Screen
             name="Station List"
-            component={AllStationsNavigator}
+            component={StationsNavigator}
             options={{
               tabBarIcon: () => (
                 <Ionicons
@@ -150,7 +150,7 @@ export default function Navigation() {
           />
           <Tab.Screen
             name="More"
-            component={MoreScreenStack}
+            component={MoreScreenNavigator}
             options={{
               tabBarIcon: () => (
                 <Ionicons

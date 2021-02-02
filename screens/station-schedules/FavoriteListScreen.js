@@ -6,7 +6,7 @@ import { useColorScheme } from "react-native-appearance";
 import * as SecureStore from "expo-secure-store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import StationList from "../../components/stationList";
+import StationList from "../../components/StationList";
 import { useIsFocused } from "@react-navigation/native";
 import SearchBar from "../../components/SearchBar";
 

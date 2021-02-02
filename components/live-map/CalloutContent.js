@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 
-const CalloutText = props => {
+const CalloutContent = props => {
 
   const textStyle = props.colorScheme === "dark" ? styles.darkThemeText : null;
 
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CalloutText;
+export default CalloutContent;
