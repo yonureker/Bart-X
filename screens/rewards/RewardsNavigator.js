@@ -23,7 +23,7 @@ export default function RewardsNavigator(props) {
   return (
     <Stack.Navigator
       initialRouteName={currentUser ? "My Account" : "Rewards Home"}
-      screenOptions={{ headerTitleStyle: { fontSize: 18 } }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name="Rewards Home"
@@ -37,17 +37,14 @@ export default function RewardsNavigator(props) {
       <Stack.Screen
         name="Rewards Phone Screen"
         component={RewardsPhoneScreen}
-        options={{ title: "Enter Phone Number", headerTitleAlign: "center" }}
       />
       <Stack.Screen
         name="Verify Code"
         component={VerifyCodeScreen}
-        options={{ title: "Verify Code", headerTitleAlign: "center" }}
       />
       <Stack.Screen
         name="My Account"
         component={MyAccountScreen}
-        options={{ title: "My Account", headerTitleAlign: "center" }}
       />
     </Stack.Navigator>
   );

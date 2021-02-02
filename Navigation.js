@@ -78,7 +78,7 @@ export default function Navigation() {
   const appUsageCounter = async () => {
     const appUsageCounter = await SecureStore.getItemAsync("appUsageCounter");
 
-    if (usage == null) {
+    if (appUsageCounter == null) {
       SecureStore.setItemAsync("appUsageCounter", "1");
     } else {
       SecureStore.setItemAsync("appUsageCounter", String(Number(appUsageCounter) + 1));
