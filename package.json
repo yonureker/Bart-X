@@ -22,7 +22,7 @@
     "expo-firebase-recaptcha": "^1.1.2",
     "expo-secure-store": "~9.2.0",
     "expo-store-review": "~2.2.0",
-    "firebase": "7.9.0",
+    "firebase": "7.24.0",
     "geolib": "^3.2.1",
     "moment": "^2.29.4",
     "react": "16.13.1",
